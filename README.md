@@ -14,11 +14,9 @@ LieMapp은 LLM 추론 엔진의 소스 코드에서 공통 형식의 로그를 �
 
 ## 2. Usage
 
-저장소 루트에서 실행합니다. `ATTACK_ID`와 `ENGINE_ID`는 `check.py --list`에 표시된 ID로 바꾸세요.
+저장소 루트(`README.md`가 있는 디렉터리)에서 실행합니다. `ATTACK_ID`와 `ENGINE_ID`는 `check.py --list`에 표시된 ID로 바꾸세요.
 
 ```bash
-cd LieMapp
-
 # 최초 공통 환경 설치 (이미 설치했다면 생략)
 python3 -m venv .venv
 python3 -m pip install -r requirements.txt

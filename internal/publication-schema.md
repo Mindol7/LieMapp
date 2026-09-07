@@ -53,10 +53,10 @@ mapping_path, internal_file, internal_sha256, supplements, attack_label, engine_
 실제 발행과 전체 내용 재검증이 같은 함수를 사용한다. 원시 preview·참조 hash를 읽지만 파일을 생성하지 않는다.
 재검증은 실제 목적지 경로와 기존 내부 분석 hash를 넘겨 JSON 전체 및 MD 문자열을 정확히 비교할 수 있다.
 
-아래 CLI 예시는 `AI-Forensics/` 저장소 루트에서 실행한다.
+아래 CLI 예시는 `LieMapp/` 저장소 루트에서 실행한다.
 
 ```bash
-OPENBLAS_NUM_THREADS=1 python LieMapp/internal/publication.py \
+OPENBLAS_NUM_THREADS=1 python internal/publication.py \
   --log /explicit/raw/run/events.jsonl \
   --rules /explicit/conditions.json \
   --log-output-dir /explicit/public/LogFile/engine \
