@@ -1,0 +1,2847 @@
+{
+  "verified_at_utc": "2026-09-06T10:24:11.252269+00:00",
+  "passed": true,
+  "manifest_sha256": "65c8e570c26a73f5e2e50200d77b5dc98ac67568570de7a9502dc6872df325ec",
+  "verified_case_count": 84,
+  "checks": [
+    "all raw image hashes",
+    "unique inputs",
+    "canonical dimensions",
+    "calibration/evaluation separation",
+    "original/augmentation relation",
+    "unambiguous per-transform joins",
+    "10 normal calibration bases"
+  ],
+  "script_hashes": {
+    "test_research_inputs.py": "e6786066c8db7f215266ff8581d5ec22b35e2aa178288b8d49b00f66aa2e859a",
+    "prepare_dataset.py": "3e6e622531b291dca5b89eeffc6ebf159a9eed02ce6571c24a22394b0b717d35",
+    "generate_attack.py": "620cf04ebf0912f220c6fc9c4eb0b34cfd912b7d952378956cd59d5acee7c5f9",
+    "verify_dataset.py": "38dc48482168879540f6d6b2392526f37c11c0d524262e5af69354b05d73a1fa"
+  },
+  "training": {
+    "provenance_sha256": "1a86579dfcb461e0d9c5843e8ca2a27e38db956423e9fdd6892cafb9296c0289",
+    "actual_steps": 128,
+    "linf_in_integer_pixels": 32,
+    "nonzero_gradient_steps": 128,
+    "train_heldout_exact_questions_disjoint": true,
+    "checks": [
+      "clean/attack/rawpixels/trace hashes",
+      "finite nonzero gradients",
+      "PGD bound each step",
+      "PNG bound after encoding"
+    ]
+  },
+  "upstream": {
+    "commit": "ddc8a60efd1b87cb4eab44b11225cd8a296295cd",
+    "files": [
+      {
+        "path": ".gitignore",
+        "sha256": "b9a7d8e738e85af457a984dfff539f5171366de89a050bbec927a190097ef454"
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "17ac1fac6e4c129fdf6f31a00f41a7566f129c6395f4799ae0ff8fa47c5c9610"
+      },
+      {
+        "path": "README.md",
+        "sha256": "49a8fb7c25221cd4dd73852a6d1d76aed935d4ef082bd3ac44bc9b24678d9d6b"
+      },
+      {
+        "path": "blip_utils/visual_attacker.py",
+        "sha256": "f592f80bbf0f6b1aae9a2fea1c2c56f6c54a0e036f5a401f6e6c7497e4c88429"
+      },
+      {
+        "path": "clean_images/0.png",
+        "sha256": "e8f956891bf382052ceb99f784b7e54b969b268073a8b4ca9fc9ac0763b7a236"
+      },
+      {
+        "path": "clean_images/1.png",
+        "sha256": "0ec3ddffc254c93dced75572a2f9f84f96ecd7ebc7a84ff55d240b6687487ec2"
+      },
+      {
+        "path": "clean_images/2.png",
+        "sha256": "bc81248da7c7d91201c1e2f2d213bdbe6d055d0c6ce7967297823093039dacb1"
+      },
+      {
+        "path": "clean_images/3.png",
+        "sha256": "5d1b4ea2c09c1193900ec286e90f142ef6ede497b7bd83b1fe431afae55a9d2f"
+      },
+      {
+        "path": "clean_images/4.png",
+        "sha256": "02b80776ae85c3506a8f8db5f447b554c4f53833d41148d30b2c14cc2ea9a5aa"
+      },
+      {
+        "path": "clean_images/coco_1.jpg",
+        "sha256": "c7e214905c25c01403f3677f0c4070bd70a285f3aa8bafd6711bd27d73453bf9"
+      },
+      {
+        "path": "clean_images/coco_10.jpg",
+        "sha256": "1fbee9e526cabd1e7a4a9ca979f1cad50ba1a35d09d8d3ee23c67856628ec2b3"
+      },
+      {
+        "path": "clean_images/coco_2.jpg",
+        "sha256": "a1014013f65722e91d5a9a58dd10bd7c861c6ec3175d80edb416a9f0920546fd"
+      },
+      {
+        "path": "clean_images/coco_3.jpg",
+        "sha256": "d84541b96ef068401749429c52e26b891a5d08cee5924986a4ca2798d2ce09a6"
+      },
+      {
+        "path": "clean_images/coco_4.jpg",
+        "sha256": "6d28aca076f309360f392b53b4e9a85ec7ec3ee524cba7f8dac52e50d85dcc36"
+      },
+      {
+        "path": "clean_images/coco_5.jpg",
+        "sha256": "21b3a0928964f83cd10bcc2766e27d7c0a574e1a1477dad52703e5594670ca45"
+      },
+      {
+        "path": "clean_images/coco_6.jpg",
+        "sha256": "c8af9b2d81ecf798fde207301f299758826e49184a07c5b25fde4501f4ce463e"
+      },
+      {
+        "path": "clean_images/coco_7.jpg",
+        "sha256": "decb66eed1cbb10802e090b4d932757b2e6963d30fa1f9f963507edcb61870e6"
+      },
+      {
+        "path": "clean_images/coco_8.jpg",
+        "sha256": "9fcbad7ee37d61098b5c4bc38ba835a172b73157fdf5afbe764311b3eddc5a97"
+      },
+      {
+        "path": "clean_images/coco_9.jpg",
+        "sha256": "6b202e24633cff5e2ca73be84378f8d7f442b040ed618499da83603faffab2fd"
+      },
+      {
+        "path": "clean_images/eg1.png",
+        "sha256": "90f1f8b1f5b879f401a049a13f4f1d2692a3ae8d6c0c5b2d4deda2279a600553"
+      },
+      {
+        "path": "clean_images/eg2.png",
+        "sha256": "eac06676ec25cfb90f73b6bd3b0ad30cace17723dbc3e5102eb9bcfa422a3326"
+      },
+      {
+        "path": "clean_images/eg3.jpg",
+        "sha256": "d092764cc9f21b9bc535ff5284b5add4d8256148bab1bc2f5b5ab3fd32759a36"
+      },
+      {
+        "path": "clean_images/eg4.png",
+        "sha256": "1436c6d792a01f56fe9a4411892e1754336f64ede85f7ff81151a5941b46b292"
+      },
+      {
+        "path": "clean_images/eg5.png",
+        "sha256": "66bd1f21531ff80c3cfc9d92ab75c8c1acecbfe3c021dd82f0b819ef82ed63b7"
+      },
+      {
+        "path": "clean_images/eg6.png",
+        "sha256": "36db7776f87765ea985e160460d271286da9f7a9bc57f7faabbf3fdd9938ed3e"
+      },
+      {
+        "path": "clean_images/eg7.png",
+        "sha256": "1436c6d792a01f56fe9a4411892e1754336f64ede85f7ff81151a5941b46b292"
+      },
+      {
+        "path": "clean_images/label.txt",
+        "sha256": "2994e8227ff990253a70ef408aecd0dce5907edf75bad7fef07f9e25391bb3c8"
+      },
+      {
+        "path": "environment.yml",
+        "sha256": "d7099553a87b8b1d6ebbe5449c7c910c2fc2cf6bddf720262ee5b013dc25771a"
+      },
+      {
+        "path": "eval_anomaly_detection.ipynb",
+        "sha256": "33d5e9223392db9574c0050437cb83a14e2e3e2d35af996beb9ff44fed7bc5be"
+      },
+      {
+        "path": "eval_configs/llama.yaml",
+        "sha256": "a0e475fd85ceb9635056d6220ee35eb4e5b609d7aae7e872e39fd14227dd377a"
+      },
+      {
+        "path": "eval_configs/minigpt4_eval.yaml",
+        "sha256": "0f7a9420e5d9c34efc15446aa7af12d1f49f2392b262537dcea273fd1a29dc5a"
+      },
+      {
+        "path": "eval_content_preserving.ipynb",
+        "sha256": "03ff36d08b2d986ab132e373f7549d8d488a03310bb4087821aa60444e84d488"
+      },
+      {
+        "path": "eval_instruction_following.ipynb",
+        "sha256": "439e75435e9463f8bf0a1e1f302f6048f3036d8d4494f9884550eebf635fe357"
+      },
+      {
+        "path": "instructblip_inference.py",
+        "sha256": "ca0a6b2d965774db4e6846368079b7b01022474cdb9af9ec9c66ea75a75196e6"
+      },
+      {
+        "path": "instructblip_visual_attack.py",
+        "sha256": "dedcb7bc8cb1a5bc509c22beeda231badd6fd728952940b44d81b1a5d8774ba2"
+      },
+      {
+        "path": "instruction_data/0/Attack/dataset.csv",
+        "sha256": "4a1dd8d5d3235ad8bd5f09fdf4dcdd5a0515a98eb7c9244627ead4ead8af99a0"
+      },
+      {
+        "path": "instruction_data/0/Formality/dataset.csv",
+        "sha256": "782b74cc43e914db7c55e0c8a4283efe4e32fce89bd0f4eda1f2349579986314"
+      },
+      {
+        "path": "instruction_data/0/Irony/dataset.csv",
+        "sha256": "4955852ac16b7596b1f9c8bdc523410e67b64ca038fc822a35bdf4a451f123ac"
+      },
+      {
+        "path": "instruction_data/0/Language/dataset.csv",
+        "sha256": "9d8a7f5b2881b4afb9e65a8868f201e517a24a5a7f3fef6133ed4d29b90d1570"
+      },
+      {
+        "path": "instruction_data/0/Politics/dataset.csv",
+        "sha256": "c77eedc84dbafe49fc690114274a09f302b3618662a285f96469c6b4522791df"
+      },
+      {
+        "path": "instruction_data/0/Sentiment/dataset.csv",
+        "sha256": "587cfd59636565151ce0a3d3121dd871905aae2a6f2d8fc283ad147b8ebe56a6"
+      },
+      {
+        "path": "instruction_data/1/Attack/dataset.csv",
+        "sha256": "e7fb8d9476076f2d90014d7260eba7bfffd52e9cb40357c56b7461ac82d5e314"
+      },
+      {
+        "path": "instruction_data/1/Formality/dataset.csv",
+        "sha256": "4ef091ee4845b6e42e2453ced5f664615a8d7e6300f5a75f3e99e50166b0af6d"
+      },
+      {
+        "path": "instruction_data/1/Language/dataset.csv",
+        "sha256": "8517dd01b7963e8ae9ef542feef73191c4def30ba0f61b8c50bcd35c1f5f9247"
+      },
+      {
+        "path": "instruction_data/1/Politics/dataset.csv",
+        "sha256": "695cfb9e5e6a771f9c3c223c773a6a5f7d6c17eb5296ac154f7e5d20bb8f7d89"
+      },
+      {
+        "path": "instruction_data/1/Sentiment/dataset.csv",
+        "sha256": "c333d3ea3eff5833527323b37dc1945538ef973f6533d31592509bb3cfc281bf"
+      },
+      {
+        "path": "instruction_data/2/Attack/dataset.csv",
+        "sha256": "06b8e42ce7a166f1a80646554478ba91fed4a0d15c683f3000a51cb498763842"
+      },
+      {
+        "path": "instruction_data/2/Formality/dataset.csv",
+        "sha256": "79a55879494547471541e522d453adcdfacd7776a318e568b8739f8a268d818f"
+      },
+      {
+        "path": "instruction_data/2/Language/dataset.csv",
+        "sha256": "523eac26bd2fcafe64b6f2f2f3da54cd4305338613d3ced8c0a49b9410e7fdcc"
+      },
+      {
+        "path": "instruction_data/2/Politics/dataset.csv",
+        "sha256": "f4e7e9232f4a7a07fb74dc9effbfb587f634039e7f4ec617da92dcc2ac3a31b7"
+      },
+      {
+        "path": "instruction_data/2/Sentiment/dataset.csv",
+        "sha256": "180c1bad26d3b62e8615218773977c2e60ea15030ecd223c63cf898e9ffbcfae"
+      },
+      {
+        "path": "instruction_data/3/Attack/dataset.csv",
+        "sha256": "3af8c7041743d0a2d129dd471618709264649746818c7da3e008defc750811d5"
+      },
+      {
+        "path": "instruction_data/3/Formality/dataset.csv",
+        "sha256": "dc8643c8e7e000d4c4e396dbf31d65990bec74008fccccbbf98c71fd129822fd"
+      },
+      {
+        "path": "instruction_data/3/Language/dataset.csv",
+        "sha256": "14fc46e00dff8ef7612f87e6ac53f64ddcfa1fa011ae42040f112ae57480b158"
+      },
+      {
+        "path": "instruction_data/3/Politics/dataset.csv",
+        "sha256": "91a457633b9679bd87e8f636d064fe4c90f170ed84c89397aa447fa40269b73e"
+      },
+      {
+        "path": "instruction_data/3/Sentiment/dataset.csv",
+        "sha256": "42b0fa7df1ecd392a190189918e4a49da03df7033e50aded6ced913d71ef8b62"
+      },
+      {
+        "path": "instruction_data/4/Attack/dataset.csv",
+        "sha256": "e20b1cdfbb06115ac49a2574ff1ce2888fb4368a59333cfe92681ffdff54b9da"
+      },
+      {
+        "path": "instruction_data/4/Formality/dataset.csv",
+        "sha256": "463d0af260e01617abbe5d6a984a8994fad1dade881d16610f28def2c1d41deb"
+      },
+      {
+        "path": "instruction_data/4/Language/dataset.csv",
+        "sha256": "ba7eb860e7868e889092a0249bbbe203d3683b78ead5c32c09e7ef2ed8094127"
+      },
+      {
+        "path": "instruction_data/4/Politics/dataset.csv",
+        "sha256": "291f554774230900567cb646c9f536c35850632b334ecea9549d10823f138e6e"
+      },
+      {
+        "path": "instruction_data/4/Sentiment/dataset.csv",
+        "sha256": "ee35249044d0f221d5531c888011e63e83ffbf6150038d51e5518be763a8b2cc"
+      },
+      {
+        "path": "instruction_data/README.md",
+        "sha256": "e54283fdad9c577bf551945be3d6826a6eab205445d970532f8ab5cd64f6f373"
+      },
+      {
+        "path": "instruction_data/coco_1/Attack/dataset.csv",
+        "sha256": "537f38d4894371dece9252615ced7b8f746ccb6ee494c261854552cdbf0240f0"
+      },
+      {
+        "path": "instruction_data/coco_1/Formality/dataset.csv",
+        "sha256": "0eb6300450cd48f5bde72fd06b5c6d94c5923a2921b297309d812cc25e41703b"
+      },
+      {
+        "path": "instruction_data/coco_1/Language/dataset.csv",
+        "sha256": "85e62f00c700bbbcfc0d7179315e17e722e528b951ecae1f4a6848e1dbbc85c0"
+      },
+      {
+        "path": "instruction_data/coco_1/Politics/dataset.csv",
+        "sha256": "0983ed8c4a4b0a6de1ba5cf8d13de7072c98291cf40f0a0ba6fc46de719f12c0"
+      },
+      {
+        "path": "instruction_data/coco_1/Sentiment/dataset.csv",
+        "sha256": "ed9c30a1b082859d7e8916bba1a12aa63238080453c30f6baae53ccef0b39a32"
+      },
+      {
+        "path": "instruction_data/coco_10/Attack/dataset.csv",
+        "sha256": "131b79699b6d9f63858e6f16d20bcb7dff553e406d9480c37e136c76b0d10b88"
+      },
+      {
+        "path": "instruction_data/coco_10/Formality/dataset.csv",
+        "sha256": "044efdb230ca1f2928bb24df01896b735a9cb5578ad335f47bfd45a645970d6a"
+      },
+      {
+        "path": "instruction_data/coco_10/Language/dataset.csv",
+        "sha256": "560a0dd6521de755de72f5b261f98d256b93a29162845b26b587465ae53971ff"
+      },
+      {
+        "path": "instruction_data/coco_10/Politics/dataset.csv",
+        "sha256": "34ab9d3620cebf27d97f3a532c80a0a568559a0dae163ff9283725036b9e747e"
+      },
+      {
+        "path": "instruction_data/coco_10/Sentiment/dataset.csv",
+        "sha256": "10b744c1a99cd7818f76b3dcc15a7f7ad43c24615015642e07d297f5b3352434"
+      },
+      {
+        "path": "instruction_data/coco_2/Attack/dataset.csv",
+        "sha256": "9af33ef6d463f43e3f1623efcf1f9807f2b3e5c680c73078934b80606a026ab3"
+      },
+      {
+        "path": "instruction_data/coco_2/Formality/dataset.csv",
+        "sha256": "6d856bd77821f484687f51f0c6ba57cb96441fd0f81d10212f85afcffdf4f79c"
+      },
+      {
+        "path": "instruction_data/coco_2/Language/dataset.csv",
+        "sha256": "6d984e62b4dec8b757661a129a09299b8412908074ae44e50349cb58d369a849"
+      },
+      {
+        "path": "instruction_data/coco_2/Politics/dataset.csv",
+        "sha256": "dd8d2a1edf70416365dac44efb9def96d39496f22cdbeb72079567f513c38ce6"
+      },
+      {
+        "path": "instruction_data/coco_2/Sentiment/dataset.csv",
+        "sha256": "fc32938168ec0e8e6a4c221035624a680ccb741cd0bd5acffde406b689ab8a98"
+      },
+      {
+        "path": "instruction_data/coco_3/Attack/dataset.csv",
+        "sha256": "9bb82dad5d1b2ca1fbc2ef21c5717b839506574cd5595552382d947fb130dc6a"
+      },
+      {
+        "path": "instruction_data/coco_3/Formality/dataset.csv",
+        "sha256": "072e9bb3930cfcd9ef855dc44bcc36ee6c3d7a02ed1b3e3d0cb1f311b243aab7"
+      },
+      {
+        "path": "instruction_data/coco_3/Language/dataset.csv",
+        "sha256": "42a3fa6b64067c591ae7b882ba14a0dc82ad05e90012527c85dd01893dba5216"
+      },
+      {
+        "path": "instruction_data/coco_3/Politics/dataset.csv",
+        "sha256": "916370217157b810f2178f60c680609c3526f02ad1a384240c4b775b928bee2c"
+      },
+      {
+        "path": "instruction_data/coco_3/Sentiment/dataset.csv",
+        "sha256": "6bb0f16b9efbc6b8f52dd38928cde35c9838590158f0c8e158b0d9b2da0ab22c"
+      },
+      {
+        "path": "instruction_data/coco_4/Attack/dataset.csv",
+        "sha256": "f29ecc283b897f244d9aeba3080fa0d9492f8374231ae16767cab57f47c8eecf"
+      },
+      {
+        "path": "instruction_data/coco_4/Formality/dataset.csv",
+        "sha256": "04e9bf930532063ac960911125674a0a0a199549822ce34085f9b8a97e4d6d2b"
+      },
+      {
+        "path": "instruction_data/coco_4/Language/dataset.csv",
+        "sha256": "17c6a9b5093f3a86798dc1d79044c3773d54e43fa25e9c53d37fcf5a0a2aea90"
+      },
+      {
+        "path": "instruction_data/coco_4/Politics/dataset.csv",
+        "sha256": "a1b114b47afcd99fb122c2a7b63a6aa36a156efd5507fca73a6f22c9e3250dd2"
+      },
+      {
+        "path": "instruction_data/coco_4/Sentiment/dataset.csv",
+        "sha256": "15ed9b8da0533d367151bddcd1dd80c49c2c42cf0ad50883d47073146a051e74"
+      },
+      {
+        "path": "instruction_data/coco_5/Attack/dataset.csv",
+        "sha256": "92082f5ba6946b6199d5060f3b0b6a2e7e546f59df6764512027ba9397e0b456"
+      },
+      {
+        "path": "instruction_data/coco_5/Formality/dataset.csv",
+        "sha256": "73b238d2af40480b17b61d4c07c204aabe6ba21c530d24fe3cd8ab9ffeb61ef2"
+      },
+      {
+        "path": "instruction_data/coco_5/Language/dataset.csv",
+        "sha256": "f5730cf5edf186decee2a519e4fa92188704b23e9e08ae658d173057dbaa39f2"
+      },
+      {
+        "path": "instruction_data/coco_5/Politics/dataset.csv",
+        "sha256": "5ff1d28161f7630a7ecf207e8e8ce0482c842b9ef542ff89aa02e2a17a36ec6c"
+      },
+      {
+        "path": "instruction_data/coco_5/Sentiment/dataset.csv",
+        "sha256": "21c4420240a3a6b548ed76f7617b80094357977517cf72cefa28e4c7c0c1d1c5"
+      },
+      {
+        "path": "instruction_data/coco_6/Attack/dataset.csv",
+        "sha256": "1958f35bffdae70ed22b0b9f46df616953428d4cc351a39c4257b9af885f72a0"
+      },
+      {
+        "path": "instruction_data/coco_6/Formality/dataset.csv",
+        "sha256": "4eb3b723a730e26656cee27be0b45ab86c0b3b83acbf710760590ded7bdceadb"
+      },
+      {
+        "path": "instruction_data/coco_6/Language/dataset.csv",
+        "sha256": "12155346c6a24bd91e37e43cddc603be9410be175bb61c11531ca8407a9288e3"
+      },
+      {
+        "path": "instruction_data/coco_6/Politics/dataset.csv",
+        "sha256": "35e8706f6ab8729a8622e7a4817d380c1429cada28e74aef9d91285f90862130"
+      },
+      {
+        "path": "instruction_data/coco_6/Sentiment/dataset.csv",
+        "sha256": "f8fd44acf35dcf5644f8fdbdabb31ddced5cd09111d3e22df319adc92073c812"
+      },
+      {
+        "path": "instruction_data/coco_7/Attack/dataset.csv",
+        "sha256": "a532de74202ab044391d90621ca5e8df845c216eb66c06d9673acfea4a2074b3"
+      },
+      {
+        "path": "instruction_data/coco_7/Formality/dataset.csv",
+        "sha256": "eb329eb47252ab0e92b9f83c6ff00fe527c7bb4282d26e1f49b2de60c16f3145"
+      },
+      {
+        "path": "instruction_data/coco_7/Language/dataset.csv",
+        "sha256": "35e17c9defef0be89b7e7e5c179bda66b8c06d2255dae4328041b5cf7a273b94"
+      },
+      {
+        "path": "instruction_data/coco_7/Politics/dataset.csv",
+        "sha256": "302289db05079e6392cbf544bfef660bb3d6c086ec1d3ff42377812d85d8ee3c"
+      },
+      {
+        "path": "instruction_data/coco_7/Sentiment/dataset.csv",
+        "sha256": "7627548668e1737964ccc183562ccf0f3c8d61b23824673a781af042501e523e"
+      },
+      {
+        "path": "instruction_data/coco_8/Attack/dataset.csv",
+        "sha256": "87d99f4f520ea03bac0ce3ad8d914fa7f6fa6dd6b76442966fc580530d6ac195"
+      },
+      {
+        "path": "instruction_data/coco_8/Formality/dataset.csv",
+        "sha256": "5cfbb35243b5bc5f5c0499107eed600e9c47faea89e65774d7dc7df1e44844a6"
+      },
+      {
+        "path": "instruction_data/coco_8/Language/dataset.csv",
+        "sha256": "cc6f65c8afac99e83c55344f60dd3cc20ff4648e7ac801877f6b42e51db2ed03"
+      },
+      {
+        "path": "instruction_data/coco_8/Politics/dataset.csv",
+        "sha256": "2a2b068396772e8c5103950dd67070e4d152aa8b2733aea2f7cbd014f6e892d3"
+      },
+      {
+        "path": "instruction_data/coco_8/Sentiment/dataset.csv",
+        "sha256": "9d41b2b8ffd0eb7ee5226237fe5a42eff472d55ef05cc5c23632df83c244b7b8"
+      },
+      {
+        "path": "instruction_data/coco_9/Attack/dataset.csv",
+        "sha256": "07431d68c90fce83155ca1481336588a4e6a6ad4ecfc467de9e7e335be0b6e90"
+      },
+      {
+        "path": "instruction_data/coco_9/Formality/dataset.csv",
+        "sha256": "75abf7703866c8061a02ef5e7e4caf5c77a8446543bf2dc3c17c627d6e30e759"
+      },
+      {
+        "path": "instruction_data/coco_9/Language/dataset.csv",
+        "sha256": "c9aa563171a9168a0620ac206ba24d521d49b1fd18991ef1ef4bced9ed8ff037"
+      },
+      {
+        "path": "instruction_data/coco_9/Politics/dataset.csv",
+        "sha256": "6224d8ce463d334bbd847fefef3ceae974f45629e91e2d8aed0ee173e9f2e9e0"
+      },
+      {
+        "path": "instruction_data/coco_9/Sentiment/dataset.csv",
+        "sha256": "72e1b9e265da61b725c9cbbc4b56d30873168966fb8788f819b3119ddfae9279"
+      },
+      {
+        "path": "instruction_data/eg1/dataset.csv",
+        "sha256": "f8c548d7fa54a64020c81cbc72a07dcd36f26fb1f1986fdd6b96a46c9f263626"
+      },
+      {
+        "path": "instruction_data/eg2/dataset.csv",
+        "sha256": "33496451080410bd87b71343c03beec87b7f2d6a06d2cd14c3f99f95d55a4fa7"
+      },
+      {
+        "path": "instruction_data/eg3/dataset.csv",
+        "sha256": "a6c8fd27c4c7792e6e2d79416b179273f229959d0d580b09f7d6d8f231b4748e"
+      },
+      {
+        "path": "instruction_data/eg4/dataset.csv",
+        "sha256": "6cf201f7428e1c26b968c7bb442a442036c7ec78b721570ba110943db1af5e7f"
+      },
+      {
+        "path": "instruction_data/eg5/dataset.csv",
+        "sha256": "d4ed484d211c2f4293f5ddcd506d3b6d4de74deeee0b7057453a9cab9747ac4c"
+      },
+      {
+        "path": "instruction_data/eg6/dataset.csv",
+        "sha256": "6ca51d600c0adf6aa002c8c5e001ee2b90414c172b92024542a3574ec1a59700"
+      },
+      {
+        "path": "instruction_data/eg7/dataset.csv",
+        "sha256": "9dcc681e378435aae1d4f97aaf9b27f25994464bca21db338d89db54675ea5b2"
+      },
+      {
+        "path": "instruction_data/training_data_evaluation.ipynb",
+        "sha256": "563515e8f594883b674ba496d1219c6ce21bb9f1b04641a624ab4825ada196ee"
+      },
+      {
+        "path": "interesting_examples/conservative_apple.pdf",
+        "sha256": "9e00e5a2251d336ed478300ef93959eabbfd12c791839cf56692a580877fa017"
+      },
+      {
+        "path": "interesting_examples/harry_potter.pdf",
+        "sha256": "bc84f34fc0b6af17bf1603ed296a6bee2b997966bf224917ceafd32ff5d986d3"
+      },
+      {
+        "path": "interesting_examples/paper_review.pdf",
+        "sha256": "51cb10a366bb1c3c6d12c463f036f95b2928559061a87f300d85ad6fd0fcf202"
+      },
+      {
+        "path": "interesting_examples/paper_review.png",
+        "sha256": "3969ba89d738e4bbe34bfb9b3eabd2668596246c23a575bf98ac734310acfcc0"
+      },
+      {
+        "path": "interesting_examples/stonk.pdf",
+        "sha256": "feba8cd5ee3dbbd698267d6904939e3a38dd3c7e334d8ac0de7b07211f01e175"
+      },
+      {
+        "path": "interesting_examples/terrorist.pdf",
+        "sha256": "79b3c11e8a11e588c92a38a17750991de485fd5be0354b845376b0b5ab6e6a98"
+      },
+      {
+        "path": "lavis/LICENSE_Lavis.md",
+        "sha256": "5aca00bff81e12a65992c7f2ecfece6ba7a923193c7a1d33a1b60f657e8cf11a"
+      },
+      {
+        "path": "lavis/__init__.py",
+        "sha256": "6ad1f5f087ec8ff32c3a3ec50431026d45a0e3f6d0c9332e206a576b44b40d86"
+      },
+      {
+        "path": "lavis/common/config.py",
+        "sha256": "62e754848c88e0ee5cf9bca65d5d62e5964eb89a5caf7631a187b14afac92b6c"
+      },
+      {
+        "path": "lavis/common/dist_utils.py",
+        "sha256": "80ac52911e1f4f2dc6aa551272a25cf75a8adb1db288b4d6a7488566b8b916e9"
+      },
+      {
+        "path": "lavis/common/gradcam.py",
+        "sha256": "e2b44904ba3f09c7daa4aaa9cc41f07eaa60834e8e88b3f162392314ef7fc1a2"
+      },
+      {
+        "path": "lavis/common/logger.py",
+        "sha256": "482b247740ff93529e902e5b3a4de7690b562ff891d1a26303b7b61d30c4ac29"
+      },
+      {
+        "path": "lavis/common/optims.py",
+        "sha256": "6d07e81d0695bbca9689358bcc439ebd219d4d3c7b02e24de03cc10174509bfc"
+      },
+      {
+        "path": "lavis/common/registry.py",
+        "sha256": "10b1c5042593e71e2f57c34069a0a14655ae07f5c60bd27b03f9b0146f3c74d0"
+      },
+      {
+        "path": "lavis/common/utils.py",
+        "sha256": "df2d956141a7a0eabe058d69418796ffb633bc6ed350a0962a5d48b297ebacf9"
+      },
+      {
+        "path": "lavis/common/vqa_tools/__init__.py",
+        "sha256": "1ac25db0b3394feeef3c3a3a18089a5a3982b001e7138acb578ca979e6d4655f"
+      },
+      {
+        "path": "lavis/common/vqa_tools/vqa.py",
+        "sha256": "8d1cc77c4afc216c75f09d5cdb480b91fa94197e9d4b36faf72728164c0c86af"
+      },
+      {
+        "path": "lavis/common/vqa_tools/vqa_eval.py",
+        "sha256": "adc1ce7aad5643bf2caf6d94e92fa030f8efe138800a4a96d9b501654ba677e6"
+      },
+      {
+        "path": "lavis/configs/datasets/aokvqa/defaults.yaml",
+        "sha256": "0d243d780c3c6257673286e36b23caeaace0ae01dd3fe58d66510db3f9883a63"
+      },
+      {
+        "path": "lavis/configs/datasets/avsd/defaults_dial.yaml",
+        "sha256": "d808edbd0a2b6433e272a2c8c186b7e2932081d2a28baabdfb3e072dea0168ce"
+      },
+      {
+        "path": "lavis/configs/datasets/coco/defaults_cap.yaml",
+        "sha256": "78247fd995d44032bcdfa9269b4ca2dfc39933285ebc79338e080088a3a7946c"
+      },
+      {
+        "path": "lavis/configs/datasets/coco/defaults_ret.yaml",
+        "sha256": "4018d808ce31a5e27c5601701d0c5af437259a2ab09df0547dcd09feb90abb59"
+      },
+      {
+        "path": "lavis/configs/datasets/coco/defaults_vqa.yaml",
+        "sha256": "760be450db7966442fb6803849c772abb4516912f584c878830208010bff1fa8"
+      },
+      {
+        "path": "lavis/configs/datasets/coco/eval_vqa.yaml",
+        "sha256": "b9b8012fa7f8274461587fd0ec066765eaf5895b039fad988fd07830155487e8"
+      },
+      {
+        "path": "lavis/configs/datasets/conceptual_caption/defaults_12m.yaml",
+        "sha256": "9dda4c86ddab3118b4291698c95995b6f14f92e81892e3f50920e2d4f3930db1"
+      },
+      {
+        "path": "lavis/configs/datasets/conceptual_caption/defaults_3m.yaml",
+        "sha256": "8a710da626d79d37a716aa7c3ad2b23c5b26c1d49b1dc4f36e14ef51ca192e1a"
+      },
+      {
+        "path": "lavis/configs/datasets/didemo/defaults_ret.yaml",
+        "sha256": "b661a46e6995a67bf4a917811f73be45d8f9f2527761a568a729076f8b869e10"
+      },
+      {
+        "path": "lavis/configs/datasets/flickr30k/defaults.yaml",
+        "sha256": "e3791ca260311f6f07f1255107adc02551ef288fba80bc6adf0e60f23021b831"
+      },
+      {
+        "path": "lavis/configs/datasets/gqa/balanced_testdev.yaml",
+        "sha256": "28d56de8c430ef3a3d330fe210dde51a120022efd35412988919a8c5c79f42d8"
+      },
+      {
+        "path": "lavis/configs/datasets/gqa/balanced_val.yaml",
+        "sha256": "2b7e7c6b1b332180e9a80059b6306045314cdd4616f100a931e3bd2eafc01251"
+      },
+      {
+        "path": "lavis/configs/datasets/gqa/defaults.yaml",
+        "sha256": "58f15e00ae8b936d262745566d7ebd537d85f307987f2c5d63ca5937a991364f"
+      },
+      {
+        "path": "lavis/configs/datasets/imagenet/defaults.yaml",
+        "sha256": "9b830de6f846d8fcb71d1ae37d5b46a73fbd57b72a239ec01a0c7fa156ae508e"
+      },
+      {
+        "path": "lavis/configs/datasets/laion/defaults_2B_multi.yaml",
+        "sha256": "37312c9930ce6b8005b0a3e36a2361e5abb722670ae90ba92e7b7249c2f5180d"
+      },
+      {
+        "path": "lavis/configs/datasets/msrvtt/defaults_cap.yaml",
+        "sha256": "b61b77b3666b1d9c310775d51500ae4e12acb848cd202243c2de56ff88cc5b17"
+      },
+      {
+        "path": "lavis/configs/datasets/msrvtt/defaults_qa.yaml",
+        "sha256": "f777145f526bf788e317f0535c23bbcac6f11bcf1f105de8089d87457aab3c06"
+      },
+      {
+        "path": "lavis/configs/datasets/msrvtt/defaults_ret.yaml",
+        "sha256": "962480dc10669752e1bc1d4e2cb848cf028ed6cb882cbc583c01d81205e55b4f"
+      },
+      {
+        "path": "lavis/configs/datasets/msvd/defaults_cap.yaml",
+        "sha256": "7fb3aedf468828047d41e4a9dea0e30b567a19f98429feceb30a1ab346606b7d"
+      },
+      {
+        "path": "lavis/configs/datasets/msvd/defaults_qa.yaml",
+        "sha256": "4cc072a3b14aeeb65b1af1382bd386008b0fa35b051976aa5ae54c0ae76226a8"
+      },
+      {
+        "path": "lavis/configs/datasets/nlvr/defaults.yaml",
+        "sha256": "8792213dd2e858eb8faeec1871ec62889d546adaad7aed66d9dc1ba045bda6f3"
+      },
+      {
+        "path": "lavis/configs/datasets/nocaps/defaults.yaml",
+        "sha256": "0437e1c3c338315029d6cbd39bfc8c69631fe6089e9bc0fea7a06497be8e2f97"
+      },
+      {
+        "path": "lavis/configs/datasets/okvqa/defaults.yaml",
+        "sha256": "53249088934c1ad3024e57d36bc11747fbbcda54ec08f55e5b25371a6405c117"
+      },
+      {
+        "path": "lavis/configs/datasets/sbu_caption/defaults.yaml",
+        "sha256": "7e6077c1d90b625a15235c10df05d53316dfd8a5624021158d030504baeeb311"
+      },
+      {
+        "path": "lavis/configs/datasets/snli_ve/defaults.yaml",
+        "sha256": "292e8be90636e3271ff7034a31ea5c58921744513353476da4518312f301ac53"
+      },
+      {
+        "path": "lavis/configs/datasets/vatex/defaults_cap.yaml",
+        "sha256": "9e53c847b8da7b7f7fe395dba06cfd8e1d9bb4d13f48ab39048ca2d43cc360bc"
+      },
+      {
+        "path": "lavis/configs/datasets/vg/defaults_caption.yaml",
+        "sha256": "3bcff3e0dc4cc8d47993612deabfedfad23fe3adf98986f1aacf4b2fed3f2742"
+      },
+      {
+        "path": "lavis/configs/datasets/vg/defaults_vqa.yaml",
+        "sha256": "30dcab8d086e355d4a16af7303d273cb0b33c0cf7267b46d5c30e9635c2a0b46"
+      },
+      {
+        "path": "lavis/configs/default.yaml",
+        "sha256": "b465981fdc2c5050b606a949f94bffbfd21b02fbda63cf4f16a9129f1d2fed3f"
+      },
+      {
+        "path": "lavis/configs/models/albef_classification_ve.yaml",
+        "sha256": "04aeb78772ca8a8d760f2577f7ad34f87a5a0c0a95746a97b339c662042e9994"
+      },
+      {
+        "path": "lavis/configs/models/albef_feature_extractor.yaml",
+        "sha256": "28fac2ae650f8a456cc18b8049137fe0b1feac6e716d7852dbf11fdcc43fb13d"
+      },
+      {
+        "path": "lavis/configs/models/albef_nlvr.yaml",
+        "sha256": "e124d28e37383dec9acdd0b2a5934f43ccbdcaa2f507d660924d835b6e7dbe87"
+      },
+      {
+        "path": "lavis/configs/models/albef_pretrain_base.yaml",
+        "sha256": "ef9956979f1f206b3ba3273ab8ba253b22ad54bd4fcaef6630fcb545b2506c66"
+      },
+      {
+        "path": "lavis/configs/models/albef_retrieval_coco.yaml",
+        "sha256": "5cf5231306007f24b80abac705396630491b5c68519a4cddbfe68455a010b6d9"
+      },
+      {
+        "path": "lavis/configs/models/albef_retrieval_flickr.yaml",
+        "sha256": "c4191485782cd49bac1d5c0e367e21088563ba4dd9e07f6e23c3e0a89391a7d4"
+      },
+      {
+        "path": "lavis/configs/models/albef_vqav2.yaml",
+        "sha256": "60a9b62cd65a56c8661fd19dc5d4c74fcdde7856a5cfc62380bfe9349cbf7ada"
+      },
+      {
+        "path": "lavis/configs/models/alpro_qa_msrvtt.yaml",
+        "sha256": "d39f5c8a4c5af04f7990d8d8aa3b4c3a848ed82767d6156593290df1b175fa93"
+      },
+      {
+        "path": "lavis/configs/models/alpro_qa_msvd.yaml",
+        "sha256": "3848a7f47590df9f6b0dfc5b40f4f79b0858ca7329f63eefbd3386a2e234d62f"
+      },
+      {
+        "path": "lavis/configs/models/alpro_retrieval_didemo.yaml",
+        "sha256": "32973929255e7794a2cda97a96ff9120964d815a96f7aa7fabca601ac165a274"
+      },
+      {
+        "path": "lavis/configs/models/alpro_retrieval_msrvtt.yaml",
+        "sha256": "3b6b8a5a87bf0dfaf570aae294ed776dea9401c29ff801d2e7c82c300593168c"
+      },
+      {
+        "path": "lavis/configs/models/bert_config.json",
+        "sha256": "23f4d3cd2397ac73a3e190808577e9650161b8f2bf600a605a4abb597b4a0d91"
+      },
+      {
+        "path": "lavis/configs/models/bert_config_alpro.json",
+        "sha256": "e6f07710554ff6065a46696e99a7f33ad2dfff233a62012aa4547718edf0a038"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_caption_flant5xl.yaml",
+        "sha256": "2ecd997ec295de00f383a176cc11cf8456cafb79daee8ccd19616632affc8538"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_caption_opt2.7b.yaml",
+        "sha256": "c973fa1d05721187355f60bf49ac0d2327b87a86903f197c25acd5ec25d43c37"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_caption_opt6.7b.yaml",
+        "sha256": "3a974ebe597b517ea75118bce2b0ef5a2159acbb0d347b6815159dba054fbdd0"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_coco.yaml",
+        "sha256": "84f1c5f37d4b4a30466e8d5f83d7ea85b7920063955be8a265b58755056cf305"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_instruct_flant5xl.yaml",
+        "sha256": "c4c2c819586483006c3fd21b285a19356fe56d5c308f3e3802b95244f4b543df"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_instruct_flant5xxl.yaml",
+        "sha256": "9327db6ed2ce1bc718f425059befe0e7a76330cc1f6613a05d2155da044ca264"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_instruct_vicuna13b.yaml",
+        "sha256": "d205796a4fdacebab45f7ae4794f7d4a9cab4ad88466130e411962922f71f7fa"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_instruct_vicuna7b.yaml",
+        "sha256": "0d574f5f45c29d765df2d00ecd23df319d0e5983693a1a0b36f06e16a64e0351"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_pretrain.yaml",
+        "sha256": "b2fce0fc0a34834fad02704a4f4263e0f0d1befd62912c52d43ab9624ceb5135"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_pretrain_flant5xl.yaml",
+        "sha256": "65913a0167bc8a22d35d888993ad0fd09e1c44bc1e84b633467d68859c60b2d2"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_pretrain_flant5xl_vitL.yaml",
+        "sha256": "00880401e4d4a8588d56afae2236c4ff387b8c33cb17072166cc347c2bd6a94d"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_pretrain_flant5xxl.yaml",
+        "sha256": "0906502024f6a20ab02a49735955277d689d398f8379f961fd60febead3cb32b"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_pretrain_llama7b.yaml",
+        "sha256": "e1a94f464d703b16b59f1ae5739930313a598a9c7d5aa3eba17b6128472b70f3"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_pretrain_opt2.7b.yaml",
+        "sha256": "506b8bdb4c513d93f2dec65ea8c808ce8bdd77504e4c44b04d2da07f0b1d1859"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_pretrain_opt6.7b.yaml",
+        "sha256": "78abb2094ef21485355521cd47312ee019bb358e8d3e9a481dc4ddd1129752b2"
+      },
+      {
+        "path": "lavis/configs/models/blip2/blip2_pretrain_vitL.yaml",
+        "sha256": "ec058594cf76483c92078f889c7f5ac3cdf20614371d22aabc6a1f9bec620cce"
+      },
+      {
+        "path": "lavis/configs/models/blip_caption_base_coco.yaml",
+        "sha256": "5658485b625647dbbbc14f9e4c314e4d394221d207bed32f7f6b5e5387b8acce"
+      },
+      {
+        "path": "lavis/configs/models/blip_caption_large_coco.yaml",
+        "sha256": "ace6cf387c8516b228f7565eb7f2cceeed255c5543fc752845f6028986374bf7"
+      },
+      {
+        "path": "lavis/configs/models/blip_classification_base.yaml",
+        "sha256": "8937cb9691b05a11939c984b5b246190901e8a3d1a67e9f7edf80572c09c1c58"
+      },
+      {
+        "path": "lavis/configs/models/blip_feature_extractor_base.yaml",
+        "sha256": "adaade0facccebfc6e723cdf56d5830f7b82a54d48099609c2f7d225aa047bce"
+      },
+      {
+        "path": "lavis/configs/models/blip_itm_base.yaml",
+        "sha256": "5c99e84e089dc08bcb0f7434c1cc8d43f1aa88974e14b6f0634415840f901347"
+      },
+      {
+        "path": "lavis/configs/models/blip_itm_large.yaml",
+        "sha256": "9a810fa5d16a5720cf3c98a735da99eb2a7f34e5fccb13fcc72acb9833c9e2a5"
+      },
+      {
+        "path": "lavis/configs/models/blip_nlvr.yaml",
+        "sha256": "9e1801530e3157c3ad7012170c1c192cd02b0033240fcb93391054235e517b51"
+      },
+      {
+        "path": "lavis/configs/models/blip_pretrain_base.yaml",
+        "sha256": "77bfa7ad17c0d9dc658fb25879825b53abe938b55fabb6ec7a4554c4959d613d"
+      },
+      {
+        "path": "lavis/configs/models/blip_pretrain_large.yaml",
+        "sha256": "00617b4c904e2bf3e35a3eae5bd11e178296c09e0d830125c9f380314082a20d"
+      },
+      {
+        "path": "lavis/configs/models/blip_retrieval_coco.yaml",
+        "sha256": "45240debf91b1dded3abd862efda121720b10e532dc98bc9acf13f8abdcd5f0c"
+      },
+      {
+        "path": "lavis/configs/models/blip_retrieval_flickr.yaml",
+        "sha256": "055d1537d8e94fe495358e98fdfe9dbf1b9b1678f3acb62ba7d3c5eeba642171"
+      },
+      {
+        "path": "lavis/configs/models/blip_vqa_aokvqa.yaml",
+        "sha256": "76cf077cce574217b4494022c1221db06e3381dde22701e101c49bf91849f1aa"
+      },
+      {
+        "path": "lavis/configs/models/blip_vqa_okvqa.yaml",
+        "sha256": "91d4912b7f2fbb427b3b22583722d9821e35346190a1c573f07c67f1ff58c38f"
+      },
+      {
+        "path": "lavis/configs/models/blip_vqav2.yaml",
+        "sha256": "4ed24e845cbea299a9b844cd6cd09fd1fd4196caf904ecc3a90c480438f49271"
+      },
+      {
+        "path": "lavis/configs/models/clip/RN101-quickgelu.json",
+        "sha256": "7e7d276912dd4841d3684253cbd0f628a13267b8d36920428de52b1de4c78abe"
+      },
+      {
+        "path": "lavis/configs/models/clip/RN101.json",
+        "sha256": "5dc6149e06e7327de45b829f408b560863bd39b04ff1cd3bacb920711dc4a1ad"
+      },
+      {
+        "path": "lavis/configs/models/clip/RN50-quickgelu.json",
+        "sha256": "079e9c4f3d7808a767de08061ab417f98d9e8aaaecec6510949cad0c0c389a41"
+      },
+      {
+        "path": "lavis/configs/models/clip/RN50.json",
+        "sha256": "f02550091048f25a87edfcd81c7bd4919d4d4a61e485030ca1fe067e88d3cb91"
+      },
+      {
+        "path": "lavis/configs/models/clip/RN50x16.json",
+        "sha256": "0d394e486b6b6a26e748ec97e9c5393dd961b06b5b3e7b61bae71fc3b4405a10"
+      },
+      {
+        "path": "lavis/configs/models/clip/RN50x4.json",
+        "sha256": "f94eecc426f3055fec4ba2c5388a4d8cea602e0f83b8b6b353a90dea85f8d241"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-B-16-plus-240.json",
+        "sha256": "cd09b2aca88dfd5ccaa5d2109606159b915fbc78fb03398cb32dd1ed3e7186d7"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-B-16-plus.json",
+        "sha256": "66ecfdccb925b1b3120af4ab5506657501e0d80a49d9665a4ee956fdf9b93bb5"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-B-16.json",
+        "sha256": "b08bd3693df386305f28adaf8038e447f68ee8192e567ac77e7c29510fe012b3"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-B-32-plus-256.json",
+        "sha256": "fb563ef282f802400e4ee5db678e0d827f44a7e9f07a2b4bdce9238414ebd869"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-B-32-quickgelu.json",
+        "sha256": "c8abc244b98197c538a0ba71c14e9bae08ff4a648f36e03211ff9604011ece6e"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-B-32.json",
+        "sha256": "523df6db8eaf5d08a4e48321e926135364a473267e04a2fd207fa87b22ac6104"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-H-14.json",
+        "sha256": "29b8aff54c7e9da590d4ba07f17608cbeb383556b176e106adb5242f916672ab"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-H-16.json",
+        "sha256": "3926e053fa0703c3f51c285a095129c18bc346f6789ae7b83a6726789c2447d6"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-L-14-280.json",
+        "sha256": "90da5cd5652f91c4f177ac9a2ddf2558629da67602c692f1fa58c1ea094e5c90"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-L-14-336.json",
+        "sha256": "5775652da532da4cac6b20e854940f94cf0ff5f554afe7f8174ea9c7d4e8f367"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-L-14.json",
+        "sha256": "0c26e8203c2ee67fc024a98c23d662845347f859899b56912fe6ba55c8aaddaa"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-L-16-320.json",
+        "sha256": "f883b3cdc83616860c31fbad6f97ffd73c745dde8a91aed9cd6021159fe690ee"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-L-16.json",
+        "sha256": "e290de2c626b3ac8c66f0f7a655132b363163c3019a87c0d2b1c21851cb720cf"
+      },
+      {
+        "path": "lavis/configs/models/clip/ViT-g-14.json",
+        "sha256": "0c8bda8adddb2c8285a7ccbeb075d59ebb63c91b8404799d67635d83b753d3e2"
+      },
+      {
+        "path": "lavis/configs/models/clip/timm-efficientnetv2_rw_s.json",
+        "sha256": "c8d0ef53336af3564c7f2506f3769df1f992b55507ea145fd9b16e1bb7f29d9d"
+      },
+      {
+        "path": "lavis/configs/models/clip/timm-resnet50d.json",
+        "sha256": "f697b0c0288329e7bbddf8d96073eb52a3fd678da9b9eb808e96870396f79e38"
+      },
+      {
+        "path": "lavis/configs/models/clip/timm-resnetaa50d.json",
+        "sha256": "7b8d22021f4c77d1665460a08cf41e3a73fbf0399ebede9bc008c688cdca78c6"
+      },
+      {
+        "path": "lavis/configs/models/clip/timm-resnetblur50.json",
+        "sha256": "10b99b722c18adfb51411eef9973c4ad45e1bb49991629ada1ef1b9554001b2f"
+      },
+      {
+        "path": "lavis/configs/models/clip/timm-swin_base_patch4_window7_224.json",
+        "sha256": "17c7b74be6812a9469aebda592c82b1bb2127c44757ea3381a34c10ec895c134"
+      },
+      {
+        "path": "lavis/configs/models/clip/timm-vit_base_patch16_224.json",
+        "sha256": "59668b8f429be1e70d5ef099c7e6e3d794de12c1bcd52d9d8e574224365e04a1"
+      },
+      {
+        "path": "lavis/configs/models/clip/timm-vit_base_patch32_224.json",
+        "sha256": "ce8e93bbf91e8156511205f52b3d570ce4244326b361ed6369fb9bbdfb0a411e"
+      },
+      {
+        "path": "lavis/configs/models/clip/timm-vit_small_patch16_224.json",
+        "sha256": "5136b621a272047f781f6e3366f8415924d1709753bacc6787fbe4f9d8ef32a9"
+      },
+      {
+        "path": "lavis/configs/models/clip_resnet50.yaml",
+        "sha256": "98c4f3b58c453f86c0e5c28ab5e53e98bb6dc04f0c76ecd6db35c8d050aeed6c"
+      },
+      {
+        "path": "lavis/configs/models/clip_vit_base16.yaml",
+        "sha256": "6d06c96c9da163529040b4d3eb232a506e104dfd9c104bcb661f7d2590e5aba5"
+      },
+      {
+        "path": "lavis/configs/models/clip_vit_base32.yaml",
+        "sha256": "c292cc526fb433600196b024e0ee049677b792fdccc297c6647d6348b93e3192"
+      },
+      {
+        "path": "lavis/configs/models/clip_vit_large14.yaml",
+        "sha256": "786000638658ee784168e7be036b60d1c2de053b2470a25323f9fe7884a4f52b"
+      },
+      {
+        "path": "lavis/configs/models/clip_vit_large14_336.yaml",
+        "sha256": "662eaca84b5af8348a0d2632c9d744007ebe99bf3bec0345327b9c707d6a4579"
+      },
+      {
+        "path": "lavis/configs/models/gpt_dialogue_base.yaml",
+        "sha256": "309c6a88744d45af1abb1319f88589f05136cb3c274a416bf4f85bd5c7af852e"
+      },
+      {
+        "path": "lavis/configs/models/img2prompt-vqa/img2prompt_vqa_base.yaml",
+        "sha256": "1ac3f8a0801a5288d098d82a04a4e7b5c7fea260fb63dbab9619e7dde6b7b2aa"
+      },
+      {
+        "path": "lavis/configs/models/med_config.json",
+        "sha256": "64b696197762b064ef7b4f006de3025d6027e6af3c11f1e3003da98c2917fc64"
+      },
+      {
+        "path": "lavis/configs/models/med_config_albef.json",
+        "sha256": "467853eb80548b99f919174ed64c8da3c7f8cab1419f8f2248cff35e6298e02c"
+      },
+      {
+        "path": "lavis/configs/models/med_large_config.json",
+        "sha256": "5c6125f0ab23c0fd6ca8949812b924b6f4e5b40cc0265ae7b80fe320be4cba72"
+      },
+      {
+        "path": "lavis/configs/models/pnp-vqa/pnp_vqa_3b.yaml",
+        "sha256": "0278b92c44f83d33cdf29cca55fbb11add67f0817aad6a5b2450f96bcffebbf7"
+      },
+      {
+        "path": "lavis/configs/models/pnp-vqa/pnp_vqa_base.yaml",
+        "sha256": "a66079fff0e05fcda1db1a26c5c5d10f77115504a313177a5aa0f8b2657e7944"
+      },
+      {
+        "path": "lavis/configs/models/pnp-vqa/pnp_vqa_large.yaml",
+        "sha256": "bdcfa4ee2207e370f76c7743f848c718de1543f5a31007fe7a1d52eed3a0df05"
+      },
+      {
+        "path": "lavis/configs/models/pnp-vqa/unifiedqav2_3b_config.json",
+        "sha256": "b67a3df582a4089c3c62cd91651e640e63e6721218aa3ea1756b0becec360770"
+      },
+      {
+        "path": "lavis/configs/models/pnp-vqa/unifiedqav2_base_config.json",
+        "sha256": "c60799b18e2cc2df94eb70330ba5e20882bab080e9d74f6f1bbdcb4f35975c14"
+      },
+      {
+        "path": "lavis/configs/models/pnp-vqa/unifiedqav2_large_config.json",
+        "sha256": "4ca516ef54135910074cfdc652e8452e340ed5eebd723defa007310379e87c07"
+      },
+      {
+        "path": "lavis/datasets/builders/__init__.py",
+        "sha256": "96db3bae35021d24422f703a956532d576a61b67a178c9172ba47885e8865635"
+      },
+      {
+        "path": "lavis/datasets/builders/base_dataset_builder.py",
+        "sha256": "d718cfe71292913b7c77272430b8ef1ace3c1bfce0842862226efb32eb5c196b"
+      },
+      {
+        "path": "lavis/datasets/builders/caption_builder.py",
+        "sha256": "574cdfccf4e03ca30f2668bae946718618729e16b73f50f6c45039a04f24493c"
+      },
+      {
+        "path": "lavis/datasets/builders/classification_builder.py",
+        "sha256": "07deb88cd820f300f8d9b8578338b56ba0ecddc0f4ed9ca881f99196feda0ad9"
+      },
+      {
+        "path": "lavis/datasets/builders/dialogue_builder.py",
+        "sha256": "9b946f21f6fff9ee95b0b3b1ab2cfe48d30e1baf54059bb0d4cee30e9825c0a4"
+      },
+      {
+        "path": "lavis/datasets/builders/image_text_pair_builder.py",
+        "sha256": "c626b6a8ead05fad6b2757e6d92ace8363569a8a8401f7812ba65b04fa4dc518"
+      },
+      {
+        "path": "lavis/datasets/builders/imagefolder_builder.py",
+        "sha256": "fe061ecdefa5455c7e7d574223dafa753028d63cad312d733c625ebcf5472cdb"
+      },
+      {
+        "path": "lavis/datasets/builders/retrieval_builder.py",
+        "sha256": "440a946283135f054733ed112f6f256d1c35b3aba154640ff355f3b8845af27a"
+      },
+      {
+        "path": "lavis/datasets/builders/video_qa_builder.py",
+        "sha256": "3410ac255f699d5f2193dbc51edfef546e800bf6bf8ddf518792c636574465e6"
+      },
+      {
+        "path": "lavis/datasets/builders/vqa_builder.py",
+        "sha256": "062a71acca24c81bf1506a65e3951c0dd3f43feb02143a2e34a9e0f4b5a1e79e"
+      },
+      {
+        "path": "lavis/datasets/data_utils.py",
+        "sha256": "02bb3406148101c95066fc62f00f9c54ab3f69c01b1cfc38b98806014a76cf7e"
+      },
+      {
+        "path": "lavis/datasets/datasets/aok_vqa_datasets.py",
+        "sha256": "6dd9ac0645366a016b350ef7c44eaf277bbe68afcf271ccc8e39246ae3b9e2a8"
+      },
+      {
+        "path": "lavis/datasets/datasets/avsd_dialogue_datasets.py",
+        "sha256": "436abc29cf7177c1498c153686d1a3e1a167db7732d03d52e84478fdab33204b"
+      },
+      {
+        "path": "lavis/datasets/datasets/base_dataset.py",
+        "sha256": "526ba8bea05ff6f9f967b5821451a36c1c2849ed94c30541202979367bd40412"
+      },
+      {
+        "path": "lavis/datasets/datasets/caption_datasets.py",
+        "sha256": "cce75ba78ebae0189d5e0eae2a1a7fec88f740b011750d49310fb30b6bb50311"
+      },
+      {
+        "path": "lavis/datasets/datasets/coco_caption_datasets.py",
+        "sha256": "a32c5b04eee3052fb6c8288ffecf3b3dcb1f65f5cc2d3bdabeaea1e10a74d35f"
+      },
+      {
+        "path": "lavis/datasets/datasets/coco_vqa_datasets.py",
+        "sha256": "827e687b4f366bab92a3f5b0ea83bceb8f3fa920ef0c2c1ec873dd8e9a26acc5"
+      },
+      {
+        "path": "lavis/datasets/datasets/dataloader_utils.py",
+        "sha256": "d8bb08e45b75d65e0388a6598a034e6c786e36d0cec25232f445e6ef2b4dd4df"
+      },
+      {
+        "path": "lavis/datasets/datasets/dialogue_datasets.py",
+        "sha256": "cf2d33690e47af74e758edb7dd1a4078533f0208ad00fc8974ea5b4d261f6261"
+      },
+      {
+        "path": "lavis/datasets/datasets/gqa_datasets.py",
+        "sha256": "b70361d7242360fe71fcc5186ca6d897a012420780122fa88a5da289370d86c4"
+      },
+      {
+        "path": "lavis/datasets/datasets/image_text_pair_datasets.py",
+        "sha256": "cc7aebfe7ad9810a0a286cc5fb1f860a8d59bc128fea7a8c3cf6e97dca91a718"
+      },
+      {
+        "path": "lavis/datasets/datasets/imagefolder_dataset.py",
+        "sha256": "9746d9bcbeb3429a8f8c31f83c601ee63e8292335c5568e2b4119dbb274c0577"
+      },
+      {
+        "path": "lavis/datasets/datasets/laion_dataset.py",
+        "sha256": "1de8547a223c98889ee22417b5bd2dfe70446793ad2011ac06c3b7704bb32629"
+      },
+      {
+        "path": "lavis/datasets/datasets/multimodal_classification_datasets.py",
+        "sha256": "16a6b12303a02466b1c854aebd3be264f0cad30b2fd919468c598b35a58967b8"
+      },
+      {
+        "path": "lavis/datasets/datasets/nlvr_datasets.py",
+        "sha256": "43ba3e5b9485e14ad067bcdd91ddf2b0a73ba5d6152ed3f4a2fd9cee07857b48"
+      },
+      {
+        "path": "lavis/datasets/datasets/retrieval_datasets.py",
+        "sha256": "b1c4d861abc5f359a265636a32979433e92c764b5072ea96f409f66fd376e87f"
+      },
+      {
+        "path": "lavis/datasets/datasets/snli_ve_datasets.py",
+        "sha256": "97507d7f928e296b9ed214aa7a8530f586d34a36a2638e6195bacc9223af943f"
+      },
+      {
+        "path": "lavis/datasets/datasets/vg_vqa_datasets.py",
+        "sha256": "a28ed0a66cd031f312e45e302568bf0f8050ab5c5b4dc27900220d96b91c7491"
+      },
+      {
+        "path": "lavis/datasets/datasets/video_caption_datasets.py",
+        "sha256": "61e6181f407be1592e59bc6eba3c5da67781c5061d07279167dc90db07faa245"
+      },
+      {
+        "path": "lavis/datasets/datasets/video_vqa_datasets.py",
+        "sha256": "265ab0f1152f6a06fe72c9d8a57236a734db5f5a3b3cc01ff77be202ec7d647e"
+      },
+      {
+        "path": "lavis/datasets/datasets/vqa_datasets.py",
+        "sha256": "8f6836389d6dd482a972e204ad8477ab2cfca1649b40f2e379cc981aa9a728f6"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/DownloadConceptualCaptions/LICENSE",
+        "sha256": "db3b69bb56e568079b587fda58bd3cbc594f3432edc96645ab65a02217c0c9ba"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/DownloadConceptualCaptions/README.md",
+        "sha256": "8f89434cbc16f39ff55a7a2209e59f35677bb7c0c878a26e38da618e71c84d1a"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/DownloadConceptualCaptions/create_annotation_12m.ipynb",
+        "sha256": "0a68ca1fca418a6ecdcc73755a221539461350ebde19d4278e3178294f3829ca"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/DownloadConceptualCaptions/create_annotation_3m.ipynb",
+        "sha256": "702e3246556b4f18232cf1aa68c7210c0ef69c30d19ff2377d082e29615fcc3a"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/DownloadConceptualCaptions/download_data_cc12m.py",
+        "sha256": "ea65c6b7a204e1f3db6fd488781e344c8eb858a61c3fcd28818eb935d8adf192"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/DownloadConceptualCaptions/download_data_cc3m.py",
+        "sha256": "0885e964cd9e0d2b1c674152eb1871c1c6b439d82097c0815dfd3269f3069c04"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_coco.py",
+        "sha256": "57bda023bf11d0efbebff2053cfe192a1ea103d1c4bd0f48ca4c259e7b48b73e"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_didemo.py",
+        "sha256": "c872f9ee39db03a7eda39d6e480a1412159d68d2a275361103aeb795d01a1f07"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_flickr.py",
+        "sha256": "57b474f161868593352dae9acd81d4db37c8bd7afbd7728b948d2adc6a21fc93"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_gqa.py",
+        "sha256": "42c5da6c7805a8a63c747d6711ef0719cde599bcfd211ded86affce80771ee43"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_msrvtt.py",
+        "sha256": "709740ed1d91d51fddb1f16b02a087f354f642ebbaaeaf3866141d0a752195b2"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_msvd.py",
+        "sha256": "8d87d539b0b7046e524b9e3bbfaadebc86450a4d37bd1a850c0946ba9d29d8a6"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_nocaps.py",
+        "sha256": "bad5e9e9e38e9001c05a04bad66598cc3c05037cc5d506ee633804f12d3cfff3"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_sbu.py",
+        "sha256": "ec80f88837dbe2d2b42abe647ed9b43e38a6dbfbf60c2755bad7ea212d76330e"
+      },
+      {
+        "path": "lavis/datasets/download_scripts/download_vg.py",
+        "sha256": "a68b4630dc28d3510d591cfb5cb509fbc9b9727180d36dc5fb7058aa2243c2b5"
+      },
+      {
+        "path": "lavis/models/__init__.py",
+        "sha256": "deb8f913824af58c40e9dd4c3368b4c72d547461cc5159db7492ca5d2dc92e2e"
+      },
+      {
+        "path": "lavis/models/albef_models/__init__.py",
+        "sha256": "54c431293447fd684dd7bd4220a0774ffb56e011751c963d0ae76ccb257987f5"
+      },
+      {
+        "path": "lavis/models/albef_models/albef_classification.py",
+        "sha256": "9d7f82ac2ad6f25b61c3c12e71b33082feaf46704b0de7247a1c965f27449a32"
+      },
+      {
+        "path": "lavis/models/albef_models/albef_feature_extractor.py",
+        "sha256": "27372a918b9416b3e86ae146b75637b4332828902b65e1e5c6144fef0bdfdf8a"
+      },
+      {
+        "path": "lavis/models/albef_models/albef_nlvr.py",
+        "sha256": "d2d74a66e4171c27b9a40a62b96436de1a184ba6ab6cd66808d57aaf902b8f40"
+      },
+      {
+        "path": "lavis/models/albef_models/albef_outputs.py",
+        "sha256": "bc71d46fa7e2c648ff8aaee44501282c1a2dda7b52e2714dc3708957becbc71c"
+      },
+      {
+        "path": "lavis/models/albef_models/albef_pretrain.py",
+        "sha256": "808ae15a9a98c2634db28a05f7228948ae0d20b5542d73576a8550d5a8788e09"
+      },
+      {
+        "path": "lavis/models/albef_models/albef_retrieval.py",
+        "sha256": "724cfcd7b15c8ce2f4026bcc6681cb3ee1a269f01a41980fd32e0bf6c4e5643b"
+      },
+      {
+        "path": "lavis/models/albef_models/albef_vqa.py",
+        "sha256": "2c4d23f39e3a2d5868fbcee6931cc776007ccdbbbcc7539c1c4d7993320892ab"
+      },
+      {
+        "path": "lavis/models/alpro_models/__init__.py",
+        "sha256": "6370db3dec08893f5dfebedada6ee442bd3dae0ba3ea9de794fb6806d949347d"
+      },
+      {
+        "path": "lavis/models/alpro_models/alpro_outputs.py",
+        "sha256": "35cefcac85e48567e09a417eb69f5419ab55fa1a9244a56eea6cfff5c9cfba53"
+      },
+      {
+        "path": "lavis/models/alpro_models/alpro_qa.py",
+        "sha256": "64229dc9745083ef2b678e2070fe731e0f8e74c12c310d7d2e1de15f6e8e74bb"
+      },
+      {
+        "path": "lavis/models/alpro_models/alpro_retrieval.py",
+        "sha256": "13db023ab0c881dfd7a1454b08f3e650f764f5d52c478a290d8179faf4a322b8"
+      },
+      {
+        "path": "lavis/models/base_model.py",
+        "sha256": "1aac2c08a772386c80dd5e747022b9cd2734e1afe9ac65465897660ca20997c9"
+      },
+      {
+        "path": "lavis/models/blip2_models/Qformer.py",
+        "sha256": "9d1375ffed630df9449e7e5e69072038bf20af5bd0e1cc22ae1f2337b586f95e"
+      },
+      {
+        "path": "lavis/models/blip2_models/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "lavis/models/blip2_models/blip2.py",
+        "sha256": "265755bbb90884e2906219816a834458fd7bcfb0b15d1490acca29423e5d512e"
+      },
+      {
+        "path": "lavis/models/blip2_models/blip2_image_text_matching.py",
+        "sha256": "a5399ddaa9ecd50d6c5951d7922c8e2b41282886194dc2fba840b93d93803d62"
+      },
+      {
+        "path": "lavis/models/blip2_models/blip2_opt.py",
+        "sha256": "c7ebd7994a5ec419009ce4515f002ee7afa52cb92012df1a530b21e1443519e6"
+      },
+      {
+        "path": "lavis/models/blip2_models/blip2_qformer.py",
+        "sha256": "bf729fe4cabcd6e7f8ca1a616dcc8fcd4e946b4f149de8718258b0b926b62948"
+      },
+      {
+        "path": "lavis/models/blip2_models/blip2_t5.py",
+        "sha256": "89953e91d43d012aedce4750984c5003e4151316902d8f61d5e9c8250cc56247"
+      },
+      {
+        "path": "lavis/models/blip2_models/blip2_t5_instruct.py",
+        "sha256": "360d0d6d852b6692dd0bcfe7f78f7f504c1128b852895b28c5ccf19e09281184"
+      },
+      {
+        "path": "lavis/models/blip2_models/blip2_vicuna_instruct.py",
+        "sha256": "d8bd0c82c16f2c341ad381941d6d36afc99ea0933f3e9c7c15f095b44d3d2ef9"
+      },
+      {
+        "path": "lavis/models/blip2_models/modeling_llama.py",
+        "sha256": "c4c4f09da997b3c37227c649d71bbb70be905144ebfd941926d9058fadcc2a10"
+      },
+      {
+        "path": "lavis/models/blip2_models/modeling_opt.py",
+        "sha256": "324d5206148e98976196abb6f92dccfe22e0f28ea91d94445282af6eb511d723"
+      },
+      {
+        "path": "lavis/models/blip2_models/modeling_t5.py",
+        "sha256": "51d74da8cbabe23df95aac274c021275e4033348f2a4b8a1e6d3a1a1f012e63a"
+      },
+      {
+        "path": "lavis/models/blip_models/__init__.py",
+        "sha256": "446109d1d628473a733224457029b37bc562f05e4b6ab44d333c4ab0181c5a74"
+      },
+      {
+        "path": "lavis/models/blip_models/blip.py",
+        "sha256": "1a62ca192a112c85f5c73ba2c919e67eee7d336d45200ee3966673b147721b25"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_caption.py",
+        "sha256": "343d4fd79df135e07484b40e42ba0a9954ab2a9e447ffa729f1180097f1d5169"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_classification.py",
+        "sha256": "c2bf4c539d469eb5cae16af25ee633324a831e5ee3c9af0e24a5f777758052bc"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_feature_extractor.py",
+        "sha256": "146f2ef7e0c7eee0fa2c647e136952e5360f8063a9f93f1fec6eb8d6e05fdbb0"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_image_text_matching.py",
+        "sha256": "0d5ead4ea7b846f2dbab4da9ade3d89c74f1fc86f8ff3f673b2eef08c434d73f"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_nlvr.py",
+        "sha256": "180f06feb27958bd49c29dff1d8cd565b5552fe1509416cac3cde56fdc1fcfc1"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_outputs.py",
+        "sha256": "d655e46f9c61dd0d4c609b066a24e0df203053250c0c1954af69093bca750602"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_pretrain.py",
+        "sha256": "60aafbc1535a06ec8027dc209021ec71037d0a1c4700f63d78cbccd81d9b1a16"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_retrieval.py",
+        "sha256": "5a3294a6f7c62348531871de4d987bccd9e699f1958ecc43fdba8a458effa03b"
+      },
+      {
+        "path": "lavis/models/blip_models/blip_vqa.py",
+        "sha256": "43957021a6f8cf4f9c60ac21cf2d8a2bbc5b907756bdeaf3054b62dc5f9ea0c6"
+      },
+      {
+        "path": "lavis/models/blip_models/nlvr_encoder.py",
+        "sha256": "137792e6ec89ac212d158b69314f5bdae897ce64c6d71db3f1265bae86db90b5"
+      },
+      {
+        "path": "lavis/models/clip_models/__init__.py",
+        "sha256": "c1146fcb770678f1c2f92fbf5c9fc008bacfac8f9b61026834b7cdcd7badd379"
+      },
+      {
+        "path": "lavis/models/clip_models/bpe_simple_vocab_16e6.txt.gz",
+        "sha256": "924691ac288e54409236115652ad4aa250f48203de50a9e4722a6ecd48d6804a"
+      },
+      {
+        "path": "lavis/models/clip_models/clip_outputs.py",
+        "sha256": "1c631ea20d5341895fa87a417cfded4b8731365319271cc3355023d58f4c6988"
+      },
+      {
+        "path": "lavis/models/clip_models/loss.py",
+        "sha256": "df55b80c98fb24ec2f940d26f73df84a0f9518db17537ccaa4df955179212118"
+      },
+      {
+        "path": "lavis/models/clip_models/model.py",
+        "sha256": "3c051b9d9757c7f8a0914726e5f58c97ccea1078660b0cd1fd8837fa607026ab"
+      },
+      {
+        "path": "lavis/models/clip_models/pics/CLIP.png",
+        "sha256": "308a3ca4503f1c7a07803916c369d78c4ef501e5ab7fc727da9b5e1d2f9ec85b"
+      },
+      {
+        "path": "lavis/models/clip_models/pretrained.py",
+        "sha256": "8bb8584e9490b371a382f389ed77e983120e39ac2d0591a02cb7319842a43ae3"
+      },
+      {
+        "path": "lavis/models/clip_models/timm_model.py",
+        "sha256": "a082e50941fc3895593324e822cb819c0e741eb1bb05eb3cc35c6076b2984180"
+      },
+      {
+        "path": "lavis/models/clip_models/tokenizer.py",
+        "sha256": "7548dc1304b9e337afb9d28b4f81298b6f7ce36dfddff20fe4d69d0401a59f18"
+      },
+      {
+        "path": "lavis/models/clip_models/transform.py",
+        "sha256": "f257c3477ffc5515546454de236209ddf618dcad81e99891885dae1f8ef2ed0d"
+      },
+      {
+        "path": "lavis/models/clip_models/utils.py",
+        "sha256": "f6d4d4fb82f3c199537e33b03bd5d4164f436615f77d0266a53615bb51e40dab"
+      },
+      {
+        "path": "lavis/models/clip_vit.py",
+        "sha256": "156077469df4b7bb09b26623ad4ec65601a8071e07909b7c0999af78bd180009"
+      },
+      {
+        "path": "lavis/models/eva_vit.py",
+        "sha256": "21c0aa5d1ec7e3e8d94cd98fac643b472864fdeb051b43706636c12e7ed863e5"
+      },
+      {
+        "path": "lavis/models/gpt_models/gpt_dialogue.py",
+        "sha256": "3416fbd30995b50f242294c72b522ed172b5ada7bc33a7c6ee8feb6dc12be0f7"
+      },
+      {
+        "path": "lavis/models/img2prompt_models/__init__.py",
+        "sha256": "9d12855cc5197cfd532364edd036ea3a56ba38e76a430dab3c30e46d496728e3"
+      },
+      {
+        "path": "lavis/models/img2prompt_models/img2prompt_vqa.py",
+        "sha256": "136c6228bf93075fd9a2d15c870d90487cdfcd5cbf16900aa60a5cb6254f1339"
+      },
+      {
+        "path": "lavis/models/med.py",
+        "sha256": "5857ec781f3e58e6d8c463d37902817b07fccc87d78817c84b6d1045337ab3d2"
+      },
+      {
+        "path": "lavis/models/pnp_vqa_models/__init__.py",
+        "sha256": "df6ee4f35f918a247cd70bdb672d4915ca2a12023f6ec9d6c6996ea677e59f69"
+      },
+      {
+        "path": "lavis/models/pnp_vqa_models/pnp_unifiedqav2_fid.py",
+        "sha256": "446ae61c8e2fbb09e560acab11819e17e83a25c2575859cca4f070c2a5e456a0"
+      },
+      {
+        "path": "lavis/models/pnp_vqa_models/pnp_vqa.py",
+        "sha256": "aa85db45f05df71d5d0eab9d0e606522c5d891896b4eec4246aa5ad8c4d5c0ea"
+      },
+      {
+        "path": "lavis/models/timesformer/__init__.py",
+        "sha256": "22761ce3315a8002006951bdd6f682e318e3274753f5351483b302c1da46fbea"
+      },
+      {
+        "path": "lavis/models/timesformer/conv2d_same.py",
+        "sha256": "7772e052c20952842174a335a195192beba134057246d6993cd81d70e16ca66c"
+      },
+      {
+        "path": "lavis/models/timesformer/features.py",
+        "sha256": "aaa9456a25221e9b42ccba57b47c751c7c0671e2113bb44dc1d59fdfe5e8e8c9"
+      },
+      {
+        "path": "lavis/models/timesformer/helpers.py",
+        "sha256": "53eb48a16909ffd99c3fbe2fd0a6a1327c421fd79741e091ca87f475a3ae1c4a"
+      },
+      {
+        "path": "lavis/models/timesformer/linear.py",
+        "sha256": "8177b9112e189da13bd659fb091cdaa6a4a9194e8a1eedbbf141100f4146b338"
+      },
+      {
+        "path": "lavis/models/timesformer/vit.py",
+        "sha256": "a1fd7e795edd6eba8793f3a104895cb3b79bd4dc82064f3e581188319f93efe5"
+      },
+      {
+        "path": "lavis/models/timesformer/vit_utils.py",
+        "sha256": "eada494467dbaf354a20f6a02f731d9d812b9ff7d7a2cb86b682e26859c6137f"
+      },
+      {
+        "path": "lavis/models/vit.py",
+        "sha256": "1bd9312ba2907fd505d918ef6829bf901e8b7e32e3110a8d1c611e58612a1abd"
+      },
+      {
+        "path": "lavis/processors/__init__.py",
+        "sha256": "43634b81f9450a69561678158180b3a8f2fbde24db269e6fd4aad420055aa2bb"
+      },
+      {
+        "path": "lavis/processors/alpro_processors.py",
+        "sha256": "01f3c0f687b33e09f31bd0ea364684bec6ce966a930ee019f5813364497ccf5b"
+      },
+      {
+        "path": "lavis/processors/base_processor.py",
+        "sha256": "08c0ed8b96f9a703cc03b0bfa4b44df2c05c8170aa031b03df9dd214d6943b5f"
+      },
+      {
+        "path": "lavis/processors/blip_processors.py",
+        "sha256": "0dd64eac6fb216b336b4344f1cb2b51184ed7f01228e92bbb05b1dc9ef02a6e8"
+      },
+      {
+        "path": "lavis/processors/clip_processors.py",
+        "sha256": "b088bae35e3af74b5de885162b4399324b4d1992c199ba8b13902e42b84d46ac"
+      },
+      {
+        "path": "lavis/processors/functional_video.py",
+        "sha256": "772daa8d396bd20e7163810f4392dde4db1b811795c11193d9264af7bc604ec2"
+      },
+      {
+        "path": "lavis/processors/gpt_processors.py",
+        "sha256": "ab19ff581f0eeddcdfbe3b5425fb6988679165d025142e449927a7ed02433b2d"
+      },
+      {
+        "path": "lavis/processors/randaugment.py",
+        "sha256": "98d697bb1f9208c341608b9b786f64f58471224bfba7a24c79c4c9aaae0069b3"
+      },
+      {
+        "path": "lavis/processors/transforms_video.py",
+        "sha256": "ff6a5f81f669eca0ee4dc2389b2175b4de03cbe8dcbcebab294296b86c835b5e"
+      },
+      {
+        "path": "lavis/projects/albef/eval/nlvr_eval.yaml",
+        "sha256": "d056b1544bb2aa4fd48b9108650a306e4cfab2f1b0995c4221ae83ed0cc6c4c4"
+      },
+      {
+        "path": "lavis/projects/albef/eval/ret_coco_eval.yaml",
+        "sha256": "bbea5093776fb23d50094050fe9218d2bfbc364084c8af6f345199c6205cee0b"
+      },
+      {
+        "path": "lavis/projects/albef/eval/ret_flickr30k_eval.yaml",
+        "sha256": "56e4de0b041e9a0280f2a3216d390f2ce000521f44bf5dfe8057104ed6d9c36d"
+      },
+      {
+        "path": "lavis/projects/albef/eval/snli_ve_eval.yaml",
+        "sha256": "9d1eaf5e9d3dd154e4850a1628aaa0a2df84a02348df0cba0db2dd76efa3035e"
+      },
+      {
+        "path": "lavis/projects/albef/eval/vqa_test.yaml",
+        "sha256": "661f5b8d365e3a551f785a24476c8b759c33a04bc2f79628d8184004da46aaa3"
+      },
+      {
+        "path": "lavis/projects/albef/eval/vqa_val.yaml",
+        "sha256": "3d4ef362d9c570ff7c54d7ea5c83cd7f7f3ba8bfe4146d992c3021d404012d43"
+      },
+      {
+        "path": "lavis/projects/albef/train/aokvqa_ft.yaml",
+        "sha256": "69dc492468541cce14873cff092226eeddc42e0a657e634c8b937b65300e26c6"
+      },
+      {
+        "path": "lavis/projects/albef/train/nlvr_ft.yaml",
+        "sha256": "c409aec4c71bc3c9d99d47e9cd8f1b35ecf4c5de21a73c38999a99d96307bae1"
+      },
+      {
+        "path": "lavis/projects/albef/train/okvqa_ft.yaml",
+        "sha256": "ffcfdf795f8b2958f70c562e1bd48786692f5df0ad30cfae28c5b5b09be09d99"
+      },
+      {
+        "path": "lavis/projects/albef/train/pretrain.yaml",
+        "sha256": "7788fd698e674c3b8c3847025db308205cb9bfe1b633a3d125b87d07fd76a2fa"
+      },
+      {
+        "path": "lavis/projects/albef/train/ret_coco_ft.yaml",
+        "sha256": "e6cf678933fe67222a8989b2a6ac4f6f3a68a77996bc2d4b718ba466212245b2"
+      },
+      {
+        "path": "lavis/projects/albef/train/ret_flickr30k_ft.yaml",
+        "sha256": "3c91113400cfff5349c3d05fb251cb0ca3a29afe60c4f8bbc6f04525044f0088"
+      },
+      {
+        "path": "lavis/projects/albef/train/snli_ve_ft.yaml",
+        "sha256": "37edc48ee389ffeb9d18bd2197a25349a87bdc3fb7a65c45fdeee49ceb3ae006"
+      },
+      {
+        "path": "lavis/projects/albef/train/vqa_ft.yaml",
+        "sha256": "798bc16744a6411c1203ea6b136ecda694730983549f3e2986c696492f2febcf"
+      },
+      {
+        "path": "lavis/projects/alpro/eval/didemo_ret_eval.yaml",
+        "sha256": "a2581d331d597f39146d6612040470c38588b98c3578ef776bf05e2af8647fe9"
+      },
+      {
+        "path": "lavis/projects/alpro/eval/msrvtt_qa_eval.yaml",
+        "sha256": "ec3a9736817812a2f11d8f09265fc3da76495636b532e3dcbf89d6ef3adec0e7"
+      },
+      {
+        "path": "lavis/projects/alpro/eval/msrvtt_ret_eval.yaml",
+        "sha256": "d0fd15149e7ede15e9cd7742a2f081d938839a398d41c7b79e2e8bc5897e3644"
+      },
+      {
+        "path": "lavis/projects/alpro/eval/msvd_qa_eval.yaml",
+        "sha256": "8d3c5705a6dd869d8005eb6a98f6bc2207e73230216c35a36ed0221d268005e4"
+      },
+      {
+        "path": "lavis/projects/alpro/train/didemo_ret_ft.yaml",
+        "sha256": "ef8da1c5560831b5742c97edf928d3f2dd773cb65d2f29a2fd77f06b72509684"
+      },
+      {
+        "path": "lavis/projects/alpro/train/msrvtt_qa_ft.yaml",
+        "sha256": "d65350e797dfaf7e413dbcaab34d8cf0bf767c4cfc489802c32ec332640adfc0"
+      },
+      {
+        "path": "lavis/projects/alpro/train/msrvtt_retrieval_ft.yaml",
+        "sha256": "4ec6c61839f0b0ed48c0b01b2dd2b06f7b6eaa22ab5a1c30609272ce5f4ae50a"
+      },
+      {
+        "path": "lavis/projects/alpro/train/msvd_qa_ft.yaml",
+        "sha256": "5ab85d38bb86c6b4327ac4eace9d8417df612928854bc849c8ff926df27cca31"
+      },
+      {
+        "path": "lavis/projects/blip/coco_cap_ft_iter.yaml",
+        "sha256": "f1266181c1c94f96dc18bc8e7dde5734497dec6390ee6b141825dca002f754bc"
+      },
+      {
+        "path": "lavis/projects/blip/eval/aokvqa_eval.yaml",
+        "sha256": "6da06c9f2012aab8cfd4ccd20144d9bacb5ad900a449e234234b06db8f29e8bd"
+      },
+      {
+        "path": "lavis/projects/blip/eval/caption_coco_eval.yaml",
+        "sha256": "422117bd74cb732cd0c81db88508e17ffee8555e4e81cfaeb247d301c18c0a79"
+      },
+      {
+        "path": "lavis/projects/blip/eval/caption_coco_eval_large.yaml",
+        "sha256": "2f28b8521f1fb39c0b4171ed392dce4497f2c8531f086a4628709d0542df6bba"
+      },
+      {
+        "path": "lavis/projects/blip/eval/nlvr_eval.yaml",
+        "sha256": "f110c7410387e147d878371f85cadab82922ec516d32fb985feb97942afa745d"
+      },
+      {
+        "path": "lavis/projects/blip/eval/nocaps_eval.yaml",
+        "sha256": "13a0d0cf22352b11001a14958b483e9e2c5890ff34e214dd0bd620533dfb9391"
+      },
+      {
+        "path": "lavis/projects/blip/eval/okvqa_eval.yaml",
+        "sha256": "459df9c4cf6d081845265fc754b745f173eba2ea775c97db14e14628bcd4e6a6"
+      },
+      {
+        "path": "lavis/projects/blip/eval/ret_coco_eval.yaml",
+        "sha256": "8c2aaee676983ded57fee47d834fc1bde0b351be7328c0f00d46a67fc9e42328"
+      },
+      {
+        "path": "lavis/projects/blip/eval/ret_flickr_eval.yaml",
+        "sha256": "39bd2c754f0599c50a9bfe82734e8df9f70fff3f36db2751f4f32674b58d55a3"
+      },
+      {
+        "path": "lavis/projects/blip/eval/vqav2_eval.yaml",
+        "sha256": "5926b4c827954f0173bb4efedd77b096ae39925036bb292838715c698dfc4f63"
+      },
+      {
+        "path": "lavis/projects/blip/train/aokvqa_ft.yaml",
+        "sha256": "d4b347187f7aaf3a902504ff873a439309811642f759cf632467b6b151e07b9e"
+      },
+      {
+        "path": "lavis/projects/blip/train/caption_coco_ft.yaml",
+        "sha256": "50c0aefa5c3565c73f851af72e2cff56989f5083329e0382b77c1a7389ef77af"
+      },
+      {
+        "path": "lavis/projects/blip/train/caption_coco_large_ft.yaml",
+        "sha256": "9426e3ed5b273c9114e37d8088500f30b2044a07c4c1179ad173f34cacf544bf"
+      },
+      {
+        "path": "lavis/projects/blip/train/nlvr_ft.yaml",
+        "sha256": "5885f6e5be31e24bd0706d7091a7256674888447823e284bb1511a050c52078f"
+      },
+      {
+        "path": "lavis/projects/blip/train/okvqa_ft.yaml",
+        "sha256": "0c2fb7a002c9323ea5562721f00c8950322b69348d4a3631d2b84165bbcd5bbd"
+      },
+      {
+        "path": "lavis/projects/blip/train/pretrain_14m.yaml",
+        "sha256": "7e1f4d69bba0d8a15341390f1a384becb0ac507fba30faed90beeb551bc8e06c"
+      },
+      {
+        "path": "lavis/projects/blip/train/retrieval_coco_ft.yaml",
+        "sha256": "160a9162441e55fefda4367e41cbd1dd69c027f9ff8b3f5a375dd37e32f3a618"
+      },
+      {
+        "path": "lavis/projects/blip/train/retrieval_flickr_ft.yaml",
+        "sha256": "13bf249caadc08da2f26fe5794bd70d3195455415e95da9e0ae22a3aa2364f68"
+      },
+      {
+        "path": "lavis/projects/blip/train/vqav2_ft.yaml",
+        "sha256": "11612dd955bec544c55f892a51871f69a4113f0bb3c3497bfce5a46999b9b5a3"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/caption_coco_flant5xl_eval.yaml",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/caption_coco_opt2.7b_eval.yaml",
+        "sha256": "753a2ea9d8a0227adfe134cf2849f4401e8fc8f12ee396610d29853d48e515d4"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/caption_coco_opt6.7b_eval.yaml",
+        "sha256": "34ce701a601d0947a8b155d5adab30b3aa1336ecfccfed4eb7f17400b1500116"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/gqa_zeroshot_flant5xl_eval.yaml",
+        "sha256": "b6f279e61a4a989a8c630132ed6576de0bc18c12aaba1d6e8d88988727a91ec9"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/okvqa_zeroshot_flant5xl_eval.yaml",
+        "sha256": "ffc482146746af327ddfb6adf6ed5603a92736cffea88266b25615faae9c4125"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/ret_coco_eval.yaml",
+        "sha256": "ec011fbd3a4c51abecca6ef5ed9a4d34d1837e39f69e7fb2c6b508bcd224dbd3"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/ret_flickr_eval.yaml",
+        "sha256": "65b6b55391ef8125886185c69f2ce1463933b30d2612f139962a69f3ce6617c5"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/vqav2_zeroshot_flant5xl_eval.yaml",
+        "sha256": "4df1e91ee8389bc642b8530cf3d2da96e5d132b142f7768b194950d353cf0145"
+      },
+      {
+        "path": "lavis/projects/blip2/eval/vqav2_zeroshot_opt_eval.yaml",
+        "sha256": "32e0ce3c0bf86bd500578f4145ca163563ed04b5576629b5c8fe5d71c0a9b06e"
+      },
+      {
+        "path": "lavis/projects/blip2/train/caption_coco_ft.yaml",
+        "sha256": "268890cfa42ad9fb4700ba7e5e973647f874c097fe870758421fd2775d361f50"
+      },
+      {
+        "path": "lavis/projects/blip2/train/pretrain_stage1.yaml",
+        "sha256": "9cd525dabc0026e85cafebde8cf30be2ad1547897641003d350d8ddf314ca794"
+      },
+      {
+        "path": "lavis/projects/blip2/train/pretrain_stage2.yaml",
+        "sha256": "e7bc2a04c05771801f80529f94140f23b7e9ae2bdcc28815abab1159ec716546"
+      },
+      {
+        "path": "lavis/projects/blip2/train/retrieval_coco_ft.yaml",
+        "sha256": "91c39364f1b782cea07fa5ef5db3da9a241c1bf3277692b611fd26c4084989da"
+      },
+      {
+        "path": "lavis/projects/clip/exp_coco_ret_eval.yaml",
+        "sha256": "8c6bbdefb429a0d3ac303c2c0d6296100e5e0b6326dafb1d1927e897aa07eea1"
+      },
+      {
+        "path": "lavis/projects/clip/exp_flickr_ret_eval.yaml",
+        "sha256": "e8fd5dfe149b00d282bc9c7dc42501369e27b05dbf8d67250b1bd6ac2e3ca8b6"
+      },
+      {
+        "path": "lavis/projects/clip/exp_imnet_zs_eval.yaml",
+        "sha256": "f304b6cfc7365eab859fe1ffda61b7eb8686259abb21764fe51715453eff0f80"
+      },
+      {
+        "path": "lavis/projects/gpt/eval/dialogue_avsd_eval.yaml",
+        "sha256": "09bf1bd2e29cfe9922781ff194eb23c9a1f44fff47c50fc594057f24052f1b06"
+      },
+      {
+        "path": "lavis/projects/gpt/train/dialogue_avsd_ft.yaml",
+        "sha256": "c73e1fb8b203d649f8af9bd7fbea357aa20c302e90e0e8462d802d7ae83756f3"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/gqa_eval.yaml",
+        "sha256": "7d9285b06a927bff994da7671bfe62c05bf4f3a38d42d1aff05543a841dbbe25"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/gqa_eval_3b.yaml",
+        "sha256": "0dad2bd8c70e213bf356e5e63cbe736e3407b92abcaf2bdccb04d6420babc383"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/gqa_eval_large.yaml",
+        "sha256": "f2b3980598d0e1cb6a56218a90e3a7c45e98e69241f50649eec13db0f07819ee"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/okvqa_eval.yaml",
+        "sha256": "cd5977817014d165f084cf5a005321a9cbeeac935b6f72b0a315d9a1be3f7136"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/okvqa_eval_3b.yaml",
+        "sha256": "5bfde5c7c98d1dabb57e5ca4ffe8ccf6e9331a5a08b5d7d8cb3cbd9c8f851a37"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/okvqa_eval_large.yaml",
+        "sha256": "82499d6f21c47ac87872da981dde5ae2143bf1596f4be9e707842d6f26bea280"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/vqav2_eval.yaml",
+        "sha256": "56be098795c10dba8351238e1b8440ce77db04679eb44249d88d0182df498ff9"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/vqav2_eval_3b.yaml",
+        "sha256": "39a7064ff4f174d6302babfc80a15cf095eb000d2dc5c5ac92a041c3199c85ff"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/vqav2_eval_large.yaml",
+        "sha256": "a3c84f9743aa5e3d019de9f3de1ca6a6f4f046b0fc35bb8443aa3093e9455324"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/vqav2_test_eval.yaml",
+        "sha256": "747da84e24943d4c451462b5380e0f2ed2511e635fc30d67a72484b2b8a0de0b"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/vqav2_test_eval_3b.yaml",
+        "sha256": "c7c84ec6f1eeff00e62a3990b7e42905f839bc2cba73c2a70fbbc636c46f27f0"
+      },
+      {
+        "path": "lavis/projects/pnp-vqa/eval/vqav2_test_eval_large.yaml",
+        "sha256": "240e33ee7b8091a6f0cc759890b82c200b2961ac4b22e10706ce51f6f684243a"
+      },
+      {
+        "path": "lavis/runners/__init__.py",
+        "sha256": "8238988606d4de9eae8675f436b0943b3318d9de318bb2636570404c84164c10"
+      },
+      {
+        "path": "lavis/runners/runner_base.py",
+        "sha256": "5e322fc5b35dafd9fb98692f26c6cab85897808ee78925bf8d8822f45258a69e"
+      },
+      {
+        "path": "lavis/runners/runner_iter.py",
+        "sha256": "d45331909f5e872e4ac893fd32cbc4a3dbd33f8bd68c61a127a7abd2166ec444"
+      },
+      {
+        "path": "lavis/tasks/__init__.py",
+        "sha256": "1611346a93f6e7d38660ae7be931cefb285117d288037d58c5f4729ef5d5d36a"
+      },
+      {
+        "path": "lavis/tasks/base_task.py",
+        "sha256": "65df6717846986ac9462c706353cbc1a6057a7ac946a014ddfa5b15807270ee9"
+      },
+      {
+        "path": "lavis/tasks/captioning.py",
+        "sha256": "feebaeffc70eea1b5eb6832299d8ebc52fbad7cb6aedf4ef1f2cf5474e626111"
+      },
+      {
+        "path": "lavis/tasks/dialogue.py",
+        "sha256": "514ed9b2b3fc033cfd12858643edb8e619a96539b154f7491098038aa916e20f"
+      },
+      {
+        "path": "lavis/tasks/image_text_pretrain.py",
+        "sha256": "a9353c27e3e19dddfc3a5c1230e3d96b48fc7847e32af0b1e59d61ab941647c7"
+      },
+      {
+        "path": "lavis/tasks/multimodal_classification.py",
+        "sha256": "9c52dee7416b923e5bd8e0a15a9aebbedcfa84fd7a2a677598e5cc437c0a0544"
+      },
+      {
+        "path": "lavis/tasks/retrieval.py",
+        "sha256": "dc43b8ba0b9ae99526cd0fd8edb054202a342b540b3e421d4dc017ed60d83bb5"
+      },
+      {
+        "path": "lavis/tasks/vqa.py",
+        "sha256": "49a0c6f30dc824805176e01221f2a471810c46af986ce765a3d682c43fe5edd1"
+      },
+      {
+        "path": "lavis/tasks/vqa_reading_comprehension.py",
+        "sha256": "426e33ad2f7cd7e875d6db1fa066d5fda0ed96516e8d45da0cf97d061e1cf52e"
+      },
+      {
+        "path": "llava_llama_2/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      {
+        "path": "llava_llama_2/__init__.py",
+        "sha256": "52508db720555fae39081e92e8b7f26244df4153b5f3f6bc7bd4a647b7071310"
+      },
+      {
+        "path": "llava_llama_2/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "7ab16b3c3dfd1298dc79f8450c43276ff23dcc4f6c218d665bd4bacc4433292d"
+      },
+      {
+        "path": "llava_llama_2/__pycache__/constants.cpython-39.pyc",
+        "sha256": "132e7d71f354c777f80ad18a7766c66e5e1654f58e205c325c2b9700bdb07e40"
+      },
+      {
+        "path": "llava_llama_2/__pycache__/conversation.cpython-39.pyc",
+        "sha256": "152a6f2498f66cad23b9d0b91e8502c72faf41f317ff07cc420d822b6c51f4ac"
+      },
+      {
+        "path": "llava_llama_2/__pycache__/mm_utils.cpython-39.pyc",
+        "sha256": "1838c6be5fe4a4832f01f7617334436c9b49acd5135e225168c16aa9891e3d2e"
+      },
+      {
+        "path": "llava_llama_2/__pycache__/utils.cpython-39.pyc",
+        "sha256": "1c4684ea40ac91a86549e6077090e5ad481f1ba3ed33cc3d0313f744011365fd"
+      },
+      {
+        "path": "llava_llama_2/constants.py",
+        "sha256": "2c5a8a659b3c5c1c70360808ae901511db67da8fbe331e1329cd754f6f3a0879"
+      },
+      {
+        "path": "llava_llama_2/conversation.py",
+        "sha256": "77c26552146569a2586f4cd51ad3ca7aa1a0f4b9fc79015374f188f8267df76b"
+      },
+      {
+        "path": "llava_llama_2/eval/README.md",
+        "sha256": "07ba55dfac6fe5c26c29dbd66bead4701f8c38a03988c395a1b11070467e5d5e"
+      },
+      {
+        "path": "llava_llama_2/eval/eval_gpt_review.py",
+        "sha256": "6eaa69df1c2505dd60f827dc4b37ac469c693a30b6566a3743d97fd3b839d318"
+      },
+      {
+        "path": "llava_llama_2/eval/eval_gpt_review_bench.py",
+        "sha256": "d81e9d535b78eb5267edb833969e91e078574393d68ce60340f604c4e47d7bc1"
+      },
+      {
+        "path": "llava_llama_2/eval/eval_gpt_review_visual.py",
+        "sha256": "a0bd7f0900ed11c047906b4360e003233f1537bedca0e22f4153dceed696b0eb"
+      },
+      {
+        "path": "llava_llama_2/eval/eval_science_qa.py",
+        "sha256": "fa0e4f3689a3f052db5b36bedd6b2217814f1139561d87f2590d611be4abc1d7"
+      },
+      {
+        "path": "llava_llama_2/eval/eval_science_qa_gpt4.py",
+        "sha256": "979374e63d47b1c83b5b57fa8b47770d7c526ff3656b0709c5162fdb7f5cc7b2"
+      },
+      {
+        "path": "llava_llama_2/eval/eval_science_qa_gpt4_requery.py",
+        "sha256": "9652b38ad7826e95071fbcd88fcc5f72f114ebab6729b10c479bb0a6824a7cd6"
+      },
+      {
+        "path": "llava_llama_2/eval/generate_webpage_data_from_table.py",
+        "sha256": "617dee4abe58ea5b2a74493b01241ac1689a27c33db600d4a7b3417aa865a133"
+      },
+      {
+        "path": "llava_llama_2/eval/model_qa.py",
+        "sha256": "0be465d76ecdec076e649d12b1dbc68dd8772f2c62eb0b35d6b87759187f9d2d"
+      },
+      {
+        "path": "llava_llama_2/eval/model_vqa.py",
+        "sha256": "64f1edee11b57b4388214ee702edbdfd36a8ef3238bc149630a37caf2b6e1335"
+      },
+      {
+        "path": "llava_llama_2/eval/model_vqa_ds.py",
+        "sha256": "6ea557ce5b6dd2ed81d7330c5618e5069bc5c0585ef157134592097d5df1bc9c"
+      },
+      {
+        "path": "llava_llama_2/eval/model_vqa_science.py",
+        "sha256": "4c7f1fa95865c8af56380955d281ec81ad1360f411d4eb8762bc25d250a2a9e8"
+      },
+      {
+        "path": "llava_llama_2/eval/qa_baseline_gpt35.py",
+        "sha256": "f10aee9bce58619a097d3dfb29335b4b437872a4d482f350b614b248622eaca7"
+      },
+      {
+        "path": "llava_llama_2/eval/run_llava.py",
+        "sha256": "fbafc062156b17b9b8b08bac8c61366daf3c0cae505d0176f20482850c26d4ed"
+      },
+      {
+        "path": "llava_llama_2/eval/summarize_gpt_review.py",
+        "sha256": "2c45ff71a2feb785c59b7262815e89e0f959b13236dce55ebac55485a8d56710"
+      },
+      {
+        "path": "llava_llama_2/eval/table/answer/answer_alpaca-13b.jsonl",
+        "sha256": "50a6a9274da00cc74e8b3a8e3e92be2ba23ed6f2bf6ae9bbcc3082424acea540"
+      },
+      {
+        "path": "llava_llama_2/eval/table/answer/answer_bard.jsonl",
+        "sha256": "3b807061959b50b2c7cc2d278c02ce4a1608c6afe366d22613ba90be6c9a3f3f"
+      },
+      {
+        "path": "llava_llama_2/eval/table/answer/answer_gpt35.jsonl",
+        "sha256": "c6545739b0738eba5f9348e77f680031aec076a72ecba71b3014e7b1b0dfe099"
+      },
+      {
+        "path": "llava_llama_2/eval/table/answer/answer_llama-13b.jsonl",
+        "sha256": "cbe933439a8a70107761929d72731979ece34e1df0bcdba11af8817ce9975f40"
+      },
+      {
+        "path": "llava_llama_2/eval/table/answer/answer_vicuna-13b.jsonl",
+        "sha256": "d1a4b3a5d2e3ca90d2d55084ee25d4d90e63e65ac647bf50359da8633e16d0b8"
+      },
+      {
+        "path": "llava_llama_2/eval/table/caps_boxes_coco2014_val_80.jsonl",
+        "sha256": "818d3df2b52784699bbdc129b6bc68e035d78ff8f5093c3e2ce5e0f726549b15"
+      },
+      {
+        "path": "llava_llama_2/eval/table/model.jsonl",
+        "sha256": "de5a74cfd219a6906e4c93d5b83fbc905f0cb9d39359e38fc37b2a9a61372af2"
+      },
+      {
+        "path": "llava_llama_2/eval/table/prompt.jsonl",
+        "sha256": "4cc925e20a4b10969298c113eeb5316dd5863686d500a770d5f1798230720ce5"
+      },
+      {
+        "path": "llava_llama_2/eval/table/question.jsonl",
+        "sha256": "590c39157bc561eadd7f03cad4be18c2b597f93029780af65f86718f39eafa87"
+      },
+      {
+        "path": "llava_llama_2/eval/table/results/test_sqa_llava_13b_v0.json",
+        "sha256": "35574d4ebb89ad628319c8624145a500ddb4792967f6da137b6d4fd6317a6fce"
+      },
+      {
+        "path": "llava_llama_2/eval/table/review/review_alpaca-13b_vicuna-13b.jsonl",
+        "sha256": "c8fd15e3e128684e6096adc2c93ded78bff5b6c9052c4ec59526c50eee474a6d"
+      },
+      {
+        "path": "llava_llama_2/eval/table/review/review_bard_vicuna-13b.jsonl",
+        "sha256": "a5a9d6e77e053d466568abb4834e58b0983e253c81bc63068a8bc3d5984966fb"
+      },
+      {
+        "path": "llava_llama_2/eval/table/review/review_gpt35_vicuna-13b.jsonl",
+        "sha256": "370f496e6d871c9d932c3ddbe6ccdcbfa9ad04a44b04e037b26e7ac474d9ed56"
+      },
+      {
+        "path": "llava_llama_2/eval/table/review/review_llama-13b_vicuna-13b.jsonl",
+        "sha256": "2a66bf23d002fa7d85250233d495ee5ad95fbbd39ffc4c829c1d51865874a1cb"
+      },
+      {
+        "path": "llava_llama_2/eval/table/reviewer.jsonl",
+        "sha256": "3f2a75487baa66851fb5584d4cb8a3f14dd442c13a253a5bf21f0b48a017f1b2"
+      },
+      {
+        "path": "llava_llama_2/eval/table/rule.json",
+        "sha256": "dd7345a44ce9f7a24e51a30ee030cdab32346f9d08e3359c80545ff1312b1e07"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/figures/alpaca.png",
+        "sha256": "f61148aa7dfb6d17b1f341bc0dc852ed1270f2ee128d77fda57ab7df185a051d"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/figures/bard.jpg",
+        "sha256": "fd86b3a25383ea2cca3b4147036a00d6125ce51ffb26daf384e814ecd90a2df6"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/figures/chatgpt.svg",
+        "sha256": "a362957d7e9682d46bb0e9a488a1039b506be2a85ca836986c455c77c5fe4c4e"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/figures/llama.jpg",
+        "sha256": "3c1aeb2844dabea9bede23d998b8eb3c4d09a3f1abe0a1fedbc501e7ef079e6b"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/figures/swords_FILL0_wght300_GRAD0_opsz48.svg",
+        "sha256": "b4e1ccfd86dec456fdff29d645ba502bbaabb32e5917d1692e3ff5396508c669"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/figures/vicuna.jpeg",
+        "sha256": "56c088a38183ba47599d9d9829b578eeed606c99761ed7dda05a302b803e34f5"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/index.html",
+        "sha256": "8710c86bcdfa4782e8555cf2a63b1c44395046875554343a58e39d0833b48864"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/script.js",
+        "sha256": "a868b812cefde66271def08ad84154c8750a11bc9f95a390dc7f7f97eda3302a"
+      },
+      {
+        "path": "llava_llama_2/eval/webpage/styles.css",
+        "sha256": "e4f99a8e0714130707a1454a62abc0867e28c012acbbdcbd892fb14f112ab3b7"
+      },
+      {
+        "path": "llava_llama_2/mm_utils.py",
+        "sha256": "127084b95f29ea13efdaa692a07fc2a8b86b0552453aa74d22c7ab9792f5d811"
+      },
+      {
+        "path": "llava_llama_2/model/__init__.py",
+        "sha256": "58caff90f3cb1cf6d88257be0913b67e2a28de09134c3ab4c0082bc901fdcb73"
+      },
+      {
+        "path": "llava_llama_2/model/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "ee4732bcc8a22d5d005c6e81b1a7fe277b85c51d66284c10aeea9e09f4ed6c73"
+      },
+      {
+        "path": "llava_llama_2/model/__pycache__/builder.cpython-39.pyc",
+        "sha256": "92217e5db1df2a57fff20a4bbb77088eac32b4c4802afbe997dc2ac30c372937"
+      },
+      {
+        "path": "llava_llama_2/model/__pycache__/llava_arch.cpython-39.pyc",
+        "sha256": "6b5560ce6199e102842dcc264a0f672eccef8137251117de2ff2cc5db7a513bf"
+      },
+      {
+        "path": "llava_llama_2/model/apply_delta.py",
+        "sha256": "bdb244912aa81c964fb8b3e2c8e9ad53b993e0c649867b173dfb9c33da01881f"
+      },
+      {
+        "path": "llava_llama_2/model/builder.py",
+        "sha256": "bb2a5593afb5285a768a7265a9739b08b4193c778971e6874ce474866d52b05c"
+      },
+      {
+        "path": "llava_llama_2/model/consolidate.py",
+        "sha256": "466e1c641ad9a1b816e425c37ad67054e0c8152680121e2ed12336365b00abf4"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/__pycache__/llava_llama.cpython-39.pyc",
+        "sha256": "79145f2f7ac5d8d1465160da63181f233ee784bb7691d0d3103b02199a22042c"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/__pycache__/llava_mpt.cpython-39.pyc",
+        "sha256": "01f63a4ed6de16a787eab5ea9f70724190fd800c31a578342fd26246fb0999f9"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/llava_llama.py",
+        "sha256": "7ccf8d881f08703a6f382abf11410fc844a05d18e10f1e67bef4b12a567642c1"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/llava_mpt.py",
+        "sha256": "24bf2eddefdd2f38f580905c903a577edcfd181eec184b29fd079ff8842a31de"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/adapt_tokenizer.cpython-39.pyc",
+        "sha256": "3a528a198692882b6a425798a87b0062310afd4d10f922d02d0933bdf74cb5e6"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/attention.cpython-39.pyc",
+        "sha256": "eec70582f8957ce7043e324d392cb61cb4fce034e44c140e6078caecb8241def"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/blocks.cpython-39.pyc",
+        "sha256": "6a0291eec1dab5859e8390d42a74960ae2abdd79408fff8a1435dcf9615ae456"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/configuration_mpt.cpython-39.pyc",
+        "sha256": "72001eb54bf5d25997644ded75d63300da4cbf35171169b91e7ce7b31f1f4d28"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/custom_embedding.cpython-39.pyc",
+        "sha256": "9a7ebf9a472bb0f229c9fc7005354420ca6e7fcaee83064e0f8e1aabc00764d2"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/flash_attn_triton.cpython-39.pyc",
+        "sha256": "08ad3bd62161527585c0f828983b8a2c38d8bf73f02a3144bdff8b0bc69b82ed"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/hf_prefixlm_converter.cpython-39.pyc",
+        "sha256": "f8074d9623b87132dabcc9d100d95116e3547053c7e04bd708fc4283f4144baf"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/meta_init_context.cpython-39.pyc",
+        "sha256": "76f6412193a776ec9fc313dbc3936ee850c74931c730e240a3ec1457760bcc6c"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/modeling_mpt.cpython-39.pyc",
+        "sha256": "dd7a9079ce29dfa0fabc8e1d1746257d98c907f231a69ed3b942f38fb854eac8"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/norm.cpython-39.pyc",
+        "sha256": "dc2c7af6ec5129310068a306a0b73ef6db18b5c45555b3be5a8c5190e5b262af"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/__pycache__/param_init_fns.cpython-39.pyc",
+        "sha256": "bcdb06d3ca36f8891dfb83036172a4a569abe110ec72a560a2d65c89cd3a6321"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/adapt_tokenizer.py",
+        "sha256": "1a877c5856cbea1fee9d986b5fee1889ca14ccba765f01071acdb444d8dfbb2e"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/attention.py",
+        "sha256": "07e31cef1d0a61ebddb3aa3245ce954f95269ff48cd2a922a60cb2c63655c2ea"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/blocks.py",
+        "sha256": "e1666f4cecb0d101c8c073586c4ce75d7983c2d1a173fca98abbe92543e010ea"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/configuration_mpt.py",
+        "sha256": "7e5fa6b9c72f7992094c6bec4c5aa03b1e8da27272862c85e228cfc11ec63a51"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/custom_embedding.py",
+        "sha256": "7c8a8b156977c48083dff878049f1186cb67c45b1a0c9b801b5987b6c721f9ff"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/flash_attn_triton.py",
+        "sha256": "3f548a86236f026bab28555954ae13afd7b4bc70b6ef81059570ea74d267e63c"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/hf_prefixlm_converter.py",
+        "sha256": "3901fdcbfda941a95deb9b0607db6286894a303714b0a11f9e0b0116ee142be7"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/meta_init_context.py",
+        "sha256": "8a643f6cd204d93a75a55a200d0f48388f7a1a969b6b0f055a3eeaa6a55f61fe"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/modeling_mpt.py",
+        "sha256": "5a5503aa4a8878fb69c4e76849c075b9123266ec163ed598659b57e7de4e41bd"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/norm.py",
+        "sha256": "d68257021b3824fadc0868c0faa4684e8723ffb3150f4d06225a131976437076"
+      },
+      {
+        "path": "llava_llama_2/model/language_model/mpt/param_init_fns.py",
+        "sha256": "47fe44634b233c9c8c668bebcb80305d0ffb7a50a4464938070fe6f173a7acb5"
+      },
+      {
+        "path": "llava_llama_2/model/llava_arch.py",
+        "sha256": "6f8afc58487f7f213b1a2e5d8ff26c78cea5bf63253f0e2360a726897749c4ca"
+      },
+      {
+        "path": "llava_llama_2/model/make_delta.py",
+        "sha256": "2f2ddd46296f6fd3d331f468809c3172c023a8b3fbb3acd20894245a6f4e7903"
+      },
+      {
+        "path": "llava_llama_2/model/multimodal_encoder/__pycache__/builder.cpython-39.pyc",
+        "sha256": "ede90556540f1cb76d994aaa094f8a601808394ed9af1f5121a6cfccf55f4b77"
+      },
+      {
+        "path": "llava_llama_2/model/multimodal_encoder/__pycache__/clip_encoder.cpython-39.pyc",
+        "sha256": "3bdf3eb435e1bd245fb7e365d1551f3fce81b4db175912775dd286498f0c35f1"
+      },
+      {
+        "path": "llava_llama_2/model/multimodal_encoder/builder.py",
+        "sha256": "e5e016136434254784dc511e06aba24af667d3015c52e8dcf6441c5a122e24bd"
+      },
+      {
+        "path": "llava_llama_2/model/multimodal_encoder/clip_encoder.py",
+        "sha256": "7f92ce89ea81030514052a630568222bce69c787094af1bcc414e2614d53e725"
+      },
+      {
+        "path": "llava_llama_2/model/utils.py",
+        "sha256": "9a0a760bcf89926be4b176e484906f745a33f7389f0e1ce48061de46beaf6789"
+      },
+      {
+        "path": "llava_llama_2/serve/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "llava_llama_2/serve/cli.py",
+        "sha256": "b1e6f2bf343157ea5c1e7e95afcead0770b937cdea49f3b7ab17e7278c21e8ad"
+      },
+      {
+        "path": "llava_llama_2/serve/controller.py",
+        "sha256": "e535bf2acca834023c59aabf51170c569533d07d746df0b0e549e3e6a80299e4"
+      },
+      {
+        "path": "llava_llama_2/serve/examples/extreme_ironing.jpg",
+        "sha256": "a54caa21bc513ed25c8ca7f5747555c05dfd4e33f6a3cf5c08b3d9138a4da1d9"
+      },
+      {
+        "path": "llava_llama_2/serve/examples/waterview.jpg",
+        "sha256": "d092764cc9f21b9bc535ff5284b5add4d8256148bab1bc2f5b5ab3fd32759a36"
+      },
+      {
+        "path": "llava_llama_2/serve/gradio_web_server.py",
+        "sha256": "109d61796a395d8bd4c2050c7f343ae420e957eae22207a2ccac9348d5bc86a4"
+      },
+      {
+        "path": "llava_llama_2/serve/model_worker.py",
+        "sha256": "d6e54001febe38d33a15f905ed560d7cec046477ece0a3150de8aafff2b093c9"
+      },
+      {
+        "path": "llava_llama_2/serve/register_worker.py",
+        "sha256": "ebd9ba00aa2b511d3bed8145bf6713fb93e884f2032ede37c361a9b46f8f9ed4"
+      },
+      {
+        "path": "llava_llama_2/serve/test_message.py",
+        "sha256": "bd24495fdc5213c0f214e4f4a15659bc246227c45ac85a6fcea0e01df03c76a3"
+      },
+      {
+        "path": "llava_llama_2/train/llama_flash_attn_monkey_patch.py",
+        "sha256": "9785c17ea70e7020f93a556e0fa68add7c159c129306d2b49a03a55209aa039b"
+      },
+      {
+        "path": "llava_llama_2/train/llava_trainer.py",
+        "sha256": "f53a1849ea16f9ab93a3431bccf98f478b171f5e6ede79581862875bbf880698"
+      },
+      {
+        "path": "llava_llama_2/train/train.py",
+        "sha256": "541ab3e3df0fefb1f60b71bc007586405b679b1a6cb159d195c039b4f9fe1f57"
+      },
+      {
+        "path": "llava_llama_2/train/train_mem.py",
+        "sha256": "cfaddc016bc8e8b38355eff39cbb22b9f9c0876244358cea3adf3fa4357c806e"
+      },
+      {
+        "path": "llava_llama_2/utils.py",
+        "sha256": "d1c78218fc97a0c09a3a244e3bfd4783d2f5c642fb97ba57b41473af624d4c5c"
+      },
+      {
+        "path": "llava_llama_2_utils/__pycache__/generator.cpython-39.pyc",
+        "sha256": "fdb9c759beec6f3fb734999aa67a66650e1d2eb3229946068cfd08c0f11ba4e2"
+      },
+      {
+        "path": "llava_llama_2_utils/__pycache__/prompt_wrapper.cpython-39.pyc",
+        "sha256": "ce7cf1bac5fdf1652718034a6194a1fae4f77ee3fb019ca2bf1505aedeabaa70"
+      },
+      {
+        "path": "llava_llama_2_utils/__pycache__/visual_attacker.cpython-39.pyc",
+        "sha256": "b7df7331851b2f948adfdd8b9b8c3f2809ec72916805d296de762d4fac7dc9c1"
+      },
+      {
+        "path": "llava_llama_2_utils/generator.py",
+        "sha256": "d9d68574b13fe5f90b73949e0b7b4443e963467a1e21f3404c8b5231fade7bc5"
+      },
+      {
+        "path": "llava_llama_2_utils/prompt_wrapper.py",
+        "sha256": "80aaaa9020d75e819cdfeec277e8dbfd6b67ec6baf3eaa05122805abad8d0341"
+      },
+      {
+        "path": "llava_llama_2_utils/visual_attacker.py",
+        "sha256": "042ee581646933b2226de9743ac3652df32740af9038c86cfb27a2d8af09782c"
+      },
+      {
+        "path": "llava_llama_v2_inference.py",
+        "sha256": "762b52d52b37e9b46dd650d1d33dca7cdae927cf837849dd78fd65e5a71c46ae"
+      },
+      {
+        "path": "llava_llama_v2_visual_attack.py",
+        "sha256": "27cbe808276d09016b2686846bca63d515b754419851c6f3cea3274cea6be360"
+      },
+      {
+        "path": "minigpt4/LICENSE_MiniGPT-4.md",
+        "sha256": "35641484cf5b1b9581f55073d84787ed9fb94a523cbaf9d671519917d8fc0aae"
+      },
+      {
+        "path": "minigpt4/__init__.py",
+        "sha256": "fd0379b91e2871726e4a91892cf6a4590a0f4e53db05f8d270667493cd64e98a"
+      },
+      {
+        "path": "minigpt4/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "199a9825d65a3f2345b2e7a393905fa781680dcc7895a32302eb39e40a208f36"
+      },
+      {
+        "path": "minigpt4/common/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "minigpt4/common/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "ae820d2bc8ef843e9bb69e835ea0b6cf5955d4ab1ae565de469f762c32ac715f"
+      },
+      {
+        "path": "minigpt4/common/__pycache__/config.cpython-39.pyc",
+        "sha256": "d387d32e7cf469a579496473f14548a513eb9d304077358d9e28c3097b8debf3"
+      },
+      {
+        "path": "minigpt4/common/__pycache__/dist_utils.cpython-39.pyc",
+        "sha256": "a610ea0c7d893570bd371a264c8ff2881906b091d902b6b4125b2a26972dea64"
+      },
+      {
+        "path": "minigpt4/common/__pycache__/logger.cpython-39.pyc",
+        "sha256": "85354a3cae6f417a8a424ac137d7c95258bf387c86796df50ae964cd324ad088"
+      },
+      {
+        "path": "minigpt4/common/__pycache__/registry.cpython-39.pyc",
+        "sha256": "9f7eea376da6a4fe0e5a1bf9566b4226f9291b71c630d07f4c3266fda2eeb793"
+      },
+      {
+        "path": "minigpt4/common/__pycache__/utils.cpython-39.pyc",
+        "sha256": "5c79246d7be2517f4b621fb78b850ce17cbdb9022398ecd665f355401c3f67f6"
+      },
+      {
+        "path": "minigpt4/common/config.py",
+        "sha256": "0d269040c907a78a4cafb387f90e834e12a79cfde71f35f982d8d8d9cb41448f"
+      },
+      {
+        "path": "minigpt4/common/dist_utils.py",
+        "sha256": "0ba93c8735f3e96dc7b8dc57a6ffd759cc7469bac4aa452ff92458af05ee3999"
+      },
+      {
+        "path": "minigpt4/common/gradcam.py",
+        "sha256": "e2b44904ba3f09c7daa4aaa9cc41f07eaa60834e8e88b3f162392314ef7fc1a2"
+      },
+      {
+        "path": "minigpt4/common/logger.py",
+        "sha256": "0779fbece2c3bef0c0a6eed30ad24a0a9de65fc74998f9d824b89a0eb6a478c3"
+      },
+      {
+        "path": "minigpt4/common/optims.py",
+        "sha256": "0b6dc7e70464a24c47594598298cbbae516557053855bc1a0cc17b78f92a86d3"
+      },
+      {
+        "path": "minigpt4/common/registry.py",
+        "sha256": "51f8f6451398cc9a9d67c8f38323213eb6880b5f5bc9a9e8829d2b1a65931c58"
+      },
+      {
+        "path": "minigpt4/common/utils.py",
+        "sha256": "24f48158777adf1bd41c53b67f56165c69b7469dc927da5002c31c14513721fd"
+      },
+      {
+        "path": "minigpt4/configs/datasets/cc_sbu/align.yaml",
+        "sha256": "77e9b2615d9a41121008fba70a4c88c98cc0fdf84b51cc784694c19ed167c282"
+      },
+      {
+        "path": "minigpt4/configs/datasets/cc_sbu/defaults.yaml",
+        "sha256": "5081538f6aebc9d9dbc3edbf51200e29f3ea58e05eb431cdbfef74e9a130ccc6"
+      },
+      {
+        "path": "minigpt4/configs/datasets/laion/defaults.yaml",
+        "sha256": "790dd2ce42267a1903da384894cc24e0e81701efa753ebdb2f38384d94117315"
+      },
+      {
+        "path": "minigpt4/configs/default.yaml",
+        "sha256": "711a90e38766342d315967492f753ea8f2f047c74dabcbf4b9ae53d0d8773ab9"
+      },
+      {
+        "path": "minigpt4/configs/models/llama.yaml",
+        "sha256": "47c718d55ad6bb962f5e900f4b4a4b6cc30856c66437541411176900b9990fe3"
+      },
+      {
+        "path": "minigpt4/configs/models/minigpt4.yaml",
+        "sha256": "b89edf241d320d1bd8b1676df6fb36d29c90d835e1cc424ca58d1e6d2d5f6580"
+      },
+      {
+        "path": "minigpt4/configs/models/minigpt4_7b.yaml",
+        "sha256": "b89edf241d320d1bd8b1676df6fb36d29c90d835e1cc424ca58d1e6d2d5f6580"
+      },
+      {
+        "path": "minigpt4/conversation/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "minigpt4/conversation/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "4e7a9b4498eeab7b14433efdc6dfeb0911cf8084aed266d075c1ea0fa8b27b13"
+      },
+      {
+        "path": "minigpt4/conversation/__pycache__/conversation.cpython-39.pyc",
+        "sha256": "865b3919e859d791c736bc755d44d6b4cad7ed5a983e371a35ddb80987acbcfc"
+      },
+      {
+        "path": "minigpt4/conversation/conversation.py",
+        "sha256": "24d6e1b552ad94fe4a15dd9a4c7e8224b252eb0249d33d58391085a3a5b147c0"
+      },
+      {
+        "path": "minigpt4/datasets/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "minigpt4/datasets/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "5043637762dad23e295cf141ec58f6c28c23df1e5bf1b418c2c5cf88c88a01a4"
+      },
+      {
+        "path": "minigpt4/datasets/__pycache__/data_utils.cpython-39.pyc",
+        "sha256": "25a6c0d76f23db480e9a3312b089bb59bb5b18b280ce1f704c94485537e62ea7"
+      },
+      {
+        "path": "minigpt4/datasets/builders/__init__.py",
+        "sha256": "f15ab6a620f37bb45c98a7239c85edb5295c8954b45a9ee7dd7dca5c97b6d925"
+      },
+      {
+        "path": "minigpt4/datasets/builders/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "eff6fd32fc5c00496754b3dd15a53e0a00da2dddecb71384d85b6adbf1ca5bf6"
+      },
+      {
+        "path": "minigpt4/datasets/builders/__pycache__/base_dataset_builder.cpython-39.pyc",
+        "sha256": "ce50ffdcf799dbe36dd628360085996199266a7eca215a432de3cec2766c2258"
+      },
+      {
+        "path": "minigpt4/datasets/builders/__pycache__/custom_builder.cpython-39.pyc",
+        "sha256": "7a10df7d95436345cd9a2a48e341e65d43092803ef4ffacc687c20bb093987f9"
+      },
+      {
+        "path": "minigpt4/datasets/builders/__pycache__/image_text_pair_builder.cpython-39.pyc",
+        "sha256": "c3baa7ec8cce2656fb3f7d222cbb508354602c8e95e2685e92ff00ad940ff4de"
+      },
+      {
+        "path": "minigpt4/datasets/builders/base_dataset_builder.py",
+        "sha256": "952e1f6249b9f7bfa256b681ec9b66fdb2e965ef8092477b0c354cb563858b1a"
+      },
+      {
+        "path": "minigpt4/datasets/builders/image_text_pair_builder.py",
+        "sha256": "e61747fdfd390f1f349e06132589f8c13eec1f60ab81eae28f68c2ecdd0117fd"
+      },
+      {
+        "path": "minigpt4/datasets/data_utils.py",
+        "sha256": "955e05d12dc0de2b94f7d2daff12fd15d39126c32864ba5e56affc4cac01c0cd"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "81300d737a4775f44951fdc000440073294f505d74ed6f4e0206c618c5da30e6"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/__pycache__/base_dataset.cpython-39.pyc",
+        "sha256": "70181215b0e73b8bea7e9a94e59b59805eaf08ee1b6e07158c3c782fd1b168ec"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/__pycache__/caption_datasets.cpython-39.pyc",
+        "sha256": "a46909f61a7988b68170591be9f948ddc8b9f63f30bbfa985e93dc07e5baa8d6"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/__pycache__/cc_sbu_dataset.cpython-39.pyc",
+        "sha256": "93de9216111bf015db7cc7b9708c953d175185bef9579e6622ba5054353932c2"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/__pycache__/dataloader_utils.cpython-39.pyc",
+        "sha256": "02acc0f94a0e52e5900fa2006f655ff3974a0c2f5e7d96b38eb6ea5ba8a8742b"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/__pycache__/laion_dataset.cpython-39.pyc",
+        "sha256": "cdad0183ef37a087fcdd8961e81bb86f40d8a15968deaf1a227e74098328def7"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/base_dataset.py",
+        "sha256": "cea961cba476a35fd3998eae77f4beea4bdb38cd5c57573ecdcab2422b836484"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/caption_datasets.py",
+        "sha256": "87179b1703fe34fb1b5eeb9ac96bcec35ae0f9ca2ae815f29adf792c8ff1e5ad"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/cc_sbu_dataset.py",
+        "sha256": "68a5d690171f9b1d24405ba5cde57db33bbc99ad0ef78d32f5c197d07d3c9643"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/dataloader_utils.py",
+        "sha256": "549eb595c5bfb501e46e117e612b94fc78a08f7e890435d4c26b81f7f4bcdce6"
+      },
+      {
+        "path": "minigpt4/datasets/datasets/laion_dataset.py",
+        "sha256": "1290f8578ea637f02ef6ff360de8e4aeb9fee8c010f60aabbc8603cee27a021f"
+      },
+      {
+        "path": "minigpt4/models/Qformer.py",
+        "sha256": "9d1375ffed630df9449e7e5e69072038bf20af5bd0e1cc22ae1f2337b586f95e"
+      },
+      {
+        "path": "minigpt4/models/__init__.py",
+        "sha256": "daa69e41d3db517eb0ec3585d39c4c443f165de19ae0c7e2f096c9273521bbef"
+      },
+      {
+        "path": "minigpt4/models/__pycache__/Qformer.cpython-39.pyc",
+        "sha256": "844134063d53460b9bd89bc747a36c71f40ade90c596bd272b38716e55c47522"
+      },
+      {
+        "path": "minigpt4/models/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "53bf770d6ff066a5243b041968349b66d120b6b9520eca4ce4c70ce85fb5d336"
+      },
+      {
+        "path": "minigpt4/models/__pycache__/base_model.cpython-39.pyc",
+        "sha256": "ef9440282a897e54d953644a0e798f54b833ad3f36e1084c4eebddd614c20a6c"
+      },
+      {
+        "path": "minigpt4/models/__pycache__/blip2.cpython-39.pyc",
+        "sha256": "af701e561db5e348000b9a3e45a743afee6fbcadf6d409077df4d1ecbb36e9e0"
+      },
+      {
+        "path": "minigpt4/models/__pycache__/eva_vit.cpython-39.pyc",
+        "sha256": "e0ad5d3440dee2b73de7a76c99e395d9d43d701ea1936ba8250b30d7c05c68f2"
+      },
+      {
+        "path": "minigpt4/models/__pycache__/mini_gpt4.cpython-39.pyc",
+        "sha256": "0c4f26d5802fb7a22524a51830bbab62d3bea0cc42561dfcee2dd2dff7fb973c"
+      },
+      {
+        "path": "minigpt4/models/__pycache__/modeling_llama.cpython-39.pyc",
+        "sha256": "25d1e24b1b13a66dbb2c74e0d0ab61e810d844280e45adf1e1ca5e385685fb13"
+      },
+      {
+        "path": "minigpt4/models/base_model.py",
+        "sha256": "94a9deea371f16b34bd00429b6df6d3f73465156ee2d88ef8e16555489c618bc"
+      },
+      {
+        "path": "minigpt4/models/blip2.py",
+        "sha256": "e8c63db5a826dbf9e51f093100aa38529bc8d5ddf41f759cfbf8f4b30afafd9b"
+      },
+      {
+        "path": "minigpt4/models/blip2_outputs.py",
+        "sha256": "7dd8b4a26d345aeb09d4527bb30ed4e493f594b4d40bf89acecda4767292b713"
+      },
+      {
+        "path": "minigpt4/models/eva_vit.py",
+        "sha256": "63fb32c603970327e596b5b24269537509c6d90f9e244fd772210f873ecc5b08"
+      },
+      {
+        "path": "minigpt4/models/mini_gpt4.py",
+        "sha256": "e06ee17380309635a8b20a59b9d4407170695613a6192fc29300b431e20144f5"
+      },
+      {
+        "path": "minigpt4/models/modeling_llama.py",
+        "sha256": "32fbdca9ebd7fb0b597f1fa45875f29659ccdda02a11c4690efbcab93b89ce93"
+      },
+      {
+        "path": "minigpt4/processors/__init__.py",
+        "sha256": "cfefc5004e978c0dbe98e8eddb204e84b724194c3c1ecb4d254aaefba77db1f5"
+      },
+      {
+        "path": "minigpt4/processors/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "6dfc04d0d872bd21c157aa1ed1ebe19365b7766812aaea25fa6a15ba7d017d3a"
+      },
+      {
+        "path": "minigpt4/processors/__pycache__/base_processor.cpython-39.pyc",
+        "sha256": "e54d18c5e72cf07b5feab1b1140067609fd2176116364dc7c65e14d5fd6cfb42"
+      },
+      {
+        "path": "minigpt4/processors/__pycache__/blip_processors.cpython-39.pyc",
+        "sha256": "a093b612f2991df8f8fb939b92c64ce006b04a0c0611d6f407fcef5f10c4b1da"
+      },
+      {
+        "path": "minigpt4/processors/__pycache__/randaugment.cpython-39.pyc",
+        "sha256": "0c75996b713ba72fa2c5882d1572cc7561446cb12bd52b8790266edc9ad2621a"
+      },
+      {
+        "path": "minigpt4/processors/base_processor.py",
+        "sha256": "d17c3c045e0fc74e994b7f034aa0d3198e471984b37c7632c553f0c36a414e49"
+      },
+      {
+        "path": "minigpt4/processors/blip_processors.py",
+        "sha256": "d4892b3d0b6109d898bf5ff3c9ccfe2283c297b4644a46ae1c512bec09b5ec90"
+      },
+      {
+        "path": "minigpt4/processors/randaugment.py",
+        "sha256": "3e0701da8f54ce4eaa36adcdc73ce7e84ca1a9e74cffe52c4913232a4d076191"
+      },
+      {
+        "path": "minigpt4/runners/__init__.py",
+        "sha256": "d2297b69207857fc6747a056c45a3bb8566b360452d070c1c8a41a3a0af7e384"
+      },
+      {
+        "path": "minigpt4/runners/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "abc80b7408d0451d684fabce26db76b0a383dd94005afbdb032571bd49b909da"
+      },
+      {
+        "path": "minigpt4/runners/__pycache__/runner_base.cpython-39.pyc",
+        "sha256": "6afd902dfb2fc99598729edae7d494d978e0630998e95497b4ca2040fe9619c2"
+      },
+      {
+        "path": "minigpt4/runners/runner_base.py",
+        "sha256": "ae97135d7e72b72358489c802175567348477eb319fb083f61572cfb7f65f85c"
+      },
+      {
+        "path": "minigpt4/tasks/__init__.py",
+        "sha256": "994137aadfbecbd35d2a69e0d579d0ee48646e2cc8ef04b97f3e832e3460e392"
+      },
+      {
+        "path": "minigpt4/tasks/__pycache__/__init__.cpython-39.pyc",
+        "sha256": "0c29690fc289d665dc44a477ced34a3fe16fe240738f0bcaa3e44a89d3f5ffb5"
+      },
+      {
+        "path": "minigpt4/tasks/__pycache__/base_task.cpython-39.pyc",
+        "sha256": "526c3ca8acdbda0d4d80fe8cddd61d26375ceac6699baffd1ad5319040d5d182"
+      },
+      {
+        "path": "minigpt4/tasks/__pycache__/image_text_pretrain.cpython-39.pyc",
+        "sha256": "34d26ee03f9c91fa9ccf220b04e2535c1fe7ac4d480ef44313cd62f3d83d1bd8"
+      },
+      {
+        "path": "minigpt4/tasks/base_task.py",
+        "sha256": "d8d7ee1ee4d4c8aa4f144e65fc66902b7b923b8b99db7377abb1b702056a8924"
+      },
+      {
+        "path": "minigpt4/tasks/image_text_pretrain.py",
+        "sha256": "4bdefe0314851848daec1441ce21a8eba16adb76192b6a089b227ef33bc3dc7d"
+      },
+      {
+        "path": "minigpt_inference.py",
+        "sha256": "fcf81a214bfffba2fa708c0592ed331b7c0e151cb65767da70f4539dcfd14de6"
+      },
+      {
+        "path": "minigpt_utils/__pycache__/generator.cpython-39.pyc",
+        "sha256": "0885b84b236ccbf62befbb2150bf20613d2b671e9731f9b4a8adcd7e9cfa2975"
+      },
+      {
+        "path": "minigpt_utils/__pycache__/prompt_wrapper.cpython-39.pyc",
+        "sha256": "6d98878c1732be597734babce097f011e5e96657a32d23b003d038e99ab67f31"
+      },
+      {
+        "path": "minigpt_utils/__pycache__/text_attacker.cpython-39.pyc",
+        "sha256": "3570e57f19dab0ca71d92fccaa624d415a35066683ce08512c25387eaf52d112"
+      },
+      {
+        "path": "minigpt_utils/__pycache__/visual_attacker.cpython-39.pyc",
+        "sha256": "15fe7953a28bb4f015c962a1b732868427d56c5a5f75997048ea5776faf3dd24"
+      },
+      {
+        "path": "minigpt_utils/generator.py",
+        "sha256": "f14e8a13083bfbe964774ab746bfb6c1ba3d84c8e17326f00cab4bd3e54d5e64"
+      },
+      {
+        "path": "minigpt_utils/prompt_wrapper.py",
+        "sha256": "2479cb6905bc30e412aba276faa061fe8c47f3a2b394a5aaf81e767e81c598e9"
+      },
+      {
+        "path": "minigpt_utils/text_attacker.py",
+        "sha256": "f88ac2e3d4bbb20429480e08c147099bc8dc2902c740be8a9eceb868e6fae329"
+      },
+      {
+        "path": "minigpt_utils/visual_attacker.py",
+        "sha256": "903d2f553d822d27f9f3cc3d70919e0251d13f6d5cfb7a94411a34f272b49a16"
+      },
+      {
+        "path": "minigpt_visual_attack.py",
+        "sha256": "6b193732c97744370ff03abea1e2ad87cb48c5d8b14c7f6c53fda172c20d2a82"
+      },
+      {
+        "path": "script/README.md",
+        "sha256": "c6b190ee91ef2730be2010d81fc230576f22675014a79c0d77a7bd98efe86a58"
+      },
+      {
+        "path": "script/blip/blip_coco_script/script_attack_blip.sh",
+        "sha256": "117c128a1c6d582a35780d88d656eb510dbbc6cb1d810a255553fbfd35285ca7"
+      },
+      {
+        "path": "script/blip/blip_coco_script/script_formality_blip.sh",
+        "sha256": "30ada03f92e107800da0330364efef9fa62ec009e11685e7d208e3acb55bb8b9"
+      },
+      {
+        "path": "script/blip/blip_coco_script/script_language_blip.sh",
+        "sha256": "0ac4c76ccd01c1d68bcd6bdbbc34c9d289a7fe0faa025abc7287433a4a37a6b7"
+      },
+      {
+        "path": "script/blip/blip_coco_script/script_politics_blip.sh",
+        "sha256": "e7bbe99a71ca2d69209bb98df286531b00477b76b2297864c60145987fbe8176"
+      },
+      {
+        "path": "script/blip/blip_coco_script/script_sentiment_blip.sh",
+        "sha256": "21b8b9935d5daab000d94dbdd7c101e08e9364f640edcc25964f2d00fce1b610"
+      },
+      {
+        "path": "script/blip/blip_imagenet_script/script_attack_blip.sh",
+        "sha256": "57cc39e0d98b0d536d33ab73ef5776fbfdcc3c57fa58274bee4e0ac7e9f1eeab"
+      },
+      {
+        "path": "script/blip/blip_imagenet_script/script_formality_blip.sh",
+        "sha256": "f8a6786c8b220ea7077b49b1c7e5b8d82fc8ad5039ca3de021f3905fe5b47335"
+      },
+      {
+        "path": "script/blip/blip_imagenet_script/script_language_blip.sh",
+        "sha256": "6f93d13b41c1f2a5e3f58bd06aeb023a8769e94a7fd62ff1ea3c8ec53387cc7d"
+      },
+      {
+        "path": "script/blip/blip_imagenet_script/script_politics_blip.sh",
+        "sha256": "6752cb9640984f48f1c93b0565e1d29e0feec80041e0f3b5b2da49eafb82c9f4"
+      },
+      {
+        "path": "script/blip/blip_imagenet_script/script_sentiment_blip.sh",
+        "sha256": "39148b2e283141e44283d8e0f2e92648ec3b16124d0e9a3f04659bc40977c1b3"
+      },
+      {
+        "path": "script/llava/llava_coco_script/script_attack_llava.sh",
+        "sha256": "1c59090888dec53fe1a0dd0dffd617a8a497fe545b2f1dc284505c5db400a6e7"
+      },
+      {
+        "path": "script/llava/llava_coco_script/script_formality_llava.sh",
+        "sha256": "28e9160ec5323da2b535140a6eb2a62d1d196911f4758b3ae9aea970a6f36088"
+      },
+      {
+        "path": "script/llava/llava_coco_script/script_language_llava.sh",
+        "sha256": "dd095825d9f8c4fe54fca6099fbb8571fc0377731e989ccd7b3306dd490e40f8"
+      },
+      {
+        "path": "script/llava/llava_coco_script/script_politics_llava.sh",
+        "sha256": "32bae9aff27302ea9decbad24590f0e9d79b572639de47598b1948bc7bff8608"
+      },
+      {
+        "path": "script/llava/llava_coco_script/script_sentiment_llava.sh",
+        "sha256": "b69f8be8ebad8123001b2c2e4e63afa2e62e16b1bea04e1d0b38a22b60a3e46f"
+      },
+      {
+        "path": "script/llava/llava_imagenet_script.sh/script_attack_llava.sh",
+        "sha256": "8cc3a7d0e1bf31f6757041347493d05737590870a6bfb42ea40fbcbb37335f3e"
+      },
+      {
+        "path": "script/llava/llava_imagenet_script.sh/script_formality_llava.sh",
+        "sha256": "ce2e517bc1f2a305ccc021fc0f6e725e75082c37967a37e2e399d08633dee463"
+      },
+      {
+        "path": "script/llava/llava_imagenet_script.sh/script_language_llava.sh",
+        "sha256": "bf29d1efc2a2a0c06aefde09950b764adea99e21555f82a89d4723c886a8da59"
+      },
+      {
+        "path": "script/llava/llava_imagenet_script.sh/script_politics_llava.sh",
+        "sha256": "b99a60dceacb71e2d684b84aa1157e6e9bdf7f76b115622e6e6c4b2260d8582f"
+      },
+      {
+        "path": "script/llava/llava_imagenet_script.sh/script_sentiment_llava.sh",
+        "sha256": "d6f700a3a96b506f93e5b22a9701c18d8981f90cf0640a50d7d72e5953af5e88"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_attack_minigpt4.sh",
+        "sha256": "c31314298affaac1c850380ab2378ea943aea4afb1c4b53389ba418315066c3d"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_formality_minigpt4.sh",
+        "sha256": "324ba54b49ef991d596c37a9a5c0e909d52cb09e3197c2b819ec6529ed6513b2"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_language_minigpt4.sh",
+        "sha256": "f942571782e7f27172c0575909aa74ede9dcbcf457ba6f949212e492b990c3c0"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_politics_minigpt4.sh",
+        "sha256": "268b467830388cae2bbc6fc9e013a873b960fd4b62037cf6e6cfc370c0bb7f40"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_sentiment_minigpt4.sh",
+        "sha256": "64707a8cdc94aa658bb400b8ff893fe6b0c6b63df1c5afcdad874a631d1a9fae"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_sentiment_minigpt4_16.sh",
+        "sha256": "32b08dace2d5d41f1575444833a7bd6d2b030fd25d44adb12ac31809302049ee"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_sentiment_minigpt4_defense.sh",
+        "sha256": "893ad561e9ae58592029e31d14b0e16f8249ec2b24162853f733956f67ef0930"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_sentiment_minigpt4_l2_12.sh",
+        "sha256": "0c94accc1a6f377daa98856276e3199e28a7a4e8619ef491e5320f9b0880d2d4"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_sentiment_minigpt4_l2_24.sh",
+        "sha256": "824fbe19dc3010099f51d3389049c2f6c34d3bd32fbb19a56bbdd4573e95876b"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_sentiment_minigpt4_l2_6.sh",
+        "sha256": "7b68751893d170beaa267a1b9b35f0216072c8c811d3e5bb02562c271967b693"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_coco_script/script_sentiment_minigpt4_transfer.sh",
+        "sha256": "c383e4bb295ab238ad4f48516b9cad355da43836eecf48d290d52590e396bab8"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_imagenet_script/attack_minigpt4.sh",
+        "sha256": "840108c77ee6bd2c52fa0e2ed3c0044cffce4c50060f56dfdabe8b2d0f8150f2"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_imagenet_script/formality_minigpt4.sh",
+        "sha256": "5d58edb9147a951e4720af2969ae1188ffd1de275e36ae265fb3f59ef2dd26d5"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_imagenet_script/language_minigpt4.sh",
+        "sha256": "e75b2ba7cae47f416690657a2d314ebd695e36810189f6abfbc90ea5921188df"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_imagenet_script/politics_minigpt4.sh",
+        "sha256": "47323b88f380867f8fcb7b5e37cd6b971eeb62e2e0760073d8a843f15d6247e8"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_imagenet_script/sentiment_minigpt4.sh",
+        "sha256": "33bf67c21897a87299f631a43c126cafc9b4c49dcf930f567d8cdd5ddd8b85fa"
+      },
+      {
+        "path": "script/minigpt4/minigpt4_imagenet_script/transfer_minigpt4.sh",
+        "sha256": "ed85c33145004c2e27871c5907a2bb13b7f8d89ff14b7f1fa9037e5fa0dc07af"
+      }
+    ]
+  }
+}

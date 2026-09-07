@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "siai",
+  "engine": "sglang",
+  "engine_id": "SGLang",
+  "source_root": "LIE/sglang",
+  "source_commit": "97c6978369ac1e04c91fcc01c98acc25129a6000",
+  "status": "static_candidate_review_only",
+  "library_source": {
+    "path": "LieMappBench/Attack-Library/attack_library.xlsx",
+    "sha256": "069bdc201aef0babcb9eecabfc50627548dae616e618aac1b20cf9418a1a4981",
+    "sheet": "AI 포렌식"
+  },
+  "conditions": [
+    {
+      "condition_id": "AC1",
+      "type": "AC",
+      "text": "현재 요청에서 이미지 인코더와 multimodal fusion 경로가 실제로 활성화되는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "AC2",
+      "type": "AC",
+      "text": "입력 이미지의 adversarial perturbation이 전처리 이후에도 보존되어 이미지 인코더에 도달하는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "AC3",
+      "type": "AC",
+      "text": "생성된 visual embedding이 언어 디코더의 생성 결과에 직접 영향을 미치는 구조인가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "DC1",
+      "type": "DC",
+      "text": "원본과 증강 이미지를 동일한 전처리·인코더에 입력할 \n수 있는가?\n - 이미지 증강: JPEG 압축, 가우시안 블러, 랜덤 아핀 변환, 색상 조정, 랜덤 원근 변환",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    },
+    {
+      "condition_id": "DC2",
+      "type": "DC",
+      "text": "동일 계층의 이미지 임베딩을 추출하고 서로 연결할 수 있는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    },
+    {
+      "condition_id": "DC3",
+      "type": "DC",
+      "text": "코사인 유사도를 계산하고 모델별 정상 기준선·threshold와 비교할 수 있는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    }
+  ],
+  "historical_mapping": {
+    "engine": "sglang",
+    "sheet": "AI 포렌식",
+    "cell": "M10",
+    "text": "AC1. python/sglang/srt/models/transformers.py:1476 (_encode_modality_items), python/sglang/srt/models/transformers.py:1574 (_forward_hidden_states)\nAC2. python/sglang/srt/multimodal/processors/transformers_auto.py:173 (process_mm_data_async), python/sglang/srt/models/transformers.py:1462 (_encode_modality_items)\nAC3. python/sglang/srt/models/transformers.py:1574 (_forward_hidden_states)\n\nDC1. python/sglang/srt/models/transformers.py:1463 (_encode_modality_items)\nDC2. python/sglang/srt/models/transformers.py:1488 (_encode_modality_items)\nDC3. python/sglang/srt/models/transformers.py:1488 (_encode_modality_items).",
+    "status": "historical_unversioned_reference"
+  },
+  "logging_points": [
+    {
+      "mapping_id": "siai-SGLang-candidate-01",
+      "status": "static_candidate",
+      "condition_ids": [
+        "AC2",
+        "DC1"
+      ],
+      "source": {
+        "file": "python/sglang/srt/multimodal/processors/transformers_auto.py",
+        "symbol": "process_mm_data_async",
+        "class": null,
+        "line": 178,
+        "end_line": 275,
+        "sha256": "de0318f23029f1250b70854fab6c4932f1b56bbb031f5fdac77e49d041fb8299"
+      },
+      "stage": "preprocess",
+      "reason": "전처리 전후 및 이미지-증강 계보를 확보하는 경계",
+      "required_raw_evidence": [
+        "input bytes/tensor",
+        "output tensor",
+        "processor parameters",
+        "parent/input ID"
+      ],
+      "executed": false,
+      "instrumented": false
+    },
+    {
+      "mapping_id": "siai-SGLang-candidate-02",
+      "status": "static_candidate",
+      "condition_ids": [
+        "AC1",
+        "AC2",
+        "DC1",
+        "DC2",
+        "DC3"
+      ],
+      "source": {
+        "file": "python/sglang/srt/models/transformers.py",
+        "symbol": "_encode_modality_items",
+        "class": "MultiModalMixin",
+        "line": 1459,
+        "end_line": 1483,
+        "sha256": "034b2ba8ca17e89bc8dc707e640aeae0a5fecdb721e861d5075d14f1573d98a1"
+      },
+      "stage": "encode",
+      "reason": "이미지 인코딩 성공 여부와 같은 계층의 원시 임베딩을 확보하는 경계",
+      "required_raw_evidence": [
+        "encoder input tensor",
+        "embedding tensor",
+        "return status",
+        "layer/stage ID"
+      ],
+      "executed": false,
+      "instrumented": false
+    },
+    {
+      "mapping_id": "siai-SGLang-candidate-03",
+      "status": "static_candidate",
+      "condition_ids": [
+        "AC1",
+        "AC3"
+      ],
+      "source": {
+        "file": "python/sglang/srt/models/transformers.py",
+        "symbol": "_forward_hidden_states",
+        "class": "MultiModalMixin",
+        "line": 1581,
+        "end_line": 1610,
+        "sha256": "034b2ba8ca17e89bc8dc707e640aeae0a5fecdb721e861d5075d14f1573d98a1"
+      },
+      "stage": "fusion_decode",
+      "reason": "이미지 임베딩을 이용한 언어 디코더 실행 경계",
+      "required_raw_evidence": [
+        "embedding identity",
+        "decoder return status",
+        "logits",
+        "sequence/request ID"
+      ],
+      "executed": false,
+      "instrumented": false
+    }
+  ],
+  "limitations": [
+    "함수 존재·매핑만 확인함. 계측 적용·실행·T/F 판정을 뜻하지 않음.",
+    "AC2에는 clean/attack 쌍의 encoder-input 차이와 공격 provenance가 필요함.",
+    "AC3 직접 영향 주장은 같은 요청 추적과 통제된 visual ablation이 필요함.",
+    "DC1~3은 탐지 준비도이며 공격 탐지 성능이나 사건 발생 입증과 다름."
+  ]
+}

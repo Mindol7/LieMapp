@@ -1,0 +1,421 @@
+{
+  "schema_version": "1.0.0",
+  "source": {
+    "path": "LieMappBench/Attack-Library/attack_library.xlsx",
+    "sha256": "069bdc201aef0babcb9eecabfc50627548dae616e618aac1b20cf9418a1a4981",
+    "sheet": "AI 포렌식"
+  },
+  "attack_count": 5,
+  "attacks": [
+    {
+      "attack_id": "ikws",
+      "title": "I Know What You Said: Unveiling Hardware Cache Side-Channels in Local Large Language Model Inference",
+      "row": 6,
+      "venue": "USENIX Security 2025",
+      "category": "Sensitive Information Disclosure",
+      "technique": "Side-Channel Attack (HW)",
+      "raw_cells": {
+        "D6": "I Know What You Said: Unveiling \nHardware Cache Side-Channels in \nLocal Large Language Model Inference",
+        "E6": "Sensitive Information Disclosure",
+        "F6": "Side-Channel Attack (HW)",
+        "G6": "-",
+        "H6": "-",
+        "I6": "-",
+        "J6": "-",
+        "K6": "-",
+        "L6": "-",
+        "M6": "-"
+      },
+      "conditions": [],
+      "historical_source_mapping": {
+        "llamacpp": {
+          "engine": "llama.cpp",
+          "sheet": "AI 포렌식",
+          "cell": "I6",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        },
+        "mlc-llm": {
+          "engine": "mlc-llm",
+          "sheet": "AI 포렌식",
+          "cell": "J6",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        },
+        "vllm": {
+          "engine": "vllm",
+          "sheet": "AI 포렌식",
+          "cell": "K6",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        },
+        "tensorRT-llm": {
+          "engine": "TensorRT-LLM",
+          "sheet": "AI 포렌식",
+          "cell": "L6",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        },
+        "SGLang": {
+          "engine": "sglang",
+          "sheet": "AI 포렌식",
+          "cell": "M6",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        }
+      }
+    },
+    {
+      "attack_id": "ikwa",
+      "title": "I Know What You Asked: Prompt Leakage via KV-Cache Sharing in Multi-Tenant LLM Serving",
+      "row": 7,
+      "venue": "NDSS 2025",
+      "category": "Sensitive Information Disclosure",
+      "technique": "Side-Channel Attack (KV-Cache)",
+      "raw_cells": {
+        "D7": "I Know What You Asked: Prompt Leakage via KV-Cache Sharing in Multi-Tenant LLM Serving",
+        "E7": "Sensitive Information Disclosure",
+        "F7": "Side-Channel Attack (KV-Cache)",
+        "G7": "AC1. KV Cache 공유가 활성화 되어있는가?\nAC2. LPM 스케줄링을 사용하는가?\nAC3. 사용자 수준에서 API를 통해 KV Cache 활동 제어가 가능한가?\n - max_token: 출력되는 토큰 수 지정하는 API / pos: 시퀀스에서 KV-Cache 공유 몇 번째 토큰까지 할 것인지 결정하는 API\nAC4. KV Cache 용량은 공격을 관찰하기에 충분한가?",
+        "H7": "TBA",
+        "I7": "",
+        "J7": "",
+        "K7": "",
+        "L7": "",
+        "M7": ""
+      },
+      "conditions": [
+        {
+          "condition_id": "AC1",
+          "type": "AC",
+          "text": "KV Cache 공유가 활성화 되어있는가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G7"
+          }
+        },
+        {
+          "condition_id": "AC2",
+          "type": "AC",
+          "text": "LPM 스케줄링을 사용하는가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G7"
+          }
+        },
+        {
+          "condition_id": "AC3",
+          "type": "AC",
+          "text": "사용자 수준에서 API를 통해 KV Cache 활동 제어가 가능한가?\n - max_token: 출력되는 토큰 수 지정하는 API / pos: 시퀀스에서 KV-Cache 공유 몇 번째 토큰까지 할 것인지 결정하는 API",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G7"
+          }
+        },
+        {
+          "condition_id": "AC4",
+          "type": "AC",
+          "text": "KV Cache 용량은 공격을 관찰하기에 충분한가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G7"
+          }
+        }
+      ],
+      "historical_source_mapping": {
+        "llamacpp": {
+          "engine": "llama.cpp",
+          "sheet": "AI 포렌식",
+          "cell": "I7",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        },
+        "mlc-llm": {
+          "engine": "mlc-llm",
+          "sheet": "AI 포렌식",
+          "cell": "J7",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        },
+        "vllm": {
+          "engine": "vllm",
+          "sheet": "AI 포렌식",
+          "cell": "K7",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        },
+        "tensorRT-llm": {
+          "engine": "TensorRT-LLM",
+          "sheet": "AI 포렌식",
+          "cell": "L7",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        },
+        "SGLang": {
+          "engine": "sglang",
+          "sheet": "AI 포렌식",
+          "cell": "M7",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        }
+      }
+    },
+    {
+      "attack_id": "gcg",
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "row": 8,
+      "venue": "arXiv",
+      "category": "Prompt Injection",
+      "technique": "Jailbreaking",
+      "raw_cells": {
+        "D8": "Universal and Transferable Adversarial \nAttacks on Aligned Language Models",
+        "E8": "Prompt Injection",
+        "F8": "Jailbreaking",
+        "G8": "-",
+        "H8": "-",
+        "I8": "-",
+        "J8": "-",
+        "K8": "-",
+        "L8": "-",
+        "M8": "-"
+      },
+      "conditions": [],
+      "historical_source_mapping": {
+        "llamacpp": {
+          "engine": "llama.cpp",
+          "sheet": "AI 포렌식",
+          "cell": "I8",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        },
+        "mlc-llm": {
+          "engine": "mlc-llm",
+          "sheet": "AI 포렌식",
+          "cell": "J8",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        },
+        "vllm": {
+          "engine": "vllm",
+          "sheet": "AI 포렌식",
+          "cell": "K8",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        },
+        "tensorRT-llm": {
+          "engine": "TensorRT-LLM",
+          "sheet": "AI 포렌식",
+          "cell": "L8",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        },
+        "SGLang": {
+          "engine": "sglang",
+          "sheet": "AI 포렌식",
+          "cell": "M8",
+          "text": "-",
+          "status": "historical_unversioned_reference"
+        }
+      }
+    },
+    {
+      "attack_id": "mindthegap",
+      "title": "Mind the Gap: A Practical Attack on GGUF Quantization",
+      "row": 9,
+      "venue": "ICML 2025",
+      "category": "Supply Chain",
+      "technique": "Quantization Workflow",
+      "raw_cells": {
+        "D9": "Mind the Gap: A Practical Attack on \nGGUF Quantization",
+        "E9": "Supply Chain",
+        "F9": "Quantization Workflow",
+        "G9": "AC1. 추론 엔진이 k-quants 양자화를 지원하는가?\n -  Q2_K, Q3_K_{S,M,L}, Q4_K_{S,M}, Q5_K_{S,M}, Q6_K\nAC2. 실제로 k-quants 양자화가 진행되었고, 생성된 GGUF 파일이 로드 되었는가?\nAC3. 모델의 가중치에 노이즈가 첨가가 안되어 있는가?",
+        "H9": "TBA",
+        "I9": "",
+        "J9": "",
+        "K9": "",
+        "L9": "",
+        "M9": ""
+      },
+      "conditions": [
+        {
+          "condition_id": "AC1",
+          "type": "AC",
+          "text": "추론 엔진이 k-quants 양자화를 지원하는가?\n -  Q2_K, Q3_K_{S,M,L}, Q4_K_{S,M}, Q5_K_{S,M}, Q6_K",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G9"
+          }
+        },
+        {
+          "condition_id": "AC2",
+          "type": "AC",
+          "text": "실제로 k-quants 양자화가 진행되었고, 생성된 GGUF 파일이 로드 되었는가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G9"
+          }
+        },
+        {
+          "condition_id": "AC3",
+          "type": "AC",
+          "text": "모델의 가중치에 노이즈가 첨가가 안되어 있는가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G9"
+          }
+        }
+      ],
+      "historical_source_mapping": {
+        "llamacpp": {
+          "engine": "llama.cpp",
+          "sheet": "AI 포렌식",
+          "cell": "I9",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        },
+        "mlc-llm": {
+          "engine": "mlc-llm",
+          "sheet": "AI 포렌식",
+          "cell": "J9",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        },
+        "vllm": {
+          "engine": "vllm",
+          "sheet": "AI 포렌식",
+          "cell": "K9",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        },
+        "tensorRT-llm": {
+          "engine": "TensorRT-LLM",
+          "sheet": "AI 포렌식",
+          "cell": "L9",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        },
+        "SGLang": {
+          "engine": "sglang",
+          "sheet": "AI 포렌식",
+          "cell": "M9",
+          "text": "",
+          "status": "historical_unversioned_reference"
+        }
+      }
+    },
+    {
+      "attack_id": "siai",
+      "title": "Self-interpreting Adversarial Images",
+      "row": 10,
+      "venue": "USENIX Security 2025",
+      "category": "Prompt Injection",
+      "technique": "Multimodal Injection",
+      "raw_cells": {
+        "D10": "Self-interpreting Adversarial Images",
+        "E10": "Prompt Injection",
+        "F10": "Multimodal Injection",
+        "G10": "AC1. 현재 요청에서 이미지 인코더와 multimodal fusion 경로가 실제로 활성화되는가?\nAC2. 입력 이미지의 adversarial perturbation이 전처리 이후에도 보존되어 이미지 인코더에 도달하는가?\nAC3. 생성된 visual embedding이 언어 디코더의 생성 결과에 직접 영향을 미치는 구조인가?",
+        "H10": "DC1: 원본과 증강 이미지를 동일한 전처리·인코더에 입력할 \n수 있는가?\n - 이미지 증강: JPEG 압축, 가우시안 블러, 랜덤 아핀 변환, 색상 조정, 랜덤 원근 변환\nDC2: 동일 계층의 이미지 임베딩을 추출하고 서로 연결할 수 있는가?\nDC3: 코사인 유사도를 계산하고 모델별 정상 기준선·threshold와 비교할 수 있는가?",
+        "I10": "AC1. tools/mtmd/mtmd.cpp:1558 (mtmd_encode_impl), tools/mtmd/mtmd-helper.cpp320 (mtmd_helper_decode_image_chunk).\nAC2. tools/mtmd/mtmd.cpp:1129 (add_media), tools/mtmd/mtmd.cpp:1539 (mtmd_encode_impl)\nAC3. tools/mtmd/mtmd-helper.cpp:320 (mtmd_helper_decode_image_chunk)\n\nDC1. tools/mtmd/mtmd.cpp:1539 (mtmd_encode_impl)\nDC2. tools/mtmd/mtmd.cpp:1558 (mtmd_encode_impl)\nDC3. tools/mtmd/mtmd.cpp:1558 (mtmd_encode_impl)",
+        "J10": "AC1. python/mlc_llm/model/phi3v/phi3v_model.py:375 (image_embed), python/mlc_llm/model/phi3v/phi3v_model.py:245 (prefill)\nAC2. python/mlc_llm/model/phi3v/phi3v_model.py:346 (image_preprocess),  python/mlc_llm/model/phi3v/phi3v_model.py:373 (image_embed).\nAC3. python/mlc_llm/model/phi3v/phi3v_model.py:245 (prefill)\n\nDC1. python/mlc_llm/model/phi3v/phi3v_model.py:373 (image_embed)\nDC2. python/mlc_llm/model/phi3v/phi3v_model.py:375 (image_embed)\nDC3. python/mlc_llm/model/phi3v/phi3v_model.py:373 (image_embed)",
+        "K10": "AC1. vllm/model_executor/models/idefics3.py:648 (_process_image_input), vllm/model_executor/models/utils.py:676 (_merge_multimodal_embaddings).\nAC2. vllm/model_executor/models/idefics3.py:296 (_call_hf_processor), vllm/model_executor/models/idefics3.py:497 (image_pixels_to_features).\nAC3. vllm/model_executor/models/utils.py:676 (_merge_multimodal_embeddings).\n\nDC1. vllm/model_executor/models/idefics3.py:497 (image_pixels_to_features)\nDC2. vllm/model_executor/models/idefics3.py:648 (_process_image_input)\nDC3. vllm/model_executor/models/idefics3.py:648 (_process_image_input)",
+        "L10": "AC1. tensorrt_llm/_torch/models/modeling_qwen2vl.py:1134 (forward), tensorrt_llm/_torch/models/modeling_multimodal_utils.py:604 (fuse_input_embeds)\nAC2. tensorrt_llm/_torch/models/modeling_qwen2vl.py:920 (call_with_text_prompt), tensorrt_llm/_torch/models/modeling_qwen2vl.py:1125 (forward)\nAC3. tensorrt_llm/_torch/models/modeling_multimodal_utils.py:604 (fuse_input_embeds)\n\nDC1. tensorrt_llm/_torch/models/modeling_qwen2vl.py:1153 (forward)\nDC2. tensorrt_llm/_torch/models/modeling_qwen2vl.py:1171 (forward)\nDC3. tensorrt_llm/_torch/models/modeling_qwen2vl.py:1171 (forward)",
+        "M10": "AC1. python/sglang/srt/models/transformers.py:1476 (_encode_modality_items), python/sglang/srt/models/transformers.py:1574 (_forward_hidden_states)\nAC2. python/sglang/srt/multimodal/processors/transformers_auto.py:173 (process_mm_data_async), python/sglang/srt/models/transformers.py:1462 (_encode_modality_items)\nAC3. python/sglang/srt/models/transformers.py:1574 (_forward_hidden_states)\n\nDC1. python/sglang/srt/models/transformers.py:1463 (_encode_modality_items)\nDC2. python/sglang/srt/models/transformers.py:1488 (_encode_modality_items)\nDC3. python/sglang/srt/models/transformers.py:1488 (_encode_modality_items)."
+      },
+      "conditions": [
+        {
+          "condition_id": "AC1",
+          "type": "AC",
+          "text": "현재 요청에서 이미지 인코더와 multimodal fusion 경로가 실제로 활성화되는가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G10"
+          }
+        },
+        {
+          "condition_id": "AC2",
+          "type": "AC",
+          "text": "입력 이미지의 adversarial perturbation이 전처리 이후에도 보존되어 이미지 인코더에 도달하는가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G10"
+          }
+        },
+        {
+          "condition_id": "AC3",
+          "type": "AC",
+          "text": "생성된 visual embedding이 언어 디코더의 생성 결과에 직접 영향을 미치는 구조인가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "G10"
+          }
+        },
+        {
+          "condition_id": "DC1",
+          "type": "DC",
+          "text": "원본과 증강 이미지를 동일한 전처리·인코더에 입력할 \n수 있는가?\n - 이미지 증강: JPEG 압축, 가우시안 블러, 랜덤 아핀 변환, 색상 조정, 랜덤 원근 변환",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "H10"
+          }
+        },
+        {
+          "condition_id": "DC2",
+          "type": "DC",
+          "text": "동일 계층의 이미지 임베딩을 추출하고 서로 연결할 수 있는가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "H10"
+          }
+        },
+        {
+          "condition_id": "DC3",
+          "type": "DC",
+          "text": "코사인 유사도를 계산하고 모델별 정상 기준선·threshold와 비교할 수 있는가?",
+          "source": {
+            "sheet": "AI 포렌식",
+            "cell": "H10"
+          }
+        }
+      ],
+      "historical_source_mapping": {
+        "llamacpp": {
+          "engine": "llama.cpp",
+          "sheet": "AI 포렌식",
+          "cell": "I10",
+          "text": "AC1. tools/mtmd/mtmd.cpp:1558 (mtmd_encode_impl), tools/mtmd/mtmd-helper.cpp320 (mtmd_helper_decode_image_chunk).\nAC2. tools/mtmd/mtmd.cpp:1129 (add_media), tools/mtmd/mtmd.cpp:1539 (mtmd_encode_impl)\nAC3. tools/mtmd/mtmd-helper.cpp:320 (mtmd_helper_decode_image_chunk)\n\nDC1. tools/mtmd/mtmd.cpp:1539 (mtmd_encode_impl)\nDC2. tools/mtmd/mtmd.cpp:1558 (mtmd_encode_impl)\nDC3. tools/mtmd/mtmd.cpp:1558 (mtmd_encode_impl)",
+          "status": "historical_unversioned_reference"
+        },
+        "mlc-llm": {
+          "engine": "mlc-llm",
+          "sheet": "AI 포렌식",
+          "cell": "J10",
+          "text": "AC1. python/mlc_llm/model/phi3v/phi3v_model.py:375 (image_embed), python/mlc_llm/model/phi3v/phi3v_model.py:245 (prefill)\nAC2. python/mlc_llm/model/phi3v/phi3v_model.py:346 (image_preprocess),  python/mlc_llm/model/phi3v/phi3v_model.py:373 (image_embed).\nAC3. python/mlc_llm/model/phi3v/phi3v_model.py:245 (prefill)\n\nDC1. python/mlc_llm/model/phi3v/phi3v_model.py:373 (image_embed)\nDC2. python/mlc_llm/model/phi3v/phi3v_model.py:375 (image_embed)\nDC3. python/mlc_llm/model/phi3v/phi3v_model.py:373 (image_embed)",
+          "status": "historical_unversioned_reference"
+        },
+        "vllm": {
+          "engine": "vllm",
+          "sheet": "AI 포렌식",
+          "cell": "K10",
+          "text": "AC1. vllm/model_executor/models/idefics3.py:648 (_process_image_input), vllm/model_executor/models/utils.py:676 (_merge_multimodal_embaddings).\nAC2. vllm/model_executor/models/idefics3.py:296 (_call_hf_processor), vllm/model_executor/models/idefics3.py:497 (image_pixels_to_features).\nAC3. vllm/model_executor/models/utils.py:676 (_merge_multimodal_embeddings).\n\nDC1. vllm/model_executor/models/idefics3.py:497 (image_pixels_to_features)\nDC2. vllm/model_executor/models/idefics3.py:648 (_process_image_input)\nDC3. vllm/model_executor/models/idefics3.py:648 (_process_image_input)",
+          "status": "historical_unversioned_reference"
+        },
+        "tensorRT-llm": {
+          "engine": "TensorRT-LLM",
+          "sheet": "AI 포렌식",
+          "cell": "L10",
+          "text": "AC1. tensorrt_llm/_torch/models/modeling_qwen2vl.py:1134 (forward), tensorrt_llm/_torch/models/modeling_multimodal_utils.py:604 (fuse_input_embeds)\nAC2. tensorrt_llm/_torch/models/modeling_qwen2vl.py:920 (call_with_text_prompt), tensorrt_llm/_torch/models/modeling_qwen2vl.py:1125 (forward)\nAC3. tensorrt_llm/_torch/models/modeling_multimodal_utils.py:604 (fuse_input_embeds)\n\nDC1. tensorrt_llm/_torch/models/modeling_qwen2vl.py:1153 (forward)\nDC2. tensorrt_llm/_torch/models/modeling_qwen2vl.py:1171 (forward)\nDC3. tensorrt_llm/_torch/models/modeling_qwen2vl.py:1171 (forward)",
+          "status": "historical_unversioned_reference"
+        },
+        "SGLang": {
+          "engine": "sglang",
+          "sheet": "AI 포렌식",
+          "cell": "M10",
+          "text": "AC1. python/sglang/srt/models/transformers.py:1476 (_encode_modality_items), python/sglang/srt/models/transformers.py:1574 (_forward_hidden_states)\nAC2. python/sglang/srt/multimodal/processors/transformers_auto.py:173 (process_mm_data_async), python/sglang/srt/models/transformers.py:1462 (_encode_modality_items)\nAC3. python/sglang/srt/models/transformers.py:1574 (_forward_hidden_states)\n\nDC1. python/sglang/srt/models/transformers.py:1463 (_encode_modality_items)\nDC2. python/sglang/srt/models/transformers.py:1488 (_encode_modality_items)\nDC3. python/sglang/srt/models/transformers.py:1488 (_encode_modality_items).",
+          "status": "historical_unversioned_reference"
+        }
+      }
+    }
+  ]
+}

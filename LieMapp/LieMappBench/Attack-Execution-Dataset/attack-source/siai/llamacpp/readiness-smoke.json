@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "siai",
+  "purpose": "Native instrumentation smoke test only; not an adversarial example or attack success result",
+  "upstream_commit": "ddc8a60efd1b87cb4eab44b11225cd8a296295cd",
+  "cases": [
+    {
+      "input_id": "smoke-clean-01",
+      "role": "clean",
+      "pair_id": "smoke-clean-01",
+      "parent_id": null,
+      "transform": "original",
+      "seed": 20260906,
+      "path": "../shared/upstream/clean_images/1.png",
+      "input_sha256": "0ec3ddffc254c93dced75572a2f9f84f96ecd7ebc7a84ff55d240b6687487ec2"
+    }
+  ]
+}

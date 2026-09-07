@@ -1,0 +1,1800 @@
+{
+  "model_id": "mlc-ai/Phi-3.5-vision-instruct-q4f32_1-MLC",
+  "revision": "2d7104ab34b358b4223aabca1d08e451c6b12728",
+  "files": [
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/.gitattributes",
+      "filename": ".gitattributes",
+      "bytes": 1519,
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "official_file_metadata": {
+        "rfilename": ".gitattributes",
+        "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+        "size": 1519
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/README.md",
+      "filename": "README.md",
+      "bytes": 1846,
+      "sha256": "5a2ce03acb64281687ea5ab4a22748b60e5eb4a466745cc4e84e096050615d57",
+      "official_file_metadata": {
+        "rfilename": "README.md",
+        "blobId": "e444d24842168f6d20ebf267e3f678cd2d53a154",
+        "size": 1846
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/mlc-chat-config.json",
+      "filename": "mlc-chat-config.json",
+      "bytes": 5288,
+      "sha256": "6fc9bb8a906f37d3dcad6a2f3b2a84d2dceac50a32325d9821065f7140b91f0a",
+      "official_file_metadata": {
+        "rfilename": "mlc-chat-config.json",
+        "blobId": "f204012b39694008fb172b1d774811ad5829efa6",
+        "size": 5288
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/ndarray-cache-b16.json",
+      "filename": "ndarray-cache-b16.json",
+      "bytes": 305301,
+      "sha256": "aac64d8f71a62524a441ada5e194e45ba0df7ca86c76b93260b176e368015872",
+      "official_file_metadata": {
+        "rfilename": "ndarray-cache-b16.json",
+        "blobId": "0c7c14ae7e3e78580e4f49c0b78b660f9d09ed1f",
+        "size": 305301
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/ndarray-cache.json",
+      "filename": "ndarray-cache.json",
+      "bytes": 309445,
+      "sha256": "f87631978c2f9b1d62f9caf126ad177058a29fd1f700aa2dadb8e62e1aeeeca1",
+      "official_file_metadata": {
+        "rfilename": "ndarray-cache.json",
+        "blobId": "cdf8332c9207d77d3165d0aefa5da803ebd2f975",
+        "size": 309445
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_0.bin",
+      "filename": "params_shard_0.bin",
+      "bytes": 49250304,
+      "sha256": "e42e43a7a6aefa3354805ad3adb56608e8d47fd28135ce757f002a7d4556427f",
+      "official_file_metadata": {
+        "rfilename": "params_shard_0.bin",
+        "blobId": "07f4b6e38e655aea0f92b9e2a5b377f687b20f79",
+        "size": 49250304,
+        "lfs": {
+          "sha256": "e42e43a7a6aefa3354805ad3adb56608e8d47fd28135ce757f002a7d4556427f",
+          "size": 49250304,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_1.bin",
+      "filename": "params_shard_1.bin",
+      "bytes": 25165824,
+      "sha256": "813468c8693ba31c2ba4c45c080c547700e6287b630b5fc958c53903c5e1fe62",
+      "official_file_metadata": {
+        "rfilename": "params_shard_1.bin",
+        "blobId": "aac5d1a58f80c2a3be33401103eb9e66c474a33e",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "813468c8693ba31c2ba4c45c080c547700e6287b630b5fc958c53903c5e1fe62",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_10.bin",
+      "filename": "params_shard_10.bin",
+      "bytes": 21239808,
+      "sha256": "4c7c58f56b115df19d245947f70b8fd4d18d4c1cecdfd83cc008be8c3dc91eba",
+      "official_file_metadata": {
+        "rfilename": "params_shard_10.bin",
+        "blobId": "48e79b254dfb1ce16c46fdaee8aa46ffbbea8ebc",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "4c7c58f56b115df19d245947f70b8fd4d18d4c1cecdfd83cc008be8c3dc91eba",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_100.bin",
+      "filename": "params_shard_100.bin",
+      "bytes": 25192448,
+      "sha256": "0d62a08d3c12929016ea4711f2d19a7a84de05f9af9de840083b1fd927751ed5",
+      "official_file_metadata": {
+        "rfilename": "params_shard_100.bin",
+        "blobId": "81056e09462a874b2ff381fb8d1dc83306a14630",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "0d62a08d3c12929016ea4711f2d19a7a84de05f9af9de840083b1fd927751ed5",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_101.bin",
+      "filename": "params_shard_101.bin",
+      "bytes": 25192448,
+      "sha256": "fc9b6d4aaa6c7319cce35e6a22f12081553c415a1ac995a6619f876ef8d7d974",
+      "official_file_metadata": {
+        "rfilename": "params_shard_101.bin",
+        "blobId": "e1171b3412e0e331580f647273d7d1496d2fd74b",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "fc9b6d4aaa6c7319cce35e6a22f12081553c415a1ac995a6619f876ef8d7d974",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_102.bin",
+      "filename": "params_shard_102.bin",
+      "bytes": 25192448,
+      "sha256": "dfcc8bdbbf82477ffd31558f421d6be23b99342388882ad0f46b50798ededffa",
+      "official_file_metadata": {
+        "rfilename": "params_shard_102.bin",
+        "blobId": "ed4bd8957dc62b346e2d96b0f19ac9d5d0479084",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "dfcc8bdbbf82477ffd31558f421d6be23b99342388882ad0f46b50798ededffa",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_103.bin",
+      "filename": "params_shard_103.bin",
+      "bytes": 25192448,
+      "sha256": "c2796ef76e33a46f3af4e5e7f40e5d6138fb67ed03c8fef716fcdd682720135c",
+      "official_file_metadata": {
+        "rfilename": "params_shard_103.bin",
+        "blobId": "834a08be84eef00dab874ce8f51b39607d27e88f",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "c2796ef76e33a46f3af4e5e7f40e5d6138fb67ed03c8fef716fcdd682720135c",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_104.bin",
+      "filename": "params_shard_104.bin",
+      "bytes": 25192448,
+      "sha256": "ffd7cdb8b9fa65b92858d9b109771c1ed07b87e76103ae2838678d0cd44409d1",
+      "official_file_metadata": {
+        "rfilename": "params_shard_104.bin",
+        "blobId": "314345700365c2590725425b6a1cff8dcebe2f0c",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "ffd7cdb8b9fa65b92858d9b109771c1ed07b87e76103ae2838678d0cd44409d1",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_105.bin",
+      "filename": "params_shard_105.bin",
+      "bytes": 29200384,
+      "sha256": "19d16c4797c7550700c8ba8e9cd3532d53fa92b4f9c3a3eb3eb2d4a729f297c3",
+      "official_file_metadata": {
+        "rfilename": "params_shard_105.bin",
+        "blobId": "2e2d9ad6488ae13ff3ea41f5074641ffcd45b677",
+        "size": 29200384,
+        "lfs": {
+          "sha256": "19d16c4797c7550700c8ba8e9cd3532d53fa92b4f9c3a3eb3eb2d4a729f297c3",
+          "size": 29200384,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_11.bin",
+      "filename": "params_shard_11.bin",
+      "bytes": 25165824,
+      "sha256": "5746af2739ac5296bc1ffb1f33feba3aac8d449e874addd98b9816757dc32737",
+      "official_file_metadata": {
+        "rfilename": "params_shard_11.bin",
+        "blobId": "923316fefb58dadf884d1a9cf793ea7d7fbbd00d",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "5746af2739ac5296bc1ffb1f33feba3aac8d449e874addd98b9816757dc32737",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_12.bin",
+      "filename": "params_shard_12.bin",
+      "bytes": 22616064,
+      "sha256": "99da4d06c23d14123626c772875d1f31694de2e79eab86ef12fa10f14cefde08",
+      "official_file_metadata": {
+        "rfilename": "params_shard_12.bin",
+        "blobId": "ba0784f0fdf7163a3e6ad22e12a193c043761e1b",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "99da4d06c23d14123626c772875d1f31694de2e79eab86ef12fa10f14cefde08",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_13.bin",
+      "filename": "params_shard_13.bin",
+      "bytes": 25165824,
+      "sha256": "5fddd9272ba366037f751012dbdb14f437cf4f567ed07b39f038a591c561a33f",
+      "official_file_metadata": {
+        "rfilename": "params_shard_13.bin",
+        "blobId": "8af410232890f2e2a2713d1f2b0acc97722607c9",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "5fddd9272ba366037f751012dbdb14f437cf4f567ed07b39f038a591c561a33f",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_14.bin",
+      "filename": "params_shard_14.bin",
+      "bytes": 33239040,
+      "sha256": "a423c5403c511bc60ae8e865b0e5ea3041523252ee0a04d51f4e2ed909ff0e10",
+      "official_file_metadata": {
+        "rfilename": "params_shard_14.bin",
+        "blobId": "8f0d6fe77a92fe689cfbf9ffcdbac1331fbe34bf",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "a423c5403c511bc60ae8e865b0e5ea3041523252ee0a04d51f4e2ed909ff0e10",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_15.bin",
+      "filename": "params_shard_15.bin",
+      "bytes": 21239808,
+      "sha256": "fc80245dbfe17ff6cadd58f5ade23e7bc96edfdfd882393ffb358cc441cfb72c",
+      "official_file_metadata": {
+        "rfilename": "params_shard_15.bin",
+        "blobId": "a46abcee4477eec77a0f478448bed7612f821fbd",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "fc80245dbfe17ff6cadd58f5ade23e7bc96edfdfd882393ffb358cc441cfb72c",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_16.bin",
+      "filename": "params_shard_16.bin",
+      "bytes": 25165824,
+      "sha256": "a73d6cf93ecb4c18b50e367346fcd5436a9bda8fb535a0cb671773afafd8d47d",
+      "official_file_metadata": {
+        "rfilename": "params_shard_16.bin",
+        "blobId": "3e8bfba3020c8b3c4d0fa6e880632a1309d9b678",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "a73d6cf93ecb4c18b50e367346fcd5436a9bda8fb535a0cb671773afafd8d47d",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_17.bin",
+      "filename": "params_shard_17.bin",
+      "bytes": 22616064,
+      "sha256": "a302e25dcc814bcaa5b702d2ecb9d1f2e32f47d760d3cfd0e436c7997b8888d8",
+      "official_file_metadata": {
+        "rfilename": "params_shard_17.bin",
+        "blobId": "ba41758dcb88ff75a529e983134f81eb041efbc8",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "a302e25dcc814bcaa5b702d2ecb9d1f2e32f47d760d3cfd0e436c7997b8888d8",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_18.bin",
+      "filename": "params_shard_18.bin",
+      "bytes": 25165824,
+      "sha256": "67edf9d32356dda7160c9ef680158f3f6d619adf2cfa3e3bab5fb2333f1c649c",
+      "official_file_metadata": {
+        "rfilename": "params_shard_18.bin",
+        "blobId": "9e77b5c7f5c9127aca6f79f7cfa4b005ec748ea3",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "67edf9d32356dda7160c9ef680158f3f6d619adf2cfa3e3bab5fb2333f1c649c",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_19.bin",
+      "filename": "params_shard_19.bin",
+      "bytes": 33239040,
+      "sha256": "c0b485abd83a784ac1f99369765b3c6533104df8f0d3f08cff331ba1765b8353",
+      "official_file_metadata": {
+        "rfilename": "params_shard_19.bin",
+        "blobId": "7b824842ffb7d9813ea21471ca6e30044f7c3832",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "c0b485abd83a784ac1f99369765b3c6533104df8f0d3f08cff331ba1765b8353",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_2.bin",
+      "filename": "params_shard_2.bin",
+      "bytes": 23470080,
+      "sha256": "948b642a177f7d342c9754fa80076aa0d8b332448e25417d449ed3d78e0f784a",
+      "official_file_metadata": {
+        "rfilename": "params_shard_2.bin",
+        "blobId": "3e8eff547702147f0ba0f3bf785afb0c91f854d2",
+        "size": 23470080,
+        "lfs": {
+          "sha256": "948b642a177f7d342c9754fa80076aa0d8b332448e25417d449ed3d78e0f784a",
+          "size": 23470080,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_20.bin",
+      "filename": "params_shard_20.bin",
+      "bytes": 21239808,
+      "sha256": "e36a59ad9eb7c1960e798961c1b815ad81d3a51ac3a29284514f3fc51b72db17",
+      "official_file_metadata": {
+        "rfilename": "params_shard_20.bin",
+        "blobId": "c1fd2ad4eb4c5259f25a151305ad89097963769c",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "e36a59ad9eb7c1960e798961c1b815ad81d3a51ac3a29284514f3fc51b72db17",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_21.bin",
+      "filename": "params_shard_21.bin",
+      "bytes": 25165824,
+      "sha256": "7e036cf782384950dde2078289f00200ab1a028c9f153efdaa21fbeb6fd9ad96",
+      "official_file_metadata": {
+        "rfilename": "params_shard_21.bin",
+        "blobId": "83429b06266caae2c2ffdc17e485a8fd1b3a5282",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "7e036cf782384950dde2078289f00200ab1a028c9f153efdaa21fbeb6fd9ad96",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_22.bin",
+      "filename": "params_shard_22.bin",
+      "bytes": 22616064,
+      "sha256": "1d075a7f3953baad1b3087b230b4fac1140753e91304f815a6dd5caecbdde2e7",
+      "official_file_metadata": {
+        "rfilename": "params_shard_22.bin",
+        "blobId": "77ac81f14be806be68ec9b742b69c0a39d5a6847",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "1d075a7f3953baad1b3087b230b4fac1140753e91304f815a6dd5caecbdde2e7",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_23.bin",
+      "filename": "params_shard_23.bin",
+      "bytes": 25165824,
+      "sha256": "093c187c6499996c6b9a14fc6b489be0c2cb28f22168b3805410a7fb4de25bf8",
+      "official_file_metadata": {
+        "rfilename": "params_shard_23.bin",
+        "blobId": "6dfc26da39984b4445dd4e7f291a315b68938322",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "093c187c6499996c6b9a14fc6b489be0c2cb28f22168b3805410a7fb4de25bf8",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_24.bin",
+      "filename": "params_shard_24.bin",
+      "bytes": 33239040,
+      "sha256": "400d527dbf4bdc022345fffd1ae7ae2445d835b374b722c5e9285724cfa92138",
+      "official_file_metadata": {
+        "rfilename": "params_shard_24.bin",
+        "blobId": "a98f4828a6b9ecdf29a90abce7689e9d1267ce19",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "400d527dbf4bdc022345fffd1ae7ae2445d835b374b722c5e9285724cfa92138",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_25.bin",
+      "filename": "params_shard_25.bin",
+      "bytes": 21239808,
+      "sha256": "0f32acd971e9b498087bc76c4441258f8e2bf7e5b6c3ac37c54626674665a278",
+      "official_file_metadata": {
+        "rfilename": "params_shard_25.bin",
+        "blobId": "0e7610e378f3f5c834cad22142171b7695bf36bb",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "0f32acd971e9b498087bc76c4441258f8e2bf7e5b6c3ac37c54626674665a278",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_26.bin",
+      "filename": "params_shard_26.bin",
+      "bytes": 25165824,
+      "sha256": "5d26dbb109296da5e2cc7f5d30e7859bd663aa2fa2a9c0e8ce7fb187232aa8d2",
+      "official_file_metadata": {
+        "rfilename": "params_shard_26.bin",
+        "blobId": "aed3a86cc5ed8dc0032add4e387a21ac952ae46a",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "5d26dbb109296da5e2cc7f5d30e7859bd663aa2fa2a9c0e8ce7fb187232aa8d2",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_27.bin",
+      "filename": "params_shard_27.bin",
+      "bytes": 22616064,
+      "sha256": "00c1e89f6cb6aba09c3bdfe68fb853290f56f25a50257b569fea0f67fa825eb8",
+      "official_file_metadata": {
+        "rfilename": "params_shard_27.bin",
+        "blobId": "c28d942ceb3b52133cff858320d2906bee3eca53",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "00c1e89f6cb6aba09c3bdfe68fb853290f56f25a50257b569fea0f67fa825eb8",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_28.bin",
+      "filename": "params_shard_28.bin",
+      "bytes": 25165824,
+      "sha256": "e2fd02870be6ea545317347397ea7560065ad03e7d3cd613dd5e6cabd3a1a750",
+      "official_file_metadata": {
+        "rfilename": "params_shard_28.bin",
+        "blobId": "28e52d03f923c8d57445fcd3eead6f98222dd545",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "e2fd02870be6ea545317347397ea7560065ad03e7d3cd613dd5e6cabd3a1a750",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_29.bin",
+      "filename": "params_shard_29.bin",
+      "bytes": 33239040,
+      "sha256": "69080dc89826ea514aa11fdac496aa90619ae0b630b1e7d174674cf048ef9d34",
+      "official_file_metadata": {
+        "rfilename": "params_shard_29.bin",
+        "blobId": "1caf9663ceb7a7bc0688cc406c0030013bb6c934",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "69080dc89826ea514aa11fdac496aa90619ae0b630b1e7d174674cf048ef9d34",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_3.bin",
+      "filename": "params_shard_3.bin",
+      "bytes": 25165824,
+      "sha256": "e0a902cb3e816840675bdd743ac894aedfd60864cd1158a69f58c3be620b1a41",
+      "official_file_metadata": {
+        "rfilename": "params_shard_3.bin",
+        "blobId": "d050724785d8491233090c80f0ee07fda20f7508",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "e0a902cb3e816840675bdd743ac894aedfd60864cd1158a69f58c3be620b1a41",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_30.bin",
+      "filename": "params_shard_30.bin",
+      "bytes": 21239808,
+      "sha256": "ee8867c7ab5db8139752c3cae1a9928277f6c9739bb292392f96542481d569b5",
+      "official_file_metadata": {
+        "rfilename": "params_shard_30.bin",
+        "blobId": "006010fdb21af1f98192ed74b5db7ed2869ac281",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "ee8867c7ab5db8139752c3cae1a9928277f6c9739bb292392f96542481d569b5",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_31.bin",
+      "filename": "params_shard_31.bin",
+      "bytes": 25165824,
+      "sha256": "23a689b5e640ac84c259edcb5e7b327e58dae09b4850b9a43f81d823f4cc2c27",
+      "official_file_metadata": {
+        "rfilename": "params_shard_31.bin",
+        "blobId": "f982970b8658b1959d4a9a9ce1347ead6152aea7",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "23a689b5e640ac84c259edcb5e7b327e58dae09b4850b9a43f81d823f4cc2c27",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_32.bin",
+      "filename": "params_shard_32.bin",
+      "bytes": 22616064,
+      "sha256": "03616859c83070ec6983f825d8f45bdb1d635a6157053aca413c81261152f186",
+      "official_file_metadata": {
+        "rfilename": "params_shard_32.bin",
+        "blobId": "af97ebacd76fb99fe94b29b78d4b2b6acf2b201d",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "03616859c83070ec6983f825d8f45bdb1d635a6157053aca413c81261152f186",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_33.bin",
+      "filename": "params_shard_33.bin",
+      "bytes": 25165824,
+      "sha256": "4334288f6ca102445f52b4510b3ae202f144e6f41583945c1b86cb8d0a51b46f",
+      "official_file_metadata": {
+        "rfilename": "params_shard_33.bin",
+        "blobId": "7731edeeee8240e66d5e45d9d79a1ebce5df2278",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "4334288f6ca102445f52b4510b3ae202f144e6f41583945c1b86cb8d0a51b46f",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_34.bin",
+      "filename": "params_shard_34.bin",
+      "bytes": 33239040,
+      "sha256": "31ca2777997afd2d131a7633754c91cef973aa3190389312da4280dbe53f6aa1",
+      "official_file_metadata": {
+        "rfilename": "params_shard_34.bin",
+        "blobId": "3ddabc1c080e08fb0d01d7915e003b435bfe6293",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "31ca2777997afd2d131a7633754c91cef973aa3190389312da4280dbe53f6aa1",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_35.bin",
+      "filename": "params_shard_35.bin",
+      "bytes": 49250304,
+      "sha256": "21fb739faf6d29a3e9e25bdfad89c05d53a0177d4cf7d68d51ff243417613ff3",
+      "official_file_metadata": {
+        "rfilename": "params_shard_35.bin",
+        "blobId": "992bc7cdf23b3aef13ec62ae45a3695b308524c7",
+        "size": 49250304,
+        "lfs": {
+          "sha256": "21fb739faf6d29a3e9e25bdfad89c05d53a0177d4cf7d68d51ff243417613ff3",
+          "size": 49250304,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_36.bin",
+      "filename": "params_shard_36.bin",
+      "bytes": 27402240,
+      "sha256": "291e2a8fcaec61a4cbcd3118ab5fbc28a9275bc4401fff05532393cd97163f55",
+      "official_file_metadata": {
+        "rfilename": "params_shard_36.bin",
+        "blobId": "e4375dc86e4669056e7b8524a03394d345c4d1d1",
+        "size": 27402240,
+        "lfs": {
+          "sha256": "291e2a8fcaec61a4cbcd3118ab5fbc28a9275bc4401fff05532393cd97163f55",
+          "size": 27402240,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_37.bin",
+      "filename": "params_shard_37.bin",
+      "bytes": 25165824,
+      "sha256": "d61a2143dd55fc922b47db902ff37bb5b5429e80bea34b005a6e037351b53052",
+      "official_file_metadata": {
+        "rfilename": "params_shard_37.bin",
+        "blobId": "ccfbed082e60860f0491a340e9705dd1a6592dcb",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "d61a2143dd55fc922b47db902ff37bb5b5429e80bea34b005a6e037351b53052",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_38.bin",
+      "filename": "params_shard_38.bin",
+      "bytes": 22616064,
+      "sha256": "684e035301d69a0e36c7474269d507f93b79acb77cb49b4d414a115c7ffd2d63",
+      "official_file_metadata": {
+        "rfilename": "params_shard_38.bin",
+        "blobId": "54d43acdbbb80e132a6f4b5660a4f7b1c98c3cab",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "684e035301d69a0e36c7474269d507f93b79acb77cb49b4d414a115c7ffd2d63",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_39.bin",
+      "filename": "params_shard_39.bin",
+      "bytes": 25165824,
+      "sha256": "9126570fcd640ac2b9eefcc0017b4bdc51cfd3de62176f4b4f0ae446eea4ebc5",
+      "official_file_metadata": {
+        "rfilename": "params_shard_39.bin",
+        "blobId": "7b534109c9bb1c07fe85dce41ce9369170243988",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "9126570fcd640ac2b9eefcc0017b4bdc51cfd3de62176f4b4f0ae446eea4ebc5",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_4.bin",
+      "filename": "params_shard_4.bin",
+      "bytes": 33239040,
+      "sha256": "b42858a2e1db1a48d0bac8e8af713784a2dc9ff079988c1f9bbae206efe098f2",
+      "official_file_metadata": {
+        "rfilename": "params_shard_4.bin",
+        "blobId": "acd3e4cfcadba3680e14861da58b20b6b1de0306",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "b42858a2e1db1a48d0bac8e8af713784a2dc9ff079988c1f9bbae206efe098f2",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_40.bin",
+      "filename": "params_shard_40.bin",
+      "bytes": 33239040,
+      "sha256": "e08bd68a40d363ce92fc035ee6a3cfd7fd51539ec10c8026067f31d9e73d606e",
+      "official_file_metadata": {
+        "rfilename": "params_shard_40.bin",
+        "blobId": "99e05cce29e83f884e58a77c6a7a15bd66a8d239",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "e08bd68a40d363ce92fc035ee6a3cfd7fd51539ec10c8026067f31d9e73d606e",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_41.bin",
+      "filename": "params_shard_41.bin",
+      "bytes": 21239808,
+      "sha256": "ef15a7c46c76880a9817308375c6d3f01e589fb2d8d5dc52900218999ee67bf9",
+      "official_file_metadata": {
+        "rfilename": "params_shard_41.bin",
+        "blobId": "17499035f8537dbff1fd1d9e13f1bddfe797700b",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "ef15a7c46c76880a9817308375c6d3f01e589fb2d8d5dc52900218999ee67bf9",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_42.bin",
+      "filename": "params_shard_42.bin",
+      "bytes": 25165824,
+      "sha256": "ce46bf5b5686062a087a20323286686331189cc35456fc2eb8ee3e267f84fe5a",
+      "official_file_metadata": {
+        "rfilename": "params_shard_42.bin",
+        "blobId": "eaf0852726c68d539c7eb76e09d425847af25dd9",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "ce46bf5b5686062a087a20323286686331189cc35456fc2eb8ee3e267f84fe5a",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_43.bin",
+      "filename": "params_shard_43.bin",
+      "bytes": 22616064,
+      "sha256": "e74904bf3d0b59e3450c22a5acace27264ae5bef2e34fc0b3a1a67c4b6227914",
+      "official_file_metadata": {
+        "rfilename": "params_shard_43.bin",
+        "blobId": "f500a3f008d9b436f2bc5ee4c981407bcb461892",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "e74904bf3d0b59e3450c22a5acace27264ae5bef2e34fc0b3a1a67c4b6227914",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_44.bin",
+      "filename": "params_shard_44.bin",
+      "bytes": 25165824,
+      "sha256": "29793886e95014692834f4599f6d0255413425308d5bfb95fd4709376d2ed5d7",
+      "official_file_metadata": {
+        "rfilename": "params_shard_44.bin",
+        "blobId": "9fe046a38a16aaf996329906de9e186c24d5366c",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "29793886e95014692834f4599f6d0255413425308d5bfb95fd4709376d2ed5d7",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_45.bin",
+      "filename": "params_shard_45.bin",
+      "bytes": 33239040,
+      "sha256": "e28b90ae75159962e5f281f7996a1284682962fd100d10e2c61bcd2639c55f4b",
+      "official_file_metadata": {
+        "rfilename": "params_shard_45.bin",
+        "blobId": "83005874a9de0c78ad0f21b6a651eb381e284c1c",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "e28b90ae75159962e5f281f7996a1284682962fd100d10e2c61bcd2639c55f4b",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_46.bin",
+      "filename": "params_shard_46.bin",
+      "bytes": 21239808,
+      "sha256": "bd3af6238df71b3011bca28f163b37183b88b72df06de1fbf023bb442e5362e7",
+      "official_file_metadata": {
+        "rfilename": "params_shard_46.bin",
+        "blobId": "5b3a5b19003cba3911b6ca608260ae33d2137559",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "bd3af6238df71b3011bca28f163b37183b88b72df06de1fbf023bb442e5362e7",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_47.bin",
+      "filename": "params_shard_47.bin",
+      "bytes": 25165824,
+      "sha256": "c9973b5401a7aaf7843b6fc1cc559abac2881a1eb0ec90611d2e7e4de13cfc56",
+      "official_file_metadata": {
+        "rfilename": "params_shard_47.bin",
+        "blobId": "f349462f4d5be4ac33497cdc039729b32c29a47f",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "c9973b5401a7aaf7843b6fc1cc559abac2881a1eb0ec90611d2e7e4de13cfc56",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_48.bin",
+      "filename": "params_shard_48.bin",
+      "bytes": 22616064,
+      "sha256": "6c6c450d2f735093660b5666b7d9e155aa86f21e7c8ab3dad32df7f89a7d81d9",
+      "official_file_metadata": {
+        "rfilename": "params_shard_48.bin",
+        "blobId": "0bf201337fc537e45870df7119a6101468228765",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "6c6c450d2f735093660b5666b7d9e155aa86f21e7c8ab3dad32df7f89a7d81d9",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_49.bin",
+      "filename": "params_shard_49.bin",
+      "bytes": 25165824,
+      "sha256": "570b3f17cbf546524146b2da43e54f4bb8f2d99dfd74ec6ea5cdfbe1c5c3d01b",
+      "official_file_metadata": {
+        "rfilename": "params_shard_49.bin",
+        "blobId": "55299369b8a91aca64f7a5923bb576bc36226a3a",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "570b3f17cbf546524146b2da43e54f4bb8f2d99dfd74ec6ea5cdfbe1c5c3d01b",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_5.bin",
+      "filename": "params_shard_5.bin",
+      "bytes": 21239808,
+      "sha256": "29e1b3bedced18aac0740c5798e5c12a23d127fbf1983b21ecd53c63163a97c4",
+      "official_file_metadata": {
+        "rfilename": "params_shard_5.bin",
+        "blobId": "952e8fd62e288410509e4a68bedc7603ea634d7f",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "29e1b3bedced18aac0740c5798e5c12a23d127fbf1983b21ecd53c63163a97c4",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_50.bin",
+      "filename": "params_shard_50.bin",
+      "bytes": 33239040,
+      "sha256": "cb3ac676867c1ca95514c2ff9627616627a76ac00d55f0f2429b73524198e40f",
+      "official_file_metadata": {
+        "rfilename": "params_shard_50.bin",
+        "blobId": "090b027d8b97e469f46be90a5201949156fb0e0d",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "cb3ac676867c1ca95514c2ff9627616627a76ac00d55f0f2429b73524198e40f",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_51.bin",
+      "filename": "params_shard_51.bin",
+      "bytes": 21239808,
+      "sha256": "e4df238976bb596548e62815cf7c8f9361fb5450331988cce7d9ab1552622dab",
+      "official_file_metadata": {
+        "rfilename": "params_shard_51.bin",
+        "blobId": "0d2a1544a20dfc58e57f9fa668c0d24f39761219",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "e4df238976bb596548e62815cf7c8f9361fb5450331988cce7d9ab1552622dab",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_52.bin",
+      "filename": "params_shard_52.bin",
+      "bytes": 25165824,
+      "sha256": "6e32194d4827da65155b21ae37abe084204e6ea208cae09cd2740850ffe3166f",
+      "official_file_metadata": {
+        "rfilename": "params_shard_52.bin",
+        "blobId": "3e2c1dfe462cf673b77c2c1f45f77f650818fdd4",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "6e32194d4827da65155b21ae37abe084204e6ea208cae09cd2740850ffe3166f",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_53.bin",
+      "filename": "params_shard_53.bin",
+      "bytes": 22616064,
+      "sha256": "497f5f93b1e9e2af24c0665d64fca978ef58349ff3db3679ca33b136f72a5f02",
+      "official_file_metadata": {
+        "rfilename": "params_shard_53.bin",
+        "blobId": "00672df82b3d6bbdbedbba85c5c84f7ba8c5158f",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "497f5f93b1e9e2af24c0665d64fca978ef58349ff3db3679ca33b136f72a5f02",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_54.bin",
+      "filename": "params_shard_54.bin",
+      "bytes": 25165824,
+      "sha256": "410558aa52af10a1e0277b48f72b7aece1cbe430fa7ad9f18023538d8a7ee3e0",
+      "official_file_metadata": {
+        "rfilename": "params_shard_54.bin",
+        "blobId": "94dd547cdd13ed0a70a21e0eb6f67984167c4a4e",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "410558aa52af10a1e0277b48f72b7aece1cbe430fa7ad9f18023538d8a7ee3e0",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_55.bin",
+      "filename": "params_shard_55.bin",
+      "bytes": 33239040,
+      "sha256": "0cc6e7ef9a0b7814e1e9dde18ae351a8c819af3c3d1e6c65f869d2e94d1ad584",
+      "official_file_metadata": {
+        "rfilename": "params_shard_55.bin",
+        "blobId": "406d77ee49750e7f1e8cdede2a712862eee4cec7",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "0cc6e7ef9a0b7814e1e9dde18ae351a8c819af3c3d1e6c65f869d2e94d1ad584",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_56.bin",
+      "filename": "params_shard_56.bin",
+      "bytes": 21239808,
+      "sha256": "ed85db746993b9000449c0af38ce0035ecc879e2d298ef189b48738b13b10ea4",
+      "official_file_metadata": {
+        "rfilename": "params_shard_56.bin",
+        "blobId": "84747b7900b2d37ff4837a33260b0bd0b38460f9",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "ed85db746993b9000449c0af38ce0035ecc879e2d298ef189b48738b13b10ea4",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_57.bin",
+      "filename": "params_shard_57.bin",
+      "bytes": 25165824,
+      "sha256": "915f3373dc92ecde6aa1f8479dada5b6ae9f849eba5e3cd527f1cd23d34b1e3d",
+      "official_file_metadata": {
+        "rfilename": "params_shard_57.bin",
+        "blobId": "757def3c0fd70e7e9d9dc99c48805238937feef3",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "915f3373dc92ecde6aa1f8479dada5b6ae9f849eba5e3cd527f1cd23d34b1e3d",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_58.bin",
+      "filename": "params_shard_58.bin",
+      "bytes": 22616064,
+      "sha256": "da3d5559ab3270a3d5cacbe19e95e8063cf6e0665493ed1ec961347aa3ce0fba",
+      "official_file_metadata": {
+        "rfilename": "params_shard_58.bin",
+        "blobId": "ad0eaadf2edbeb2ce464ba1855e666b539bd0f84",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "da3d5559ab3270a3d5cacbe19e95e8063cf6e0665493ed1ec961347aa3ce0fba",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_59.bin",
+      "filename": "params_shard_59.bin",
+      "bytes": 25165824,
+      "sha256": "d5f3f608c14a31261e67508989982aec9083190523e88cf8472a033e79948cf3",
+      "official_file_metadata": {
+        "rfilename": "params_shard_59.bin",
+        "blobId": "2252b20465e0fcd29dacf336e360a76486bf9a08",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "d5f3f608c14a31261e67508989982aec9083190523e88cf8472a033e79948cf3",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_6.bin",
+      "filename": "params_shard_6.bin",
+      "bytes": 25165824,
+      "sha256": "0b11bf41b8ec6c19d66e510176d25972b17d4f552c1794777001c4777ee43a17",
+      "official_file_metadata": {
+        "rfilename": "params_shard_6.bin",
+        "blobId": "93f768c1810f8a38e819c100d5d85d912d564f2b",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "0b11bf41b8ec6c19d66e510176d25972b17d4f552c1794777001c4777ee43a17",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_60.bin",
+      "filename": "params_shard_60.bin",
+      "bytes": 33239040,
+      "sha256": "d108461be3e4f26d116170a114fff6dc8663ec8f8dd14972c1ad51b983ea98bb",
+      "official_file_metadata": {
+        "rfilename": "params_shard_60.bin",
+        "blobId": "7304c0f223ea963afa60b031d08e1102d6ef2b56",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "d108461be3e4f26d116170a114fff6dc8663ec8f8dd14972c1ad51b983ea98bb",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_61.bin",
+      "filename": "params_shard_61.bin",
+      "bytes": 26548224,
+      "sha256": "c5273daaf6b869342943a1079cf0193ff134932baf75e27ae8b65b143d6b6876",
+      "official_file_metadata": {
+        "rfilename": "params_shard_61.bin",
+        "blobId": "721a3d8017bb1f58384172bbc96df8c90e924474",
+        "size": 26548224,
+        "lfs": {
+          "sha256": "c5273daaf6b869342943a1079cf0193ff134932baf75e27ae8b65b143d6b6876",
+          "size": 26548224,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_62.bin",
+      "filename": "params_shard_62.bin",
+      "bytes": 25165824,
+      "sha256": "02de448039f6748cf52da40b2e6ed511f9c7d58be4e2811b67b8ed2c1f338aa6",
+      "official_file_metadata": {
+        "rfilename": "params_shard_62.bin",
+        "blobId": "882e0a5f382117d69db0acaf46c1fc2f93142038",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "02de448039f6748cf52da40b2e6ed511f9c7d58be4e2811b67b8ed2c1f338aa6",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_63.bin",
+      "filename": "params_shard_63.bin",
+      "bytes": 22616064,
+      "sha256": "3db0cb36b5eada964c50b747a1b15a134fd03240c767664f845337784b29c45f",
+      "official_file_metadata": {
+        "rfilename": "params_shard_63.bin",
+        "blobId": "df638213e61d7254eb3718752f3896e98f6d957c",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "3db0cb36b5eada964c50b747a1b15a134fd03240c767664f845337784b29c45f",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_64.bin",
+      "filename": "params_shard_64.bin",
+      "bytes": 25165824,
+      "sha256": "f2fbd42b0a0539a657563526aaa5481efa14eb236dfded09cd9cd4a294206928",
+      "official_file_metadata": {
+        "rfilename": "params_shard_64.bin",
+        "blobId": "397c1330e6f0877cf3587840846475301c4c9576",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "f2fbd42b0a0539a657563526aaa5481efa14eb236dfded09cd9cd4a294206928",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_65.bin",
+      "filename": "params_shard_65.bin",
+      "bytes": 33239040,
+      "sha256": "5f0f70b4bfc0cb92b61aa2e273953f356b7a82cee527e97a499d8c70f2511593",
+      "official_file_metadata": {
+        "rfilename": "params_shard_65.bin",
+        "blobId": "f774201913910c64d17ee2354c9cbc366d8cef75",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "5f0f70b4bfc0cb92b61aa2e273953f356b7a82cee527e97a499d8c70f2511593",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_66.bin",
+      "filename": "params_shard_66.bin",
+      "bytes": 21239808,
+      "sha256": "1c30a821007f500252e8c49f05706231330f94bc2998802c13c991c9378dac83",
+      "official_file_metadata": {
+        "rfilename": "params_shard_66.bin",
+        "blobId": "80a7b8fe44da2884f716af3bfbcc9c2eac7194ac",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "1c30a821007f500252e8c49f05706231330f94bc2998802c13c991c9378dac83",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_67.bin",
+      "filename": "params_shard_67.bin",
+      "bytes": 25165824,
+      "sha256": "7f5ea707b1287cb588f92f565ff365c753489704de827be7b64abb0799c7ddc9",
+      "official_file_metadata": {
+        "rfilename": "params_shard_67.bin",
+        "blobId": "d09e2c3c0b95803201410670205ef743776b42b7",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "7f5ea707b1287cb588f92f565ff365c753489704de827be7b64abb0799c7ddc9",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_68.bin",
+      "filename": "params_shard_68.bin",
+      "bytes": 22616064,
+      "sha256": "3f2b4dd71c48c62eb8b985e0234692d074d234c51a64be363103b3632d3dd022",
+      "official_file_metadata": {
+        "rfilename": "params_shard_68.bin",
+        "blobId": "1a06eef034f283b20bc7c0d7fc1b21dd006ddcc4",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "3f2b4dd71c48c62eb8b985e0234692d074d234c51a64be363103b3632d3dd022",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_69.bin",
+      "filename": "params_shard_69.bin",
+      "bytes": 25165824,
+      "sha256": "203e1692bf6b833ad8d5d224e1fac03bbf9758638fe1e704bf84907baf387c76",
+      "official_file_metadata": {
+        "rfilename": "params_shard_69.bin",
+        "blobId": "9885880e9e558cfd6f4ebe1d5fad36697fe74f88",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "203e1692bf6b833ad8d5d224e1fac03bbf9758638fe1e704bf84907baf387c76",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_7.bin",
+      "filename": "params_shard_7.bin",
+      "bytes": 22616064,
+      "sha256": "acb52eb9fc099f9dbcbdfd763589783e9d5a807164ce969490028c1d7f63c28d",
+      "official_file_metadata": {
+        "rfilename": "params_shard_7.bin",
+        "blobId": "0dcc012876acc4021b810b3f55e71837f7f96d12",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "acb52eb9fc099f9dbcbdfd763589783e9d5a807164ce969490028c1d7f63c28d",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_70.bin",
+      "filename": "params_shard_70.bin",
+      "bytes": 33239040,
+      "sha256": "65a47b34cc4814c70e3e2c65387ab1856567f20d210ea220b2d4372ccf61b59b",
+      "official_file_metadata": {
+        "rfilename": "params_shard_70.bin",
+        "blobId": "431a85cd3e6512072255f5b7b39dc32d5a47272c",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "65a47b34cc4814c70e3e2c65387ab1856567f20d210ea220b2d4372ccf61b59b",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_71.bin",
+      "filename": "params_shard_71.bin",
+      "bytes": 21239808,
+      "sha256": "a5d900441a09817fad204c6c01c25109b8940e2891ce115e03efeef8944ce2dc",
+      "official_file_metadata": {
+        "rfilename": "params_shard_71.bin",
+        "blobId": "b57c72ec52bc612edc0c5190a111fb4bdd251492",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "a5d900441a09817fad204c6c01c25109b8940e2891ce115e03efeef8944ce2dc",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_72.bin",
+      "filename": "params_shard_72.bin",
+      "bytes": 25165824,
+      "sha256": "ed9adc8da05a1f94d271abcc7d581ee742b48b7986982c9b6a18c1c008ff1fac",
+      "official_file_metadata": {
+        "rfilename": "params_shard_72.bin",
+        "blobId": "a605c74d6402767963959c87268d2e95bbd404cd",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "ed9adc8da05a1f94d271abcc7d581ee742b48b7986982c9b6a18c1c008ff1fac",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_73.bin",
+      "filename": "params_shard_73.bin",
+      "bytes": 22616064,
+      "sha256": "bbb09bc2357c0f299bd7ed3c92dc5d06b771c56ac74267ff3cf23f2f6e33c240",
+      "official_file_metadata": {
+        "rfilename": "params_shard_73.bin",
+        "blobId": "4fa4d0417c9b0bc9b4f493d8eadddaa545b1d55c",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "bbb09bc2357c0f299bd7ed3c92dc5d06b771c56ac74267ff3cf23f2f6e33c240",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_74.bin",
+      "filename": "params_shard_74.bin",
+      "bytes": 25165824,
+      "sha256": "e6c34cc5aa5032b8c8853cc9952c31218c8cd524168d460a84589b3d9ab237d0",
+      "official_file_metadata": {
+        "rfilename": "params_shard_74.bin",
+        "blobId": "9e1676eec654b15560ba7e2047e9068c5c57b47d",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "e6c34cc5aa5032b8c8853cc9952c31218c8cd524168d460a84589b3d9ab237d0",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_75.bin",
+      "filename": "params_shard_75.bin",
+      "bytes": 33239040,
+      "sha256": "24337c9970eca4ea2bb053aa12e6c666313e6b1e3df4c5615caf371cfb7f104c",
+      "official_file_metadata": {
+        "rfilename": "params_shard_75.bin",
+        "blobId": "e75260a7db50581efa6fede1f564de3d79cdc6a2",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "24337c9970eca4ea2bb053aa12e6c666313e6b1e3df4c5615caf371cfb7f104c",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_76.bin",
+      "filename": "params_shard_76.bin",
+      "bytes": 21239808,
+      "sha256": "6f3a9b8b5bf78bd2b5fe0a73c01b38bb6696af651d9e78a95604b75a3ffc084c",
+      "official_file_metadata": {
+        "rfilename": "params_shard_76.bin",
+        "blobId": "6724f38e58f49ceac9e2a3ad72b929d6e75633be",
+        "size": 21239808,
+        "lfs": {
+          "sha256": "6f3a9b8b5bf78bd2b5fe0a73c01b38bb6696af651d9e78a95604b75a3ffc084c",
+          "size": 21239808,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_77.bin",
+      "filename": "params_shard_77.bin",
+      "bytes": 25165824,
+      "sha256": "c7aff01548ea0693b1dac60d60843b2f87bcaecf25a744a7a8cc2cdcbc0e74e9",
+      "official_file_metadata": {
+        "rfilename": "params_shard_77.bin",
+        "blobId": "e4f618ae0e777a7f1c7490f3d879e161b4b414f9",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "c7aff01548ea0693b1dac60d60843b2f87bcaecf25a744a7a8cc2cdcbc0e74e9",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_78.bin",
+      "filename": "params_shard_78.bin",
+      "bytes": 22616064,
+      "sha256": "16bd0828905393dd9738f309049832da36aecd9ee4edb4d0c149fe9d9b79ad34",
+      "official_file_metadata": {
+        "rfilename": "params_shard_78.bin",
+        "blobId": "5f531bcfd08f5a3ff48c2f9758807e2ec7b9efc2",
+        "size": 22616064,
+        "lfs": {
+          "sha256": "16bd0828905393dd9738f309049832da36aecd9ee4edb4d0c149fe9d9b79ad34",
+          "size": 22616064,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_79.bin",
+      "filename": "params_shard_79.bin",
+      "bytes": 25165824,
+      "sha256": "e1436e538ac30ea270444c97a00d4e9dfc6c54935f065e861069f4ee3d3fa158",
+      "official_file_metadata": {
+        "rfilename": "params_shard_79.bin",
+        "blobId": "b6182eea2501491714ae19b73e1c70e22b61184d",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "e1436e538ac30ea270444c97a00d4e9dfc6c54935f065e861069f4ee3d3fa158",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_8.bin",
+      "filename": "params_shard_8.bin",
+      "bytes": 25165824,
+      "sha256": "a54f0d54e007c8fee68e6f7eb4e9716b163490063cedef689539855dad25b027",
+      "official_file_metadata": {
+        "rfilename": "params_shard_8.bin",
+        "blobId": "bfd69af8c64cb49a5014bfbfacf49df266a76e46",
+        "size": 25165824,
+        "lfs": {
+          "sha256": "a54f0d54e007c8fee68e6f7eb4e9716b163490063cedef689539855dad25b027",
+          "size": 25165824,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_80.bin",
+      "filename": "params_shard_80.bin",
+      "bytes": 33239040,
+      "sha256": "bec018efb6e4ca7267d6ac6877bf5604c2d20ae93f6446762ef8ef2692e4ad71",
+      "official_file_metadata": {
+        "rfilename": "params_shard_80.bin",
+        "blobId": "9f43c5813169425cc12f85c75934fea03273fa13",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "bec018efb6e4ca7267d6ac6877bf5604c2d20ae93f6446762ef8ef2692e4ad71",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_81.bin",
+      "filename": "params_shard_81.bin",
+      "bytes": 32036864,
+      "sha256": "640d8930d7067c8452e9e03f9a5a08f6c5eddfcd2c4a19e15806af75da4c90ff",
+      "official_file_metadata": {
+        "rfilename": "params_shard_81.bin",
+        "blobId": "7bd4ad18ac5f04ccc648072c61a26f4c9040fbc2",
+        "size": 32036864,
+        "lfs": {
+          "sha256": "640d8930d7067c8452e9e03f9a5a08f6c5eddfcd2c4a19e15806af75da4c90ff",
+          "size": 32036864,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_82.bin",
+      "filename": "params_shard_82.bin",
+      "bytes": 25192448,
+      "sha256": "a120f14fe6b7954577bebc1f2a53d8de4d1de003c29bb5c0174f3cfd7c82ddee",
+      "official_file_metadata": {
+        "rfilename": "params_shard_82.bin",
+        "blobId": "ffb2ae5b3f2164d902e1da8029ede6e5a5de03cc",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "a120f14fe6b7954577bebc1f2a53d8de4d1de003c29bb5c0174f3cfd7c82ddee",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_83.bin",
+      "filename": "params_shard_83.bin",
+      "bytes": 25192448,
+      "sha256": "efe081ad7b3a251c89b768f23fdebf9bfbc541332488861ba4e9c474b6d085b0",
+      "official_file_metadata": {
+        "rfilename": "params_shard_83.bin",
+        "blobId": "37ae76154177c049c6ce12402cb08a4cca4842af",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "efe081ad7b3a251c89b768f23fdebf9bfbc541332488861ba4e9c474b6d085b0",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_84.bin",
+      "filename": "params_shard_84.bin",
+      "bytes": 25192448,
+      "sha256": "9c17ff264f10bf8f51466f7d8e67089d66f408909e68aeeb11f48728cee75305",
+      "official_file_metadata": {
+        "rfilename": "params_shard_84.bin",
+        "blobId": "76c428ca37082fcc6c80ee79b5786eb1551b37a1",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "9c17ff264f10bf8f51466f7d8e67089d66f408909e68aeeb11f48728cee75305",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_85.bin",
+      "filename": "params_shard_85.bin",
+      "bytes": 25192448,
+      "sha256": "4863b84a7f57a37d0b5c173cfbac1dfd7991edc6190c08fdfefd966e04a23d80",
+      "official_file_metadata": {
+        "rfilename": "params_shard_85.bin",
+        "blobId": "7355dfa3ddc7a49741137d0d597403a92ff03ab3",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "4863b84a7f57a37d0b5c173cfbac1dfd7991edc6190c08fdfefd966e04a23d80",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_86.bin",
+      "filename": "params_shard_86.bin",
+      "bytes": 25192448,
+      "sha256": "29fe0af67ee4b2f85299dddb9ba4080b0941bde819e7f7caa5ee30d8d22b0355",
+      "official_file_metadata": {
+        "rfilename": "params_shard_86.bin",
+        "blobId": "6137bd82b7c77a92bd8113fcce8c50d4b7c0425a",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "29fe0af67ee4b2f85299dddb9ba4080b0941bde819e7f7caa5ee30d8d22b0355",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_87.bin",
+      "filename": "params_shard_87.bin",
+      "bytes": 25192448,
+      "sha256": "69d9807745bf48214bd3e562a79884938a62998caa77c6cb85c27ba8aaa71df7",
+      "official_file_metadata": {
+        "rfilename": "params_shard_87.bin",
+        "blobId": "e21e7297c7480527a0a868a32549245e34b55fd1",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "69d9807745bf48214bd3e562a79884938a62998caa77c6cb85c27ba8aaa71df7",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_88.bin",
+      "filename": "params_shard_88.bin",
+      "bytes": 25192448,
+      "sha256": "47fa2f3b42935d6c3cc3995b5e627e414a15ad695708120c15fb7b06bf940893",
+      "official_file_metadata": {
+        "rfilename": "params_shard_88.bin",
+        "blobId": "6d0a007e76cbf84ca4627a2416b9b8807f6513d9",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "47fa2f3b42935d6c3cc3995b5e627e414a15ad695708120c15fb7b06bf940893",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_89.bin",
+      "filename": "params_shard_89.bin",
+      "bytes": 25192448,
+      "sha256": "7aa24fcf8efc7a632fa825c241e6b71059f3dd7fcca1c071f2cf0a9139c4e802",
+      "official_file_metadata": {
+        "rfilename": "params_shard_89.bin",
+        "blobId": "47526ee49a4ff3989c059098a7a9a2dc864e78f8",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "7aa24fcf8efc7a632fa825c241e6b71059f3dd7fcca1c071f2cf0a9139c4e802",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_9.bin",
+      "filename": "params_shard_9.bin",
+      "bytes": 33239040,
+      "sha256": "564187de1420fbb406b78fb1211103abc57b915a2cd01603c5355396b674a237",
+      "official_file_metadata": {
+        "rfilename": "params_shard_9.bin",
+        "blobId": "44ec42b53d60ab2f972980150c9e2d432ad3665a",
+        "size": 33239040,
+        "lfs": {
+          "sha256": "564187de1420fbb406b78fb1211103abc57b915a2cd01603c5355396b674a237",
+          "size": 33239040,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_90.bin",
+      "filename": "params_shard_90.bin",
+      "bytes": 25192448,
+      "sha256": "23bf03f5b19ae847a98fa4a95eb99e8fc5780e1ec5ce49398a66b85e721f2baa",
+      "official_file_metadata": {
+        "rfilename": "params_shard_90.bin",
+        "blobId": "d7c16e966c161932a138aca9bdbaf26111a4a475",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "23bf03f5b19ae847a98fa4a95eb99e8fc5780e1ec5ce49398a66b85e721f2baa",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_91.bin",
+      "filename": "params_shard_91.bin",
+      "bytes": 25192448,
+      "sha256": "64aef1c29f8ffad068abcc01ad94004e1a6e58f2ce9615e42e0a53e4fca06175",
+      "official_file_metadata": {
+        "rfilename": "params_shard_91.bin",
+        "blobId": "5ef2b9cfda628bfb908931c216ce455c152efd94",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "64aef1c29f8ffad068abcc01ad94004e1a6e58f2ce9615e42e0a53e4fca06175",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_92.bin",
+      "filename": "params_shard_92.bin",
+      "bytes": 25192448,
+      "sha256": "ea028e296ab011314b965c5745d31c3b5fd7d5b12bd2ee9c5f04ae30979e031c",
+      "official_file_metadata": {
+        "rfilename": "params_shard_92.bin",
+        "blobId": "149bde887b5fe31fcc82baceafda15e14fd5acce",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "ea028e296ab011314b965c5745d31c3b5fd7d5b12bd2ee9c5f04ae30979e031c",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_93.bin",
+      "filename": "params_shard_93.bin",
+      "bytes": 25192448,
+      "sha256": "361874e8cc7bf6d66782d4b3451ed56214a177b5757b07bc5a1ce042d2ba33b9",
+      "official_file_metadata": {
+        "rfilename": "params_shard_93.bin",
+        "blobId": "42103d666eba126256db89466cce06fd545e050b",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "361874e8cc7bf6d66782d4b3451ed56214a177b5757b07bc5a1ce042d2ba33b9",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_94.bin",
+      "filename": "params_shard_94.bin",
+      "bytes": 25192448,
+      "sha256": "8e2071a3e3bf67ebf8ec5d32fb938f8781b35eee967dafaccd5da8694b07fceb",
+      "official_file_metadata": {
+        "rfilename": "params_shard_94.bin",
+        "blobId": "9319992f101692c89507adc8e50222e21905e098",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "8e2071a3e3bf67ebf8ec5d32fb938f8781b35eee967dafaccd5da8694b07fceb",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_95.bin",
+      "filename": "params_shard_95.bin",
+      "bytes": 25192448,
+      "sha256": "2c2f7e2fa43a40d0c004205a279d2c2b560c210ddd7b99cf68921c7128aafdd3",
+      "official_file_metadata": {
+        "rfilename": "params_shard_95.bin",
+        "blobId": "b5c00db368df8e218566db8432ac90faa838035e",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "2c2f7e2fa43a40d0c004205a279d2c2b560c210ddd7b99cf68921c7128aafdd3",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_96.bin",
+      "filename": "params_shard_96.bin",
+      "bytes": 25192448,
+      "sha256": "95ae1c12a2b2cc3a88a2ee9e8e086b9e3ad947dc6b9641c92de77bb594cfd4d3",
+      "official_file_metadata": {
+        "rfilename": "params_shard_96.bin",
+        "blobId": "97bdd52be5a2cd85bb342ed16ecea3392f4d7cb9",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "95ae1c12a2b2cc3a88a2ee9e8e086b9e3ad947dc6b9641c92de77bb594cfd4d3",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_97.bin",
+      "filename": "params_shard_97.bin",
+      "bytes": 25192448,
+      "sha256": "a52385a396677d15b479f0f6dd1d14c6f802d9d39f3e68af466b86771b753e0c",
+      "official_file_metadata": {
+        "rfilename": "params_shard_97.bin",
+        "blobId": "709ed8903aca106e589e38709c8ebeb66ad55ad3",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "a52385a396677d15b479f0f6dd1d14c6f802d9d39f3e68af466b86771b753e0c",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_98.bin",
+      "filename": "params_shard_98.bin",
+      "bytes": 25192448,
+      "sha256": "f52cf670c2532ca43b9dc69b3ab20e1066077536f3650eb0842f59441173fcf0",
+      "official_file_metadata": {
+        "rfilename": "params_shard_98.bin",
+        "blobId": "26caf60f26ff0e2ecc02a62ad9fc434e41692ff6",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "f52cf670c2532ca43b9dc69b3ab20e1066077536f3650eb0842f59441173fcf0",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/params_shard_99.bin",
+      "filename": "params_shard_99.bin",
+      "bytes": 25192448,
+      "sha256": "83b3f2fe204cfe7a59a0782cdd90a9f1e33d67b65886b4e2d869fc53080e283e",
+      "official_file_metadata": {
+        "rfilename": "params_shard_99.bin",
+        "blobId": "dc9b3d04287bc65053e843c656e4897ac663339a",
+        "size": 25192448,
+        "lfs": {
+          "sha256": "83b3f2fe204cfe7a59a0782cdd90a9f1e33d67b65886b4e2d869fc53080e283e",
+          "size": 25192448,
+          "pointerSize": 133
+        }
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/tensor-cache.json",
+      "filename": "tensor-cache.json",
+      "bytes": 309445,
+      "sha256": "f87631978c2f9b1d62f9caf126ad177058a29fd1f700aa2dadb8e62e1aeeeca1",
+      "official_file_metadata": {
+        "rfilename": "tensor-cache.json",
+        "blobId": "cdf8332c9207d77d3165d0aefa5da803ebd2f975",
+        "size": 309445
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/tokenizer.json",
+      "filename": "tokenizer.json",
+      "bytes": 1851360,
+      "sha256": "493f8ad437be806d5ccdc57e91479bdbb0c656448c1b89ff70f7653530d78518",
+      "official_file_metadata": {
+        "rfilename": "tokenizer.json",
+        "blobId": "6a0986c7e1b01a58ff8cc31fc2d64ddd230fec7e",
+        "size": 1851360
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/models/Phi-3.5-vision-instruct-q4f32_1-MLC/tokenizer_config.json",
+      "filename": "tokenizer_config.json",
+      "bytes": 9519,
+      "sha256": "581d4654c018fbcef2504b57a805dcad37126038137b5d25d22b5a02abc1ef29",
+      "official_file_metadata": {
+        "rfilename": "tokenizer_config.json",
+        "blobId": "3c7b5bda28936460312aa5161c8ad08d583829fc",
+        "size": 9519
+      }
+    }
+  ],
+  "downloaded_bytes": 2771867899,
+  "base_model": {
+    "id": "microsoft/Phi-3.5-vision-instruct",
+    "revision": "12b77fb40b63a2c73c68243d3f767aab688a1b2a",
+    "license": "mit",
+    "license_url": "https://huggingface.co/microsoft/Phi-3.5-vision-instruct/resolve/12b77fb40b63a2c73c68243d3f767aab688a1b2a/LICENSE",
+    "license_sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+  },
+  "remote_code_executed": false,
+  "experiment_interpretation": "Existing SmolVLM PGD inputs are cross-model transfer, not Phi-trained attacks"
+}

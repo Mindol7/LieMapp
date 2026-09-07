@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "attacks": {
+    "siai": {
+      "label": "SIAI",
+      "rules": "LieMappBench/Logging-Dataset/siai/conditions.json",
+      "presentation": "LieMappBench/Logging-Dataset/siai/presentation.json",
+      "engines": {
+        "llamacpp": {
+          "label": "llama.cpp",
+          "source_log": ".evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/siai/llamacpp/logging-map-native-final-20260906-001.json",
+          "supplements": [".evidence/supplements/siai/llamacpp.json"],
+          "execute": {
+            "cwd": "..",
+            "command": ["{python}", "{root}/LieMappBench/Attack-Execution-Dataset/attack-script/siai/llamacpp/run.py", "--dataset", "{root}/LieMappBench/Attack-Execution-Dataset/attack-source/siai/shared/experiment-cpu128-v1/dataset.json", "--ablate-input", "evaluation-cassette-attack--original", "--explicit-input", "evaluation-cassette-clean--original", "--max-tokens", "48", "--threads", "4", "--run-id", "{run_id}"]
+          }
+        },
+        "vllm": {
+          "label": "vLLM",
+          "source_log": ".evidence/raw/siai/vllm/siai-vllm-native-cpu128-20260906-001/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/siai/vllm/logging-map-native-final-reviewed-20260906-001.json",
+          "supplements": [".evidence/supplements/siai/vllm.json"],
+          "execute": {
+            "cwd": "Instrumented-LIE/siai/vllm",
+            "command": ["{root}/Instrumented-LIE/siai/vllm/.venv/bin/python", "{root}/LieMappBench/Attack-Execution-Dataset/attack-script/siai/vllm/run.py", "--run-id", "{run_id}", "--ablate-input", "evaluation-cassette-attack--original", "--explicit-input", "evaluation-cassette-clean--original", "--max-tokens", "48", "--reuse-engine", "--timeout", "1800"]
+          }
+        },
+        "SGLang": {
+          "label": "SGLang",
+          "source_log": ".evidence/raw/siai/SGLang/siai-SGLang-native-cpu-one-tile-20260906-001/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/siai/SGLang/logging-points-publication.json",
+          "supplements": [".evidence/supplements/siai/SGLang.json"],
+          "execute": {
+            "cwd": "..",
+            "command": ["{root}/Instrumented-LIE/siai/SGLang/.venv/bin/python", "{root}/LieMappBench/Attack-Execution-Dataset/attack-script/siai/SGLang/run.py", "--run-id", "{run_id}", "--ablate-input", "evaluation-cassette-attack--original", "--explicit-input", "evaluation-cassette-clean--original", "--max-tokens", "64"]
+          }
+        },
+        "mlc-llm": {
+          "label": "MLC-LLM",
+          "source_log": ".evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/siai/mlc-llm/source-review-phi35-cpu-retry.json",
+          "supplements": [".evidence/supplements/siai/mlc-llm.json"],
+          "execution_note": "2026-09-07 실제 재시도: 공식 Phi-3.5 Vision q4f32_1 모델 다운로드, fresh CPU C++ runtime 및 engine factory 생성 성공. 모델 라이브러리 LLVM 컴파일 5회 실패로 native 이미지 추론 0회. 상세 재시도 스크립트와 증거는 Logging-Dataset/siai/mlc-llm/phi35-cpu-retry.md 참조."
+        },
+        "tensorRT-llm": {
+          "label": "TensorRT-LLM",
+          "source_log": ".evidence/raw/siai/tensorRT-llm/siai-tensorRT-llm-phi35-readiness-retry-20260907-002/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/siai/tensorRT-llm/source-review.json",
+          "supplements": [".evidence/supplements/siai/tensorRT-llm.json"],
+          "execution_note": "2026-09-07 실제 재시도: CUDA compiler/driver가 없어 native 실행 불가. MLC 가중치 형식은 TensorRT-LLM 입력 형식과 다릅니다. 아래 명령은 재점검이지 native 공격 실행이 아닙니다."
+        }
+      }
+    }
+  }
+}

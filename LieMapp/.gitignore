@@ -1,0 +1,18 @@
+# Util
+.archive/
+.evidence/
+.tooling/
+.venv/
+tests/
+__pycache__/
+expoeriments.json
+
+# Document
+docs/
+report/
+
+# LLM Inference Engine
+LIE/
+Instrumented-LIE/
+
+# Cache

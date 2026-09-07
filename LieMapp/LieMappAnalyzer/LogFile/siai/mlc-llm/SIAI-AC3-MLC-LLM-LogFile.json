@@ -1,0 +1,1903 @@
+{
+  "schema_version": "1.0.0",
+  "summary": {
+    "attack_id": "siai",
+    "attack_name": "Self-interpreting Adversarial Images",
+    "engine_id": "mlc-llm",
+    "condition_id": "AC3",
+    "kind": "AC",
+    "verdict": "F",
+    "evidence_value": null,
+    "evidence_status": "not_evaluated",
+    "evaluation_reason": "scope_unavailable",
+    "explanation": "요구한 실행 범위의 증거가 확보되지 않아 조건 충족을 확인하지 못했습니다. 표시 F는 미평가를 뜻하며 공격 불가능이나 엔진 안전을 뜻하지 않습니다.",
+    "document_notice": "조건별 JSON은 원시 로그를 대체하지 않는 검증 가능한 증거 묶음입니다. 전체 원본 값은 연결된 raw archive에 보존됩니다.",
+    "attack_label": "SIAI",
+    "engine_label": "MLC-LLM"
+  },
+  "supplementary_context": [
+    {
+      "title": "Phi-3.5 Vision 모델 변경 후 실제 CPU 다운로드·빌드·컴파일 재시도",
+      "summary": [
+        "공식 MLC Phi-3.5-vision-instruct-q4f32_1-MLC 모델의 고정 revision 2d7104ab34b358b4223aabca1d08e451c6b12728을 다운로드하고 114개 파일 전체 해시를 검증했습니다.",
+        "같은 MLC source 9fa644f에서 fresh CPU C++ runtime을 빌드했으며, 실제 라이브러리 로드와 미초기화 C++ engine factory 생성까지 성공했습니다. 이는 모델 로딩·추론 성공이 아닙니다.",
+        "PhiV 모델의 LLVM 컴파일 5회는 모두 실패했습니다. 원본 CPU 경로의 int32 overflow, 최소 int64-index 호환 변형의 tirx.Div 오류, 추가 FloorDiv 표현 변형의 동일 계열 오류를 각각 원시 로그로 보존했습니다.",
+        "GPU 전용 이미지 커널의 CPU 포트 및 crop 계약 수정을 더 진행하면 벤치마크 대상 구현이 달라지므로 이번 범위에서는 진행하지 않았습니다. native 이미지 요청과 생성은 0회입니다.",
+        "본 보충 내용은 공통 Analyzer T/F 규칙의 입력이 아닌 환경·빌드 설명입니다. 공개 표시는 F / 미평가이며, 실제 실행에서 AC/DC 불충족을 관측한 F가 아닙니다."
+      ],
+      "source": {
+        "path": "../../../../.evidence/supplements/siai/mlc-llm.json",
+        "sha256": "9d28d93113bfa12c2da2e7a1829063ce217cc0b9821901f9e830689994b0da07"
+      },
+      "used_for_verdict": false,
+      "notice": "검증한 별도 로그에 연결된 보조 설명입니다. 이 조건의 실제 측정값이나 충족 증거를 대체하지 않습니다.",
+      "source_runs": [
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-cpu-cmake-20260907-001/events.jsonl",
+          "sha256": "1b5f7281e7baf88a2976fb1c25751605d8207d9e87cb4f41a9ed8ef51d332a95",
+          "run_status": "blocked"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-cpu-cmake-20260907-002/events.jsonl",
+          "sha256": "18e4506693150b97e8511899b56bd1f3962755af3bb2354dd1fc156ed30c50b5",
+          "run_status": "blocked"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-cpu-cmake-20260907-003/events.jsonl",
+          "sha256": "8a72ba82941ca7ed135f33884a242c9d3198df3355b174363f677c5428696135",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-cpu-runtime-build-20260907-001/events.jsonl",
+          "sha256": "829f6e05bdbe35cbc32f1703d7facdf1b7c3833faa03668c7bb22c47e63c0933",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-fresh-runtime-factory-20260907-001/events.jsonl",
+          "sha256": "fff9caab90661fb767301e82f0eb2fd6805aa2d4e64e73f7040947bc9ff9091e",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-fresh-runtime-import-20260907-001/events.jsonl",
+          "sha256": "5380316fc874a93fc737f509bcba1dda7bfba05897768dbdc0f7b12178f0dc01",
+          "run_status": "blocked"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-001/events.jsonl",
+          "sha256": "c84a110c4e1784e3ff6f450d1c4889c69744128ec95d8b709b6ca197338c30eb",
+          "run_status": "blocked"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-002/events.jsonl",
+          "sha256": "f1e47edb1999221260cf1ca821bb6ed89a76338a4fff62ab68fc0a2f58ecf762",
+          "run_status": "blocked"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-003/events.jsonl",
+          "sha256": "58ebb4e0bd83ab888bfb15993d6180b842a42c43f30fbb3ebe3ac7a7db86aa22",
+          "run_status": "blocked"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-004/events.jsonl",
+          "sha256": "8d7d8371bf84da7f9d35b39c7cb830fb4e7e814fd13d2c8de360286b2b1ba69c",
+          "run_status": "blocked"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-005/events.jsonl",
+          "sha256": "49b821359764e248871ee06fa9acb4b5250e089e5c13cbeb09213cbf2cd1aa2f",
+          "run_status": "blocked"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-model-download-20260907-001/events.jsonl",
+          "sha256": "2a528db9ad50d978a0f7d8aaa879d346cf9c94e64ecc0ca584004a73ba185b3e",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-model-verified-20260907-002/events.jsonl",
+          "sha256": "b725332c9f034fd45268ca06fc3dc30965f447cf96f9412a281ac834f0d719b6",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-python-build-tools-20260907-001/events.jsonl",
+          "sha256": "8d36d6f02dc780dbeef5ac93f491ed93580009a04d2d39f1ef8995bfb57d8bfa",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-python-dependencies-20260907-001/events.jsonl",
+          "sha256": "58ec0b5fc999ece9162a787c1063aa923b31fff9f87f1afbcb862a98d73bc94d",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-source-clone-20260907-001/events.jsonl",
+          "sha256": "09bcad4d8345eff5374ff918d1f91efa50b076c0134fc6f019e6295de0c5a09c",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-source-submodules-20260907-001/events.jsonl",
+          "sha256": "171760b2ca087859258268e44cdcd3c21e80da6702b1d26d7a385f8b557b371c",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-tokenizers-source-20260907-001/events.jsonl",
+          "sha256": "da4a375d0b88cee3d37bb3342867b7d539a8135e6146f6ca3d53877ee43dd581",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-tvm-ffi-source-20260907-001/events.jsonl",
+          "sha256": "c50740d9dfc26f5f40e4dd8a302f0948ca2f0c3d07e0657b17d0aadbb82d6c9c",
+          "run_status": "completed"
+        },
+        {
+          "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/events.jsonl",
+          "sha256": "765c10cc70fa3dbeadb488a8bdd7e30a4b0b445356866f34a4d64454293c8b06",
+          "run_status": "blocked"
+        }
+      ]
+    }
+  ],
+  "question": {
+    "plain": "이미지 표현을 바꾸면 언어 모델의 다음 토큰 예측값도 바뀌나요?",
+    "original": "생성된 visual embedding이 언어 디코더의 생성 결과에 직접 영향을 미치는 구조인가?",
+    "explanation": "같은 이미지·질문·설정에서 이미지 표현만 0으로 바꾼 대조 실행을 비교합니다. logits는 다음 토큰 후보마다 매긴 점수이며 확률 자체는 아닙니다."
+  },
+  "measurement_plan": [
+    "일반 실행에서 이미지 표현이 언어 모델로 실제 전달됐는지 확인합니다.",
+    "대조 실행에서 전달값 전체가 실제로 0인지 검사합니다.",
+    "첫 생성 단계의 전체 logits 차이를 계산합니다. 비개입 반복은 별도 보조 검증으로 구분합니다."
+  ],
+  "measurements": {
+    "summary": "요구한 실행 범위의 증거가 확보되지 않아 조건 충족을 확인하지 못했습니다. 표시 F는 미평가를 뜻하며 공격 불가능이나 엔진 안전을 뜻하지 않습니다.",
+    "actual_measurement_count": 0,
+    "items": []
+  },
+  "judgment_basis": {
+    "explanation": "요구한 실행 범위의 증거가 확보되지 않아 조건 충족을 확인하지 못했습니다. 표시 F는 미평가를 뜻하며 공격 불가능이나 엔진 안전을 뜻하지 않습니다.",
+    "source_condition_cell": "G10",
+    "original_evaluation_reason": "Run status is blocked: Phi-3.5 Vision LLVM model compilation failed; native inference was not executed",
+    "checks": [
+      {
+        "evidence_value": null,
+        "reason": "Run status is blocked: Phi-3.5 Vision LLVM model compilation failed; native inference was not executed",
+        "evidence_ids": [
+          "a65945b37aad479984db433fe1441deb",
+          "41e847d8edc64e349a718874a5615b4a",
+          "fd2d9ee877074e3b8f548cbcbfd274dd",
+          "2df014dc0eae4787a04b0daf5642ff96",
+          "0401321535fc4df09a1a98c4b15afd32",
+          "472a7e973b6149469d66ab9dccba9c85",
+          "f7120cf92934450ca7a52fc8e7c32aff",
+          "dd56864411ba4f44bfdc066f7fb90277",
+          "4d19984244a74d3e9d6833bf83a4db90",
+          "51cdd09104984f59997db18aad38e63b",
+          "e1ddcb3559e246d0ad072ee13028dc23",
+          "fc3c833e04d941c4bb425dee2a9e7ad9"
+        ]
+      }
+    ],
+    "interpretation_limit": "T는 조건 충족을 확인했다는 뜻입니다. F는 관측상 불충족 또는 미평가를 구분해 표시합니다. 미평가 F는 공격 불가능·엔진 안전의 증명이 아닙니다."
+  },
+  "logging_points": [
+    {
+      "logging_point_id": "siai.mlc.readiness.source",
+      "source": {
+        "function": "main",
+        "line": 120,
+        "logging_point_id": "siai.mlc.readiness.source",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "observed": true,
+      "reason": "이 조건 평가에 사용된 실제 원시 값을 해당 소스 경계에서 수집한 관측입니다. 별도 로깅 의도 문서는 일치하는 매핑이 제공된 경우에만 연결됩니다.",
+      "reason_origin": "generic_observation_description",
+      "event_ids": [
+        "a65945b37aad479984db433fe1441deb"
+      ]
+    },
+    {
+      "logging_point_id": "siai.mlc.readiness.model-files",
+      "source": {
+        "function": "main",
+        "line": 136,
+        "logging_point_id": "siai.mlc.readiness.model-files",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "observed": true,
+      "reason": "이 조건 평가에 사용된 실제 원시 값을 해당 소스 경계에서 수집한 관측입니다. 별도 로깅 의도 문서는 일치하는 매핑이 제공된 경우에만 연결됩니다.",
+      "reason_origin": "generic_observation_description",
+      "event_ids": [
+        "41e847d8edc64e349a718874a5615b4a"
+      ]
+    },
+    {
+      "logging_point_id": "siai.mlc.readiness.attempts",
+      "source": {
+        "function": "main",
+        "line": 139,
+        "logging_point_id": "siai.mlc.readiness.attempts",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "observed": true,
+      "reason": "이 조건 평가에 사용된 실제 원시 값을 해당 소스 경계에서 수집한 관측입니다. 별도 로깅 의도 문서는 일치하는 매핑이 제공된 경우에만 연결됩니다.",
+      "reason_origin": "generic_observation_description",
+      "event_ids": [
+        "fd2d9ee877074e3b8f548cbcbfd274dd"
+      ]
+    },
+    {
+      "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+      "source": {
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "observed": true,
+      "reason": "이 조건 평가에 사용된 실제 원시 값을 해당 소스 경계에서 수집한 관측입니다. 별도 로깅 의도 문서는 일치하는 매핑이 제공된 경우에만 연결됩니다.",
+      "reason_origin": "generic_observation_description",
+      "event_ids": [
+        "2df014dc0eae4787a04b0daf5642ff96",
+        "0401321535fc4df09a1a98c4b15afd32",
+        "472a7e973b6149469d66ab9dccba9c85",
+        "f7120cf92934450ca7a52fc8e7c32aff",
+        "dd56864411ba4f44bfdc066f7fb90277",
+        "4d19984244a74d3e9d6833bf83a4db90",
+        "51cdd09104984f59997db18aad38e63b"
+      ]
+    },
+    {
+      "logging_point_id": "siai.mlc.readiness.runtime-binaries",
+      "source": {
+        "function": "main",
+        "line": 165,
+        "logging_point_id": "siai.mlc.readiness.runtime-binaries",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "observed": true,
+      "reason": "이 조건 평가에 사용된 실제 원시 값을 해당 소스 경계에서 수집한 관측입니다. 별도 로깅 의도 문서는 일치하는 매핑이 제공된 경우에만 연결됩니다.",
+      "reason_origin": "generic_observation_description",
+      "event_ids": [
+        "e1ddcb3559e246d0ad072ee13028dc23"
+      ]
+    },
+    {
+      "logging_point_id": "siai.mlc.readiness.result",
+      "source": {
+        "function": "main",
+        "line": 183,
+        "logging_point_id": "siai.mlc.readiness.result",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "observed": true,
+      "reason": "이 조건 평가에 사용된 실제 원시 값을 해당 소스 경계에서 수집한 관측입니다. 별도 로깅 의도 문서는 일치하는 매핑이 제공된 경우에만 연결됩니다.",
+      "reason_origin": "generic_observation_description",
+      "event_ids": [
+        "fc3c833e04d941c4bb425dee2a9e7ad9"
+      ]
+    },
+    {
+      "logging_point_id": "siai-mlc-phi35-static-04",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/python/mlc_llm/model/phi3v/phi3v_image.py",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_image.py",
+        "class": "Phi3ImageEmbedding",
+        "function": "forward",
+        "line": 279,
+        "end_line": 309,
+        "sha256": "b9eb2c2dff2ba3d35f7502c28cc547b8441488e9f1369bc103e5235ee05d871b",
+        "base_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba"
+      },
+      "observed": false,
+      "reason": "실제 projector 반환 embedding 전체 원시값과 stable layer identity가 필요함",
+      "reason_origin": "declared_mapping_not_observed_in_this_condition",
+      "event_ids": []
+    },
+    {
+      "logging_point_id": "siai-mlc-phi35-static-05",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/python/mlc_llm/model/phi3v/phi3v_model.py",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_model.py",
+        "class": "Phi3VForCausalLM",
+        "function": "prefill",
+        "line": 178,
+        "end_line": 188,
+        "sha256": "e5b6e8880c62f33dd60c6cf48501321f65c0204275bbdee6daab03119f314386",
+        "base_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba"
+      },
+      "observed": false,
+      "reason": "언어 decoder의 실제 입력과 full first logits를 수집하고 동일 입력 정상/zero 개입·비개입 반복을 비교해야 함",
+      "reason_origin": "declared_mapping_not_observed_in_this_condition",
+      "event_ids": []
+    }
+  ],
+  "events": [
+    {
+      "event_id": "a65945b37aad479984db433fe1441deb",
+      "sequence": 1,
+      "timestamp_utc": "2026-09-07T04:39:14.549879+00:00",
+      "stage": "source_identity",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 120,
+        "logging_point_id": "siai.mlc.readiness.source",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "meaning": "원본 불변; private의 두 실패 호환 패치는 stock과 구분",
+        "original_git_status": "",
+        "original_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba",
+        "private_git_diff": "diff --git a/python/mlc_llm/compiler_pass/pipeline.py b/python/mlc_llm/compiler_pass/pipeline.py\nindex 9af36060..2ac32c06 100644\n--- a/python/mlc_llm/compiler_pass/pipeline.py\n+++ b/python/mlc_llm/compiler_pass/pipeline.py\n@@ -173,7 +173,9 @@ def _mlc_llm_pipeline(\n                 ),\n                 (\n                     tvm.tirx.transform.ForceNarrowIndexToInt32()\n-                    if target.kind.name != \"cuda\"\n+                    # LLVM supports int64 indexing. Keeping it avoids overflow\n+                    # in Phi3V reshape analysis on the CPU compatibility path.\n+                    if target.kind.name not in (\"cuda\", \"llvm\")\n                     else tvm.transform.Sequential([])\n                 ),\n                 ScatterTupleGetItem(),\ndiff --git a/python/mlc_llm/model/vision/image_processing.py b/python/mlc_llm/model/vision/image_processing.py\nindex 8c3eccd8..7b8e7a9e 100644\n--- a/python/mlc_llm/model/vision/image_processing.py\n+++ b/python/mlc_llm/model/vision/image_processing.py\n@@ -2,7 +2,7 @@\n Implements the CLIP Image processor.\n \"\"\"\n \n-from tvm import s_tir, tirx\n+from tvm import s_tir, target, tirx\n from tvm.relax.frontend.nn import Module, Tensor, op\n from tvm.script import tirx as T\n \n@@ -264,8 +264,14 @@ class ImageProcessor(Module):\n             return sch.mod[\"main\"].with_attr(\"tirx.is_scheduled\", 1)\n \n         h = image.shape[2]\n-        tar = tirx.truncdiv(h + 335, 336) * 336\n-        t = tirx.div(tar - h, 2)\n+        if target.Target.current(allow_none=False).kind.name == \"llvm\":\n+            # Physical image heights and padding are non-negative: floor and\n+            # truncation agree, while VM shape lowering supports FloorDiv.\n+            tar = tirx.floordiv(h + 335, 336) * 336\n+            t = tirx.floordiv(tar - h, 2)\n+        else:\n+            tar = tirx.truncdiv(h + 335, 336) * 336\n+            t = tirx.div(tar - h, 2)\n         b = tar - h - t\n         left = 0\n         right = 0\n",
+        "submodules": "-557948f1236db9e27089959de837cc23de6c6bbd 3rdparty/argparse\n-45804691223635953f311cf31a10c632553bbfc3 3rdparty/googletest\n ae721c50eaf761660b4f90cc590453cdb0c2acd0 3rdparty/stb (ae721c5)\n 34885cfd7b9ef27b859c28a41e71413dd31926f5 3rdparty/tokenizers-cpp (34885cf)\n 092bc69b6e815980bce7808595c914dd3a29f905 3rdparty/tokenizers-cpp/msgpack (092bc69)\n 11051e3b73b3a6222a52acd720e39805dc7545ab 3rdparty/tokenizers-cpp/sentencepiece (11051e3)\n 837cb9de1127b48ce48e4cefe09e83215b9d4ba7 3rdparty/tvm (heads/mlc)\n-b590a6bfe034ea3a418b7b523e3490956bcb367a 3rdparty/tvm/3rdparty/OpenCL-Headers\n-b2dd65dc864e09688245b316ac46c4a6cd07e15c 3rdparty/tvm/3rdparty/cutlass\n-96b48221df9d010c2d5b7f65d1664f198c664d28 3rdparty/tvm/3rdparty/cutlass_fpA_intB_gemm\n-07ba35bae96900e51b4d63ef3487ba24850da870 3rdparty/tvm/3rdparty/libflash_attn\n 21e30c3b1d4421f95fd69a6ba3fd0285c7b69e9c 3rdparty/tvm/3rdparty/tvm-ffi (21e30c3)\n 84d107bf416c6bab9ae68ad285876600d230490d 3rdparty/tvm/3rdparty/tvm-ffi/3rdparty/dlpack (84d107b)\n 793921876c981ce49759114d7bb89bb89b2d3a2d 3rdparty/tvm/3rdparty/tvm-ffi/3rdparty/libbacktrace (7939218)\n d4f57c440f3da8e7330a1e5d50bba9c31f9433ea 3rdparty/xgrammar (d4f57c4)\n-bbd2f4d32427e548797929af08cfe2a9cbb3cf12 3rdparty/xgrammar/3rdparty/dlpack\n"
+      },
+      "artifacts": {}
+    },
+    {
+      "event_id": "41e847d8edc64e349a718874a5615b4a",
+      "sequence": 2,
+      "timestamp_utc": "2026-09-07T04:39:20.624269+00:00",
+      "stage": "model_acquisition_verified",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 136,
+        "logging_point_id": "siai.mlc.readiness.model-files",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "base_license": "MIT; original license bytes saved, not legal advice",
+        "base_license_sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+        "file_count": 114,
+        "files": [
+          {
+            "bytes": 1519,
+            "filename": ".gitattributes",
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          {
+            "bytes": 1846,
+            "filename": "README.md",
+            "sha256": "5a2ce03acb64281687ea5ab4a22748b60e5eb4a466745cc4e84e096050615d57"
+          },
+          {
+            "bytes": 5288,
+            "filename": "mlc-chat-config.json",
+            "sha256": "6fc9bb8a906f37d3dcad6a2f3b2a84d2dceac50a32325d9821065f7140b91f0a"
+          },
+          {
+            "bytes": 305301,
+            "filename": "ndarray-cache-b16.json",
+            "sha256": "aac64d8f71a62524a441ada5e194e45ba0df7ca86c76b93260b176e368015872"
+          },
+          {
+            "bytes": 309445,
+            "filename": "ndarray-cache.json",
+            "sha256": "f87631978c2f9b1d62f9caf126ad177058a29fd1f700aa2dadb8e62e1aeeeca1"
+          },
+          {
+            "bytes": 49250304,
+            "filename": "params_shard_0.bin",
+            "sha256": "e42e43a7a6aefa3354805ad3adb56608e8d47fd28135ce757f002a7d4556427f"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_1.bin",
+            "sha256": "813468c8693ba31c2ba4c45c080c547700e6287b630b5fc958c53903c5e1fe62"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_10.bin",
+            "sha256": "4c7c58f56b115df19d245947f70b8fd4d18d4c1cecdfd83cc008be8c3dc91eba"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_100.bin",
+            "sha256": "0d62a08d3c12929016ea4711f2d19a7a84de05f9af9de840083b1fd927751ed5"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_101.bin",
+            "sha256": "fc9b6d4aaa6c7319cce35e6a22f12081553c415a1ac995a6619f876ef8d7d974"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_102.bin",
+            "sha256": "dfcc8bdbbf82477ffd31558f421d6be23b99342388882ad0f46b50798ededffa"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_103.bin",
+            "sha256": "c2796ef76e33a46f3af4e5e7f40e5d6138fb67ed03c8fef716fcdd682720135c"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_104.bin",
+            "sha256": "ffd7cdb8b9fa65b92858d9b109771c1ed07b87e76103ae2838678d0cd44409d1"
+          },
+          {
+            "bytes": 29200384,
+            "filename": "params_shard_105.bin",
+            "sha256": "19d16c4797c7550700c8ba8e9cd3532d53fa92b4f9c3a3eb3eb2d4a729f297c3"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_11.bin",
+            "sha256": "5746af2739ac5296bc1ffb1f33feba3aac8d449e874addd98b9816757dc32737"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_12.bin",
+            "sha256": "99da4d06c23d14123626c772875d1f31694de2e79eab86ef12fa10f14cefde08"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_13.bin",
+            "sha256": "5fddd9272ba366037f751012dbdb14f437cf4f567ed07b39f038a591c561a33f"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_14.bin",
+            "sha256": "a423c5403c511bc60ae8e865b0e5ea3041523252ee0a04d51f4e2ed909ff0e10"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_15.bin",
+            "sha256": "fc80245dbfe17ff6cadd58f5ade23e7bc96edfdfd882393ffb358cc441cfb72c"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_16.bin",
+            "sha256": "a73d6cf93ecb4c18b50e367346fcd5436a9bda8fb535a0cb671773afafd8d47d"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_17.bin",
+            "sha256": "a302e25dcc814bcaa5b702d2ecb9d1f2e32f47d760d3cfd0e436c7997b8888d8"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_18.bin",
+            "sha256": "67edf9d32356dda7160c9ef680158f3f6d619adf2cfa3e3bab5fb2333f1c649c"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_19.bin",
+            "sha256": "c0b485abd83a784ac1f99369765b3c6533104df8f0d3f08cff331ba1765b8353"
+          },
+          {
+            "bytes": 23470080,
+            "filename": "params_shard_2.bin",
+            "sha256": "948b642a177f7d342c9754fa80076aa0d8b332448e25417d449ed3d78e0f784a"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_20.bin",
+            "sha256": "e36a59ad9eb7c1960e798961c1b815ad81d3a51ac3a29284514f3fc51b72db17"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_21.bin",
+            "sha256": "7e036cf782384950dde2078289f00200ab1a028c9f153efdaa21fbeb6fd9ad96"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_22.bin",
+            "sha256": "1d075a7f3953baad1b3087b230b4fac1140753e91304f815a6dd5caecbdde2e7"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_23.bin",
+            "sha256": "093c187c6499996c6b9a14fc6b489be0c2cb28f22168b3805410a7fb4de25bf8"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_24.bin",
+            "sha256": "400d527dbf4bdc022345fffd1ae7ae2445d835b374b722c5e9285724cfa92138"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_25.bin",
+            "sha256": "0f32acd971e9b498087bc76c4441258f8e2bf7e5b6c3ac37c54626674665a278"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_26.bin",
+            "sha256": "5d26dbb109296da5e2cc7f5d30e7859bd663aa2fa2a9c0e8ce7fb187232aa8d2"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_27.bin",
+            "sha256": "00c1e89f6cb6aba09c3bdfe68fb853290f56f25a50257b569fea0f67fa825eb8"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_28.bin",
+            "sha256": "e2fd02870be6ea545317347397ea7560065ad03e7d3cd613dd5e6cabd3a1a750"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_29.bin",
+            "sha256": "69080dc89826ea514aa11fdac496aa90619ae0b630b1e7d174674cf048ef9d34"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_3.bin",
+            "sha256": "e0a902cb3e816840675bdd743ac894aedfd60864cd1158a69f58c3be620b1a41"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_30.bin",
+            "sha256": "ee8867c7ab5db8139752c3cae1a9928277f6c9739bb292392f96542481d569b5"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_31.bin",
+            "sha256": "23a689b5e640ac84c259edcb5e7b327e58dae09b4850b9a43f81d823f4cc2c27"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_32.bin",
+            "sha256": "03616859c83070ec6983f825d8f45bdb1d635a6157053aca413c81261152f186"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_33.bin",
+            "sha256": "4334288f6ca102445f52b4510b3ae202f144e6f41583945c1b86cb8d0a51b46f"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_34.bin",
+            "sha256": "31ca2777997afd2d131a7633754c91cef973aa3190389312da4280dbe53f6aa1"
+          },
+          {
+            "bytes": 49250304,
+            "filename": "params_shard_35.bin",
+            "sha256": "21fb739faf6d29a3e9e25bdfad89c05d53a0177d4cf7d68d51ff243417613ff3"
+          },
+          {
+            "bytes": 27402240,
+            "filename": "params_shard_36.bin",
+            "sha256": "291e2a8fcaec61a4cbcd3118ab5fbc28a9275bc4401fff05532393cd97163f55"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_37.bin",
+            "sha256": "d61a2143dd55fc922b47db902ff37bb5b5429e80bea34b005a6e037351b53052"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_38.bin",
+            "sha256": "684e035301d69a0e36c7474269d507f93b79acb77cb49b4d414a115c7ffd2d63"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_39.bin",
+            "sha256": "9126570fcd640ac2b9eefcc0017b4bdc51cfd3de62176f4b4f0ae446eea4ebc5"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_4.bin",
+            "sha256": "b42858a2e1db1a48d0bac8e8af713784a2dc9ff079988c1f9bbae206efe098f2"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_40.bin",
+            "sha256": "e08bd68a40d363ce92fc035ee6a3cfd7fd51539ec10c8026067f31d9e73d606e"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_41.bin",
+            "sha256": "ef15a7c46c76880a9817308375c6d3f01e589fb2d8d5dc52900218999ee67bf9"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_42.bin",
+            "sha256": "ce46bf5b5686062a087a20323286686331189cc35456fc2eb8ee3e267f84fe5a"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_43.bin",
+            "sha256": "e74904bf3d0b59e3450c22a5acace27264ae5bef2e34fc0b3a1a67c4b6227914"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_44.bin",
+            "sha256": "29793886e95014692834f4599f6d0255413425308d5bfb95fd4709376d2ed5d7"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_45.bin",
+            "sha256": "e28b90ae75159962e5f281f7996a1284682962fd100d10e2c61bcd2639c55f4b"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_46.bin",
+            "sha256": "bd3af6238df71b3011bca28f163b37183b88b72df06de1fbf023bb442e5362e7"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_47.bin",
+            "sha256": "c9973b5401a7aaf7843b6fc1cc559abac2881a1eb0ec90611d2e7e4de13cfc56"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_48.bin",
+            "sha256": "6c6c450d2f735093660b5666b7d9e155aa86f21e7c8ab3dad32df7f89a7d81d9"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_49.bin",
+            "sha256": "570b3f17cbf546524146b2da43e54f4bb8f2d99dfd74ec6ea5cdfbe1c5c3d01b"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_5.bin",
+            "sha256": "29e1b3bedced18aac0740c5798e5c12a23d127fbf1983b21ecd53c63163a97c4"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_50.bin",
+            "sha256": "cb3ac676867c1ca95514c2ff9627616627a76ac00d55f0f2429b73524198e40f"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_51.bin",
+            "sha256": "e4df238976bb596548e62815cf7c8f9361fb5450331988cce7d9ab1552622dab"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_52.bin",
+            "sha256": "6e32194d4827da65155b21ae37abe084204e6ea208cae09cd2740850ffe3166f"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_53.bin",
+            "sha256": "497f5f93b1e9e2af24c0665d64fca978ef58349ff3db3679ca33b136f72a5f02"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_54.bin",
+            "sha256": "410558aa52af10a1e0277b48f72b7aece1cbe430fa7ad9f18023538d8a7ee3e0"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_55.bin",
+            "sha256": "0cc6e7ef9a0b7814e1e9dde18ae351a8c819af3c3d1e6c65f869d2e94d1ad584"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_56.bin",
+            "sha256": "ed85db746993b9000449c0af38ce0035ecc879e2d298ef189b48738b13b10ea4"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_57.bin",
+            "sha256": "915f3373dc92ecde6aa1f8479dada5b6ae9f849eba5e3cd527f1cd23d34b1e3d"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_58.bin",
+            "sha256": "da3d5559ab3270a3d5cacbe19e95e8063cf6e0665493ed1ec961347aa3ce0fba"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_59.bin",
+            "sha256": "d5f3f608c14a31261e67508989982aec9083190523e88cf8472a033e79948cf3"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_6.bin",
+            "sha256": "0b11bf41b8ec6c19d66e510176d25972b17d4f552c1794777001c4777ee43a17"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_60.bin",
+            "sha256": "d108461be3e4f26d116170a114fff6dc8663ec8f8dd14972c1ad51b983ea98bb"
+          },
+          {
+            "bytes": 26548224,
+            "filename": "params_shard_61.bin",
+            "sha256": "c5273daaf6b869342943a1079cf0193ff134932baf75e27ae8b65b143d6b6876"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_62.bin",
+            "sha256": "02de448039f6748cf52da40b2e6ed511f9c7d58be4e2811b67b8ed2c1f338aa6"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_63.bin",
+            "sha256": "3db0cb36b5eada964c50b747a1b15a134fd03240c767664f845337784b29c45f"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_64.bin",
+            "sha256": "f2fbd42b0a0539a657563526aaa5481efa14eb236dfded09cd9cd4a294206928"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_65.bin",
+            "sha256": "5f0f70b4bfc0cb92b61aa2e273953f356b7a82cee527e97a499d8c70f2511593"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_66.bin",
+            "sha256": "1c30a821007f500252e8c49f05706231330f94bc2998802c13c991c9378dac83"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_67.bin",
+            "sha256": "7f5ea707b1287cb588f92f565ff365c753489704de827be7b64abb0799c7ddc9"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_68.bin",
+            "sha256": "3f2b4dd71c48c62eb8b985e0234692d074d234c51a64be363103b3632d3dd022"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_69.bin",
+            "sha256": "203e1692bf6b833ad8d5d224e1fac03bbf9758638fe1e704bf84907baf387c76"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_7.bin",
+            "sha256": "acb52eb9fc099f9dbcbdfd763589783e9d5a807164ce969490028c1d7f63c28d"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_70.bin",
+            "sha256": "65a47b34cc4814c70e3e2c65387ab1856567f20d210ea220b2d4372ccf61b59b"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_71.bin",
+            "sha256": "a5d900441a09817fad204c6c01c25109b8940e2891ce115e03efeef8944ce2dc"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_72.bin",
+            "sha256": "ed9adc8da05a1f94d271abcc7d581ee742b48b7986982c9b6a18c1c008ff1fac"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_73.bin",
+            "sha256": "bbb09bc2357c0f299bd7ed3c92dc5d06b771c56ac74267ff3cf23f2f6e33c240"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_74.bin",
+            "sha256": "e6c34cc5aa5032b8c8853cc9952c31218c8cd524168d460a84589b3d9ab237d0"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_75.bin",
+            "sha256": "24337c9970eca4ea2bb053aa12e6c666313e6b1e3df4c5615caf371cfb7f104c"
+          },
+          {
+            "bytes": 21239808,
+            "filename": "params_shard_76.bin",
+            "sha256": "6f3a9b8b5bf78bd2b5fe0a73c01b38bb6696af651d9e78a95604b75a3ffc084c"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_77.bin",
+            "sha256": "c7aff01548ea0693b1dac60d60843b2f87bcaecf25a744a7a8cc2cdcbc0e74e9"
+          },
+          {
+            "bytes": 22616064,
+            "filename": "params_shard_78.bin",
+            "sha256": "16bd0828905393dd9738f309049832da36aecd9ee4edb4d0c149fe9d9b79ad34"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_79.bin",
+            "sha256": "e1436e538ac30ea270444c97a00d4e9dfc6c54935f065e861069f4ee3d3fa158"
+          },
+          {
+            "bytes": 25165824,
+            "filename": "params_shard_8.bin",
+            "sha256": "a54f0d54e007c8fee68e6f7eb4e9716b163490063cedef689539855dad25b027"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_80.bin",
+            "sha256": "bec018efb6e4ca7267d6ac6877bf5604c2d20ae93f6446762ef8ef2692e4ad71"
+          },
+          {
+            "bytes": 32036864,
+            "filename": "params_shard_81.bin",
+            "sha256": "640d8930d7067c8452e9e03f9a5a08f6c5eddfcd2c4a19e15806af75da4c90ff"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_82.bin",
+            "sha256": "a120f14fe6b7954577bebc1f2a53d8de4d1de003c29bb5c0174f3cfd7c82ddee"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_83.bin",
+            "sha256": "efe081ad7b3a251c89b768f23fdebf9bfbc541332488861ba4e9c474b6d085b0"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_84.bin",
+            "sha256": "9c17ff264f10bf8f51466f7d8e67089d66f408909e68aeeb11f48728cee75305"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_85.bin",
+            "sha256": "4863b84a7f57a37d0b5c173cfbac1dfd7991edc6190c08fdfefd966e04a23d80"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_86.bin",
+            "sha256": "29fe0af67ee4b2f85299dddb9ba4080b0941bde819e7f7caa5ee30d8d22b0355"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_87.bin",
+            "sha256": "69d9807745bf48214bd3e562a79884938a62998caa77c6cb85c27ba8aaa71df7"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_88.bin",
+            "sha256": "47fa2f3b42935d6c3cc3995b5e627e414a15ad695708120c15fb7b06bf940893"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_89.bin",
+            "sha256": "7aa24fcf8efc7a632fa825c241e6b71059f3dd7fcca1c071f2cf0a9139c4e802"
+          },
+          {
+            "bytes": 33239040,
+            "filename": "params_shard_9.bin",
+            "sha256": "564187de1420fbb406b78fb1211103abc57b915a2cd01603c5355396b674a237"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_90.bin",
+            "sha256": "23bf03f5b19ae847a98fa4a95eb99e8fc5780e1ec5ce49398a66b85e721f2baa"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_91.bin",
+            "sha256": "64aef1c29f8ffad068abcc01ad94004e1a6e58f2ce9615e42e0a53e4fca06175"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_92.bin",
+            "sha256": "ea028e296ab011314b965c5745d31c3b5fd7d5b12bd2ee9c5f04ae30979e031c"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_93.bin",
+            "sha256": "361874e8cc7bf6d66782d4b3451ed56214a177b5757b07bc5a1ce042d2ba33b9"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_94.bin",
+            "sha256": "8e2071a3e3bf67ebf8ec5d32fb938f8781b35eee967dafaccd5da8694b07fceb"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_95.bin",
+            "sha256": "2c2f7e2fa43a40d0c004205a279d2c2b560c210ddd7b99cf68921c7128aafdd3"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_96.bin",
+            "sha256": "95ae1c12a2b2cc3a88a2ee9e8e086b9e3ad947dc6b9641c92de77bb594cfd4d3"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_97.bin",
+            "sha256": "a52385a396677d15b479f0f6dd1d14c6f802d9d39f3e68af466b86771b753e0c"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_98.bin",
+            "sha256": "f52cf670c2532ca43b9dc69b3ab20e1066077536f3650eb0842f59441173fcf0"
+          },
+          {
+            "bytes": 25192448,
+            "filename": "params_shard_99.bin",
+            "sha256": "83b3f2fe204cfe7a59a0782cdd90a9f1e33d67b65886b4e2d869fc53080e283e"
+          },
+          {
+            "bytes": 309445,
+            "filename": "tensor-cache.json",
+            "sha256": "f87631978c2f9b1d62f9caf126ad177058a29fd1f700aa2dadb8e62e1aeeeca1"
+          },
+          {
+            "bytes": 1851360,
+            "filename": "tokenizer.json",
+            "sha256": "493f8ad437be806d5ccdc57e91479bdbb0c656448c1b89ff70f7653530d78518"
+          },
+          {
+            "bytes": 9519,
+            "filename": "tokenizer_config.json",
+            "sha256": "581d4654c018fbcef2504b57a805dcad37126038137b5d25d22b5a02abc1ef29"
+          }
+        ],
+        "manifest_path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-source/siai/mlc-llm/phi35-provenance/manifest.json",
+        "manifest_sha256": "eba668064aa5d094eab69c816b56e7db8f1b5bf917c8eb2299ac54a94cf0966c",
+        "model_id": "mlc-ai/Phi-3.5-vision-instruct-q4f32_1-MLC",
+        "revision": "2d7104ab34b358b4223aabca1d08e451c6b12728",
+        "total_bytes": 2771867899
+      },
+      "artifacts": {}
+    },
+    {
+      "event_id": "fd2d9ee877074e3b8f548cbcbfd274dd",
+      "sequence": 3,
+      "timestamp_utc": "2026-09-07T04:39:20.628964+00:00",
+      "stage": "historical_attempts_verified",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 139,
+        "logging_point_id": "siai.mlc.readiness.attempts",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "attempts": [
+          {
+            "elapsed_seconds": 0.2241784009966068,
+            "event_id": "a21a12247d4e44459b5feab6e38835ba",
+            "last_stderr_line": "CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage",
+            "returncode": 1,
+            "run_id": "siai-mlc-phi35-cpu-cmake-20260907-001",
+            "sequence": 2,
+            "status": "blocked"
+          },
+          {
+            "elapsed_seconds": 2.7802485980209894,
+            "event_id": "2527d1f69c574db68e02fce956f02280",
+            "last_stderr_line": "  Cargo is not found! Please install cargo.",
+            "returncode": 1,
+            "run_id": "siai-mlc-phi35-cpu-cmake-20260907-002",
+            "sequence": 2,
+            "status": "blocked"
+          },
+          {
+            "elapsed_seconds": 1.9989730920060538,
+            "event_id": "c7386b087e6c4003a842ed1f1c205ffb",
+            "last_stderr_line": "  --use-flash-attn-mqa option.",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-cpu-cmake-20260907-003",
+            "sequence": 2,
+            "status": "completed"
+          },
+          {
+            "elapsed_seconds": 158.56488212302793,
+            "event_id": "cc5b73f61321435fb13ec52cfc151621",
+            "last_stderr_line": "",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-cpu-runtime-build-20260907-001",
+            "sequence": 2,
+            "status": "completed"
+          },
+          {
+            "elapsed_seconds": 0.6084326129639521,
+            "event_id": "4fab7e0a05324ef3baacfa2a96f6dfdd",
+            "last_stderr_line": "",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-fresh-runtime-factory-20260907-001",
+            "sequence": 2,
+            "status": "completed"
+          },
+          {
+            "elapsed_seconds": 0.6916154049686156,
+            "event_id": "6b5bcfce667542c38197f0ac77febeb9",
+            "last_stderr_line": "AttributeError: module 'tvm.ir._ffi_api' has no attribute 'RegisterOpAttr'",
+            "returncode": 1,
+            "run_id": "siai-mlc-phi35-fresh-runtime-import-20260907-001",
+            "sequence": 2,
+            "status": "blocked"
+          },
+          {
+            "elapsed_seconds": 28.660993219993543,
+            "event_id": "f3790c90fcaa4cc49d4ee1c56b5726af",
+            "last_stderr_line": "ValueError: Check failed: value < 1LL << (bits - 1) (7247757312 vs. 2147483648) : Literal value 7247757312 exceeds maximum of int32",
+            "returncode": 1,
+            "run_id": "siai-mlc-phi35-llvm-model-compile-20260907-001",
+            "sequence": 2,
+            "status": "blocked"
+          },
+          {
+            "elapsed_seconds": 26.53500678599812,
+            "event_id": "575f9b32df2248228f44f2f6de784174",
+            "last_stderr_line": "ValueError: Check failed: value < 1LL << (bits - 1) (7247757312 vs. 2147483648) : Literal value 7247757312 exceeds maximum of int32",
+            "returncode": 1,
+            "run_id": "siai-mlc-phi35-llvm-model-compile-20260907-002",
+            "sequence": 2,
+            "status": "blocked"
+          },
+          {
+            "elapsed_seconds": 29.17641769500915,
+            "event_id": "90a04c224d5240e9beccd6a367bade95",
+            "last_stderr_line": "tvm.error.InternalError: Do not have a default for tirx.Div",
+            "returncode": 1,
+            "run_id": "siai-mlc-phi35-llvm-model-compile-20260907-003",
+            "sequence": 2,
+            "status": "blocked"
+          },
+          {
+            "elapsed_seconds": 30.926960064971354,
+            "event_id": "ac94024b0835490d843e2ac10bb762fe",
+            "last_stderr_line": "tvm.error.InternalError: Do not have a default for tirx.Div",
+            "returncode": 1,
+            "run_id": "siai-mlc-phi35-llvm-model-compile-20260907-004",
+            "sequence": 2,
+            "status": "blocked"
+          },
+          {
+            "elapsed_seconds": 31.186534716980532,
+            "event_id": "fb37678d4d0f4cd48dd6336625bfbf40",
+            "last_stderr_line": "tvm.error.InternalError: Do not have a default for tirx.FloorDiv",
+            "returncode": 1,
+            "run_id": "siai-mlc-phi35-llvm-model-compile-20260907-005",
+            "sequence": 2,
+            "status": "blocked"
+          },
+          {
+            "elapsed_seconds": 0.07574060000479221,
+            "event_id": "aaf66fd2ad074b87bac1422f31b0707d",
+            "last_stderr_line": " + psutil==7.2.2",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-python-build-tools-20260907-001",
+            "sequence": 2,
+            "status": "completed"
+          },
+          {
+            "elapsed_seconds": 0.9832988170091994,
+            "event_id": "dfd344c1f6d744acbbb9f54a7332da04",
+            "last_stderr_line": " + wcwidth==0.8.3",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-python-dependencies-20260907-001",
+            "sequence": 2,
+            "status": "completed"
+          },
+          {
+            "elapsed_seconds": 0.2698440019739792,
+            "event_id": "de9702f427f143c7ac2cf74ca7cea41a",
+            "last_stderr_line": "done.",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-source-clone-20260907-001",
+            "sequence": 2,
+            "status": "completed"
+          },
+          {
+            "elapsed_seconds": 12.051265513990074,
+            "event_id": "cdd43091ee25457da6717bd8920e2d8c",
+            "last_stderr_line": " * branch            d4f57c440f3da8e7330a1e5d50bba9c31f9433ea -> FETCH_HEAD",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-source-submodules-20260907-001",
+            "sequence": 2,
+            "status": "completed"
+          },
+          {
+            "elapsed_seconds": 8.496239983011037,
+            "event_id": "41c34e9c57be49a2981122a4b906debc",
+            "last_stderr_line": " * branch            11051e3b73b3a6222a52acd720e39805dc7545ab -> FETCH_HEAD",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-tokenizers-source-20260907-001",
+            "sequence": 2,
+            "status": "completed"
+          },
+          {
+            "elapsed_seconds": 8.82401389896404,
+            "event_id": "e284721f51824f7aaf0122d38b84e4d6",
+            "last_stderr_line": " * branch            793921876c981ce49759114d7bb89bb89b2d3a2d -> FETCH_HEAD",
+            "returncode": 0,
+            "run_id": "siai-mlc-phi35-tvm-ffi-source-20260907-001",
+            "sequence": 2,
+            "status": "completed"
+          }
+        ],
+        "meaning": "기존 raw JSONL의 seal 및 전체 event hash chain을 재검증한 실제 명령 결과",
+        "source_runs": [
+          {
+            "events_sha256": "1b5f7281e7baf88a2976fb1c25751605d8207d9e87cb4f41a9ed8ef51d332a95",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-cpu-cmake-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "18e4506693150b97e8511899b56bd1f3962755af3bb2354dd1fc156ed30c50b5",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-cpu-cmake-20260907-002/events.jsonl"
+          },
+          {
+            "events_sha256": "8a72ba82941ca7ed135f33884a242c9d3198df3355b174363f677c5428696135",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-cpu-cmake-20260907-003/events.jsonl"
+          },
+          {
+            "events_sha256": "829f6e05bdbe35cbc32f1703d7facdf1b7c3833faa03668c7bb22c47e63c0933",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-cpu-runtime-build-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "fff9caab90661fb767301e82f0eb2fd6805aa2d4e64e73f7040947bc9ff9091e",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-fresh-runtime-factory-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "5380316fc874a93fc737f509bcba1dda7bfba05897768dbdc0f7b12178f0dc01",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-fresh-runtime-import-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "c84a110c4e1784e3ff6f450d1c4889c69744128ec95d8b709b6ca197338c30eb",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "f1e47edb1999221260cf1ca821bb6ed89a76338a4fff62ab68fc0a2f58ecf762",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-002/events.jsonl"
+          },
+          {
+            "events_sha256": "58ebb4e0bd83ab888bfb15993d6180b842a42c43f30fbb3ebe3ac7a7db86aa22",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-003/events.jsonl"
+          },
+          {
+            "events_sha256": "8d7d8371bf84da7f9d35b39c7cb830fb4e7e814fd13d2c8de360286b2b1ba69c",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-004/events.jsonl"
+          },
+          {
+            "events_sha256": "49b821359764e248871ee06fa9acb4b5250e089e5c13cbeb09213cbf2cd1aa2f",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-llvm-model-compile-20260907-005/events.jsonl"
+          },
+          {
+            "events_sha256": "2a528db9ad50d978a0f7d8aaa879d346cf9c94e64ecc0ca584004a73ba185b3e",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-model-download-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "b725332c9f034fd45268ca06fc3dc30965f447cf96f9412a281ac834f0d719b6",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-model-verified-20260907-002/events.jsonl"
+          },
+          {
+            "events_sha256": "8d36d6f02dc780dbeef5ac93f491ed93580009a04d2d39f1ef8995bfb57d8bfa",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-python-build-tools-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "58ec0b5fc999ece9162a787c1063aa923b31fff9f87f1afbcb862a98d73bc94d",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-python-dependencies-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "09bcad4d8345eff5374ff918d1f91efa50b076c0134fc6f019e6295de0c5a09c",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-source-clone-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "171760b2ca087859258268e44cdcd3c21e80da6702b1d26d7a385f8b557b371c",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-source-submodules-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "da4a375d0b88cee3d37bb3342867b7d539a8135e6146f6ca3d53877ee43dd581",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-tokenizers-source-20260907-001/events.jsonl"
+          },
+          {
+            "events_sha256": "c50740d9dfc26f5f40e4dd8a302f0948ca2f0c3d07e0657b17d0aadbb82d6c9c",
+            "log_path": "../../raw/siai/mlc-llm/siai-mlc-phi35-tvm-ffi-source-20260907-001/events.jsonl"
+          }
+        ]
+      },
+      "artifacts": {}
+    },
+    {
+      "event_id": "2df014dc0eae4787a04b0daf5642ff96",
+      "sequence": 4,
+      "timestamp_utc": "2026-09-07T04:39:20.642767+00:00",
+      "stage": "static_source_snapshot",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "changed": true,
+        "executed_native_request": false,
+        "instrumented": false,
+        "meaning": "파일 원문 전체 byte 보존; 소스 검토는 런타임 계측값이 아니다",
+        "original_sha256": "66882150549796da7737c5a1faf5301286bdcd2dc4b80ac6aafe6c42f7b39adf",
+        "private_sha256": "7f63d2b332a127d1277e92f206884edfa552c1ebb31c7ab62fc68d50bb4b14a2",
+        "relative_path": "python/mlc_llm/compiler_pass/pipeline.py"
+      },
+      "artifacts": {
+        "original_source_bytes": {
+          "label": "original_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/aa367df48eb14d07881569f51359769b-original_source_bytes.npy",
+            "sha256": "57a3bc385335df14ec0e1c440f30e40f1d3063b67bfa89f2e9a8ce82739c566d",
+            "dtype": "uint8",
+            "shape": [
+              9729
+            ],
+            "bytes": 9857
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            84,
+            104,
+            101,
+            32,
+            99
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 9729,
+          "preview_is_complete": false
+        },
+        "private_source_bytes": {
+          "label": "private_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/bc56f4c9f39e4ca886769768f20379b7-private_source_bytes.npy",
+            "sha256": "b8301dd09e532e048e358efd812b3946b848f3b44b7e822892923f554ba63db9",
+            "dtype": "uint8",
+            "shape": [
+              9901
+            ],
+            "bytes": 10029
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            84,
+            104,
+            101,
+            32,
+            99
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 9901,
+          "preview_is_complete": false
+        }
+      }
+    },
+    {
+      "event_id": "0401321535fc4df09a1a98c4b15afd32",
+      "sequence": 5,
+      "timestamp_utc": "2026-09-07T04:39:20.658239+00:00",
+      "stage": "static_source_snapshot",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "changed": true,
+        "executed_native_request": false,
+        "instrumented": false,
+        "meaning": "파일 원문 전체 byte 보존; 소스 검토는 런타임 계측값이 아니다",
+        "original_sha256": "49e417e82787df92053570957206467097c27b48c6163adc52a0e9d7e04247e4",
+        "private_sha256": "811fe59e1d4e570af44f83e8c602e21112fd2974673c092811d624c408d8da12",
+        "relative_path": "python/mlc_llm/model/vision/image_processing.py"
+      },
+      "artifacts": {
+        "original_source_bytes": {
+          "label": "original_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/3082e1089c514ec0955597208664075a-original_source_bytes.npy",
+            "sha256": "f542962a27638a2143519a4f072646836f94da5f7dd5b038f8f90ce5a8c84801",
+            "dtype": "uint8",
+            "shape": [
+              12549
+            ],
+            "bytes": 12677
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 12549,
+          "preview_is_complete": false
+        },
+        "private_source_bytes": {
+          "label": "private_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/8619976d402241098f8b2e7fa3d0640c-private_source_bytes.npy",
+            "sha256": "b22b8c97a50920016d0d5b79eea9b8df4e8a06f52e6da43907359f5941edcd07",
+            "dtype": "uint8",
+            "shape": [
+              12897
+            ],
+            "bytes": 13025
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 12897,
+          "preview_is_complete": false
+        }
+      }
+    },
+    {
+      "event_id": "472a7e973b6149469d66ab9dccba9c85",
+      "sequence": 6,
+      "timestamp_utc": "2026-09-07T04:39:20.674049+00:00",
+      "stage": "static_source_snapshot",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "changed": false,
+        "executed_native_request": false,
+        "instrumented": false,
+        "meaning": "파일 원문 전체 byte 보존; 소스 검토는 런타임 계측값이 아니다",
+        "original_sha256": "e5b6e8880c62f33dd60c6cf48501321f65c0204275bbdee6daab03119f314386",
+        "private_sha256": "e5b6e8880c62f33dd60c6cf48501321f65c0204275bbdee6daab03119f314386",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_model.py"
+      },
+      "artifacts": {
+        "original_source_bytes": {
+          "label": "original_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/5347b7e210e7444d96e9f1cd00f66603-original_source_bytes.npy",
+            "sha256": "70c3e1f7efd7a0f1bbe50360b64d25caa1fb64958e68e29865739878d3f148d0",
+            "dtype": "uint8",
+            "shape": [
+              14818
+            ],
+            "bytes": 14946
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 14818,
+          "preview_is_complete": false
+        },
+        "private_source_bytes": {
+          "label": "private_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/a7861f3e01564a8498e743f9ef739794-private_source_bytes.npy",
+            "sha256": "70c3e1f7efd7a0f1bbe50360b64d25caa1fb64958e68e29865739878d3f148d0",
+            "dtype": "uint8",
+            "shape": [
+              14818
+            ],
+            "bytes": 14946
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 14818,
+          "preview_is_complete": false
+        }
+      }
+    },
+    {
+      "event_id": "f7120cf92934450ca7a52fc8e7c32aff",
+      "sequence": 7,
+      "timestamp_utc": "2026-09-07T04:39:20.691254+00:00",
+      "stage": "static_source_snapshot",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "changed": false,
+        "executed_native_request": false,
+        "instrumented": false,
+        "meaning": "파일 원문 전체 byte 보존; 소스 검토는 런타임 계측값이 아니다",
+        "original_sha256": "b9eb2c2dff2ba3d35f7502c28cc547b8441488e9f1369bc103e5235ee05d871b",
+        "private_sha256": "b9eb2c2dff2ba3d35f7502c28cc547b8441488e9f1369bc103e5235ee05d871b",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_image.py"
+      },
+      "artifacts": {
+        "original_source_bytes": {
+          "label": "original_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/1227f55d691b43dbb9aad2e8504e6e06-original_source_bytes.npy",
+            "sha256": "0afa42b77cccc4b154de78e0a46fbceba2fa831e6aefc4cfc25dd0151ba8a6a7",
+            "dtype": "uint8",
+            "shape": [
+              12877
+            ],
+            "bytes": 13005
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 12877,
+          "preview_is_complete": false
+        },
+        "private_source_bytes": {
+          "label": "private_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/33d839b5f97b466e96fa4e25197357c4-private_source_bytes.npy",
+            "sha256": "0afa42b77cccc4b154de78e0a46fbceba2fa831e6aefc4cfc25dd0151ba8a6a7",
+            "dtype": "uint8",
+            "shape": [
+              12877
+            ],
+            "bytes": 13005
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 12877,
+          "preview_is_complete": false
+        }
+      }
+    },
+    {
+      "event_id": "dd56864411ba4f44bfdc066f7fb90277",
+      "sequence": 8,
+      "timestamp_utc": "2026-09-07T04:39:20.712808+00:00",
+      "stage": "static_source_snapshot",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "changed": false,
+        "executed_native_request": false,
+        "instrumented": false,
+        "meaning": "파일 원문 전체 byte 보존; 소스 검토는 런타임 계측값이 아니다",
+        "original_sha256": "4888eb699c046b581fb4d47dcb5ddced69586ab3b309fe89fbe9dc77e95aca6e",
+        "private_sha256": "4888eb699c046b581fb4d47dcb5ddced69586ab3b309fe89fbe9dc77e95aca6e",
+        "relative_path": "python/mlc_llm/serve/data.py"
+      },
+      "artifacts": {
+        "original_source_bytes": {
+          "label": "original_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/388b80990b3e4aa69d8e23af0151a33d-original_source_bytes.npy",
+            "sha256": "29ce34c4feffd7a97654a6f2e8f86ce0158b39fdc195473616e61e7b6cd3e142",
+            "dtype": "uint8",
+            "shape": [
+              7018
+            ],
+            "bytes": 7146
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            67,
+            108,
+            97,
+            115,
+            115
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 7018,
+          "preview_is_complete": false
+        },
+        "private_source_bytes": {
+          "label": "private_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/034c4f93c7a74cc2bf1556888a26966c-private_source_bytes.npy",
+            "sha256": "29ce34c4feffd7a97654a6f2e8f86ce0158b39fdc195473616e61e7b6cd3e142",
+            "dtype": "uint8",
+            "shape": [
+              7018
+            ],
+            "bytes": 7146
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            34,
+            34,
+            34,
+            67,
+            108,
+            97,
+            115,
+            115
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 7018,
+          "preview_is_complete": false
+        }
+      }
+    },
+    {
+      "event_id": "4d19984244a74d3e9d6833bf83a4db90",
+      "sequence": 9,
+      "timestamp_utc": "2026-09-07T04:39:20.745465+00:00",
+      "stage": "static_source_snapshot",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "changed": false,
+        "executed_native_request": false,
+        "instrumented": false,
+        "meaning": "파일 원문 전체 byte 보존; 소스 검토는 런타임 계측값이 아니다",
+        "original_sha256": "de6fe98f6fa653429b3891226dab4fe97c574899d7bba6b9e6ed9398bce35523",
+        "private_sha256": "de6fe98f6fa653429b3891226dab4fe97c574899d7bba6b9e6ed9398bce35523",
+        "relative_path": "cpp/support/vlm_utils.cc"
+      },
+      "artifacts": {
+        "original_source_bytes": {
+          "label": "original_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/c18c0e65f1c14bf68f19a03b3b508379-original_source_bytes.npy",
+            "sha256": "78284a74d470e022bb9f29208c62ec84fc62a7c7de92d2cd59ebe1a0af406610",
+            "dtype": "uint8",
+            "shape": [
+              2016
+            ],
+            "bytes": 2144
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            47,
+            42,
+            33,
+            10,
+            32,
+            42,
+            32,
+            32
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 2016,
+          "preview_is_complete": false
+        },
+        "private_source_bytes": {
+          "label": "private_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/ee9b0326996a42d2bd4d24eae56e89c4-private_source_bytes.npy",
+            "sha256": "78284a74d470e022bb9f29208c62ec84fc62a7c7de92d2cd59ebe1a0af406610",
+            "dtype": "uint8",
+            "shape": [
+              2016
+            ],
+            "bytes": 2144
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            47,
+            42,
+            33,
+            10,
+            32,
+            42,
+            32,
+            32
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 2016,
+          "preview_is_complete": false
+        }
+      }
+    },
+    {
+      "event_id": "51cdd09104984f59997db18aad38e63b",
+      "sequence": 10,
+      "timestamp_utc": "2026-09-07T04:39:20.761708+00:00",
+      "stage": "static_source_snapshot",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "siai.mlc.readiness.static-source-snapshot",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "changed": false,
+        "executed_native_request": false,
+        "instrumented": false,
+        "meaning": "파일 원문 전체 byte 보존; 소스 검토는 런타임 계측값이 아니다",
+        "original_sha256": "ad71be956ad8f06910399a593f6638565fc810f6dc33e24ea2c28f49c59a778a",
+        "private_sha256": "ad71be956ad8f06910399a593f6638565fc810f6dc33e24ea2c28f49c59a778a",
+        "relative_path": "cpp/serve/model.cc"
+      },
+      "artifacts": {
+        "original_source_bytes": {
+          "label": "original_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/6b2b8188ecff4f3188feb7a8fee62dcc-original_source_bytes.npy",
+            "sha256": "db1c95da54e6ac8b169fc34e7657cd33f6f013b941c1acad225d3d4b550ac5f8",
+            "dtype": "uint8",
+            "shape": [
+              56938
+            ],
+            "bytes": 57066
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            47,
+            42,
+            33,
+            10,
+            32,
+            42,
+            32,
+            32
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 56938,
+          "preview_is_complete": false
+        },
+        "private_source_bytes": {
+          "label": "private_source_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/f0c8d8fa6d274281918fa8d73df22b53-private_source_bytes.npy",
+            "sha256": "db1c95da54e6ac8b169fc34e7657cd33f6f013b941c1acad225d3d4b550ac5f8",
+            "dtype": "uint8",
+            "shape": [
+              56938
+            ],
+            "bytes": 57066
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            47,
+            42,
+            33,
+            10,
+            32,
+            42,
+            32,
+            32
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 56938,
+          "preview_is_complete": false
+        }
+      }
+    },
+    {
+      "event_id": "e1ddcb3559e246d0ad072ee13028dc23",
+      "sequence": 11,
+      "timestamp_utc": "2026-09-07T04:39:20.870610+00:00",
+      "stage": "native_runtime_build_verified",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 165,
+        "logging_point_id": "siai.mlc.readiness.runtime-binaries",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "binaries": [
+          {
+            "bytes": 18822824,
+            "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/build/libmlc_llm.so",
+            "sha256": "61362dbae126738c63f6addcc8106740f54db39da129dcbfb1a2b546fe777813"
+          },
+          {
+            "bytes": 18822824,
+            "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/build/libmlc_llm_module.so",
+            "sha256": "ec7a71c67f8fde4f9ac2f4205cc5159cc95bdb189198c818336a1cec5e8fcfc9"
+          },
+          {
+            "bytes": 2866712,
+            "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/build/lib/libtvm_runtime.so",
+            "sha256": "df6ccfd6e5846bc4de2791f9103e10878f0af063f479269506f37eb02de955a0"
+          },
+          {
+            "bytes": 1471192,
+            "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/build/lib/libtvm_runtime_extra.so",
+            "sha256": "228c4e502c3fcbd400cb106212b0655268df09fc1b960d1649912147efd8f27a"
+          },
+          {
+            "bytes": 2401576,
+            "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/build/lib/libtvm_ffi.so",
+            "sha256": "be1a1f9445a916e2c44e909e7bbd9da02419fc86de88bfb12444a2c32b59d893"
+          }
+        ],
+        "cargo_lock_path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/3rdparty/tokenizers-cpp/rust/Cargo.lock",
+        "cargo_lock_sha256": "8b68fab848ea4e0e9cfab815acac63a9ce1a1ab9fb705d5966620b7d0f948362",
+        "cpp_factory_module_created": true,
+        "meaning": "fresh C++ 라이브러리 로드·미초기화 engine factory 생성만 성공",
+        "model_initialized": false,
+        "native_request_count": 0,
+        "rust_version": "1.90.0"
+      },
+      "artifacts": {
+        "cargo_lock_bytes": {
+          "label": "cargo_lock_bytes",
+          "unit": "원본 텐서의 수치 단위(별도 단위 미기록)",
+          "full_value": {
+            "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/artifacts/6266ba7e5f9846a488ee3351218e7f7a-cargo_lock_bytes.npy",
+            "sha256": "aa423da62a3830b15e9a3b6a274ef5700d5e62656ae8a867dd8cb93cf5d4c294",
+            "dtype": "uint8",
+            "shape": [
+              18724
+            ],
+            "bytes": 18852
+          },
+          "preview_notice": "아래 값은 실제 원본의 앞부분 preview입니다. 전체 배열은 full_value.path의 파일입니다.",
+          "preview": [
+            35,
+            32,
+            84,
+            104,
+            105,
+            115,
+            32,
+            102
+          ],
+          "preview_element_count": 8,
+          "total_element_count": 18724,
+          "preview_is_complete": false
+        }
+      }
+    },
+    {
+      "event_id": "fc3c833e04d941c4bb425dee2a9e7ad9",
+      "sequence": 12,
+      "timestamp_utc": "2026-09-07T04:39:20.874365+00:00",
+      "stage": "readiness_result",
+      "context": {},
+      "source": {
+        "function": "main",
+        "line": 183,
+        "logging_point_id": "siai.mlc.readiness.result",
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/mlc-llm/finalize_readiness.py",
+        "sha256": "ac240995b9de07cd0e60b0c23aed0e4bd041c1e84a00587d4e19014ac192931f"
+      },
+      "raw": {
+        "blocking_observations": [
+          "int32 constant 7247757312 overflow during stock CPU lowering",
+          "LLVM int64-index variant: VMCodeGen cannot handle tirx.Div argument",
+          "LLVM int64+FloorDiv variant: VMCodeGen cannot handle tirx.FloorDiv argument"
+        ],
+        "condition_evidence_status": "not_evaluated",
+        "cpp_factory_module_created": true,
+        "fresh_runtime_build_complete": true,
+        "meaning": "모델을 바꿔 실제 다운로드·빌드·컴파일 재시도했지만 native SIAI 추론까지 도달하지 못함",
+        "model_compile_attempt_count": 5,
+        "model_compile_success_count": 0,
+        "model_download_complete": true,
+        "model_library_available": false,
+        "native_request_count": 0,
+        "ready": false,
+        "reason_code": "phi3v_llvm_model_compilation_failed",
+        "scope_boundary": "No additional CPU image-kernel port was performed; this would change the benchmark implementation",
+        "source_review_only": [
+          "GPU thread-binding image kernels need validated CPU lowering",
+          "16 padded crop features versus native 2x2 crop dimensions require contract repair",
+          "ImageData.from_url hard-coded 1921 length disagrees with expected 757 for 2x2 crops"
+        ]
+      },
+      "artifacts": {}
+    }
+  ],
+  "provenance": {
+    "run_id": "siai-mlc-phi35-readiness-20260907-001",
+    "execution_scope": "preflight",
+    "run_status": "blocked",
+    "run_reason": "Phi-3.5 Vision LLVM model compilation failed; native inference was not executed",
+    "raw_log": {
+      "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/events.jsonl",
+      "sha256": "765c10cc70fa3dbeadb488a8bdd7e30a4b0b445356866f34a4d64454293c8b06"
+    },
+    "seal": {
+      "path": "../../../../.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/seal.json",
+      "sha256": "7e293ea7e599c3e9d822243440795cd4596cdf2f5928cff0008547f5936e52c0"
+    },
+    "rules": {
+      "path": "../../../../LieMappBench/Logging-Dataset/siai/conditions.json",
+      "sha256": "48d5cdd2a4784819f3fd0e706c9df119d0d7156685009925f0a4686e406ce16f"
+    },
+    "library": {
+      "path": "LieMappBench/Attack-Library/attack_library.xlsx",
+      "sha256": "069bdc201aef0babcb9eecabfc50627548dae616e618aac1b20cf9418a1a4981",
+      "sheet": "AI 포렌식",
+      "row": 10,
+      "cells": {
+        "AC": "G10",
+        "DC": "H10"
+      }
+    },
+    "internal_analysis": {
+      "path": "../../../../.evidence/analyses/siai/mlc-llm/20260907T050910Z-1b4f03db/analysis.json",
+      "sha256": "226117237e1722b699475d2446717713ca3d9268a35ecac54dff55cb7a676295"
+    },
+    "analyzer_sha256": "1ece41340efd348562b1a50fe5ad69ecd8f49ffa1cd7ab716bf13efae049c09c",
+    "mapping": {
+      "path": "../../../../LieMappBench/Logging-Dataset/siai/mlc-llm/source-review-phi35-cpu-retry.json",
+      "sha256": "5d6e1acd38cf8e7092d230ee4493b57c4a577f93d3f66afa8cf11e1b52787487"
+    },
+    "raw_values_preserved": true,
+    "readable_used_for_verdict": false,
+    "presentation": {
+      "path": "../../../../LieMappBench/Logging-Dataset/siai/presentation.json",
+      "sha256": "4b7124e55b9d465cfc81633ffd108183b45ca880e29ca6cd52b6af0c61ba6d26"
+    }
+  }
+}

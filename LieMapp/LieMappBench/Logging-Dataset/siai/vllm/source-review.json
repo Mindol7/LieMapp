@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "siai",
+  "engine": "vllm",
+  "engine_id": "vllm",
+  "source_root": "LIE/vllm",
+  "source_commit": "a1541f5742a29864a80087af313ad460066a1524",
+  "status": "static_candidate_review_only",
+  "library_source": {
+    "path": "LieMappBench/Attack-Library/attack_library.xlsx",
+    "sha256": "069bdc201aef0babcb9eecabfc50627548dae616e618aac1b20cf9418a1a4981",
+    "sheet": "AI 포렌식"
+  },
+  "conditions": [
+    {
+      "condition_id": "AC1",
+      "type": "AC",
+      "text": "현재 요청에서 이미지 인코더와 multimodal fusion 경로가 실제로 활성화되는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "AC2",
+      "type": "AC",
+      "text": "입력 이미지의 adversarial perturbation이 전처리 이후에도 보존되어 이미지 인코더에 도달하는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "AC3",
+      "type": "AC",
+      "text": "생성된 visual embedding이 언어 디코더의 생성 결과에 직접 영향을 미치는 구조인가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "DC1",
+      "type": "DC",
+      "text": "원본과 증강 이미지를 동일한 전처리·인코더에 입력할 \n수 있는가?\n - 이미지 증강: JPEG 압축, 가우시안 블러, 랜덤 아핀 변환, 색상 조정, 랜덤 원근 변환",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    },
+    {
+      "condition_id": "DC2",
+      "type": "DC",
+      "text": "동일 계층의 이미지 임베딩을 추출하고 서로 연결할 수 있는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    },
+    {
+      "condition_id": "DC3",
+      "type": "DC",
+      "text": "코사인 유사도를 계산하고 모델별 정상 기준선·threshold와 비교할 수 있는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    }
+  ],
+  "historical_mapping": {
+    "engine": "vllm",
+    "sheet": "AI 포렌식",
+    "cell": "K10",
+    "text": "AC1. vllm/model_executor/models/idefics3.py:648 (_process_image_input), vllm/model_executor/models/utils.py:676 (_merge_multimodal_embaddings).\nAC2. vllm/model_executor/models/idefics3.py:296 (_call_hf_processor), vllm/model_executor/models/idefics3.py:497 (image_pixels_to_features).\nAC3. vllm/model_executor/models/utils.py:676 (_merge_multimodal_embeddings).\n\nDC1. vllm/model_executor/models/idefics3.py:497 (image_pixels_to_features)\nDC2. vllm/model_executor/models/idefics3.py:648 (_process_image_input)\nDC3. vllm/model_executor/models/idefics3.py:648 (_process_image_input)",
+    "status": "historical_unversioned_reference"
+  },
+  "logging_points": [
+    {
+      "mapping_id": "siai-vllm-candidate-01",
+      "status": "static_candidate",
+      "condition_ids": [
+        "AC2",
+        "DC1"
+      ],
+      "source": {
+        "file": "vllm/model_executor/models/idefics3.py",
+        "symbol": "_apply_hf_processor_main",
+        "class": "Idefics3MultiModalProcessor",
+        "line": 244,
+        "end_line": 295,
+        "sha256": "863d51f53bfbc3d9d352b1aa5cdc192d19d8c86a308a2228ded8924820e9a5c0"
+      },
+      "stage": "preprocess",
+      "reason": "전처리 전후 및 이미지-증강 계보를 확보하는 경계",
+      "required_raw_evidence": [
+        "input bytes/tensor",
+        "output tensor",
+        "processor parameters",
+        "parent/input ID"
+      ],
+      "executed": false,
+      "instrumented": false
+    },
+    {
+      "mapping_id": "siai-vllm-candidate-02",
+      "status": "static_candidate",
+      "condition_ids": [
+        "AC2",
+        "DC1"
+      ],
+      "source": {
+        "file": "vllm/model_executor/models/idefics3.py",
+        "symbol": "image_pixels_to_features",
+        "class": null,
+        "line": 442,
+        "end_line": 480,
+        "sha256": "863d51f53bfbc3d9d352b1aa5cdc192d19d8c86a308a2228ded8924820e9a5c0"
+      },
+      "stage": "encoder_input",
+      "reason": "전처리 결과가 실제 인코더 입력으로 전달되는 경계",
+      "required_raw_evidence": [
+        "encoder input tensor",
+        "request/input ID",
+        "processor fingerprint"
+      ],
+      "executed": false,
+      "instrumented": false
+    },
+    {
+      "mapping_id": "siai-vllm-candidate-03",
+      "status": "static_candidate",
+      "condition_ids": [
+        "AC1",
+        "DC2",
+        "DC3"
+      ],
+      "source": {
+        "file": "vllm/model_executor/models/idefics3.py",
+        "symbol": "_process_image_input",
+        "class": null,
+        "line": 621,
+        "end_line": 633,
+        "sha256": "863d51f53bfbc3d9d352b1aa5cdc192d19d8c86a308a2228ded8924820e9a5c0"
+      },
+      "stage": "encode",
+      "reason": "이미지 인코딩 성공 여부와 같은 계층의 원시 임베딩을 확보하는 경계",
+      "required_raw_evidence": [
+        "encoder input tensor",
+        "embedding tensor",
+        "return status",
+        "layer/stage ID"
+      ],
+      "executed": false,
+      "instrumented": false
+    },
+    {
+      "mapping_id": "siai-vllm-candidate-04",
+      "status": "static_candidate",
+      "condition_ids": [
+        "AC1",
+        "AC3"
+      ],
+      "source": {
+        "file": "vllm/model_executor/models/utils.py",
+        "symbol": "_merge_multimodal_embeddings",
+        "class": null,
+        "line": 688,
+        "end_line": 724,
+        "sha256": "a2e26518da6b49ec861a580cd1195fe38fce57b4484ee457627093d290e3cf68"
+      },
+      "stage": "fusion",
+      "reason": "이미지 임베딩이 언어 입력에 결합되는 경계; 후속 디코더 증거도 필요",
+      "required_raw_evidence": [
+        "visual embedding hash",
+        "image-token positions",
+        "fused embeddings",
+        "request ID"
+      ],
+      "executed": false,
+      "instrumented": false
+    }
+  ],
+  "limitations": [
+    "함수 존재·매핑만 확인함. 계측 적용·실행·T/F 판정을 뜻하지 않음.",
+    "AC2에는 clean/attack 쌍의 encoder-input 차이와 공격 provenance가 필요함.",
+    "AC3 직접 영향 주장은 같은 요청 추적과 통제된 visual ablation이 필요함.",
+    "DC1~3은 탐지 준비도이며 공격 탐지 성능이나 사건 발생 입증과 다름."
+  ]
+}

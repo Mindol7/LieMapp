@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "Version-pinned CPU preflight only; these profiles are NOT executed engine instrumentation",
+  "engines": [
+    {
+      "id": "vllm",
+      "repository": "vllm",
+      "python": "/tmp/vllm-siai-venv/bin/python",
+      "packages": ["vllm", "torch", "transformers"],
+      "documents": ["requirements/cpu.txt", "docs/getting_started/installation/cpu.x86.inc.md"],
+      "required_cpu_features": [],
+      "native_package": "vllm",
+      "reason": "AVX2 CPU 지원 경로는 있으나 현재 소스 커밋에 맞는 vLLM native 패키지 및 CPU 의존성·멀티모달 실행 검증을 완료하지 못함. NVIDIA GPU 부재만으로 불가능하다고 판정하지 않음.",
+      "next_step": "원본과 분리한 계측 트리에서 pinned CPU wheel 또는 source build 구성 후 native 요청 검증 필요"
+    },
+    {
+      "id": "SGLang",
+      "repository": "sglang",
+      "python": "/tmp/sglang-siai-venv/bin/python",
+      "packages": ["sglang", "sgl_kernel", "torch", "transformers"],
+      "documents": ["docs/docs/hardware-platforms/cpu_server.mdx"],
+      "required_cpu_features": [],
+      "native_package": "sglang",
+      "reason": "초기 preflight 이후 독립 Instrumented-LIE/siai/SGLang 환경에서 실제 Engine/tokenizer/scheduler/torch_native CPU 실행을 검증했다. 사전 고정 84입력+zero/explicit 2대조군=86요청, heldout12, fresh repeat1이 완료됐다. 단, 명시적 one-tile processor adaptation(512x512, splitting/resize off, 64 visual tokens) 및 선택적 CPU extension의 lazy-import 호환성 패치를 사용했으며 stock-default 벤치마크가 아니다. 이 preflight 프로파일 자체는 실행 증거가 아니며 최종 native run과 별도로 보존한다.",
+      "next_step": "실제 실행은 Attack-Execution-Dataset/attack-script/siai/SGLang/README.md 및 Instrumented-LIE/siai/SGLang/.venv/bin/python을 사용한다. 현재 공개 결과는 developer.py/investigator.py가 report/siai/SGLang/SIAI-SGLang-Report.md 한 개와 LieMappAnalyzer/LogFile/siai/SGLang의 조건 JSON 6개로 발행한다. 당시 판정은 .archive/20260907-report-layout/report/siai/SGLang/siai-SGLang-native-cpu-one-tile-20260906-001-reviewed-common-serial/report.md, 실제 원시 증거는 동일 run-id의 .evidence/raw/siai/SGLang을 참조한다. 다른 모델/stock 설정/일반 ASR 검증은 후속 범위다."
+    },
+    {
+      "id": "mlc-llm",
+      "repository": "mlc-llm",
+      "python": "/tmp/mlc-siai-venv/bin/python",
+      "packages": ["mlc_llm", "tvm", "torch"],
+      "documents": [".gitmodules", "python/mlc_llm/model/model.py"],
+      "required_cpu_features": [],
+      "native_package": "mlc_llm",
+      "reason": "초기 SmolVLM 미지원 진단 이후 사용자 지정 Phi-3.5-vision-instruct-q4f32_1-MLC 공식 모델114파일을 다운로드·검증했고, exact source의 fresh CPU C++ runtime 빌드 및 engine factory 생성까지 성공했다. 하지만 PhiV LLVM 모델 컴파일5회는 stock int32 overflow 및 두 최소 호환 변형의 VMCodeGen Div/FloorDiv 오류로 모두 실패했다. 따라서 모델 .so가 없고 native SIAI 추론은0회다. 자세한 최종 결과는 phi35-cpu-retry.md 및 readiness-20260907-001의 원시 증거를 참조한다. GPU 부재만으로 모든 MLC CPU 실행이 불가능하다는 주장은 하지 않는다.",
+      "next_step": "실제 모델 실행을 위해 PhiV 이미지 커널의 검증된 CPU lowering과16padding/2x2crop·1921/757 token 계약 수리가 별도 필요하다. 이는 이번에 진행하지 않은 구현 확장이다. 새로운 모델 다운로드나 HF forward로 실패를 대체하지 않았다. 향후 기존 SmolVLM PGD 입력의 PhiV 실행은 교차 모델 전이 실험으로 명시해야 한다."
+    },
+    {
+      "id": "tensorRT-llm",
+      "repository": "TensorRT-LLM",
+      "python": "/tmp/sglang-siai-venv/bin/python",
+      "packages": ["tensorrt_llm", "tensorrt", "torch"],
+      "documents": ["docs/source/supported-hardware.md"],
+      "required_cpu_features": [],
+      "native_package": "tensorrt_llm",
+      "reason": "공식 지원 실행 대상은 NVIDIA GPU이며 이 호스트에는 NVIDIA GPU가 없음. CPU상의 소스 조사나 Transformers 모델 실행을 TensorRT-LLM native 추론으로 기록하지 않음.",
+      "next_step": "현 환경에서는 정적 매핑·공통 스키마까지만 검토; native 실행에는 지원 NVIDIA GPU 환경 필요"
+    }
+  ]
+}

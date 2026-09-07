@@ -1,0 +1,476 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "siai",
+  "engine_id": "mlc-llm",
+  "model_id": "mlc-ai/Phi-3.5-vision-instruct-q4f32_1-MLC",
+  "status": "readiness_blocked_static_mapping_only",
+  "conditions": [
+    {
+      "condition_id": "AC1",
+      "type": "AC",
+      "text": "현재 요청에서 이미지 인코더와 multimodal fusion 경로가 실제로 활성화되는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "AC2",
+      "type": "AC",
+      "text": "입력 이미지의 adversarial perturbation이 전처리 이후에도 보존되어 이미지 인코더에 도달하는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "AC3",
+      "type": "AC",
+      "text": "생성된 visual embedding이 언어 디코더의 생성 결과에 직접 영향을 미치는 구조인가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "DC1",
+      "type": "DC",
+      "text": "원본과 증강 이미지를 동일한 전처리·인코더에 입력할 \n수 있는가?\n - 이미지 증강: JPEG 압축, 가우시안 블러, 랜덤 아핀 변환, 색상 조정, 랜덤 원근 변환",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    },
+    {
+      "condition_id": "DC2",
+      "type": "DC",
+      "text": "동일 계층의 이미지 임베딩을 추출하고 서로 연결할 수 있는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    },
+    {
+      "condition_id": "DC3",
+      "type": "DC",
+      "text": "코사인 유사도를 계산하고 모델별 정상 기준선·threshold와 비교할 수 있는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    }
+  ],
+  "library_source": {
+    "path": "LieMappBench/Attack-Library/attack_library.xlsx",
+    "sha256": "069bdc201aef0babcb9eecabfc50627548dae616e618aac1b20cf9418a1a4981",
+    "sheet": "AI 포렌식"
+  },
+  "logging_points": [
+    {
+      "mapping_id": "siai-mlc-phi35-static-01",
+      "status": "static_candidate_not_instrumented",
+      "condition_ids": [
+        "AC2",
+        "DC1"
+      ],
+      "canonical_stage": "processor_output",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/python/mlc_llm/model/phi3v/phi3v_model.py",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_model.py",
+        "class": "Phi3VForCausalLM",
+        "function": "image_preprocess",
+        "line": 224,
+        "end_line": 272,
+        "sha256": "e5b6e8880c62f33dd60c6cf48501321f65c0204275bbdee6daab03119f314386",
+        "base_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba"
+      },
+      "reason": "입력 uint8와 정규화·분할 후 실제 pixel tensor를 같은 request/input ID에 연결해야 함",
+      "instrumented": false,
+      "native_request_executed": false,
+      "raw_runtime_values": null,
+      "raw_runtime_values_status": "not_collected_model_compilation_failed",
+      "source_snapshot_event_id": "472a7e973b6149469d66ab9dccba9c85",
+      "source_snapshot_sequence": 6,
+      "source_snapshot_artifacts": {
+        "original_source_bytes": {
+          "bytes": 14946,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/5347b7e210e7444d96e9f1cd00f66603-original_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 14818,
+          "sha256": "70c3e1f7efd7a0f1bbe50360b64d25caa1fb64958e68e29865739878d3f148d0",
+          "shape": [
+            14818
+          ]
+        },
+        "private_source_bytes": {
+          "bytes": 14946,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/a7861f3e01564a8498e743f9ef739794-private_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 14818,
+          "sha256": "70c3e1f7efd7a0f1bbe50360b64d25caa1fb64958e68e29865739878d3f148d0",
+          "shape": [
+            14818
+          ]
+        }
+      },
+      "important": "Python model methods construct compiled IR; function entry logging at compile time is not native request evidence"
+    },
+    {
+      "mapping_id": "siai-mlc-phi35-static-02",
+      "status": "static_candidate_not_instrumented",
+      "condition_ids": [
+        "AC1",
+        "AC2",
+        "DC1"
+      ],
+      "canonical_stage": "encoder_input",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/python/mlc_llm/model/phi3v/phi3v_model.py",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_model.py",
+        "class": "Phi3VForCausalLM",
+        "function": "image_embed",
+        "line": 274,
+        "end_line": 285,
+        "sha256": "e5b6e8880c62f33dd60c6cf48501321f65c0204275bbdee6daab03119f314386",
+        "base_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba"
+      },
+      "reason": "실제 vision encoder에 전달된 전체 tensor와 성공 반환을 확인해야 함",
+      "instrumented": false,
+      "native_request_executed": false,
+      "raw_runtime_values": null,
+      "raw_runtime_values_status": "not_collected_model_compilation_failed",
+      "source_snapshot_event_id": "472a7e973b6149469d66ab9dccba9c85",
+      "source_snapshot_sequence": 6,
+      "source_snapshot_artifacts": {
+        "original_source_bytes": {
+          "bytes": 14946,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/5347b7e210e7444d96e9f1cd00f66603-original_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 14818,
+          "sha256": "70c3e1f7efd7a0f1bbe50360b64d25caa1fb64958e68e29865739878d3f148d0",
+          "shape": [
+            14818
+          ]
+        },
+        "private_source_bytes": {
+          "bytes": 14946,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/a7861f3e01564a8498e743f9ef739794-private_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 14818,
+          "sha256": "70c3e1f7efd7a0f1bbe50360b64d25caa1fb64958e68e29865739878d3f148d0",
+          "shape": [
+            14818
+          ]
+        }
+      },
+      "important": "Python model methods construct compiled IR; function entry logging at compile time is not native request evidence"
+    },
+    {
+      "mapping_id": "siai-mlc-phi35-static-03",
+      "status": "static_candidate_not_instrumented",
+      "condition_ids": [
+        "AC1",
+        "DC2"
+      ],
+      "canonical_stage": "encoder_output",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/python/mlc_llm/model/phi3v/phi3v_image.py",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_image.py",
+        "class": "Phi3ImageEmbedding",
+        "function": "get_img_features",
+        "line": 189,
+        "end_line": 192,
+        "sha256": "b9eb2c2dff2ba3d35f7502c28cc547b8441488e9f1369bc103e5235ee05d871b",
+        "base_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba"
+      },
+      "reason": "동일 계층의 native visual feature를 증강 원본/변형에 대해 수집해야 함",
+      "instrumented": false,
+      "native_request_executed": false,
+      "raw_runtime_values": null,
+      "raw_runtime_values_status": "not_collected_model_compilation_failed",
+      "source_snapshot_event_id": "f7120cf92934450ca7a52fc8e7c32aff",
+      "source_snapshot_sequence": 7,
+      "source_snapshot_artifacts": {
+        "original_source_bytes": {
+          "bytes": 13005,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/1227f55d691b43dbb9aad2e8504e6e06-original_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 12877,
+          "sha256": "0afa42b77cccc4b154de78e0a46fbceba2fa831e6aefc4cfc25dd0151ba8a6a7",
+          "shape": [
+            12877
+          ]
+        },
+        "private_source_bytes": {
+          "bytes": 13005,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/33d839b5f97b466e96fa4e25197357c4-private_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 12877,
+          "sha256": "0afa42b77cccc4b154de78e0a46fbceba2fa831e6aefc4cfc25dd0151ba8a6a7",
+          "shape": [
+            12877
+          ]
+        }
+      },
+      "important": "Python model methods construct compiled IR; function entry logging at compile time is not native request evidence"
+    },
+    {
+      "mapping_id": "siai-mlc-phi35-static-04",
+      "status": "static_candidate_not_instrumented",
+      "condition_ids": [
+        "AC1",
+        "AC3",
+        "DC2",
+        "DC3"
+      ],
+      "canonical_stage": "projected_embedding",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/python/mlc_llm/model/phi3v/phi3v_image.py",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_image.py",
+        "class": "Phi3ImageEmbedding",
+        "function": "forward",
+        "line": 279,
+        "end_line": 309,
+        "sha256": "b9eb2c2dff2ba3d35f7502c28cc547b8441488e9f1369bc103e5235ee05d871b",
+        "base_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba"
+      },
+      "reason": "실제 projector 반환 embedding 전체 원시값과 stable layer identity가 필요함",
+      "instrumented": false,
+      "native_request_executed": false,
+      "raw_runtime_values": null,
+      "raw_runtime_values_status": "not_collected_model_compilation_failed",
+      "source_snapshot_event_id": "f7120cf92934450ca7a52fc8e7c32aff",
+      "source_snapshot_sequence": 7,
+      "source_snapshot_artifacts": {
+        "original_source_bytes": {
+          "bytes": 13005,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/1227f55d691b43dbb9aad2e8504e6e06-original_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 12877,
+          "sha256": "0afa42b77cccc4b154de78e0a46fbceba2fa831e6aefc4cfc25dd0151ba8a6a7",
+          "shape": [
+            12877
+          ]
+        },
+        "private_source_bytes": {
+          "bytes": 13005,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/33d839b5f97b466e96fa4e25197357c4-private_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 12877,
+          "sha256": "0afa42b77cccc4b154de78e0a46fbceba2fa831e6aefc4cfc25dd0151ba8a6a7",
+          "shape": [
+            12877
+          ]
+        }
+      },
+      "important": "Python model methods construct compiled IR; function entry logging at compile time is not native request evidence"
+    },
+    {
+      "mapping_id": "siai-mlc-phi35-static-05",
+      "status": "static_candidate_not_instrumented",
+      "condition_ids": [
+        "AC1",
+        "AC3"
+      ],
+      "canonical_stage": "decoder_input",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/mlc-llm/engine/python/mlc_llm/model/phi3v/phi3v_model.py",
+        "relative_path": "python/mlc_llm/model/phi3v/phi3v_model.py",
+        "class": "Phi3VForCausalLM",
+        "function": "prefill",
+        "line": 178,
+        "end_line": 188,
+        "sha256": "e5b6e8880c62f33dd60c6cf48501321f65c0204275bbdee6daab03119f314386",
+        "base_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba"
+      },
+      "reason": "언어 decoder의 실제 입력과 full first logits를 수집하고 동일 입력 정상/zero 개입·비개입 반복을 비교해야 함",
+      "instrumented": false,
+      "native_request_executed": false,
+      "raw_runtime_values": null,
+      "raw_runtime_values_status": "not_collected_model_compilation_failed",
+      "source_snapshot_event_id": "472a7e973b6149469d66ab9dccba9c85",
+      "source_snapshot_sequence": 6,
+      "source_snapshot_artifacts": {
+        "original_source_bytes": {
+          "bytes": 14946,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/5347b7e210e7444d96e9f1cd00f66603-original_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 14818,
+          "sha256": "70c3e1f7efd7a0f1bbe50360b64d25caa1fb64958e68e29865739878d3f148d0",
+          "shape": [
+            14818
+          ]
+        },
+        "private_source_bytes": {
+          "bytes": 14946,
+          "dtype": "uint8",
+          "format": "npy",
+          "max": 125,
+          "meaning": "Lossless raw tensor; preview is not the complete value",
+          "min": 10,
+          "path": "artifacts/a7861f3e01564a8498e743f9ef739794-private_source_bytes.npy",
+          "preview": [
+            34,
+            34,
+            34,
+            10,
+            73,
+            109,
+            112,
+            108
+          ],
+          "raw_nbytes": 14818,
+          "sha256": "70c3e1f7efd7a0f1bbe50360b64d25caa1fb64958e68e29865739878d3f148d0",
+          "shape": [
+            14818
+          ]
+        }
+      },
+      "important": "Python model methods construct compiled IR; function entry logging at compile time is not native request evidence"
+    }
+  ],
+  "native_request_count": 0,
+  "readiness_run": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/mlc-llm/siai-mlc-phi35-readiness-20260907-001/events.jsonl",
+  "readiness_events_sha256": "765c10cc70fa3dbeadb488a8bdd7e30a4b0b445356866f34a4d64454293c8b06",
+  "native_boundaries_to_pair": [
+    {
+      "file": "cpp/serve/model.cc",
+      "function": "ModelImpl::ImageEmbed",
+      "line": 128,
+      "purpose": "native runtime image_embed dispatch and returned visual embeddings"
+    },
+    {
+      "file": "cpp/serve/model.cc",
+      "function": "ModelImpl::BatchPrefill",
+      "line": 245,
+      "purpose": "native decoder/prefill dispatch and returned full logits"
+    }
+  ],
+  "evidence_limit": "No preprocessor, encoder, projected embedding, decoder input, logits or generated text was observed for a native model request."
+}

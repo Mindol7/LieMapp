@@ -1,0 +1,281 @@
+diff --git a/python/sglang/kernels/ops/kvcache/cache_move.py b/python/sglang/kernels/ops/kvcache/cache_move.py
+index cf0e0e4cc2..957175fa73 100644
+--- a/python/sglang/kernels/ops/kvcache/cache_move.py
++++ b/python/sglang/kernels/ops/kvcache/cache_move.py
+@@ -6,10 +6,6 @@ from sglang.srt.utils import is_cpu
+ 
+ _is_cpu = is_cpu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import copy_all_layer_kv_cache_cpu
+-
+-
+ @triton.jit
+ def set_kv_buffer_prefix_valid_tiled(
+     src_k_ptr,
+@@ -103,6 +99,11 @@ def copy_all_layer_kv_cache_func(
+     kv_copy_config: dict,
+ ):
+     if _is_cpu:
++        # LieMapp CPU compatibility: defer the optional cache-copy extension
++        # until this path is actually requested. No fake implementation; a
++        # missing extension still raises at the real call boundary.
++        from sgl_kernel import copy_all_layer_kv_cache_cpu
++
+         copy_all_layer_kv_cache_cpu(
+             data_ptrs,
+             strides,
+diff --git a/python/sglang/kernels/ops/speculative/cache_locs.py b/python/sglang/kernels/ops/speculative/cache_locs.py
+index ec1953d66c..8074b885d0 100644
+--- a/python/sglang/kernels/ops/speculative/cache_locs.py
++++ b/python/sglang/kernels/ops/speculative/cache_locs.py
+@@ -21,10 +21,6 @@ _is_npu = is_npu()
+ _is_musa = is_musa()
+ _is_xpu = is_xpu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import assign_extend_cache_locs_cpu
+-
+-
+ @triton.jit
+ def assign_draft_cache_locs_contiguous(
+     req_pool_indices,
+@@ -478,6 +474,9 @@ def assign_extend_cache_locs_func(
+             dtype=torch.int64,
+             device=device,
+         )
++        # LieMapp compatibility: import the actual optional kernel on demand.
++        from sgl_kernel import assign_extend_cache_locs_cpu
++
+         assign_extend_cache_locs_cpu(
+             req_pool_indices,
+             req_to_token,
+diff --git a/python/sglang/kernels/ops/speculative/eagle.py b/python/sglang/kernels/ops/speculative/eagle.py
+index 10342899ce..baedfd4fdf 100644
+--- a/python/sglang/kernels/ops/speculative/eagle.py
++++ b/python/sglang/kernels/ops/speculative/eagle.py
+@@ -6,10 +6,6 @@ from sglang.srt.utils import is_cpu, next_power_of_2
+ 
+ _is_cpu = is_cpu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import fill_accept_out_cache_loc_cpu, fill_bonus_tokens_cpu
+-
+-
+ @triton.jit
+ def fill_bonus_tokens(
+     accept_tokens,
+@@ -37,6 +33,9 @@ def fill_bonus_tokens_func(
+     batch_size: int,
+ ):
+     if _is_cpu:
++        # LieMapp compatibility: retain real speculative kernel when requested.
++        from sgl_kernel import fill_bonus_tokens_cpu
++
+         fill_bonus_tokens_cpu(
+             accept_tokens,
+             accept_lens,
+@@ -77,6 +76,8 @@ def fill_accept_out_cache_loc_func(
+     size: int,
+ ):
+     if _is_cpu:
++        from sgl_kernel import fill_accept_out_cache_loc_cpu
++
+         fill_accept_out_cache_loc_cpu(
+             accept_index,
+             out_cache_loc,
+diff --git a/python/sglang/kernels/ops/speculative/multi_layer_eagle.py b/python/sglang/kernels/ops/speculative/multi_layer_eagle.py
+index e088e52c79..540b45f7fd 100644
+--- a/python/sglang/kernels/ops/speculative/multi_layer_eagle.py
++++ b/python/sglang/kernels/ops/speculative/multi_layer_eagle.py
+@@ -21,10 +21,6 @@ from sglang.srt.utils import is_cpu, is_npu
+ _is_cpu = is_cpu()
+ _is_npu = is_npu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import rotate_input_ids_cpu
+-
+-
+ @triton.jit
+ def rotate_input_ids_kernel(
+     input_ids_ptr,
+@@ -66,6 +62,10 @@ def rotate_input_ids(
+     input_ids, extend_start_loc, extend_seq_lens, topk_index, select_index=None
+ ):
+     if _is_cpu:
++        # LieMapp compatibility: optional EAGLE extension remains mandatory
++        # if this speculative path is selected; no operation is substituted.
++        from sgl_kernel import rotate_input_ids_cpu
++
+         rotate_input_ids_cpu(
+             input_ids,
+             extend_start_loc,
+diff --git a/python/sglang/srt/layers/logits_processor.py b/python/sglang/srt/layers/logits_processor.py
+index 0b7a96a696..92df77edc7 100644
+--- a/python/sglang/srt/layers/logits_processor.py
++++ b/python/sglang/srt/layers/logits_processor.py
+@@ -502,6 +502,8 @@ class LogitsProcessor(nn.Module):
+             sampled_logits = (
+                 logits[sample_indices] if sample_indices is not None else logits
+             )
++            from sglang import liemapp_observer
++            liemapp_observer.capture_logits(sampled_logits)
+ 
+             # Decode mode or extend mode without return_logprob.
+             return LogitsProcessorOutput(
+diff --git a/python/sglang/srt/managers/scheduler.py b/python/sglang/srt/managers/scheduler.py
+index a19e59287c..e18c605f0b 100644
+--- a/python/sglang/srt/managers/scheduler.py
++++ b/python/sglang/srt/managers/scheduler.py
+@@ -4168,6 +4168,7 @@ class Scheduler(
+             else:
+                 batch.sampling_info = sched_sampling_info
+ 
++    @__import__('sglang.liemapp_observer', fromlist=['observe_batch']).observe_batch
+     @scheduler_stage_method(SCHEDULER_STAGE_RUN_BATCH)
+     def run_batch(
+         self,
+diff --git a/python/sglang/srt/mem_cache/allocation.py b/python/sglang/srt/mem_cache/allocation.py
+index 5e109a4c89..2ff01122eb 100644
+--- a/python/sglang/srt/mem_cache/allocation.py
++++ b/python/sglang/srt/mem_cache/allocation.py
+@@ -42,9 +42,6 @@ _is_npu = is_npu()
+ _is_cuda = is_cuda()
+ _is_cpu = is_cpu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import assign_req_to_token_pool_cpu
+-
+ if TYPE_CHECKING:
+     from sglang.srt.managers.schedule_batch import Req, ScheduleBatch
+ 
+@@ -628,6 +625,10 @@ def assign_req_to_token_pool_func(
+     batch_size: int,
+ ):
+     if _is_cpu:
++        # LieMapp: lazy optional speculative-decode extension import only.
++        # Calling this path still requires the real CPU extension.
++        from sgl_kernel import assign_req_to_token_pool_cpu
++
+         assign_req_to_token_pool_cpu(
+             req_pool_indices,
+             req_to_token,
+diff --git a/python/sglang/srt/models/transformers.py b/python/sglang/srt/models/transformers.py
+index af5e65b48e..14f21f1f85 100644
+--- a/python/sglang/srt/models/transformers.py
++++ b/python/sglang/srt/models/transformers.py
+@@ -655,6 +655,8 @@ class TransformersBase(nn.Module):
+ 
+         # Initialize remaining meta-device parameters to real device tensors
+         self._init_parameters(self.model)
++        from sglang import liemapp_observer
++        liemapp_observer.install_model_hooks(self.model)
+ 
+         self.lm_head: Optional[ParallelLMHead] = None
+         self.logits_processor: Optional[LogitsProcessor] = None
+diff --git a/python/sglang/srt/multimodal/processors/transformers_auto.py b/python/sglang/srt/multimodal/processors/transformers_auto.py
+index 17f486ddf0..cb1b4f90aa 100644
+--- a/python/sglang/srt/multimodal/processors/transformers_auto.py
++++ b/python/sglang/srt/multimodal/processors/transformers_auto.py
+@@ -175,6 +175,7 @@ class TransformersAutoMultimodalProcessor(BaseMultimodalProcessor):
+             )
+         return content
+ 
++    @__import__('sglang.liemapp_observer', fromlist=['observe_processor']).observe_processor
+     async def process_mm_data_async(
+         self,
+         image_data,
+@@ -220,6 +221,8 @@ class TransformersAutoMultimodalProcessor(BaseMultimodalProcessor):
+             images=images or None,
+             videos=video_data or None,
+         )
++        from sglang import liemapp_observer
++        liemapp_observer.processor_output(processor_output)
+ 
+         input_ids = processor_output["input_ids"].flatten()
+ 
+diff --git a/python/sglang/srt/speculative/eagle_utils.py b/python/sglang/srt/speculative/eagle_utils.py
+index 99875779be..9b6ee4ff34 100644
+--- a/python/sglang/srt/speculative/eagle_utils.py
++++ b/python/sglang/srt/speculative/eagle_utils.py
+@@ -53,11 +53,6 @@ if _is_cuda or _is_hip or _is_musa:
+     from sgl_kernel import (
+         build_tree_kernel_efficient as sgl_build_tree_kernel_efficient,
+     )
+-elif _is_cpu:
+-    from sgl_kernel import (
+-        build_tree_kernel_efficient_cpu as sgl_build_tree_kernel_efficient_cpu,
+-    )
+-    from sgl_kernel import verify_tree_greedy_cpu as sgl_verify_tree_greedy_cpu
+ 
+ 
+ def per_step_draft_out_cache_loc(
+@@ -253,6 +248,9 @@ def build_tree_kernel_efficient(
+             tree_mask_mode,
+         )
+     elif _is_cpu:
++        # LieMapp: retain the real optional CPU extension at its call site.
++        from sgl_kernel import build_tree_kernel_efficient_cpu as sgl_build_tree_kernel_efficient_cpu
++
+         sgl_build_tree_kernel_efficient_cpu(
+             parent_list,
+             top_scores_index,
+@@ -401,6 +399,9 @@ def verify_tree_greedy_func(
+         )
+ 
+     elif _is_cpu:
++        # LieMapp: no speculative kernel is needed for ordinary generation.
++        from sgl_kernel import verify_tree_greedy_cpu as sgl_verify_tree_greedy_cpu
++
+         sgl_verify_tree_greedy_cpu(
+             predicts=predicts,  # mutable
+             accept_index=accept_index,  # mutable
+diff --git a/python/sglang/srt/speculative/eagle_worker_common.py b/python/sglang/srt/speculative/eagle_worker_common.py
+index 010811b411..58f86926b3 100644
+--- a/python/sglang/srt/speculative/eagle_worker_common.py
++++ b/python/sglang/srt/speculative/eagle_worker_common.py
+@@ -41,9 +41,6 @@ from sglang.srt.utils.common import is_npu
+ _is_cpu = is_cpu()
+ _is_npu = is_npu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import assign_draft_cache_locs_contiguous_cpu
+-
+ if TYPE_CHECKING:
+     from sglang.srt.managers.schedule_batch import ScheduleBatch
+     from sglang.srt.managers.tp_worker import TpModelWorker
+@@ -231,6 +228,9 @@ def prepare_for_draft(
+                 device=batch.device,
+             )
+             if _is_cpu:
++                # LieMapp: no substitute; import only for a real EAGLE call.
++                from sgl_kernel import assign_draft_cache_locs_contiguous_cpu
++
+                 assign_draft_cache_locs_contiguous_cpu(
+                     batch.req_pool_indices,
+                     req_to_token_pool.req_to_token,
+diff --git a/python/sglang/srt/speculative/spec_utils.py b/python/sglang/srt/speculative/spec_utils.py
+index 941a945356..91001ba606 100644
+--- a/python/sglang/srt/speculative/spec_utils.py
++++ b/python/sglang/srt/speculative/spec_utils.py
+@@ -89,10 +89,6 @@ elif _is_hip:
+ else:
+     from sglang.srt.utils.common import fast_topk
+ 
+-if _is_cpu:
+-    from sgl_kernel import assign_extend_cache_locs_cpu
+-
+-
+ logger = logging.getLogger(__name__)
+ 
+ 
+@@ -737,6 +733,9 @@ def move_accept_tokens_to_target_kvcache(
+     )
+     accept_out_cache_loc = torch.zeros(size, dtype=torch.int64, device=device)
+     if _is_cpu:
++        # LieMapp compatibility: lazy real optional CPU speculative kernel.
++        from sgl_kernel import assign_extend_cache_locs_cpu
++
+         assign_extend_cache_locs_cpu(
+             batch.req_pool_indices,
+             batch.req_to_token_pool.req_to_token,

@@ -1,0 +1,905 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "siai",
+  "engine_id": "llamacpp",
+  "source_commit": "9e0e220594af405a62835dc3a27495729fd8506b",
+  "condition_authority": {
+    "path": "LieMappBench/Attack-Library/attack_library.xlsx",
+    "sha256": "069bdc201aef0babcb9eecabfc50627548dae616e618aac1b20cf9418a1a4981",
+    "sheet": "AI 포렌식"
+  },
+  "conditions": [
+    {
+      "condition_id": "AC1",
+      "type": "AC",
+      "text": "현재 요청에서 이미지 인코더와 multimodal fusion 경로가 실제로 활성화되는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "AC2",
+      "type": "AC",
+      "text": "입력 이미지의 adversarial perturbation이 전처리 이후에도 보존되어 이미지 인코더에 도달하는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "AC3",
+      "type": "AC",
+      "text": "생성된 visual embedding이 언어 디코더의 생성 결과에 직접 영향을 미치는 구조인가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "G10"
+      }
+    },
+    {
+      "condition_id": "DC1",
+      "type": "DC",
+      "text": "원본과 증강 이미지를 동일한 전처리·인코더에 입력할 \n수 있는가?\n - 이미지 증강: JPEG 압축, 가우시안 블러, 랜덤 아핀 변환, 색상 조정, 랜덤 원근 변환",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    },
+    {
+      "condition_id": "DC2",
+      "type": "DC",
+      "text": "동일 계층의 이미지 임베딩을 추출하고 서로 연결할 수 있는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    },
+    {
+      "condition_id": "DC3",
+      "type": "DC",
+      "text": "코사인 유사도를 계산하고 모델별 정상 기준선·threshold와 비교할 수 있는가?",
+      "source": {
+        "sheet": "AI 포렌식",
+        "cell": "H10"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001",
+      "seal": {
+        "schema_version": "1.0.0",
+        "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+        "event_count": 1120,
+        "last_event_hash": "5cca8095be2fe2062f019f13d223793d2e442a09d7c306e4b6e9bc94816dc710",
+        "status": "completed",
+        "reason": null,
+        "events_sha256": "856d786827b3dc62e5914b31334ba9fc0083feca0114351a62877f443863f62a"
+      }
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-behavior-heldout-20260906-001",
+      "seal": {
+        "schema_version": "1.0.0",
+        "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+        "event_count": 156,
+        "last_event_hash": "2281f9e118cf7fcb69be4c04290a94fb010c72dd938f7630395cf8e005b4ed2b",
+        "status": "completed",
+        "reason": null,
+        "events_sha256": "6e3b75ec04a6760d3442796c866c078bdc24df08ab35c8c14757355016cb2dc0"
+      }
+    }
+  ],
+  "logging_points": [
+    {
+      "logging_point_id": "siai.llamacpp.processor-output",
+      "condition_ids": [
+        "AC2",
+        "DC1"
+      ],
+      "reason": "엔진 전처리 직후의 정규화된 실제 픽셀을 모두 보존한다. 인코더 입력과 연결하여 전처리에서 인코더까지 전달된 값을 검증한다.",
+      "stage": "processor_output",
+      "source": {
+        "function": "add_media",
+        "line": 1399,
+        "logging_point_id": "siai.llamacpp.processor-output",
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/tools/mtmd/mtmd.cpp",
+        "sha256": "fdb5ce3a03a314d048eda8271b434404420102413f229c44fb1cd1df520123e0"
+      },
+      "source_snapshot": "source-snapshots/fdb5ce3a03a314d048eda8271b434404420102413f229c44fb1cd1df520123e0-mtmd.cpp",
+      "observed": true,
+      "observed_events": 98,
+      "example": {
+        "run_dir": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001",
+        "event_id": "27b905059b8742d68316c328aff31350",
+        "sequence": 3,
+        "context": {
+          "attack_pair_id": null,
+          "attack_status": "not_attack",
+          "base_role": "calibration",
+          "evaluation": "condition_audit",
+          "image_id": "calibration-coco-01--original",
+          "input_id": "calibration-coco-01--original",
+          "input_sha256": "43d98f9a890125e1fb256eb0548b2a26e040853102b631f0ad4f7b3ae78ebc68",
+          "isolated_process": true,
+          "max_tokens": 48,
+          "model_revision": "b9e4379657e1450d04d02eec8e345667265b0a00",
+          "pair_id": "calibration-coco-01",
+          "parent_id": null,
+          "prompt": "Describe the object shown in the picture.",
+          "prompt_sha256": "625afb69181689c35b17fcb1f6973a9b00702749c9297d60cd890fc0aef4dafe",
+          "question_id": "audit-default",
+          "request_id": "c312580335d9414a98d297e3f1727b52",
+          "role": "calibration",
+          "run_kind": "normal",
+          "seed": 3010494398,
+          "temperature": 0.0,
+          "transform": "original",
+          "transform_parameters": {},
+          "variant": "original"
+        },
+        "raw": {
+          "layout": "concatenated_HWC",
+          "part_lengths": [
+            786432,
+            786432
+          ],
+          "part_shapes": [
+            [
+              512,
+              512,
+              3
+            ],
+            [
+              512,
+              512,
+              3
+            ]
+          ],
+          "returncode": 0,
+          "status": "success"
+        },
+        "artifacts": {
+          "values": {
+            "bytes": 6291584,
+            "dtype": "float32",
+            "format": "npy",
+            "max": 1.0,
+            "meaning": "Lossless raw tensor; preview is not the complete value",
+            "min": -1.0,
+            "path": "artifacts/d11566f5522f457f80ffe12447b921b9-values.npy",
+            "preview": [
+              -0.7098039388656616,
+              -0.8039215803146362,
+              -0.7098039388656616,
+              -0.7098039388656616,
+              -0.8039215803146362,
+              -0.7098039388656616,
+              -0.7176470756530762,
+              -0.8117647171020508
+            ],
+            "raw_nbytes": 6291456,
+            "sha256": "a120c389fab3c749b0f49254058a58dc810ee14caab43c47969a8b90c8eb3955",
+            "shape": [
+              1572864
+            ]
+          }
+        }
+      }
+    },
+    {
+      "logging_point_id": "siai.llamacpp.encoder-input",
+      "condition_ids": [
+        "AC1",
+        "AC2",
+        "DC1"
+      ],
+      "reason": "clip_image_batch_encode에 실제로 전달되는 float32 버퍼를 보존한다. 함수 호출 여부와 perturbation 보존 여부를 혼동하지 않고 clean/attack 쌍과 비교한다.",
+      "stage": "encoder_input",
+      "source": {
+        "function": "mtmd_encode_impl",
+        "line": 1825,
+        "logging_point_id": "siai.llamacpp.encoder-input",
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/tools/mtmd/mtmd.cpp",
+        "sha256": "fdb5ce3a03a314d048eda8271b434404420102413f229c44fb1cd1df520123e0"
+      },
+      "source_snapshot": "source-snapshots/fdb5ce3a03a314d048eda8271b434404420102413f229c44fb1cd1df520123e0-mtmd.cpp",
+      "observed": true,
+      "observed_events": 196,
+      "example": {
+        "run_dir": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001",
+        "event_id": "300a944e02be4aabb12f647993679405",
+        "sequence": 4,
+        "context": {
+          "attack_pair_id": null,
+          "attack_status": "not_attack",
+          "base_role": "calibration",
+          "evaluation": "condition_audit",
+          "image_id": "calibration-coco-01--original",
+          "input_id": "calibration-coco-01--original",
+          "input_sha256": "43d98f9a890125e1fb256eb0548b2a26e040853102b631f0ad4f7b3ae78ebc68",
+          "isolated_process": true,
+          "max_tokens": 48,
+          "model_revision": "b9e4379657e1450d04d02eec8e345667265b0a00",
+          "pair_id": "calibration-coco-01",
+          "parent_id": null,
+          "prompt": "Describe the object shown in the picture.",
+          "prompt_sha256": "625afb69181689c35b17fcb1f6973a9b00702749c9297d60cd890fc0aef4dafe",
+          "question_id": "audit-default",
+          "request_id": "c312580335d9414a98d297e3f1727b52",
+          "role": "calibration",
+          "run_kind": "normal",
+          "seed": 3010494398,
+          "temperature": 0.0,
+          "transform": "original",
+          "transform_parameters": {},
+          "variant": "original"
+        },
+        "raw": {
+          "layout": "concatenated_HWC",
+          "n_image_tokens": 64,
+          "part_lengths": [
+            786432
+          ],
+          "part_shapes": [
+            [
+              512,
+              512,
+              3
+            ]
+          ],
+          "returncode": 0,
+          "status": "success"
+        },
+        "artifacts": {
+          "values": {
+            "bytes": 3145856,
+            "dtype": "float32",
+            "format": "npy",
+            "max": 1.0,
+            "meaning": "Lossless raw tensor; preview is not the complete value",
+            "min": -1.0,
+            "path": "artifacts/456246a89cdc4340a1ac1b79f5501285-values.npy",
+            "preview": [
+              -0.7098039388656616,
+              -0.8039215803146362,
+              -0.7098039388656616,
+              -0.7098039388656616,
+              -0.8039215803146362,
+              -0.7098039388656616,
+              -0.7176470756530762,
+              -0.8117647171020508
+            ],
+            "raw_nbytes": 3145728,
+            "sha256": "20a2589f6199937eaf451758fa0019713cd3e35537e3e0f9b0385bf4e5a7da85",
+            "shape": [
+              786432
+            ]
+          }
+        }
+      }
+    },
+    {
+      "logging_point_id": "siai.llamacpp.projected-embedding",
+      "condition_ids": [
+        "AC1",
+        "AC3",
+        "DC2",
+        "DC3"
+      ],
+      "reason": "성공한 이미지 인코딩·projection의 실제 출력과 반환값을 기록한다. 모든 타일을 순서대로 연결해야 전체 임베딩이다.",
+      "stage": "projected_embedding",
+      "source": {
+        "function": "mtmd_encode_impl",
+        "line": 1837,
+        "logging_point_id": "siai.llamacpp.projected-embedding",
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/tools/mtmd/mtmd.cpp",
+        "sha256": "fdb5ce3a03a314d048eda8271b434404420102413f229c44fb1cd1df520123e0"
+      },
+      "source_snapshot": "source-snapshots/fdb5ce3a03a314d048eda8271b434404420102413f229c44fb1cd1df520123e0-mtmd.cpp",
+      "observed": true,
+      "observed_events": 196,
+      "example": {
+        "run_dir": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001",
+        "event_id": "060f3ee96885404ba2558cfc73edda7e",
+        "sequence": 5,
+        "context": {
+          "attack_pair_id": null,
+          "attack_status": "not_attack",
+          "base_role": "calibration",
+          "evaluation": "condition_audit",
+          "image_id": "calibration-coco-01--original",
+          "input_id": "calibration-coco-01--original",
+          "input_sha256": "43d98f9a890125e1fb256eb0548b2a26e040853102b631f0ad4f7b3ae78ebc68",
+          "isolated_process": true,
+          "max_tokens": 48,
+          "model_revision": "b9e4379657e1450d04d02eec8e345667265b0a00",
+          "pair_id": "calibration-coco-01",
+          "parent_id": null,
+          "prompt": "Describe the object shown in the picture.",
+          "prompt_sha256": "625afb69181689c35b17fcb1f6973a9b00702749c9297d60cd890fc0aef4dafe",
+          "question_id": "audit-default",
+          "request_id": "c312580335d9414a98d297e3f1727b52",
+          "role": "calibration",
+          "run_kind": "normal",
+          "seed": 3010494398,
+          "temperature": 0.0,
+          "transform": "original",
+          "transform_parameters": {},
+          "variant": "original"
+        },
+        "raw": {
+          "embedding_dimension": 576,
+          "n_image_tokens": 64,
+          "returncode": 0,
+          "status": "success"
+        },
+        "artifacts": {
+          "values": {
+            "bytes": 147584,
+            "dtype": "float32",
+            "format": "npy",
+            "max": 100.86048889160156,
+            "meaning": "Lossless raw tensor; preview is not the complete value",
+            "min": -54.833091735839844,
+            "path": "artifacts/f442c4933f0a412e9c2c070a4212ebdf-values.npy",
+            "preview": [
+              -0.17804908752441406,
+              -6.39597225189209,
+              -1.4736502170562744,
+              -7.8723602294921875,
+              -13.138199806213379,
+              -3.32598876953125,
+              -3.4800262451171875,
+              5.833655834197998
+            ],
+            "raw_nbytes": 147456,
+            "sha256": "41ca263b5eeeb215b065b7e4cc05407500a44cfb1fdf4e74cf335d69148f4134",
+            "shape": [
+              64,
+              576
+            ]
+          }
+        }
+      }
+    },
+    {
+      "logging_point_id": "siai.llamacpp.decoder-batch",
+      "condition_ids": [
+        "AC1",
+        "AC3"
+      ],
+      "reason": "실제 llama_decode 호출이 소비한 이미지 임베딩 배치와 반환값을 기록한다. 실패 배치는 성공으로 판정하지 않는다.",
+      "stage": "decoder_batch",
+      "source": {
+        "function": "mtmd_helper_decode_image_chunk",
+        "line": 193,
+        "logging_point_id": "siai.llamacpp.decoder-batch",
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/tools/mtmd/mtmd-helper.cpp",
+        "sha256": "f3bb86e1972670ea9c9d2c3db08dbbb2777c220895f80b53691f4f6e19313b0d"
+      },
+      "source_snapshot": "source-snapshots/f3bb86e1972670ea9c9d2c3db08dbbb2777c220895f80b53691f4f6e19313b0d-mtmd-helper.cpp",
+      "observed": true,
+      "observed_events": 196,
+      "example": {
+        "run_dir": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001",
+        "event_id": "03cb063e6fd344b5ae5a4b9748c959ef",
+        "sequence": 6,
+        "context": {
+          "attack_pair_id": null,
+          "attack_status": "not_attack",
+          "base_role": "calibration",
+          "evaluation": "condition_audit",
+          "image_id": "calibration-coco-01--original",
+          "input_id": "calibration-coco-01--original",
+          "input_sha256": "43d98f9a890125e1fb256eb0548b2a26e040853102b631f0ad4f7b3ae78ebc68",
+          "isolated_process": true,
+          "max_tokens": 48,
+          "model_revision": "b9e4379657e1450d04d02eec8e345667265b0a00",
+          "pair_id": "calibration-coco-01",
+          "parent_id": null,
+          "prompt": "Describe the object shown in the picture.",
+          "prompt_sha256": "625afb69181689c35b17fcb1f6973a9b00702749c9297d60cd890fc0aef4dafe",
+          "question_id": "audit-default",
+          "request_id": "c312580335d9414a98d297e3f1727b52",
+          "role": "calibration",
+          "run_kind": "normal",
+          "seed": 3010494398,
+          "temperature": 0.0,
+          "transform": "original",
+          "transform_parameters": {},
+          "variant": "original"
+        },
+        "raw": {
+          "batch_count": 1,
+          "batch_index": 0,
+          "n_image_tokens": 64,
+          "n_past": 6,
+          "returncode": 0,
+          "seq_id": 0,
+          "status": "success",
+          "token_offset": 0,
+          "total_image_tokens": 64
+        },
+        "artifacts": {
+          "values": {
+            "bytes": 147584,
+            "dtype": "float32",
+            "format": "npy",
+            "max": 100.86048889160156,
+            "meaning": "Lossless raw tensor; preview is not the complete value",
+            "min": -54.833091735839844,
+            "path": "artifacts/29e7b0a1f27543faac3d7b3d6beae431-values.npy",
+            "preview": [
+              -0.17804908752441406,
+              -6.39597225189209,
+              -1.4736502170562744,
+              -7.8723602294921875,
+              -13.138199806213379,
+              -3.32598876953125,
+              -3.4800262451171875,
+              5.833655834197998
+            ],
+            "raw_nbytes": 147456,
+            "sha256": "41ca263b5eeeb215b065b7e4cc05407500a44cfb1fdf4e74cf335d69148f4134",
+            "shape": [
+              64,
+              576
+            ]
+          }
+        }
+      }
+    },
+    {
+      "logging_point_id": "siai.llamacpp.decoder-input",
+      "condition_ids": [
+        "AC1",
+        "AC3",
+        "DC2"
+      ],
+      "reason": "한 이미지 청크의 모든 llama_decode 배치가 성공한 뒤 전체 소비 버퍼를 기록한다. projection 값과의 일치만으로 출력에 대한 인과적 영향을 단정하지 않는다.",
+      "stage": "decoder_input",
+      "source": {
+        "function": "mtmd_helper_decode_image_chunk",
+        "line": 218,
+        "logging_point_id": "siai.llamacpp.decoder-input",
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/tools/mtmd/mtmd-helper.cpp",
+        "sha256": "f3bb86e1972670ea9c9d2c3db08dbbb2777c220895f80b53691f4f6e19313b0d"
+      },
+      "source_snapshot": "source-snapshots/f3bb86e1972670ea9c9d2c3db08dbbb2777c220895f80b53691f4f6e19313b0d-mtmd-helper.cpp",
+      "observed": true,
+      "observed_events": 196,
+      "example": {
+        "run_dir": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001",
+        "event_id": "34d74d7a73d04d749ae907aff3c6f32b",
+        "sequence": 7,
+        "context": {
+          "attack_pair_id": null,
+          "attack_status": "not_attack",
+          "base_role": "calibration",
+          "evaluation": "condition_audit",
+          "image_id": "calibration-coco-01--original",
+          "input_id": "calibration-coco-01--original",
+          "input_sha256": "43d98f9a890125e1fb256eb0548b2a26e040853102b631f0ad4f7b3ae78ebc68",
+          "isolated_process": true,
+          "max_tokens": 48,
+          "model_revision": "b9e4379657e1450d04d02eec8e345667265b0a00",
+          "pair_id": "calibration-coco-01",
+          "parent_id": null,
+          "prompt": "Describe the object shown in the picture.",
+          "prompt_sha256": "625afb69181689c35b17fcb1f6973a9b00702749c9297d60cd890fc0aef4dafe",
+          "question_id": "audit-default",
+          "request_id": "c312580335d9414a98d297e3f1727b52",
+          "role": "calibration",
+          "run_kind": "normal",
+          "seed": 3010494398,
+          "temperature": 0.0,
+          "transform": "original",
+          "transform_parameters": {},
+          "variant": "original"
+        },
+        "raw": {
+          "batch_count": 1,
+          "completed_batches": 1,
+          "intervention": false,
+          "n_image_tokens": 64,
+          "n_past": 6,
+          "returncode": 0,
+          "seq_id": 0,
+          "status": "success"
+        },
+        "artifacts": {
+          "values": {
+            "bytes": 147584,
+            "dtype": "float32",
+            "format": "npy",
+            "max": 100.86048889160156,
+            "meaning": "Lossless raw tensor; preview is not the complete value",
+            "min": -54.833091735839844,
+            "path": "artifacts/b1c638dec86b436ea14ed009a12fe741-values.npy",
+            "preview": [
+              -0.17804908752441406,
+              -6.39597225189209,
+              -1.4736502170562744,
+              -7.8723602294921875,
+              -13.138199806213379,
+              -3.32598876953125,
+              -3.4800262451171875,
+              5.833655834197998
+            ],
+            "raw_nbytes": 147456,
+            "sha256": "41ca263b5eeeb215b065b7e4cc05407500a44cfb1fdf4e74cf335d69148f4134",
+            "shape": [
+              64,
+              576
+            ]
+          }
+        }
+      }
+    },
+    {
+      "logging_point_id": "siai.llamacpp.visual-ablation",
+      "condition_ids": [
+        "AC3"
+      ],
+      "reason": "원본 요청과 동일한 이미지·프롬프트·seed에서 visual embedding만 0으로 바꾸는 통제 실험을 명시적으로 기록한다. 일반 추론 또는 공격 성공 로그가 아니다.",
+      "stage": "intervention",
+      "source": {
+        "function": "mtmd_helper_decode_image_chunk",
+        "line": 154,
+        "logging_point_id": "siai.llamacpp.visual-ablation",
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/tools/mtmd/mtmd-helper.cpp",
+        "sha256": "f3bb86e1972670ea9c9d2c3db08dbbb2777c220895f80b53691f4f6e19313b0d"
+      },
+      "source_snapshot": "source-snapshots/f3bb86e1972670ea9c9d2c3db08dbbb2777c220895f80b53691f4f6e19313b0d-mtmd-helper.cpp",
+      "observed": true,
+      "observed_events": 2,
+      "example": {
+        "run_dir": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001",
+        "event_id": "97759afcd2e74c1fa018bad6620b073b",
+        "sequence": 1111,
+        "context": {
+          "attack_pair_id": "cassette-pirate",
+          "attack_status": "trained_candidate_not_success_claim",
+          "base_role": "attack",
+          "evaluation": "condition_audit",
+          "image_id": "evaluation-cassette-attack--original",
+          "input_id": "evaluation-cassette-attack--original",
+          "input_sha256": "e82001a486d908dd4810987b1ed6ed50c764345b7c4c9e4119219475ab70f3ee",
+          "isolated_process": true,
+          "max_tokens": 48,
+          "model_revision": "b9e4379657e1450d04d02eec8e345667265b0a00",
+          "pair_id": "evaluation-cassette-attack",
+          "parent_id": null,
+          "prompt": "Describe the object shown in the picture.",
+          "prompt_sha256": "625afb69181689c35b17fcb1f6973a9b00702749c9297d60cd890fc0aef4dafe",
+          "question_id": "audit-default",
+          "request_id": "04937e2bca64497f9d560177b4e9e4b0",
+          "role": "ablation",
+          "run_kind": "zero_visual_embeddings",
+          "seed": 827464032,
+          "temperature": 0.0,
+          "transform": "original",
+          "transform_parameters": {},
+          "variant": "original"
+        },
+        "raw": {
+          "embedding_dimension": 576,
+          "method": "zero_visual_embeddings",
+          "n_image_tokens": 64,
+          "status": "success"
+        },
+        "artifacts": {}
+      }
+    },
+    {
+      "logging_point_id": "siai.llamacpp.generation-output",
+      "condition_ids": [
+        "AC3"
+      ],
+      "reason": "실제 언어 디코더의 첫 토큰 전체 logits·생성 텍스트·토큰 ID를 보존한다. 정상/ablation의 정량 차이와 공격 목표 달성은 구분하여 분석한다.",
+      "stage": "generation_output",
+      "source": {
+        "function": "generate_response",
+        "line": 252,
+        "logging_point_id": "siai.llamacpp.generation-output",
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/tools/mtmd/mtmd-cli.cpp",
+        "sha256": "77a5450a81c94e3453652d247d24ce92b710948cf13fd5dd89d6e5ffea904af6"
+      },
+      "source_snapshot": "source-snapshots/77a5450a81c94e3453652d247d24ce92b710948cf13fd5dd89d6e5ffea904af6-mtmd-cli.cpp",
+      "observed": true,
+      "observed_events": 98,
+      "example": {
+        "run_dir": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/siai/llamacpp/siai-llamacpp-native-cpu128-20260906-001",
+        "event_id": "b90daaf05cb44aa9b4685e4e5ab38006",
+        "sequence": 12,
+        "context": {
+          "attack_pair_id": null,
+          "attack_status": "not_attack",
+          "base_role": "calibration",
+          "evaluation": "condition_audit",
+          "image_id": "calibration-coco-01--original",
+          "input_id": "calibration-coco-01--original",
+          "input_sha256": "43d98f9a890125e1fb256eb0548b2a26e040853102b631f0ad4f7b3ae78ebc68",
+          "isolated_process": true,
+          "max_tokens": 48,
+          "model_revision": "b9e4379657e1450d04d02eec8e345667265b0a00",
+          "pair_id": "calibration-coco-01",
+          "parent_id": null,
+          "prompt": "Describe the object shown in the picture.",
+          "prompt_sha256": "625afb69181689c35b17fcb1f6973a9b00702749c9297d60cd890fc0aef4dafe",
+          "question_id": "audit-default",
+          "request_id": "c312580335d9414a98d297e3f1727b52",
+          "role": "calibration",
+          "run_kind": "normal",
+          "seed": 3010494398,
+          "temperature": 0.0,
+          "transform": "original",
+          "transform_parameters": {},
+          "variant": "original"
+        },
+        "raw": {
+          "first_step_logits_count": 49280,
+          "generated_text": " The image depicts a person holding a bat in a baseball game. The person is wearing a white T-shirt and black baseball cap. The baseball cap is positioned on the person's head, and the person's face is not visible. The",
+          "generated_token_count": 48,
+          "n_past": 199,
+          "n_predict": 48,
+          "returncode": 0,
+          "status": "success",
+          "token_ids": [
+            378,
+            2443,
+            21559,
+            253,
+            1055,
+            6961,
+            253,
+            10581,
+            281,
+            253,
+            16352,
+            3133,
+            30,
+            378,
+            1055,
+            314,
+            9064,
+            253,
+            2537,
+            312,
+            29,
+            42582,
+            284,
+            2632,
+            16352,
+            1408,
+            30,
+            378,
+            16352,
+            1408,
+            314,
+            17982,
+            335,
+            260,
+            1055,
+            506,
+            1680,
+            28,
+            284,
+            260,
+            1055,
+            506,
+            2715,
+            314,
+            441,
+            6178,
+            30,
+            378
+          ]
+        },
+        "artifacts": {
+          "logits": {
+            "bytes": 197248,
+            "dtype": "float32",
+            "format": "npy",
+            "max": 17.56899642944336,
+            "meaning": "Lossless raw tensor; preview is not the complete value",
+            "min": -22.13849639892578,
+            "path": "artifacts/ac9661bb3d0d4b6e882903814b0f5001-logits.npy",
+            "preview": [
+              -10.433374404907227,
+              -11.34172248840332,
+              -2.64217472076416,
+              -10.470232009887695,
+              -10.702201843261719,
+              -9.949769020080566,
+              -10.332731246948242,
+              -9.953641891479492
+            ],
+            "raw_nbytes": 197120,
+            "sha256": "34c62fb9b14defd33a4ba88ca5cfc6109870928ba84db9f5092f8b7ba91f03d0",
+            "shape": [
+              49280
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "reproducibility_files": [
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "logger_sha256",
+      "source_path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Logging-Dataset/logger.py",
+      "sha256": "b7232875bcbc0febe286d099fc5558a733b328e7f042fb00fd02719b48023e9e",
+      "snapshot": "source-snapshots/b7232875bcbc0febe286d099fc5558a733b328e7f042fb00fd02719b48023e9e-logger.py"
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "transport_sha256",
+      "source_path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Logging-Dataset/native/bridge.h",
+      "sha256": "43b85a26dd36762a908610035fa6c11168e079558a308e7551bd7d8be75715b9",
+      "snapshot": "source-snapshots/43b85a26dd36762a908610035fa6c11168e079558a308e7551bd7d8be75715b9-bridge.h"
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "runner_sha256",
+      "source_path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/llamacpp/run.py",
+      "sha256": "9fade7416182956b0019c6bb68d92ea8c3fcfb743c3cc7dd212e664e401b859b",
+      "snapshot": "source-snapshots/9fade7416182956b0019c6bb68d92ea8c3fcfb743c3cc7dd212e664e401b859b-run.py"
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libggml-base.so.0.23.0",
+      "sha256": "cc3426227d62299a950c07fc55c91ded118cfb4b8b2982a59b83dd2c51892a56",
+      "bytes": 948712,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libggml-cpu.so.0.23.0",
+      "sha256": "dd86881817920634aa2586d835105c33d79d482fb8f627523b462fb1bc3e55ea",
+      "bytes": 1193880,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libggml.so.0.23.0",
+      "sha256": "1ea06291f8f95a88fd0cbd0e64e17956d806f445c0d68cef84df823fe3e27b87",
+      "bytes": 60720,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libllama-common.so.0.4.0",
+      "sha256": "7275a83313fc7a0754b8bb6e068d9d9cdfe6a2fa56da8890b7e8f84b289eed2a",
+      "bytes": 5950080,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libllama.so.0.4.0",
+      "sha256": "af52a73c747f2c168cb7f27472bbbe603239d25a22b02781f3f4f3c041ebe278",
+      "bytes": 4764416,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libmtmd.so.0.4.0",
+      "sha256": "aae2ecbb5098f4be83ce053e90eaa41673bd34a351802962a3c6e1c1ebf9d58d",
+      "bytes": 2208400,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-native-cpu128-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/llama-mtmd-cli",
+      "sha256": "96696af3d471b94dfe5d34d17719a706939abd337c1ed7e2cdffb43814e81d11",
+      "bytes": 314568,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "logger_sha256",
+      "source_path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Logging-Dataset/logger.py",
+      "sha256": "b7232875bcbc0febe286d099fc5558a733b328e7f042fb00fd02719b48023e9e",
+      "snapshot": "source-snapshots/b7232875bcbc0febe286d099fc5558a733b328e7f042fb00fd02719b48023e9e-logger.py"
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "transport_sha256",
+      "source_path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Logging-Dataset/native/bridge.h",
+      "sha256": "43b85a26dd36762a908610035fa6c11168e079558a308e7551bd7d8be75715b9",
+      "snapshot": "source-snapshots/43b85a26dd36762a908610035fa6c11168e079558a308e7551bd7d8be75715b9-bridge.h"
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "runner_sha256",
+      "source_path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/siai/llamacpp/run.py",
+      "sha256": "9fade7416182956b0019c6bb68d92ea8c3fcfb743c3cc7dd212e664e401b859b",
+      "snapshot": "source-snapshots/9fade7416182956b0019c6bb68d92ea8c3fcfb743c3cc7dd212e664e401b859b-run.py"
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libggml-base.so.0.23.0",
+      "sha256": "cc3426227d62299a950c07fc55c91ded118cfb4b8b2982a59b83dd2c51892a56",
+      "bytes": 948712,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libggml-cpu.so.0.23.0",
+      "sha256": "dd86881817920634aa2586d835105c33d79d482fb8f627523b462fb1bc3e55ea",
+      "bytes": 1193880,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libggml.so.0.23.0",
+      "sha256": "1ea06291f8f95a88fd0cbd0e64e17956d806f445c0d68cef84df823fe3e27b87",
+      "bytes": 60720,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libllama-common.so.0.4.0",
+      "sha256": "7275a83313fc7a0754b8bb6e068d9d9cdfe6a2fa56da8890b7e8f84b289eed2a",
+      "bytes": 5950080,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libllama.so.0.4.0",
+      "sha256": "af52a73c747f2c168cb7f27472bbbe603239d25a22b02781f3f4f3c041ebe278",
+      "bytes": 4764416,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/libmtmd.so.0.4.0",
+      "sha256": "aae2ecbb5098f4be83ce053e90eaa41673bd34a351802962a3c6e1c1ebf9d58d",
+      "bytes": 2208400,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    },
+    {
+      "run_id": "siai-llamacpp-behavior-heldout-20260906-001",
+      "kind": "native_binary",
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/siai/llamacpp/build-liemapp/bin/llama-mtmd-cli",
+      "sha256": "96696af3d471b94dfe5d34d17719a706939abd337c1ed7e2cdffb43814e81d11",
+      "bytes": 314568,
+      "hash_observed": "mapping_freeze_after_completed_run",
+      "binary_copied": false
+    }
+  ],
+  "interpretation_limits": [
+    "A source mapping is not itself an AC/DC truth value.",
+    "Concatenate all same-request stage tensors in event order; one image may have multiple tiles.",
+    "Lossless raw tensor values are in .npy artifacts, not only the preview.",
+    "Native inference completion, causal visual dependence, and attack success are separate claims."
+  ]
+}
