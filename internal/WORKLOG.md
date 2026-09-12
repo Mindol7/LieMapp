@@ -537,6 +537,182 @@ TensorRT-LLM은 미지수이고, **엔진 빌드 시간은 이 숫자에 포함�
 
 ---
 
+## 6.6 서버 환경 구성 (2026-09-12 검증 완료)
+
+TensorRT-LLM v1.2.1을 WSL2 + conda에서 import 가능하게 만드는 절차. **다섯 번의 실패를 거쳐 확정했다.**
+docker 이미지를 쓰면 이 과정이 없지만, 소스를 계측해야 하므로 직접 구성한다.
+
+### 확인된 최종 상태
+
+```
+[TensorRT-LLM] TensorRT LLM version: 1.2.1
+trtllm : 1.2.1
+경로   : $CONDA_PREFIX/lib/python3.12/site-packages/tensorrt_llm
+torch  : 2.9.1+cu130 | cuda 13.0
+GPU    : NVIDIA RTX PRO 6000 Blackwell Server Edition
+nvcc   : release 13.3, V13.3.73
+```
+
+### 절차
+
+```bash
+# 0) 환경 (반드시 3.12 — cp312 휠만 존재)
+conda create -n liemapp-trtllm python=3.12 -y
+conda activate liemapp-trtllm
+
+# 1) torch 를 CUDA 13 빌드로. 기존 torch 가 있으면 반드시 먼저 제거할 것 (아래 함정 ① 참조)
+pip uninstall -y torch torchvision
+pip3 install torch==2.9.1 torchvision --index-url https://download.pytorch.org/whl/cu130
+python -c "import torch; print(torch.__version__, torch.version.cuda)"   # 2.9.1+cu130 13.0 이어야 함
+
+# 2) TensorRT-LLM. 휠은 PyPI 가 아니라 NVIDIA 인덱스에 있다
+CURRENT_TORCH=$(python -c "import torch; print(torch.__version__)")
+echo "torch==$CURRENT_TORCH" > /tmp/torch-constraint.txt
+pip install tensorrt-llm==1.2.1 -c /tmp/torch-constraint.txt --extra-index-url https://pypi.nvidia.com
+
+# 3) 시스템 라이브러리 (sudo 불필요, conda 환경 안에만 설치)
+conda install -c conda-forge openmpi numactl -y
+conda install -c nvidia cuda-nvcc=13 -y
+
+# 4) 라이브러리 경로와 CUDA_HOME 을 활성화 스크립트에 고정
+mkdir -p $CONDA_PREFIX/etc/conda/activate.d
+cat > $CONDA_PREFIX/etc/conda/activate.d/liemapp-cuda.sh <<'EOF'
+SP="$CONDA_PREFIX/lib/python3.12/site-packages"
+NVLIBS=$(find "$SP/nvidia" -name lib -type d 2>/dev/null | tr '\n' ':')
+export LD_LIBRARY_PATH="${NVLIBS}${SP}/torch/lib:${SP}/tensorrt_libs:${CONDA_PREFIX}/lib:${LD_LIBRARY_PATH}"
+export CUDA_HOME="$CONDA_PREFIX"
+EOF
+
+# 5) 새 셸에서 확인
+conda deactivate && conda activate liemapp-trtllm
+python -c "import tensorrt_llm, torch; print(tensorrt_llm.__version__, torch.__version__, torch.cuda.get_device_name(0))"
+```
+
+### 겪은 오류와 원인 (순서대로)
+
+| # | 오류 | 원인 | 해결 |
+|---|---|---|---|
+| 1 | `cannot load MPI library` (`libmpi.so`) | `mpi4py`는 설치됐으나 MPI 구현체가 없음. `_utils.py:37`의 `from mpi4py import MPI`가 최상단 무조건 import라 `TLLM_DISABLE_MPI=1`로는 못 막는다 | `conda install -c conda-forge openmpi` |
+| 2 | `libcublasLt.so.13` 없음 | **torch 가 CUDA 12 빌드로 깔렸다.** 함정 ① 참조 | torch 제거 후 cu130 인덱스에서 재설치 |
+| 3 | `libnvrtc.so.13` 없음 | 파일은 `site-packages/nvidia/cu13/lib/`에 있으나 동적 링커 경로에 없음 | `LD_LIBRARY_PATH` |
+| 4 | `libnuma.so.1` 없음 | 시스템 라이브러리. WSL2 최소 설치본에 없음 | `conda install -c conda-forge numactl` |
+| 5 | `deep_gemm/__init__.py` `assert cuda_home is not None` | `CUDA_HOME`·`CUDA_PATH`·`nvcc`·`/usr/local/cuda` 가 모두 없음 | `conda install -c nvidia cuda-nvcc=13` + `CUDA_HOME=$CONDA_PREFIX` |
+
+### 함정 ① — pip 은 torch 의 CUDA 변종을 구분하지 않는다
+
+`pip install torch==2.9.1 --index-url .../cu130`은 **이미 같은 버전 번호의 cu12 torch 가 있으면
+"already satisfied"로 건너뛴다.** `2.9.1`과 `2.9.1+cu130`을 같은 버전으로 보기 때문이다.
+반드시 `pip uninstall -y torch torchvision` 후에 설치하고, `torch.version.cuda`가 13.x인지 확인한다.
+
+v1.2.1 문서(`docs/source/installation/linux.md:19,69-79`)에 이 함정이 명시돼 있다.
+> By default, PyTorch CUDA 12.8 package is installed. Install PyTorch CUDA 13.0 package to align
+> with the CUDA version used for building TensorRT LLM wheels.
+
+### 함정 ② — `ldd` 결과는 과장돼 보인다
+
+`ldd bindings.cpython-312-*.so`는 `libtorch*`, `libc10*`을 "not found"로 보고하지만,
+실제 실행에서는 `_utils.py`가 `import torch`를 먼저 하므로 프로세스에 이미 올라가 있어 문제가 없다.
+진짜로 막는 것은 아무도 미리 올려주지 않는 `libnuma.so.1` 같은 것이다.
+다만 하네스가 엔진 서버를 **subprocess 로 띄울 때**는 import 순서가 달라질 수 있으므로
+`torch/lib`과 `tensorrt_libs`도 `LD_LIBRARY_PATH`에 넣어 둔다.
+
+### 무시해도 되는 경고
+
+- `nvidia-modelopt 0.37.0 does not provide the extra 'torch'` — 존재하지 않는 extra 요청. 본체는 설치됨.
+- `transformers 4.57.3 is incompatible with nvidia-modelopt` — `modelopt`은 양자화 도구이며 AMA 실험에서 쓰지 않는다.
+  **4.57.3은 v1.2.1이 직접 요구하는 버전이고 채팅 템플릿 렌더링에 쓰이므로 AC2 판정의 근거다. 바꾸지 말 것.**
+
+### 두 환경을 분리해서 쓴다
+
+| 환경 | 용도 | numpy |
+|---|---|---|
+| conda `liemapp-trtllm` | 엔진 실행 (torch, CUDA, TensorRT-LLM) | **1.26.4** (v1.2.1이 `numpy<2` 요구) |
+| 리포 루트 `.venv` | 분석·발행 (`developer.py`, `analyzer.py`) | **2.5.2** |
+
+합치면 numpy 충돌이 난다. `experiments.json`의 실행 명령은 `{root}/.venv/bin/python`을 쓰므로,
+TensorRT-LLM 엔진 기동은 conda 환경의 python 을 별도로 지정해야 한다(다른 엔진의 `execute.command` 참고).
+
+---
+
+## 6.7 계측본 배치와 v1.2.1 계측 지점 (2026-09-12 확정)
+
+### 배치 — git 클론 + 휠 바이너리 오버레이
+
+`Instrumented-LIE/ama/tensorRT-llm/`은 **v1.2.1 git 클론**이어야 하고, 그 위에 휠의 바이너리만 얹는다.
+site-packages를 통째로 복사하는 방식은 **안 된다.**
+
+근거는 코드에 있다.
+
+| 강제 지점 | 코드 | 위반 시 |
+|---|---|---|
+| 계측 파일이 저장소 루트 안에 있어야 함 | `logger.py:120-122` `if self.source_root and not path.is_relative_to(self.source_root): raise ValueError` | 모든 emit이 예외. AMA 러너 13곳 전부 `source_root=ROOT`를 넘긴다 |
+| 계측 트리가 **git 워크트리**여야 함 | `ama/vllm/native_runtime.py:41`, `ama/vllm/run.py:72`, `ama/llamacpp/native_public_runtime.py:29` 등이 `git -C ENGINE rev-parse HEAD` | `.git`이 없으면 엔진 리비전 기록 단계에서 죽는다 |
+| 원본 클론 **5개 전부** 존재·clean | `shared/audit_public_runs.py:352-356` — `("llama.cpp", "vllm", "sglang", "mlc-llm", "TensorRT-LLM")`에 대해 `git status --porcelain` | 하나라도 없거나 더러우면 감사 실패 |
+
+심링크로 우회할 수 없다. `logger.py:120`의 `path.resolve(strict=True)`가 `:121`보다 먼저 실행되어 실경로로 풀린다.
+
+**"컴파일 확장이 있으면 PYTHONPATH 셰도우가 안 된다"는 틀렸다.**
+`Instrumented-LIE/ama/vllm/vllm/_C.abi3.so`가 **150,137,552 B**이고 이미 그 방식으로 동작 중이다
+(`ama/vllm/native_runtime.py:67`). 프레임워크가 요구하는 것은 순수 파이썬이 아니라 **저장소 내부 경로**다.
+
+또한 휠의 순수 파이썬 층은 v1.2.1 git 소스와 **바이트 동일**하다.
+실측: `serve/openai_server.py` 1,139행, sha256 `592027a9baeec71d6bad39355334aa40` — 양쪽 일치.
+
+```bash
+cd <repo>
+ENGINE="$PWD/Instrumented-LIE/ama/tensorRT-llm"
+
+# 1) 원본에서 git 클론. --shared / --reference 금지
+#    (Instrumented-LIE/ama/llamacpp 가 --shared 로 만들어져 alternates 에 의존한다. 따라하지 말 것)
+mkdir -p Instrumented-LIE/ama
+git clone --no-hardlinks LIE/TensorRT-LLM "$ENGINE"
+git -C "$ENGINE" rev-parse HEAD          # 376f7e1bd8ed543f75014309e3fd4b237e9b0e73
+
+# 2) 휠의 바이너리만 얹는다. dist-info 는 절대 복사하지 말 것
+#    (importlib.metadata 가 셰도우 쪽으로 넘어간다)
+TRT=$(python -c "import tensorrt_llm,os; print(os.path.dirname(tensorrt_llm.__file__))" 2>/dev/null | tail -1)
+for d in bindings libs; do [ -e "$TRT/$d" ] && cp -a "$TRT/$d" "$ENGINE/tensorrt_llm/"; done
+find "$TRT" -maxdepth 1 -name "*.so" -exec cp -a {} "$ENGINE/tensorrt_llm/" \;
+
+# 3) 셰도우 확인 — 저장소 안 경로가 나와야 한다
+PYTHONPATH="$ENGINE" python -c "import tensorrt_llm,os; print(os.path.dirname(tensorrt_llm.__file__))" 2>/dev/null | tail -1
+```
+
+`import tensorrt_llm`은 배너를 **stdout**에 출력한다. 경로를 변수에 담을 때 `| tail -1`을 쓸 것.
+
+### 로컬(개발 박스)의 LIE/TensorRT-LLM 은 건드리지 말 것
+
+`ama/mlc-llm/audit_run.py`의 `EXPECTED_COMMITS["TensorRT-LLM"]`가 현재 리비전(`a5f8680e…`)을 고정한다.
+로컬을 v1.2.1로 옮기면 MLC 감사가 깨진다. **v1.2.1은 서버에만 둔다.**
+
+### v1.2.1 계측 지점 (서버 실측)
+
+`tensorrt_llm/serve/openai_server.py` (1,139행). **앞선 문서의 1918/2163/1785 행 번호는 1.3 계열이며 전부 무효다.**
+
+| 스테이지 | 위치 | 앵커 | 잡을 것 |
+|---|---|---|---|
+| `ama_native_tools_received` | 485 진입 직후 | `async def openai_chat` | `request.tools`, `request.tool_choice`, `tools_count` |
+| `ama_native_prompt_rendered` | 552 직후 | `prompt: str = apply_chat_template(` | `prompt` → `raw.rendered_prompt` (**AC2 판정 근거**), `tools_count` |
+| `ama_native_tool_calls_returned` | 517 안, 응답 조립 후 | `async def create_chat_response` | 파싱된 `tool_calls` (name + arguments) |
+
+**주의**: `tool_dicts`/`apply_chat_template`이 535·552 와 650·659 **두 번** 나온다.
+485행 `openai_chat` 안에 있는 것은 앞쪽이다. 뒤쪽이 어느 함수인지 확인하고,
+AMA는 `stream=false`이므로 실제로 타는 경로만 계측한다.
+
+### 서버 기동 시 반드시 `--tool_parser qwen3`
+
+v1.2.1에는 `auto` 해석이 없다. 7절 참조. 빼먹으면 DC1·DC2가 플래그 버그로 F가 된다.
+
+### 아직 확인되지 않은 것
+
+- 3번 셰도우 확인이 실제로 저장소 경로를 가리키는지 (미실행)
+- `setup.py:170-206`의 `runtime/*__mypyc*.so`가 자기 `.py`를 가릴 수 있다.
+  `serve/`는 대상이 아니지만, 다른 서브패키지를 계측하게 되면 조용히 무력화될 수 있다
+- shallow 클론에서 `git status`가 LFS 포인터로 더러워지는지
+- `trtllm-serve`의 실제 기동 플래그(모델 경로·포트·tool parser)
+
+---
+
 ## 7. 함정 목록 (반복해서 물린 것들)
 
 ### 서버 이전 관련
