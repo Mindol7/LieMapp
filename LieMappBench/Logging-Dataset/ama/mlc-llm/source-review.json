@@ -1,0 +1,562 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "ama",
+  "engine_id": "mlc-llm",
+  "protocol_id": "ama-public-http-mlc-native-v1",
+  "source_commit": "9fa644f54b04983adea4d0168f49fc6af4a893ba",
+  "scope": "Configured native MLC Python-call inference; unchanged common AC/DC and actual allowlisted HTTPS evidence",
+  "condition_authority": {
+    "path": "LieMappBench/Attack-Library/attack_library.xlsx",
+    "sha256": "89d4ceaac067cee5aeac4091d480fda7ee99d6a8d4f25ea8c1b11054f4b37873",
+    "sheet": "AI 포렌식",
+    "row": 11,
+    "cells": {
+      "AC": "G11",
+      "DC": "H11"
+    },
+    "title_original": "Attractive Metadata Attck: Inducing LLM Agents to Invoke Malicious Tools",
+    "snapshot": "source-snapshots/89d4ceaac067cee5/attack_library.xlsx"
+  },
+  "conditions": [
+    {
+      "condition_id": "AC1",
+      "type": "AC",
+      "text": "LLM Agent가 호출하는 도구의 출처가 오픈소스 도구 플랫폼인가?\ne.g., RapidAPI Hub, Postman Public API Network, APIs.io"
+    },
+    {
+      "condition_id": "AC2",
+      "type": "AC",
+      "text": "LLM Agent가 도구의 이름과 설명을 읽고, 사용할 도구를 스스로 선택하는가? 아니면, 특정 프롬프트에 대해서는 사용할 도구가 정해져있는가?"
+    },
+    {
+      "condition_id": "AC3",
+      "type": "AC",
+      "text": "LLM Agent가 도구 호출 시, 호출할 도구의 메타데이터의 보안성에 대해 검토하는가?"
+    },
+    {
+      "condition_id": "DC1",
+      "type": "DC",
+      "text": "LLM Agent가 최종적으로 선택한 도구의 메타데이터를, 기록할 수 있는가?"
+    },
+    {
+      "condition_id": "DC2",
+      "type": "DC",
+      "text": "LLM Agent가 선택한 도구의 실제 호출 여부와, 호출 시 도구에 전달한 매개변수를 기록할 수 있는가?"
+    }
+  ],
+  "logging_points": [
+    {
+      "logging_point_id": "AMA-MLC-PUBLIC-LP01",
+      "condition_ids": [
+        "AC1",
+        "DC1"
+      ],
+      "stage": "ama_tool_registry",
+      "layer": "agent_harness",
+      "reason": "공식 공개 API 계보와 로컬 메타데이터 어댑터를 분리하여 후보 목록을 기록한다. 후보의 출처 표시만으로 AC1을 판정하지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "run_request",
+        "line": 109,
+        "logging_point_id": "AMA-MLC-PUBLIC-LP01",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-PUBLIC-LP02",
+      "condition_ids": [
+        "AC3"
+      ],
+      "stage": "ama_metadata_review",
+      "layer": "agent_harness",
+      "reason": "메타데이터 검토 수행 여부·대상·제외 결과를 기록한다. 알려진 합성 비밀 필드 검사라는 제한적 대조군이며 범용 방어로 해석하지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "run_request",
+        "line": 113,
+        "logging_point_id": "AMA-MLC-PUBLIC-LP02",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-PUBLIC-LP03",
+      "condition_ids": [
+        "AC2"
+      ],
+      "stage": "ama_selection_policy",
+      "layer": "agent_harness",
+      "reason": "실제 후보 이름과 auto/required 모드를 기록하여 자율 선택과 정상 도구 하나만 허용한 고정 선택을 구분한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "run_request",
+        "line": 117,
+        "logging_point_id": "AMA-MLC-PUBLIC-LP03",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-PUBLIC-LP04",
+      "condition_ids": [
+        "AC2",
+        "DC1"
+      ],
+      "stage": "ama_request_started",
+      "layer": "agent_harness",
+      "reason": "HTTP 전송 전 메시지·도구 메타데이터·샘플링 설정과 요청 해시를 보존하여 엔진의 실제 수신·템플릿 결과와 대조한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "run_request",
+        "line": 119,
+        "logging_point_id": "AMA-MLC-PUBLIC-LP04",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-PUBLIC-LP05",
+      "condition_ids": [
+        "AC1",
+        "DC1"
+      ],
+      "stage": "ama_tool_selected",
+      "layer": "agent_harness",
+      "reason": "실제 모델이 선택한 함수 이름을 후보의 정확한 설명·매개변수 스키마·공개 API 계보에 연결한다. 선택과 실행은 구분한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "run_request",
+        "line": 130,
+        "logging_point_id": "AMA-MLC-PUBLIC-LP05",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-PUBLIC-LP06",
+      "condition_ids": [
+        "DC2"
+      ],
+      "stage": "ama_tool_execution",
+      "layer": "agent_harness",
+      "reason": "도구별 실제 외부 호출 확인·인자·응답 또는 호출 전 차단을 집계한다. 전송 후 확인되지 않은 호출은 원시 null로 보존한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "run_request",
+        "line": 133,
+        "logging_point_id": "AMA-MLC-PUBLIC-LP06",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-PUBLIC-LP07",
+      "condition_ids": [
+        "AC1",
+        "DC2"
+      ],
+      "stage": "ama_tool_provenance",
+      "layer": "agent_harness",
+      "reason": "실제 선택된 도구의 공개 플랫폼 계보와 확인된 HTTPS 호출 증거를 함께 연결한다. 공개 출처라는 정적 표시 하나만으로 AC1=T로 처리하지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "run_request",
+        "line": 135,
+        "logging_point_id": "AMA-MLC-PUBLIC-LP07",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-PUBLIC-LP08",
+      "condition_ids": [
+        "DC1",
+        "DC2"
+      ],
+      "stage": "ama_request_finished",
+      "layer": "agent_harness",
+      "reason": "공격 역할 도구 선택·실행·합성 canary 전달을 분리 집계하고 원시 응답을 보존한다. 단일 성공 사례를 메타데이터의 인과적 효과로 단정하지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "run_request",
+        "line": 138,
+        "logging_point_id": "AMA-MLC-PUBLIC-LP08",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-HTTP-LP01",
+      "condition_ids": [
+        "AC1",
+        "DC2"
+      ],
+      "stage": "ama_http_request",
+      "layer": "http_client",
+      "reason": "허용된 공식 공개 API로 전송할 실제 GET 경로·query·헤더·nonce를 기록하여 모델 인자와 외부 요청을 연결한다. 전송 의도 자체는 수신 증거가 아니다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "dispatch_calls",
+        "line": 81,
+        "logging_point_id": "AMA-MLC-HTTP-LP01",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-HTTP-LP02",
+      "condition_ids": [
+        "AC1",
+        "DC2"
+      ],
+      "stage": "ama_http_response",
+      "layer": "http_client",
+      "reason": "제공자가 반환한 실제 HTTPS 응답 원문·TLS 정보·echo 및 nonce를 보존한다. 이는 클라이언트가 수집한 영수증이며 제공자 내부 함수의 계측 로그가 아니다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "dispatch_calls",
+        "line": 85,
+        "logging_point_id": "AMA-MLC-HTTP-LP02",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-HTTP-LP03",
+      "condition_ids": [
+        "DC2"
+      ],
+      "stage": "ama_tool_call_outcome",
+      "layer": "http_client",
+      "reason": "개별 호출의 원문 인자·검증·전송·확인 결과를 request_id/tool_call_id/http_attempt_id로 연결한다. 부정확한 인자를 임의 보정하지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+        "function": "dispatch_calls",
+        "line": 94,
+        "logging_point_id": "AMA-MLC-HTTP-LP03",
+        "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a"
+      },
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-RUN01",
+      "condition_ids": [],
+      "stage": "ama_run_started",
+      "layer": "experiment_runner",
+      "reason": "데이터셋·공개 출처 스냅샷·전체 요청 순서를 실행 전에 고정한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/run_public.py",
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "AMA-MLC-RUN01",
+        "sha256": "2a569e7d5812a2011a8041bb537fd85b47d9e8e0248f1e93a4fa4e6b00f382d7"
+      },
+      "source_snapshot": "source-snapshots/2a569e7d5812a201/run_public.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-RUN02",
+      "condition_ids": [],
+      "stage": "ama_server_started",
+      "layer": "experiment_runner",
+      "reason": "실제로 준비된 로컬 CPU MLC-LLM 서버의 실행 명령과 주소를 기록한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/run_public.py",
+        "function": "main",
+        "line": 158,
+        "logging_point_id": "AMA-MLC-RUN02",
+        "sha256": "2a569e7d5812a2011a8041bb537fd85b47d9e8e0248f1e93a4fa4e6b00f382d7"
+      },
+      "source_snapshot": "source-snapshots/2a569e7d5812a201/run_public.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-RUN03",
+      "condition_ids": [],
+      "stage": "ama_run_finished",
+      "layer": "experiment_runner",
+      "reason": "계획한 요청의 완료 수와 정상 종료 상태를 기록한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/run_public.py",
+        "function": "main",
+        "line": 163,
+        "logging_point_id": "AMA-MLC-RUN03",
+        "sha256": "2a569e7d5812a2011a8041bb537fd85b47d9e8e0248f1e93a4fa4e6b00f382d7"
+      },
+      "source_snapshot": "source-snapshots/2a569e7d5812a201/run_public.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-RUN04",
+      "condition_ids": [],
+      "stage": "ama_run_failed",
+      "layer": "experiment_runner",
+      "reason": "실행 오류를 공격 방어 또는 엔진 안전 판정과 구분하여 보존한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/run_public.py",
+        "function": "main",
+        "line": 166,
+        "logging_point_id": "AMA-MLC-RUN04",
+        "sha256": "2a569e7d5812a2011a8041bb537fd85b47d9e8e0248f1e93a4fa4e6b00f382d7"
+      },
+      "source_snapshot": "source-snapshots/2a569e7d5812a201/run_public.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-RUN05",
+      "condition_ids": [],
+      "stage": "ama_process_output",
+      "layer": "experiment_runner",
+      "reason": "서버 출력 원문·해시·자체 프로세스 트리의 TCP 수신 주소 점검을 보존한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/run_public.py",
+        "function": "main",
+        "line": 173,
+        "logging_point_id": "AMA-MLC-RUN05",
+        "sha256": "2a569e7d5812a2011a8041bb537fd85b47d9e8e0248f1e93a4fa4e6b00f382d7"
+      },
+      "source_snapshot": "source-snapshots/2a569e7d5812a201/run_public.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다."
+    },
+    {
+      "logging_point_id": "AMA-MLC-LP01",
+      "condition_ids": [
+        "AC2",
+        "DC1"
+      ],
+      "stage": "ama_native_tools_received",
+      "layer": "native_inference_engine",
+      "reason": "실제 MLC 요청 수신부에서 도구 이름·설명·스키마, 자율/고정 선택 설정 및 API 호환 변환 전후를 기록한다. 공개 API 출처와 실제 호출은 이 지점만으로 증명하지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/mlc-llm/engine/python/mlc_llm/serve/engine_base.py",
+        "function": "process_chat_completion_request",
+        "line": 741,
+        "logging_point_id": "AMA-MLC-LP01",
+        "sha256": "959ab12bd1087278afd505e628f3b727e513c5eb0a602b93b6f352ea2f2520fd"
+      },
+      "source_snapshot": "source-snapshots/959ab12bd1087278/engine_base.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다.",
+      "original_source": {
+        "path": "LIE/mlc-llm/python/mlc_llm/serve/engine_base.py",
+        "function": "process_chat_completion_request",
+        "sha256": "b355194b6c3af2038dfc6f5591c3a7067bddf5887989b87b70cbdc555602e5fe",
+        "source_snapshot": "source-snapshots/b355194b6c3af203/engine_base.py"
+      }
+    },
+    {
+      "logging_point_id": "AMA-MLC-LP02",
+      "condition_ids": [
+        "AC2",
+        "DC1"
+      ],
+      "stage": "ama_native_prompt_rendered",
+      "layer": "native_inference_engine",
+      "reason": "도구 메타데이터가 포함된 실제 템플릿 결과와 인코딩된 입력 토큰을 보존한다. 기본 Qwen2 템플릿이 아닌 명시적 Python 호출 형식 설정을 사용했음을 확인한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/mlc-llm/engine/python/mlc_llm/serve/engine_base.py",
+        "function": "process_chat_completion_request",
+        "line": 796,
+        "logging_point_id": "AMA-MLC-LP02",
+        "sha256": "959ab12bd1087278afd505e628f3b727e513c5eb0a602b93b6f352ea2f2520fd"
+      },
+      "source_snapshot": "source-snapshots/959ab12bd1087278/engine_base.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다.",
+      "original_source": {
+        "path": "LIE/mlc-llm/python/mlc_llm/serve/engine_base.py",
+        "function": "process_chat_completion_request",
+        "sha256": "b355194b6c3af2038dfc6f5591c3a7067bddf5887989b87b70cbdc555602e5fe",
+        "source_snapshot": "source-snapshots/b355194b6c3af203/engine_base.py"
+      }
+    },
+    {
+      "logging_point_id": "AMA-MLC-LP03",
+      "condition_ids": [
+        "DC1",
+        "DC2"
+      ],
+      "stage": "ama_native_tool_calls_returned",
+      "layer": "native_inference_engine",
+      "reason": "네이티브 생성 Python 원문·출력 토큰·파싱된 인자 사전·실제 C++ 생성 설정·최종 응답을 함께 기록한다. 파싱된 사전을 모델이 생성한 원본 JSON 문자열로 표현하지 않으며, 외부 실행 증거와 별도로 연결한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/mlc-llm/engine/python/mlc_llm/serve/engine_base.py",
+        "function": "wrap_chat_completion_response",
+        "line": 1289,
+        "logging_point_id": "AMA-MLC-LP03",
+        "sha256": "959ab12bd1087278afd505e628f3b727e513c5eb0a602b93b6f352ea2f2520fd"
+      },
+      "source_snapshot": "source-snapshots/959ab12bd1087278/engine_base.py",
+      "observed": false,
+      "observed_event_count": 0,
+      "raw_fields": [],
+      "example_event_ids": [],
+      "evidence_limit": "모델의 도구 호출 제안과 클라이언트 측 실제 HTTPS 호출 증거를 구분한다. 관측 전 정적 매핑은 조건 충족 증거가 아니다.",
+      "original_source": {
+        "path": "LIE/mlc-llm/python/mlc_llm/serve/engine_base.py",
+        "function": "wrap_chat_completion_response",
+        "sha256": "b355194b6c3af2038dfc6f5591c3a7067bddf5887989b87b70cbdc555602e5fe",
+        "source_snapshot": "source-snapshots/b355194b6c3af203/engine_base.py"
+      }
+    }
+  ],
+  "supporting_sources": [
+    {
+      "path": "Instrumented-LIE/ama/mlc-llm/engine/python/mlc_llm/liemapp_ama.py",
+      "sha256": "c1407fd550693ab09656735d1f653f15ef28398bac7f3e595d970f623447687f",
+      "source_snapshot": "source-snapshots/c1407fd550693ab0/liemapp_ama.py"
+    },
+    {
+      "path": "Instrumented-LIE/ama/mlc-llm/engine/python/mlc_llm/serve/engine.py",
+      "sha256": "c2fcb48e50a72eaaf29aa2d9cb3071af703aee7fc0f50e9b8b579abd5ea755cc",
+      "source_snapshot": "source-snapshots/c2fcb48e50a72eaa/engine.py"
+    },
+    {
+      "path": "Instrumented-LIE/ama/mlc-llm/engine/python/mlc_llm/protocol/openai_api_protocol.py",
+      "sha256": "fcfca9303d4881ee989b97e59339c29fb37fabd46f1fe5a136d7f462e9475f55",
+      "source_snapshot": "source-snapshots/fcfca9303d4881ee/openai_api_protocol.py"
+    },
+    {
+      "path": "Instrumented-LIE/ama/mlc-llm/engine/python/mlc_llm/protocol/conversation_protocol.py",
+      "sha256": "7205bf81ad1e594cfdf08ae55288c423cb0f59a7cee42bbb49982562363b671b",
+      "source_snapshot": "source-snapshots/7205bf81ad1e594c/conversation_protocol.py"
+    },
+    {
+      "path": "Instrumented-LIE/ama/mlc-llm/engine/python/mlc_llm/conversation_template/qwen2.py",
+      "sha256": "a4b2f10bd40a7826f87531abdad42245cef55c4830c40c837316184cb55ecb2a",
+      "source_snapshot": "source-snapshots/a4b2f10bd40a7826/qwen2.py"
+    },
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/service.py",
+      "sha256": "78777cd18b84df38ae363e144a28733cf67f8e6966c1febe1e3342fa987c8475",
+      "source_snapshot": "source-snapshots/78777cd18b84df38/service.py"
+    },
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/native_runtime.py",
+      "sha256": "721cbb62e093c32d0ae88d8ae3308cc27d7dc5bec8d8449713f403793363fbb3",
+      "source_snapshot": "source-snapshots/721cbb62e093c32d/native_runtime.py"
+    },
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+      "sha256": "e2dce7178eddbd903b17c99016a36e58df994398d2da9f354477d3dff3e1827a",
+      "source_snapshot": "source-snapshots/e2dce7178eddbd90/mlc_protocol.py"
+    },
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/public_http_protocol.py",
+      "sha256": "a76e5c1ce67c7cb866126b324f6a78103dd79502b12d9e59feda925afe3a3ec0",
+      "source_snapshot": "source-snapshots/a76e5c1ce67c7cb8/public_http_protocol.py"
+    },
+    {
+      "path": "LieMappBench/Logging-Dataset/logger.py",
+      "sha256": "b7232875bcbc0febe286d099fc5558a733b328e7f042fb00fd02719b48023e9e",
+      "source_snapshot": "source-snapshots/b7232875bcbc0feb/logger.py"
+    },
+    {
+      "path": "LieMappAnalyzer/analyzer.py",
+      "sha256": "1ece41340efd348562b1a50fe5ad69ecd8f49ffa1cd7ab716bf13efae049c09c",
+      "source_snapshot": "source-snapshots/1ece41340efd3485/analyzer.py"
+    },
+    {
+      "path": "LieMappBench/Logging-Dataset/ama/mlc-llm/public-http-native-v1/conditions.json",
+      "sha256": "5ba8e58afed3ff44a5357e1833d3527b8517d4a9765e9e64310ed350a1641bb8",
+      "source_snapshot": "source-snapshots/5ba8e58afed3ff44/conditions.json"
+    }
+  ],
+  "code_dependency_snapshots": [],
+  "source_run": null,
+  "observed_counts": {},
+  "status": "static_source_review_only_not_runtime_evidence",
+  "limitations": [
+    "기본 Qwen2 템플릿에는 도구 정보가 포함되지 않아 별도 Conversation 설정을 사용한다.",
+    "MLC named 고정 선택은 다른 엔진의 required 문법 강제와 같지 않다.",
+    "Python 호출 원문·네이티브 인자 사전·HTTPS 전송 인자를 구분하며 보정하지 않는다.",
+    "AC3 T는 검토 수행, DC T는 증거 확보이며 공격 성공률 또는 안전 인증이 아니다."
+  ],
+  "freeze": {
+    "created_utc": "2026-09-11T15:32:09.815678+00:00",
+    "utility_sha256": "7e30153ee0fb4d6b25f9f3b837a15276ff2e5807740a108526931498421c632a",
+    "utility_snapshot": "source-snapshots/7e30153ee0fb4d6b/freeze_mapping.py"
+  }
+}

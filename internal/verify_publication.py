@@ -16,7 +16,7 @@ os.environ['OPENBLAS_NUM_THREADS'] = '1'
 
 from LieMappAnalyzer.analyzer import EvidencePackage, analyze
 from internal import publication
-from internal.workflow import load_config, resolve, verify_selection
+from internal.workflow import load_config, resolve, selected_protocol, selected_supplements, verify_selection
 
 
 def read(path):
@@ -43,12 +43,13 @@ def audit(config, *, root=ROOT, recompute=False):
         require(checked_hashes[path] == reference['sha256'], 'Referenced bytes changed: ' + str(path))
 
     for attack_id, attack in config['attacks'].items():
-        rules_path = resolve(attack['rules'], root)
-        rules = read(rules_path)
         for engine_id, engine in attack['engines'].items():
             current = read(root / '.evidence/current' / attack_id / (engine_id + '.json'))
             raw = resolve(current['source_log'], root)
             package = EvidencePackage(raw)
+            protocol = selected_protocol(attack, package.metadata, root=root)
+            rules_path = protocol['rules']
+            rules = read(rules_path)
             verify_selection(current, attack_id=attack_id, engine_id=engine_id,
                              source_log=raw, events_sha256=package.seal['events_sha256'])
             internal = root / '.evidence/analyses' / attack_id / engine_id / current['publication_id']
@@ -107,11 +108,10 @@ def audit(config, *, root=ROOT, recompute=False):
             else:
                 fresh = analysis
             presentation, presentation_path = publication._checked_data(
-                resolve(attack['presentation'], root) if attack.get('presentation') else None, fresh)
+                protocol['presentation'], fresh)
             mapping, mapping_path = publication._checked_data(
                 resolve(engine['mapping'], root) if engine.get('mapping') else None, fresh, engine=True)
-            supplement_paths = ([resolve(p, root) for p in engine.get('supplements', [])]
-                                if engine.get('source_log') and raw == resolve(engine['source_log'], root) else [])
+            supplement_paths = selected_supplements(engine, raw, root=root)
             supplements = publication._supplements(supplement_paths, fresh)
             targets = {c['id']: log_dir / f"{attack['label']}-{c['id']}-{engine['label']}-LogFile.json"
                        for c in rules['conditions']}

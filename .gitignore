@@ -3,14 +3,17 @@
 .evidence/
 .tooling/
 .venv/
-tests/
 __pycache__/
 *.py[cod]
-expoeriments.json
 
 # Document
 docs/
 report/
+RESEARCH_PROGRESS.md
+
+# Reference papers: copyrighted, distribute by citation not by copy.
+# See LieMappBench/Attack-Library/REFERENCES.md
+LieMappBench/Attack-Library/refs/
 
 # LLM Inference Engine
 LIE/

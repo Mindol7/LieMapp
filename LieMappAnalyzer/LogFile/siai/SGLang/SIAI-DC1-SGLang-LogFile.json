@@ -20955,11 +20955,11 @@
     },
     "rules": {
       "path": "../../../../LieMappBench/Logging-Dataset/siai/conditions.json",
-      "sha256": "48d5cdd2a4784819f3fd0e706c9df119d0d7156685009925f0a4686e406ce16f"
+      "sha256": "9c2cab615a97b241785af4ab7e417bede0180ed706f44789754bacff825382c4"
     },
     "library": {
       "path": "LieMappBench/Attack-Library/attack_library.xlsx",
-      "sha256": "069bdc201aef0babcb9eecabfc50627548dae616e618aac1b20cf9418a1a4981",
+      "sha256": "9c68520ce96aead135aa2535943f1526c1791b264d4cd4dbd0ad9684d43e270f",
       "sheet": "AI 포렌식",
       "row": 10,
       "cells": {
@@ -20968,10 +20968,10 @@
       }
     },
     "internal_analysis": {
-      "path": "../../../../.evidence/analyses/siai/SGLang/20260907T050858Z-9122a196/analysis.json",
-      "sha256": "7300ae56847d18c3e34ee822e46448ad4cb320f12723cd4735cdbdaed8d90113"
+      "path": "../../../../.evidence/analyses/siai/SGLang/20260912T122943Z-5b2e8a5b/analysis.json",
+      "sha256": "f54056b95217e790eca28f2d7dc7025282d3c22781cf5da53458578173c50178"
     },
-    "analyzer_sha256": "1ece41340efd348562b1a50fe5ad69ecd8f49ffa1cd7ab716bf13efae049c09c",
+    "analyzer_sha256": "30c1da3898087b1626f3b611127d6c7fbd80caabd44e90856432f3220a965f0d",
     "mapping": {
       "path": "../../../../LieMappBench/Logging-Dataset/siai/SGLang/logging-points-publication.json",
       "sha256": "77a6db2ed56492be5ed48342329f8f4fac323e7820bf4870b19bd9aa7a179f25"

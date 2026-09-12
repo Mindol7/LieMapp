@@ -33,6 +33,9 @@ KNOWN_ATTACKS = {
     "I Know What You Said: Unveiling Hardware Cache Side-Channels in Local Large Language Model Inference": "ikws",
     "Mind the Gap: A Practical Attack on GGUF Quantization": "mindthegap",
     "Universal and Transferable Adversarial Attacks on Aligned Language Models": "gcg",
+    "Attractive Metadata Attack: Inducing LLM Agents to Invoke Malicious Tools": "ama",
+    # Preserve the authoritative workbook text, including its current spelling.
+    "Attractive Metadata Attck: Inducing LLM Agents to Invoke Malicious Tools": "ama",
 }
 
 

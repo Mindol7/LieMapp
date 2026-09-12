@@ -1,0 +1,158 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "ama",
+  "engine_id": "vllm",
+  "upstream_commit": "a1541f5742a29864a80087af313ad460066a1524",
+  "original_repository": "LIE/vllm",
+  "instrumented_repository": "Instrumented-LIE/ama/vllm",
+  "private_experiment_fork": true,
+  "clone_storage": "Independent local clone using --no-hardlinks; no alternates or shared Git object store",
+  "build": {
+    "status": "reused_native_cpu_kernels",
+    "backend": "CPU",
+    "native_rebuild_performed": false,
+    "source_of_precompiled_kernels": "Instrumented-LIE/siai/vllm/vllm; same upstream commit, copied without modifying SIAI",
+    "runtime_python": "Instrumented-LIE/siai/vllm/.venv/bin/python",
+    "readonly_dependency": true,
+    "package_versions": {
+      "torch": "2.13.0+cpu",
+      "transformers": "5.16.1",
+      "vllm": "0.28.1rc1.dev453+ga1541f574.d20260906.cpu",
+      "pydantic": "2.13.5",
+      "numpy": "2.3.5",
+      "uvicorn": "0.52.4",
+      "fastapi": "0.136.3",
+      "tokenizers": "0.23.2",
+      "xgrammar": "0.2.3"
+    },
+    "selected_kernel": "_C_AVX2.abi3.so",
+    "dtype": "float32",
+    "gpu_required": false,
+    "process_model": "Real OpenAI AsyncLLM frontend uses AsyncMPClient and a separate engine core; each single-rank engine uses UniProcExecutor. VLLM_ENABLE_V1_MULTIPROCESSING=0 does not eliminate API-server engine-core multiprocessing."
+  },
+  "source_changes": [
+    {
+      "path": "vllm/entrypoints/openai/chat_completion/api_router.py",
+      "original_sha256": "34aed1eff3cb4354d44f6f8f74d08b0d11a625bce945ee116e0e9190665c127b",
+      "instrumented_sha256": "8e21a40faaa8cf9ccaf92b586d4e33897dd12f364dc6cddf56c20365d6608351"
+    },
+    {
+      "path": "vllm/entrypoints/openai/chat_completion/serving.py",
+      "original_sha256": "ea1f76074a9587c8054f54d30a6ba748b6a5fc4d90dd82c801504505c1da1f92",
+      "instrumented_sha256": "bd5ad3c4e044b18087baaa578c1b8bd3401ec4458034c330e20461806adf070b"
+    },
+    {
+      "path": "vllm/liemapp_ama.py",
+      "original_sha256": null,
+      "instrumented_sha256": "0a413792af1f9b8a5f0468afe6682c45e6035acb8d95037eba5df983dffaecc1"
+    }
+  ],
+  "validated_files": [
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/entrypoints/openai/chat_completion/api_router.py",
+      "sha256": "8e21a40faaa8cf9ccaf92b586d4e33897dd12f364dc6cddf56c20365d6608351",
+      "bytes": 4683
+    },
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/entrypoints/openai/chat_completion/serving.py",
+      "sha256": "bd5ad3c4e044b18087baaa578c1b8bd3401ec4458034c330e20461806adf070b",
+      "bytes": 58789
+    },
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/liemapp_ama.py",
+      "sha256": "0a413792af1f9b8a5f0468afe6682c45e6035acb8d95037eba5df983dffaecc1",
+      "bytes": 3027
+    },
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/_C.abi3.so",
+      "sha256": "fb148d06153713b85a2f206dc877d70517596d82a9b50d463dbefdcabc12727f",
+      "bytes": 150137552
+    },
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/_C_AVX2.abi3.so",
+      "sha256": "a086e9b962a4d7b20b840261723122401fb25d482cad63a06e239cf50fd673de",
+      "bytes": 84590752
+    },
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/_C_AVX512.abi3.so",
+      "sha256": "1eef0adeca82bec90a07dc0467f4bde41c816c916b0087abe027dd44303311ab",
+      "bytes": 97851432
+    },
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/spinloop.abi3.so",
+      "sha256": "43701ad16144d724627656a209ba726e1125d5b1af95d4002ec8f27b6ffcd432",
+      "bytes": 39448
+    },
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/fs_io_C.abi3.so",
+      "sha256": "ea2b208cc0bac7a3f15a7382612f1d2f72a6f8133fdb3615398ea92d82399f7d",
+      "bytes": 402088
+    },
+    {
+      "path": "Instrumented-LIE/ama/vllm/vllm/_version.py",
+      "sha256": "ca95526fee96678b0a0ae217188ce171bce415e0234bbf81fade95a67ed5d1cd",
+      "bytes": 602
+    },
+    {
+      "path": "Instrumented-LIE/siai/vllm/.venv/bin/python",
+      "sha256": "a92f0f95e883390c7256b2e441484aac06b1002dbe1d924141a77c8d82f96223",
+      "bytes": 8025024
+    },
+    {
+      "path": "Instrumented-LIE/siai/vllm/.venv/lib/libiomp5.so",
+      "sha256": "9c6d353bb4a555cb82bcf6baff47c0a019f994abfafa18e3d6ec073dedc3a606",
+      "bytes": 2142776
+    },
+    {
+      "path": "Instrumented-LIE/siai/vllm/.native-deps/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4",
+      "sha256": "589db2634e919a0a25d8948eecdb3785eeb411fcdb368de3494118e5dd770f9f",
+      "bytes": 150880
+    },
+    {
+      "path": "LieMappBench/Logging-Dataset/logger.py",
+      "sha256": "b7232875bcbc0febe286d099fc5558a733b328e7f042fb00fd02719b48023e9e",
+      "bytes": 17263
+    },
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/vllm/native_runtime.py",
+      "sha256": "4c1d08f1960dac7c66e16fb448e44a9a31dfced176f10b2ec0cd7ec1539f438d",
+      "bytes": 9662
+    },
+    {
+      "path": "Instrumented-LIE/siai/vllm/.venv/lib/python3.12/site-packages/torch/_C.cpython-312-x86_64-linux-gnu.so",
+      "sha256": "68123140eba0fc2d86966b9b2f265c690a0f32f225347f832f1828e22935196a",
+      "bytes": 8737
+    },
+    {
+      "path": "Instrumented-LIE/siai/vllm/.venv/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+      "sha256": "ae0f4bc33ffe73f4eb85b2fd03b036c68cf5ab6139995f6a2345f5962c1bbb81",
+      "bytes": 434184800
+    },
+    {
+      "path": "Instrumented-LIE/siai/vllm/.venv/lib/python3.12/site-packages/torch/lib/libc10.so",
+      "sha256": "52d951ec184bf4ead929cfa5a24daa14cc617bf9e2180b6e551434b6f11d0b3f",
+      "bytes": 1525128
+    },
+    {
+      "path": "Instrumented-LIE/siai/vllm/.venv/lib/python3.12/site-packages/torch/lib/libtorch_python.so",
+      "sha256": "247efcbc423fb65aa64640b96cd51672d4863413472ed2ddded6ad57a8647c67",
+      "bytes": 30616304
+    }
+  ],
+  "network_policy": {
+    "http": "127.0.0.1",
+    "distributed_executor": "uni",
+    "rendezvous": "Native upstream FileStore for CPU; no TCPStore safety patch",
+    "gloo_interface": "lo",
+    "listener_verification": "Startup and post-request own-process-tree TCP listener audit, fail on non-loopback",
+    "external_tool_dispatch": false,
+    "ipc": "Short private tempfile directory for ZMQ Unix-domain sockets, removed after server process lifetime; evidence caches remain in the run directory."
+  },
+  "validation": {
+    "api_server_help": "passed using AMA source with existing read-only venv",
+    "actual_inference": "Pending; recorded separately in run evidence",
+    "logging_parity": "Pending; not implied by source/kernel readiness",
+    "native_cpu_probe": "Passed: AMA imports and AMA AVX2 library loaded; native silu_and_mul agrees with PyTorch reference; UniProc CPU selects file:// rendezvous.",
+    "observer_unit_tests": "4 tests; disabled transport, 8 concurrent request contexts, malformed context rejection, strict no-call normalization."
+  }
+}

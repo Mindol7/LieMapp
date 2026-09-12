@@ -199,7 +199,7 @@ def _plan(rule, presentation):
     if operation == "compare":
         field = rule["field"]
         label = _description(presentation, "field_labels", field, field)["label"]
-        operators = {"eq": "같은지", "ne": "다른지", "gt": "큰지", "ge": "이상인지", "lt": "작은지", "le": "이하인지", "contains": "포함하는지", "in": "포함되는지"}
+        operators = {"eq": "같은지", "ne": "다른지", "gt": "큰지", "ge": "이상인지", "lt": "작은지", "le": "이하인지", "contains": "포함하는지", "not_contains": "포함하지 않는지", "in": "포함되는지"}
         return [f"{label}가 기준값 {json.dumps(rule.get('value'), ensure_ascii=False)}와 비교하여 {operators[rule['cmp']]} 확인합니다."]
     return [descriptions[operation]]
 

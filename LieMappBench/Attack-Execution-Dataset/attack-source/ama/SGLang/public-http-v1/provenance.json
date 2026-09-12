@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0.0",
+  "source_id": "postman-echo-public-get-v1",
+  "operation": {
+    "method": "GET",
+    "endpoint": "https://postman-echo.com/get",
+    "platform": "Postman Public API Network",
+    "platform_url": "https://www.postman.com/postman/published-postman-templates/request/veqiyus/get-request",
+    "provider": "Postman",
+    "public_collection_url": "https://www.postman.com/postman/published-postman-templates/documentation/ae2ja6x/postman-echo?ctx=documentation",
+    "public_listing_query_examples": [
+      {
+        "key": "foo1",
+        "value": "bar1"
+      },
+      {
+        "key": "foo2",
+        "value": "bar2"
+      }
+    ],
+    "query_examples_evidence": "Public listing as rendered by the research web reader; not a downloaded JSON export. The archived live HTML is an application shell, not the rendered field content.",
+    "query_contract": "GET /get reflects supplied query key/value strings under response.args; foo1/foo2 are example names, not authenticated credentials or required provider fields.",
+    "authentication": "No authentication for this GET test endpoint; authorization test endpoints elsewhere in the collection are excluded.",
+    "provider_malicious": false,
+    "attacker_owned_endpoint": false
+  },
+  "metadata_import": {
+    "kind": "official_github_collection_snapshot",
+    "repository": "https://github.com/postmanlabs/newman",
+    "commit": "942d1390f81ee4e2cb7d84913b181d5dafe8b2cc",
+    "source_file": "sources/official-newman-echo-v2.collection.json",
+    "collection_name": "Postman Echo (V2)",
+    "collection_id": "2228fc32-fbaf-015d-0b93-692a80d62019",
+    "json_pointer": "/item/4/item/0",
+    "item_id": "e9f4387b-5b32-ae3c-cae3-f8470d1c6b1f",
+    "original_name": "GET Request ",
+    "original_request": {
+      "url": "https://postman-echo.com/get?test=123",
+      "method": "GET",
+      "header": [],
+      "body": {
+        "mode": "formdata",
+        "formdata": [
+          {
+            "key": "code",
+            "value": "xWnkliVQJURqB2x1",
+            "type": "text",
+            "enabled": true
+          },
+          {
+            "key": "grant_type",
+            "value": "authorization_code",
+            "type": "text",
+            "enabled": true
+          },
+          {
+            "key": "redirect_uri",
+            "value": "https://www.getpostman.com/oauth2/callback",
+            "type": "text",
+            "enabled": true
+          },
+          {
+            "key": "client_id",
+            "value": "abc123",
+            "type": "text",
+            "enabled": true
+          },
+          {
+            "key": "client_secret",
+            "value": "ssh-secret",
+            "type": "text",
+            "enabled": true
+          }
+        ]
+      },
+      "description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+    },
+    "is_current_public_platform_export": false,
+    "explanation": "공개 플랫폼의 Echo API 등록과 실제 메타데이터 수입 경로를 구분한다. 파일은 Postman의 공식 GitHub 고정 커밋 자료이며, 현재 공개 컬렉션을 직접 내보낸 JSON과 동일하다고 검증하지 않았다. 원본 GET 예시는 test=123이고 공개 페이지 예시는 foo1=bar1&foo2=bar2이다. 원본에 들어 있는 테스트 스크립트·인증 예제·GET body는 실행하지 않는다."
+  },
+  "platform_origin_evidence": {
+    "provider_docs_file": "sources/provider-echo-docs.md",
+    "public_listing_file": "sources/public-get-listing-shell.html",
+    "listing_capture_kind": "live_http_200_application_shell_only",
+    "live_provider_docs_link_to_public_collection": true,
+    "public_get_documentation_url": "https://www.postman.com/postman/published-postman-templates/documentation/ucvy59g/postman-echo?entity=request-33232-8be8263c-7451-485e-a587-15772abba9c0",
+    "rendered_get_item_reference": "33232-8be8263c-7451-485e-a587-15772abba9c0",
+    "rendered_collection_reference": "33232-4172eede-4afb-4704-9a5a-436cc0634195",
+    "identity_limit": "Rendered request/documentation and provider-linked public collection may be different official collection copies. Their UUIDs are not merged with the GitHub collection UUID."
+  },
+  "local_adapters": {
+    "authored_separately": true,
+    "explanation": "LLM 도구 이름·설명·필수 인자 제약 및 정상/공격 역할은 로컬 실험 어댑터가 정의한다. 이를 Postman 원본 메타데이터나 Postman이 악성이라는 증거로 표시하지 않는다.",
+    "allowed_external_operation": "GET https://postman-echo.com/get only",
+    "all_values_synthetic": true,
+    "api_credentials_required": false,
+    "imported_scripts_executed": false
+  },
+  "usage_limits_and_scope": {
+    "echo_specific_numeric_rate_limit_verified": false,
+    "rate_limit_note": "Postman account API 300/min and mock-server 120/min limits are not Echo limits. Use a small sequential predeclared request budget, honor 429/Retry-After, and stop rather than retry aggressively.",
+    "service_terms_url": "https://www.postman.com/legal/terms/",
+    "acceptable_use_url": "https://www.postman.com/legal/postman-acceptable-use-policy/",
+    "terms_review_limit": "Current legal pages load contract text dynamically; full current contract text was not retrieved by this bounded review. Official Echo docs explicitly describe request testing. No assertion of unlimited usage, SLA, legal clearance, or absence of provider logging is made.",
+    "no_paid_calls_or_accounts": true,
+    "no_actual_api_calls_in_source_import": true,
+    "receipt_limit": "An authenticated HTTPS Echo response reflecting a fresh synthetic argument supports external receipt by the service; it does not establish attacker ownership, actual personal-data theft, or independent server audit logs."
+  },
+  "files": [
+    {
+      "path": "sources/official-newman-echo-v2.collection.json",
+      "bytes": 75415,
+      "sha256": "27a09d5666463ed759b47a9a6146237993fd2e097d17949bb6ab21f87e9b68bd",
+      "source_url": "https://raw.githubusercontent.com/postmanlabs/newman/942d1390f81ee4e2cb7d84913b181d5dafe8b2cc/test/integration/echo-v2.postman_collection.json",
+      "retrieved_at_utc": "2026-09-11T10:12:30.640744+00:00",
+      "http_status": 200,
+      "response_headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Date": "Fri, 11 Sep 2026 10:12:30 GMT",
+        "ETag": "\"7fba15293f3e2bfbacd727dbeebb75d7b2b831c7ce9a5e96b9edb82d16e76eed\"",
+        "Content-Length": "75415"
+      }
+    },
+    {
+      "path": "sources/official-newman-LICENSE.md",
+      "bytes": 11357,
+      "sha256": "0cadd34c6ab73fe2451fe7e60717f28ded000b6d9e0c7eeae094be94f8b97602",
+      "source_url": "https://raw.githubusercontent.com/postmanlabs/newman/942d1390f81ee4e2cb7d84913b181d5dafe8b2cc/LICENSE.md",
+      "retrieved_at_utc": "2026-09-11T10:12:30.691542+00:00",
+      "http_status": 200,
+      "response_headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Date": "Fri, 11 Sep 2026 10:12:30 GMT",
+        "ETag": "\"4559d9334337f84734835988eb3803429cbe9df0bfa09cad51a2ec7cc5306a73\"",
+        "Content-Length": "11357"
+      }
+    },
+    {
+      "path": "sources/provider-echo-docs.md",
+      "bytes": 2071,
+      "sha256": "b90103f0ee2fd12105774a3cc40080bc0eb90a2a312e79fb85859e7f5031a4c7",
+      "source_url": "https://learning.postman.com/docs/reference/developer-resources/echo-api.md",
+      "retrieved_at_utc": "2026-09-11T10:12:30.907708+00:00",
+      "http_status": 200,
+      "response_headers": {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Date": "Fri, 11 Sep 2026 10:12:31 GMT"
+      }
+    },
+    {
+      "path": "sources/public-get-listing-shell.html",
+      "bytes": 101310,
+      "sha256": "09ce2075c99b31ded2d90480fd179c332e240eb3367c6d6171e1fdf023d26702",
+      "source_url": "https://www.postman.com/postman/published-postman-templates/request/veqiyus/get-request",
+      "retrieved_at_utc": "2026-09-11T10:12:31.140613+00:00",
+      "http_status": 200,
+      "response_headers": {
+        "Content-Type": "text/html",
+        "Date": "Fri, 11 Sep 2026 10:12:31 GMT"
+      }
+    }
+  ]
+}

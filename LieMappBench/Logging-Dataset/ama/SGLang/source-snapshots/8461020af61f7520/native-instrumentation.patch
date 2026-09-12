@@ -1,0 +1,456 @@
+diff --git a/python/sglang/kernels/ops/kvcache/cache_move.py b/python/sglang/kernels/ops/kvcache/cache_move.py
+index cf0e0e4cc2..957175fa73 100644
+--- a/python/sglang/kernels/ops/kvcache/cache_move.py
++++ b/python/sglang/kernels/ops/kvcache/cache_move.py
+@@ -6,10 +6,6 @@ from sglang.srt.utils import is_cpu
+ 
+ _is_cpu = is_cpu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import copy_all_layer_kv_cache_cpu
+-
+-
+ @triton.jit
+ def set_kv_buffer_prefix_valid_tiled(
+     src_k_ptr,
+@@ -103,6 +99,11 @@ def copy_all_layer_kv_cache_func(
+     kv_copy_config: dict,
+ ):
+     if _is_cpu:
++        # LieMapp CPU compatibility: defer the optional cache-copy extension
++        # until this path is actually requested. No fake implementation; a
++        # missing extension still raises at the real call boundary.
++        from sgl_kernel import copy_all_layer_kv_cache_cpu
++
+         copy_all_layer_kv_cache_cpu(
+             data_ptrs,
+             strides,
+diff --git a/python/sglang/kernels/ops/speculative/cache_locs.py b/python/sglang/kernels/ops/speculative/cache_locs.py
+index ec1953d66c..8074b885d0 100644
+--- a/python/sglang/kernels/ops/speculative/cache_locs.py
++++ b/python/sglang/kernels/ops/speculative/cache_locs.py
+@@ -21,10 +21,6 @@ _is_npu = is_npu()
+ _is_musa = is_musa()
+ _is_xpu = is_xpu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import assign_extend_cache_locs_cpu
+-
+-
+ @triton.jit
+ def assign_draft_cache_locs_contiguous(
+     req_pool_indices,
+@@ -478,6 +474,9 @@ def assign_extend_cache_locs_func(
+             dtype=torch.int64,
+             device=device,
+         )
++        # LieMapp compatibility: import the actual optional kernel on demand.
++        from sgl_kernel import assign_extend_cache_locs_cpu
++
+         assign_extend_cache_locs_cpu(
+             req_pool_indices,
+             req_to_token,
+diff --git a/python/sglang/kernels/ops/speculative/eagle.py b/python/sglang/kernels/ops/speculative/eagle.py
+index 10342899ce..baedfd4fdf 100644
+--- a/python/sglang/kernels/ops/speculative/eagle.py
++++ b/python/sglang/kernels/ops/speculative/eagle.py
+@@ -6,10 +6,6 @@ from sglang.srt.utils import is_cpu, next_power_of_2
+ 
+ _is_cpu = is_cpu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import fill_accept_out_cache_loc_cpu, fill_bonus_tokens_cpu
+-
+-
+ @triton.jit
+ def fill_bonus_tokens(
+     accept_tokens,
+@@ -37,6 +33,9 @@ def fill_bonus_tokens_func(
+     batch_size: int,
+ ):
+     if _is_cpu:
++        # LieMapp compatibility: retain real speculative kernel when requested.
++        from sgl_kernel import fill_bonus_tokens_cpu
++
+         fill_bonus_tokens_cpu(
+             accept_tokens,
+             accept_lens,
+@@ -77,6 +76,8 @@ def fill_accept_out_cache_loc_func(
+     size: int,
+ ):
+     if _is_cpu:
++        from sgl_kernel import fill_accept_out_cache_loc_cpu
++
+         fill_accept_out_cache_loc_cpu(
+             accept_index,
+             out_cache_loc,
+diff --git a/python/sglang/kernels/ops/speculative/multi_layer_eagle.py b/python/sglang/kernels/ops/speculative/multi_layer_eagle.py
+index e088e52c79..540b45f7fd 100644
+--- a/python/sglang/kernels/ops/speculative/multi_layer_eagle.py
++++ b/python/sglang/kernels/ops/speculative/multi_layer_eagle.py
+@@ -21,10 +21,6 @@ from sglang.srt.utils import is_cpu, is_npu
+ _is_cpu = is_cpu()
+ _is_npu = is_npu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import rotate_input_ids_cpu
+-
+-
+ @triton.jit
+ def rotate_input_ids_kernel(
+     input_ids_ptr,
+@@ -66,6 +62,10 @@ def rotate_input_ids(
+     input_ids, extend_start_loc, extend_seq_lens, topk_index, select_index=None
+ ):
+     if _is_cpu:
++        # LieMapp compatibility: optional EAGLE extension remains mandatory
++        # if this speculative path is selected; no operation is substituted.
++        from sgl_kernel import rotate_input_ids_cpu
++
+         rotate_input_ids_cpu(
+             input_ids,
+             extend_start_loc,
+diff --git a/python/sglang/srt/entrypoints/http_server.py b/python/sglang/srt/entrypoints/http_server.py
+index 18c865af4d..00e969ab1a 100644
+--- a/python/sglang/srt/entrypoints/http_server.py
++++ b/python/sglang/srt/entrypoints/http_server.py
+@@ -63,6 +63,7 @@ from fastapi.middleware.cors import CORSMiddleware
+ from fastapi.responses import ORJSONResponse, Response, StreamingResponse
+ from fastapi.routing import APIRoute
+ 
++from sglang import liemapp_ama
+ from sglang.srt.arg_groups.overrides import resolving_view
+ from sglang.srt.configs.embedding_model_spec import resolved_embedding_plan
+ from sglang.srt.constants import HEALTH_CHECK_RID_PREFIX
+@@ -1739,6 +1740,24 @@ async def openai_v1_chat_completions(
+     request: ChatCompletionRequest, raw_request: Request
+ ):
+     """OpenAI-compatible chat completion endpoint."""
++    if liemapp_ama.enabled(request):
++        submitted = await raw_request.json()
++        liemapp_ama.emit(
++            request,
++            "ama_native_tools_received",
++            "AMA-SGLANG-LP01",
++            {
++                "http_path": raw_request.url.path,
++                "tools": submitted.get("tools", []),
++                "tools_count": len(submitted.get("tools", [])),
++                "messages": submitted.get("messages", []),
++                "tool_choice": submitted.get("tool_choice", "auto"),
++                "stream": submitted.get("stream", False),
++                "native_request_id": request.rid,
++                "parsed_tools": [t.model_dump() for t in request.tools or []],
++            },
++            "Native HTTP route received exact submitted tool metadata and policy.",
++        )
+     return await raw_request.app.state.openai_serving_chat.handle_request(
+         request, raw_request
+     )
+diff --git a/python/sglang/srt/entrypoints/openai/protocol.py b/python/sglang/srt/entrypoints/openai/protocol.py
+index 3b99baea6c..5ced63ca8a 100644
+--- a/python/sglang/srt/entrypoints/openai/protocol.py
++++ b/python/sglang/srt/entrypoints/openai/protocol.py
+@@ -841,6 +841,10 @@ def _has_message_level_tools(messages: Any) -> bool:
+ 
+ 
+ class ChatCompletionRequest(BaseModel):
++    # Private experiment labels; never forwarded to chat templates or sampling.
++    liemapp_request_id: Optional[str] = Field(default=None, max_length=256)
++    liemapp_context: Dict[str, Any] = Field(default_factory=dict)
++
+     # Ordered by official OpenAI API documentation
+     # https://platform.openai.com/docs/api-reference/chat/create
+     messages: List[ChatCompletionMessageParam]
+diff --git a/python/sglang/srt/entrypoints/openai/serving_chat.py b/python/sglang/srt/entrypoints/openai/serving_chat.py
+index a38f4aa5d1..3e8d87003b 100644
+--- a/python/sglang/srt/entrypoints/openai/serving_chat.py
++++ b/python/sglang/srt/entrypoints/openai/serving_chat.py
+@@ -33,9 +33,11 @@ _CHAT_TEMPLATE_CLIENT_ERRORS: tuple[type[BaseException], ...] = (
+     jinja2.TemplateError,
+     TypeError,
+ ) + _MISTRAL_COMMON_ERRORS
+-from fastapi.responses import ORJSONResponse, StreamingResponse
++from fastapi.encoders import jsonable_encoder
++from fastapi.responses import JSONResponse, ORJSONResponse, StreamingResponse
+ from jsonschema import Draft202012Validator, SchemaError
+ 
++from sglang import liemapp_ama
+ from sglang.srt.entrypoints.openai import chat_encoding, encoding_dsv4, encoding_dsv32
+ from sglang.srt.entrypoints.openai.protocol import (
+     ChatCompletionMessageContentTextPart,
+@@ -1567,6 +1569,25 @@ class OpenAIServingChat(OpenAIServingBase):
+             if is_multimodal:
+                 prompt = self.tokenizer_manager.tokenizer.decode(prompt_ids)
+ 
++            if liemapp_ama.enabled(request):
++                liemapp_ama.emit(
++                    request,
++                    "ama_native_prompt_rendered",
++                    "AMA-SGLANG-LP02",
++                    {
++                        "rendered_prompt": rendered_prompt,
++                        "rendered_prompt_available": True,
++                        "prompt_token_ids": list(prompt_ids),
++                        "native_request_id": request.rid,
++                        "tool_choice": request.tool_choice,
++                        "tools_count": len(request.tools or []),
++                        "parser_class": self.tool_call_parser,
++                        "assistant_prefix_appended": bool(assistant_prefix),
++                        "parse_tool_calls": self._tool_call_parsing_active(request),
++                    },
++                    "Actual native chat-template output and encoded model input.",
++                )
++
+         stop = request.stop
+         image_data = image_data if image_data else None
+         audio_data = audio_data if audio_data else None
+@@ -2024,12 +2045,49 @@ class OpenAIServingChat(OpenAIServingBase):
+         if not isinstance(ret, list):
+             ret = [ret]
+ 
++        generated_outputs = None
++        if liemapp_ama.enabled(request):
++            generated_outputs = [
++                {
++                    "index": index,
++                    "text": self._decode_response(item),
++                    "token_ids": list(item.get("output_ids", [])),
++                    "meta_info": copy.deepcopy(item["meta_info"]),
++                }
++                for index, item in enumerate(ret)
++            ]
++
+         response = self._build_chat_response(
+             request,
+             ret,
+             int(time.time()),
+         )
+ 
++        if liemapp_ama.enabled(request) and isinstance(response, ChatCompletionResponse):
++            payload = jsonable_encoder(response)
++            liemapp_ama.emit(
++                request,
++                "ama_native_tool_calls_returned",
++                "AMA-SGLANG-LP03",
++                {
++                    "http_status": 200,
++                    "response": payload,
++                    "response_text": JSONResponse(content=payload).body.decode("utf-8"),
++                    "tool_calls": liemapp_ama.tool_calls(payload),
++                    "tool_calls_normalization": (
++                        "Absent/null message.tool_calls is summarized as []; "
++                        "the complete response remains unchanged."
++                    ),
++                    "generated_text": generated_outputs[0]["text"],
++                    "generated_outputs": generated_outputs,
++                    "effective_sampling_params": adapted_request.sampling_params,
++                    "native_request_id": adapted_request.rid,
++                    "parser_class": self.tool_call_parser,
++                    "tool_dispatch_observed": False,
++                },
++                "Actual generated text and native parsed response; not tool execution.",
++            )
++
+         return response
+ 
+     def _build_chat_response(
+diff --git a/python/sglang/srt/mem_cache/allocation.py b/python/sglang/srt/mem_cache/allocation.py
+index 5e109a4c89..2ff01122eb 100644
+--- a/python/sglang/srt/mem_cache/allocation.py
++++ b/python/sglang/srt/mem_cache/allocation.py
+@@ -42,9 +42,6 @@ _is_npu = is_npu()
+ _is_cuda = is_cuda()
+ _is_cpu = is_cpu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import assign_req_to_token_pool_cpu
+-
+ if TYPE_CHECKING:
+     from sglang.srt.managers.schedule_batch import Req, ScheduleBatch
+ 
+@@ -628,6 +625,10 @@ def assign_req_to_token_pool_func(
+     batch_size: int,
+ ):
+     if _is_cpu:
++        # LieMapp: lazy optional speculative-decode extension import only.
++        # Calling this path still requires the real CPU extension.
++        from sgl_kernel import assign_req_to_token_pool_cpu
++
+         assign_req_to_token_pool_cpu(
+             req_pool_indices,
+             req_to_token,
+diff --git a/python/sglang/srt/speculative/eagle_utils.py b/python/sglang/srt/speculative/eagle_utils.py
+index 99875779be..9b6ee4ff34 100644
+--- a/python/sglang/srt/speculative/eagle_utils.py
++++ b/python/sglang/srt/speculative/eagle_utils.py
+@@ -53,11 +53,6 @@ if _is_cuda or _is_hip or _is_musa:
+     from sgl_kernel import (
+         build_tree_kernel_efficient as sgl_build_tree_kernel_efficient,
+     )
+-elif _is_cpu:
+-    from sgl_kernel import (
+-        build_tree_kernel_efficient_cpu as sgl_build_tree_kernel_efficient_cpu,
+-    )
+-    from sgl_kernel import verify_tree_greedy_cpu as sgl_verify_tree_greedy_cpu
+ 
+ 
+ def per_step_draft_out_cache_loc(
+@@ -253,6 +248,9 @@ def build_tree_kernel_efficient(
+             tree_mask_mode,
+         )
+     elif _is_cpu:
++        # LieMapp: retain the real optional CPU extension at its call site.
++        from sgl_kernel import build_tree_kernel_efficient_cpu as sgl_build_tree_kernel_efficient_cpu
++
+         sgl_build_tree_kernel_efficient_cpu(
+             parent_list,
+             top_scores_index,
+@@ -401,6 +399,9 @@ def verify_tree_greedy_func(
+         )
+ 
+     elif _is_cpu:
++        # LieMapp: no speculative kernel is needed for ordinary generation.
++        from sgl_kernel import verify_tree_greedy_cpu as sgl_verify_tree_greedy_cpu
++
+         sgl_verify_tree_greedy_cpu(
+             predicts=predicts,  # mutable
+             accept_index=accept_index,  # mutable
+diff --git a/python/sglang/srt/speculative/eagle_worker_common.py b/python/sglang/srt/speculative/eagle_worker_common.py
+index 010811b411..58f86926b3 100644
+--- a/python/sglang/srt/speculative/eagle_worker_common.py
++++ b/python/sglang/srt/speculative/eagle_worker_common.py
+@@ -41,9 +41,6 @@ from sglang.srt.utils.common import is_npu
+ _is_cpu = is_cpu()
+ _is_npu = is_npu()
+ 
+-if _is_cpu:
+-    from sgl_kernel import assign_draft_cache_locs_contiguous_cpu
+-
+ if TYPE_CHECKING:
+     from sglang.srt.managers.schedule_batch import ScheduleBatch
+     from sglang.srt.managers.tp_worker import TpModelWorker
+@@ -231,6 +228,9 @@ def prepare_for_draft(
+                 device=batch.device,
+             )
+             if _is_cpu:
++                # LieMapp: no substitute; import only for a real EAGLE call.
++                from sgl_kernel import assign_draft_cache_locs_contiguous_cpu
++
+                 assign_draft_cache_locs_contiguous_cpu(
+                     batch.req_pool_indices,
+                     req_to_token_pool.req_to_token,
+diff --git a/python/sglang/srt/speculative/spec_utils.py b/python/sglang/srt/speculative/spec_utils.py
+index 941a945356..91001ba606 100644
+--- a/python/sglang/srt/speculative/spec_utils.py
++++ b/python/sglang/srt/speculative/spec_utils.py
+@@ -89,10 +89,6 @@ elif _is_hip:
+ else:
+     from sglang.srt.utils.common import fast_topk
+ 
+-if _is_cpu:
+-    from sgl_kernel import assign_extend_cache_locs_cpu
+-
+-
+ logger = logging.getLogger(__name__)
+ 
+ 
+@@ -737,6 +733,9 @@ def move_accept_tokens_to_target_kvcache(
+     )
+     accept_out_cache_loc = torch.zeros(size, dtype=torch.int64, device=device)
+     if _is_cpu:
++        # LieMapp compatibility: lazy real optional CPU speculative kernel.
++        from sgl_kernel import assign_extend_cache_locs_cpu
++
+         assign_extend_cache_locs_cpu(
+             batch.req_pool_indices,
+             batch.req_to_token_pool.req_to_token,
+diff --git a/python/sglang/liemapp_ama.py b/python/sglang/liemapp_ama.py
+new file mode 100644
+index 0000000000..678e38918d
+--- /dev/null
++++ b/python/sglang/liemapp_ama.py
+@@ -0,0 +1,83 @@
++# SPDX-License-Identifier: Apache-2.0
++# SPDX-FileCopyrightText: Copyright contributors to the LieMapp project
++"""Observation-only transport for the private LieMapp SGLang AMA experiment.
++
++Request labels never enter generation parameters or chat-template inputs. All
++storage, evidence hashes, and event sequencing belong to the common logger.
++"""
++
++import importlib.util
++import inspect
++import json
++import os
++import sys
++from functools import lru_cache
++from pathlib import Path
++from typing import Any
++
++
++def enabled(request: Any) -> bool:
++    """Observe only explicitly correlated, nonstreaming experiment requests."""
++    return bool(os.environ.get("LIEMAPP_SOCKET")) and bool(
++        getattr(request, "liemapp_request_id", None)
++    )
++
++
++def tool_calls(payload: dict) -> list:
++    """Normalize only absent/null no-call fields; retain the original response."""
++    result = []
++    for choice in payload["choices"]:
++        calls = choice["message"].get("tool_calls")
++        if calls is None:
++            continue
++        if not isinstance(calls, list):
++            raise ValueError("Native response tool_calls must be a list or null")
++        result.extend(calls)
++    return result
++
++
++@lru_cache(maxsize=1)
++def _logger_module():
++    path = Path(os.environ["LIEMAPP_LOGGER_PATH"]).resolve(strict=True)
++    name = "liemapp_sglang_ama_common_logger"
++    spec = importlib.util.spec_from_file_location(name, path)
++    if spec is None or spec.loader is None:
++        raise RuntimeError("Cannot load common LieMapp logger")
++    module = importlib.util.module_from_spec(spec)
++    sys.modules[name] = module
++    spec.loader.exec_module(module)
++    return module
++
++
++def emit(request: Any, stage: str, point: str, raw: dict, summary: str) -> None:
++    """Emit exact request-scoped observations; fail if collection is incomplete."""
++    if not enabled(request):
++        return
++    request_id = getattr(request, "liemapp_request_id", None)
++    if not isinstance(request_id, str) or not 1 <= len(request_id) <= 256:
++        raise ValueError("Invalid LieMapp request correlation ID")
++    labels = getattr(request, "liemapp_context", {})
++    if not isinstance(labels, dict):
++        raise ValueError("LieMapp request context must be an object")
++    encoded = json.dumps(labels, ensure_ascii=False, allow_nan=False)
++    if len(encoded.encode("utf-8")) > 16384:
++        raise ValueError("LieMapp request context exceeds 16 KiB")
++    context = json.loads(encoded)
++    context["request_id"] = request_id
++    frame = inspect.currentframe()
++    assert frame is not None and frame.f_back is not None
++    caller = frame.f_back
++    source = {
++        "path": str(Path(caller.f_code.co_filename).resolve()),
++        "function": caller.f_code.co_name,
++        "line": caller.f_lineno,
++        "logging_point_id": point,
++    }
++    del frame, caller
++    _logger_module().Client().emit(
++        stage,
++        {**raw, "request_id": request_id},
++        readable={"summary": summary, "scope": "native inference observation"},
++        context=context,
++        source=source,
++    )

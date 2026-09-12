@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "repository": "Qwen/Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "format": "safetensors",
+  "weights_dtype": "bfloat16",
+  "runtime_dtype": "float32",
+  "quantization": "none",
+  "cache_path": ".evidence/models/ama/qwen2.5-3b-instruct-hf/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "architecture": "Qwen2ForCausalLM",
+  "parameter_count": 3085938688,
+  "weight_bytes": 6171926992,
+  "total_download_bytes": 6183458486,
+  "files": [
+    {
+      "path": "config.json",
+      "bytes": 661,
+      "sha256": "eed00b17e22553979d090fa492e587e92885e328914c8e0b0b78f0a0d3576b3b",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/config.json",
+      "hash_provenance": "sha256_of_official_pinned_revision_response_bytes"
+    },
+    {
+      "path": "generation_config.json",
+      "bytes": 242,
+      "sha256": "ea35dfb6fc5051b01114f9b995820d55dab01ed33ee490f6378b442af82c09f9",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/generation_config.json",
+      "hash_provenance": "sha256_of_official_pinned_revision_response_bytes"
+    },
+    {
+      "path": "model.safetensors.index.json",
+      "bytes": 35581,
+      "sha256": "bc8aaa0c87d4335177e01c765f1de0db81661c67c1a72fbfb0d521b09f5ddc56",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/model.safetensors.index.json",
+      "hash_provenance": "sha256_of_official_pinned_revision_response_bytes"
+    },
+    {
+      "path": "model-00001-of-00002.safetensors",
+      "bytes": 3968658944,
+      "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/model-00001-of-00002.safetensors",
+      "hash_provenance": "official_huggingface_api_lfs_sha256"
+    },
+    {
+      "path": "model-00002-of-00002.safetensors",
+      "bytes": 2203268048,
+      "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/model-00002-of-00002.safetensors",
+      "hash_provenance": "official_huggingface_api_lfs_sha256"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 7031645,
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/tokenizer.json",
+      "hash_provenance": "sha256_of_official_pinned_revision_response_bytes"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 7305,
+      "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/tokenizer_config.json",
+      "hash_provenance": "sha256_of_official_pinned_revision_response_bytes"
+    },
+    {
+      "path": "vocab.json",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/vocab.json",
+      "hash_provenance": "sha256_of_official_pinned_revision_response_bytes"
+    },
+    {
+      "path": "merges.txt",
+      "bytes": 1671839,
+      "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/merges.txt",
+      "hash_provenance": "sha256_of_official_pinned_revision_response_bytes"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 7388,
+      "sha256": "ef52482bb785733093dc9a2e8edd8e764c77d12d8e9d8f10a80c9b547d32d0f9",
+      "source_url": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/resolve/aa8e72537993ba99e69dfaafa59ed015b17504d1/LICENSE",
+      "hash_provenance": "sha256_of_official_pinned_revision_response_bytes"
+    }
+  ],
+  "source": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct",
+  "metadata_source_url": "https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct?blobs=true",
+  "selection_reason": "동일 Qwen2.5-3B-Instruct 계열의 공식 safetensors를 vLLM CPU에서 사용한다. 현재 AVX2 CPU의 초기 검증 경로는 float32이며 실제 실행 가능성과 모델 출력은 별도 런타임 검증 대상이다.",
+  "license_notice": "제공된 LICENSE 원문을 함께 보존한다. Qwen2.5-3B-Instruct를 Apache-2.0 모델로 임의 표기하지 않는다.",
+  "cpu_compatibility": {
+    "observed_cpu": "Intel Core i7-8700",
+    "observed_architecture": "x86_64",
+    "observed_isa": [
+      "avx2",
+      "f16c",
+      "fma"
+    ],
+    "absent_isa": [
+      "avx512f",
+      "avx512_bf16",
+      "amx_tile"
+    ],
+    "reason_for_float32": "이 CPU에는 AVX-512 BF16/AMX 가속이 없으므로 FP32로 우선 검증한다. BF16 저장 가중치를 로드할 때 FP32로 변환하며 정확히 같은 수치 형식의 엔진 비교가 아니다.",
+    "same_gguf_cpu_route": "고정 vLLM 소스의 GGUF 지원은 별도 vllm-gguf-plugin으로 이동했으며, 해당 공식 플러그인은 CUDA 또는 ROCm을 요구한다. 현재 CPU 실험에서는 기존 llama.cpp Q4_K_M 파일을 그대로 사용하지 않는다.",
+    "sources": [
+      "https://github.com/vllm-project/vllm/blob/a1541f5742a29864a80087af313ad460066a1524/docs/features/quantization/gguf.md",
+      "https://github.com/vllm-project/vllm-gguf-plugin",
+      "https://github.com/vllm-project/vllm/blob/a1541f5742a29864a80087af313ad460066a1524/docs/getting_started/installation/cpu.md"
+    ]
+  },
+  "tool_calling": {
+    "parser": "hermes",
+    "enable_auto_tool_choice": true,
+    "template_source": "tokenizer_config.json at the pinned official model revision",
+    "source": "https://github.com/vllm-project/vllm/blob/a1541f5742a29864a80087af313ad460066a1524/docs/features/tool_calling.md"
+  },
+  "comparison_with_llamacpp": {
+    "same_base_model_name": "Qwen2.5-3B-Instruct",
+    "llamacpp_artifact": "Qwen/Qwen2.5-3B-Instruct-GGUF / Q4_K_M",
+    "llamacpp_artifact_revision": "7dabda4d13d513e3e842b20f0d435c732f172cbe",
+    "llamacpp_artifact_sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d",
+    "identical_weight_representation": false,
+    "bitwise_same_weights_verified": false,
+    "interpretation": "동일 이름의 기본 모델 계열을 사용하되 vLLM은 BF16 safetensors→FP32, llama.cpp는 Q4_K_M GGUF이다. 양자화·정밀도·템플릿 구현·도구 파싱·샘플링 구현 차이가 있으므로 관찰 차이를 엔진 자체의 보안성 차이로 단정하지 않는다."
+  }
+}

@@ -22,7 +22,7 @@ from typing import Any
 
 SCHEMA_VERSION = "1.0.0"
 MISSING = object()
-COMPARISONS = {"eq", "ne", "gt", "ge", "lt", "le", "contains", "in"}
+COMPARISONS = {"eq", "ne", "gt", "ge", "lt", "le", "contains", "not_contains", "in"}
 OPS = {"exists", "compare", "count", "all", "any", "pairwise_tensor_distance",
        "pairwise_tensor_cosine", "tensor_equality", "calibrated_tensor_distance", "tensor_stat"}
 
@@ -118,10 +118,14 @@ def _compare(actual: Any, cmp: str, expected: Any) -> bool | None:
         return {"gt": lambda: actual > expected, "ge": lambda: actual >= expected,
                 "lt": lambda: actual < expected, "le": lambda: actual <= expected}[cmp]()
     try:
-        if cmp == "contains":
+        if cmp in {"contains", "not_contains"}:
             if isinstance(actual, list):
-                return any(_equal(item, expected) for item in actual)
-            return expected in actual if isinstance(actual, (str, list, dict)) else None
+                present = any(_equal(item, expected) for item in actual)
+            elif isinstance(actual, (str, dict)):
+                present = expected in actual
+            else:
+                return None
+            return present if cmp == "contains" else not present
         if isinstance(expected, list):
             return any(_equal(actual, item) for item in expected)
         return actual in expected if isinstance(expected, (str, list, dict)) else None
@@ -926,8 +930,9 @@ def analyze(log_path: str | Path, rules_path: str | Path, output_dir: str | Path
         else:
             result = interpreter.evaluate(condition["rule"])
         result.update({key: condition[key] for key in ("id", "kind", "text", "source_cell")})
-        if "operationalization" in condition:
-            result["operationalization"] = condition["operationalization"]
+        for key in ("operationalization", "source_condition_id", "observation_layer"):
+            if key in condition:
+                result[key] = condition[key]
         conditions.append(result)
     summary = {}
     for kind in ("AC", "DC"):

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "repository": "Qwen/Qwen2.5-3B-Instruct-GGUF",
+  "revision": "7dabda4d13d513e3e842b20f0d435c732f172cbe",
+  "filename": "qwen2.5-3b-instruct-q4_k_m.gguf",
+  "sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d",
+  "bytes": 2104932768,
+  "quantization": "Q4_K_M",
+  "cache_path": ".evidence/models/ama",
+  "source": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct-GGUF",
+  "selection_reason": "CPU 환경의 통제 실험을 위한 Qwen2.5 계열 소형 모델. 원 논문의 Qwen2.5-32B와 동일 모델이 아니며 원 논문의 성공률 재현을 주장하지 않음.",
+  "files": [
+    {
+      "path": "qwen2.5-3b-instruct-q4_k_m.gguf",
+      "bytes": 2104932768,
+      "sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d"
+    }
+  ],
+  "legacy_manifest": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/llamacpp/model.json",
+  "reuse_note": "Exact existing GGUF; no weight conversion/download. Q4_K_M quantization differs from SGLang/vLLM FP32 runtime; no isolated engine-ranking claim."
+}

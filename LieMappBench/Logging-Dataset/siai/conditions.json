@@ -5,7 +5,7 @@
   "protocol_id": "siai-cpu-pilot-v1",
   "library": {
     "path": "LieMappBench/Attack-Library/attack_library.xlsx",
-    "sha256": "069bdc201aef0babcb9eecabfc50627548dae616e618aac1b20cf9418a1a4981",
+    "sha256": "9c68520ce96aead135aa2535943f1526c1791b264d4cd4dbd0ad9684d43e270f",
     "sheet": "AI 포렌식",
     "row": 10,
     "cells": {

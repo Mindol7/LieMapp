@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "status": "provisional_verified_setup_not_frozen_AMA_evaluation_model",
+  "repository": "mlc-ai/Qwen2.5-3B-Instruct-q4f32_1-MLC",
+  "revision": "dfa91e859b714acfa489a1464297080656c3460d",
+  "cache_path": ".evidence/models/ama/mlc-official-qwen2.5-3b-instruct-q4f32_1-dfa91e8",
+  "source_base": "Qwen/Qwen2.5-3B-Instruct",
+  "source_base_exact_revision_known": false,
+  "same_weights_as_other_engines_claimed": false,
+  "provenance_manifest": "LieMappBench/Attack-Execution-Dataset/attack-source/ama/mlc-llm/model-provenance/dfa91e8/manifest.json",
+  "downloaded_files_verified": 72,
+  "downloaded_bytes": 1748173685,
+  "upstream_verification": "Every file checked against pinned official Git blob SHA1 or LFS SHA256; individual files in provenance manifest.",
+  "quantization": "q4f32_1",
+  "weight_layout": "int4 values packed into uint32, group size 32, NK layout",
+  "runtime_dtype": "float32",
+  "floating_storage": "Publisher f32-to-bf16 cache encoding; float32-declared scales and unquantized tensors expand from BF16 at native load time.",
+  "stock_compiled_library": {
+    "path": ".evidence/models/ama/mlc-qwen2.5-3b-instruct-q4f32_1-9fa644f/qwen2.5-3b-instruct-q4f32_1-cpu.so",
+    "bytes": 2206112,
+    "sha256": "736b91f9362de99d75b3ebf4748f782ebd5e85a994f28471c833b5625ba2d792",
+    "mlc_revision": "9fa644f54b04983adea4d0168f49fc6af4a893ba",
+    "target": "llvm -mcpu=haswell, x86_64-linux-gnu",
+    "context_window_size": 4096,
+    "prefill_chunk_size": 512,
+    "max_batch_size": 1,
+    "optimization": "stock O0; no model operation or compiler scheduling patch"
+  },
+  "contract_validation": {
+    "path": ".evidence/setup/ama/mlc-llm/ama-mlc-official-model-contract-20260912-001/model-contract.json",
+    "sha256": "ccb7f632ec66fa7deea87d42b2fd2aae2cdd802b11c8dacfed13522dcd5dedf2",
+    "parameter_names_shapes_dtypes_matched": 399,
+    "packed_shards_verified": 62,
+    "floating_values_verified_finite": 96669696,
+    "all_tensor_byte_ranges_covered_without_overlap": true,
+    "all_shard_md5_matches": true,
+    "physical_cache_order_equals_compiled_parameter_order": false,
+    "physical_order_explanation": "The native loader uses compiled metadata parameter names, not physical shard order (cpp/serve/function_table.cc:185-196).",
+    "architecture_matches_reference_HF_configuration": true,
+    "tokenizer_vocabulary_and_merges_byte_identical_to_reference": true,
+    "tokenizer_config_byte_identical_to_reference": false
+  },
+  "native_smoke": {
+    "setup_evidence": ".evidence/setup/ama/mlc-llm/ama-mlc-officialweights-smoke-20260912-001",
+    "exit_code": 0,
+    "input": "What is 2 plus 2? Answer briefly.",
+    "actual_output": "4",
+    "prompt_tokens": 30,
+    "completion_tokens": 2,
+    "prefill_seconds": 90.51679082,
+    "prefill_tokens_per_second": 0.3314302211581654,
+    "end_to_end_latency_seconds": 91.871538217,
+    "network_calls": 0,
+    "is_attack_evaluation": false
+  },
+  "limitations": [
+    "This file verifies setup only; no AMA AC/DC experiment or attack-success result is claimed.",
+    "Official prequantized base revision is undisclosed, and tokenizer_config differs from the other engines' reference HF revision.",
+    "Stock CPU prefill performance is very low; evaluation size or a separately approved and validated compiler scheduling variant remains undecided.",
+    "Five failed local conversion attempts are preserved; official published weights are used, not a successful local conversion of the reference HF revision.",
+    "The eventual runtime/library selection must be frozen separately before generating final model.json and evaluation artifacts."
+  ]
+}

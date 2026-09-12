@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "protocol_id": "ama-public-http-mlc-native-v1",
+  "runtime_manifest": {
+    "path": "LieMappBench/Logging-Dataset/ama/mlc-llm/native-build-manifest.json",
+    "sha256": "8ea62ea62f5a7179269987fdaa1c95d9d6eac5958a75efa17bff25dd8fc3b80d",
+    "bytes": 453945
+  },
+  "evaluation_plan": {
+    "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/evaluation-plan.json",
+    "sha256": "941a3de887ab9409696c22d556decb60a3aa974a210c1ffb90fd45eb1aecea16",
+    "bytes": 3797
+  },
+  "parity": {
+    "path": ".evidence/audits/ama-mlc-runtime-parity-20260912-001.json",
+    "sha256": "c655c76cb7778c8ae5ce4c6d889f8cb90bd4f961c51478e168f45feed7656762",
+    "bytes": 884953
+  },
+  "development_run": {
+    "directory": ".evidence/raw/ama/mlc-llm/ama-mlc-public-development-20260912-001",
+    "artifacts": [
+      {
+        "path": ".evidence/raw/ama/mlc-llm/ama-mlc-public-development-20260912-001/events.jsonl",
+        "sha256": "9fdfb3257ff360a6d48fc1f95c296f258bdfc8c4511eeb9085354e52523bd78a",
+        "bytes": 26075637
+      },
+      {
+        "path": ".evidence/raw/ama/mlc-llm/ama-mlc-public-development-20260912-001/run.json",
+        "sha256": "31bbd4f83253c0b0c75a42f03ec6c6a96a15cb7e56c9144a2fd3b7f1856a30c9",
+        "bytes": 504657
+      },
+      {
+        "path": ".evidence/raw/ama/mlc-llm/ama-mlc-public-development-20260912-001/seal.json",
+        "sha256": "f9d04834f5da751bf72ca5619323f095f689f9a3619934b2863d3702e08b6283",
+        "bytes": 327
+      },
+      {
+        "path": ".evidence/raw/ama/mlc-llm/ama-mlc-public-development-20260912-001/observations.json",
+        "sha256": "95fe62e762616bc9e2f23c52b32325f66befdda34891c71e95ec7f8dad12e0f2",
+        "bytes": 6866
+      }
+    ]
+  },
+  "execution_sources": [
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/run_public.py",
+      "sha256": "c8c38433b2b4326b536a1f43007b5e7f3cbd6b7aed0d84fe849bc17561b471a0",
+      "bytes": 13940
+    },
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/mlc_protocol.py",
+      "sha256": "fbfc143c3f5ff8c3fb0dd8114204c86dfb32ab1975d8b4335346bda3b2cfd521",
+      "bytes": 45311
+    },
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/native_runtime.py",
+      "sha256": "3c75ef968b6d52c02017f2eb88f673a7a478fb9056a8562be9afb625e27c127a",
+      "bytes": 17986
+    },
+    {
+      "path": "LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/service.py",
+      "sha256": "dbff52981ca6f2abc80f1cdac3ff92300f7b8ac129ffd63e5a6c627ffde557b8",
+      "bytes": 11317
+    }
+  ],
+  "claim_limit": "Development gates passed; this is not a completed held-out evaluation."
+}

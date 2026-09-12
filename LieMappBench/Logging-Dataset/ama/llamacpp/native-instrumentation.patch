@@ -1,0 +1,114 @@
+diff --git a/tools/server/CMakeLists.txt b/tools/server/CMakeLists.txt
+index 43c245633..ee78dc049 100644
+--- a/tools/server/CMakeLists.txt
++++ b/tools/server/CMakeLists.txt
+@@ -31,6 +31,8 @@ endif()
+ 
+ target_include_directories(${TARGET} PRIVATE ../mtmd)
+ target_include_directories(${TARGET} PRIVATE ${CMAKE_SOURCE_DIR})
++set(LIEMAPP_NATIVE_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/../../../LieMappBench/Logging-Dataset/native" CACHE PATH "LieMapp common logger transport headers")
++target_include_directories(${TARGET} PRIVATE "${LIEMAPP_NATIVE_INCLUDE_DIR}")
+ target_link_libraries(${TARGET} PUBLIC llama-common mtmd ${CMAKE_THREAD_LIBS_INIT})
+ 
+ # llama-server-impl: server logic, reusable by app
+diff --git a/tools/server/server-common.cpp b/tools/server/server-common.cpp
+index 2ac98b6fd..7a9760b34 100644
+--- a/tools/server/server-common.cpp
++++ b/tools/server/server-common.cpp
+@@ -8,6 +8,7 @@
+ #include "base64.hpp"
+ 
+ #include "server-common.h"
++#include "bridge.h"
+ 
+ #include <random>
+ #include <sstream>
+@@ -1337,6 +1338,20 @@ json oaicompat_chat_params_parse(
+     // Apply chat template to the list of messages
+     auto chat_params = common_chat_templates_apply(opt.tmpls.get(), inputs);
+ 
++    if (liemapp::enabled() && body.contains("liemapp_request_id")) {
++        const auto log_body = liemapp::json::parse(body.dump());
++        auto context = log_body.value("liemapp_context", liemapp::json::object());
++        context["request_id"] = log_body.at("liemapp_request_id");
++        liemapp::emit("ama_native_prompt_rendered", __FILE__, __func__, __LINE__, "AMA-LLAMACPP-LP02",
++            {{"request_id", log_body.at("liemapp_request_id")}, {"tool_choice", tool_choice},
++             {"tools_count", inputs.tools.size()}, {"use_jinja", inputs.use_jinja},
++             {"parse_tool_calls", json_value(llama_params, "parse_tool_calls", false)},
++             {"rendered_prompt", chat_params.prompt}, {"chat_format", static_cast<int>(chat_params.format)},
++             {"grammar_lazy", chat_params.grammar_lazy}, {"grammar", chat_params.grammar}},
++            "Native chat template rendered metadata into the model input; this is not a security review.",
++            liemapp::json::array(), context);
++    }
++
+     llama_params["chat_format"] = static_cast<int>(chat_params.format);
+     llama_params["prompt"]      = chat_params.prompt;
+     if (!chat_params.grammar.empty()) {
+diff --git a/tools/server/server-context.cpp b/tools/server/server-context.cpp
+index f78cfb36d..b8de990cd 100644
+--- a/tools/server/server-context.cpp
++++ b/tools/server/server-context.cpp
+@@ -6,6 +6,7 @@
+ #include "server-queue.h"
+ #include "server-schema.h"
+ #include "server-stream.h"
++#include "bridge.h"
+ 
+ #include "build-info.h"
+ #include "common.h"
+@@ -4915,16 +4916,54 @@ void server_routes::init_routes() {
+         auto res = create_response();
+         std::vector<raw_buffer> files;
+         json body = json::parse(req.body);
++        if (liemapp::enabled() && body.contains("liemapp_request_id")) {
++            const auto log_body = liemapp::json::parse(body.dump());
++            auto context = log_body.value("liemapp_context", liemapp::json::object());
++            context["request_id"] = log_body.at("liemapp_request_id");
++            const auto tools = log_body.value("tools", liemapp::json::array());
++            liemapp::emit("ama_native_tools_received", __FILE__, "server_routes::post_chat_completions", __LINE__, "AMA-LLAMACPP-LP01",
++                {{"request_id", log_body.at("liemapp_request_id")}, {"http_path", req.path},
++                 {"tools", tools}, {"tools_count", tools.size()},
++                 {"messages", log_body.value("messages", liemapp::json::array())},
++                 {"tool_choice", json_value(body, "tool_choice", std::string("auto"))},
++                 {"stream", json_value(body, "stream", false)}},
++                "Native llama-server received the tool candidates and messages; tool origin is supplied by the agent.",
++                liemapp::json::array(), context);
++        }
+         json body_parsed = oaicompat_chat_params_parse(
+             body,
+             meta->chat_params,
+             files);
+-        return handle_completions_impl(
++        auto completion = handle_completions_impl(
+             req,
+             SERVER_TASK_TYPE_COMPLETION,
+             body_parsed,
+             files,
+             TASK_RESPONSE_TYPE_OAI_CHAT);
++        if (liemapp::enabled() && body.contains("liemapp_request_id") && !completion->is_stream()) {
++            const auto response = liemapp::json::parse(completion->data, nullptr, false);
++            const auto log_body = liemapp::json::parse(body.dump());
++            auto context = log_body.value("liemapp_context", liemapp::json::object());
++            context["request_id"] = log_body.at("liemapp_request_id");
++            auto tool_calls = liemapp::json::array();
++            if (response.is_object() && response.contains("choices") && response.at("choices").is_array()) {
++                for (const auto & choice : response.at("choices")) {
++                    if (choice.contains("message") && choice.at("message").contains("tool_calls")) {
++                        for (const auto & call : choice.at("message").at("tool_calls")) {
++                            tool_calls.push_back(call);
++                        }
++                    }
++                }
++            }
++            liemapp::emit("ama_native_tool_calls_returned", __FILE__, "server_routes::post_chat_completions", __LINE__, "AMA-LLAMACPP-LP03",
++                {{"request_id", log_body.at("liemapp_request_id")}, {"http_status", completion->status},
++                 {"tool_calls", tool_calls},
++                 {"response", response.is_discarded() ? liemapp::json() : response},
++                 {"response_text", completion->data}, {"tool_dispatch_observed", false}},
++                "Native inference returned parsed tool-call names and argument strings; external tool execution is not observed here.",
++                liemapp::json::array(), context);
++        }
++        return completion;
+     };
+ 
+     this->post_chat_completions_tok = [this](const server_http_req & req) {

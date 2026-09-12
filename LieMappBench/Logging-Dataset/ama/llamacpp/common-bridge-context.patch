@@ -1,0 +1,25 @@
+diff --git a/LieMappBench/Logging-Dataset/native/bridge.h b/LieMappBench/Logging-Dataset/native/bridge.h
+index 25f5d6d..7e9f9e2 100644
+--- a/LieMappBench/Logging-Dataset/native/bridge.h
++++ b/LieMappBench/Logging-Dataset/native/bridge.h
+@@ -72,13 +72,18 @@ struct socket_handle {
+ 
+ inline void emit(const char * stage, const char * path, const char * function, int line,
+                  const char * point_id, json raw, const std::string & summary,
+-                 json tensors = json::array()) {
++                 json tensors = json::array(), json context_override = nullptr) {
+     if (!enabled()) {
+         return;
+     }
+     const char * socket_path = std::getenv("LIEMAPP_SOCKET");
+     const char * context_text = std::getenv("LIEMAPP_CONTEXT_JSON");
+-    json context = context_text ? json::parse(context_text) : json::object();
++    json context = context_override.is_null()
++        ? (context_text ? json::parse(context_text) : json::object())
++        : std::move(context_override);
++    if (!context.is_object()) {
++        throw std::runtime_error("LieMapp context must be an object");
++    }
+     json payload = {
+         {"stage", stage},
+         {"source", {{"path", path}, {"function", function}, {"line", line}, {"logging_point_id", point_id}}},

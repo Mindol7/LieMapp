@@ -29,12 +29,61 @@ def identifier(value):
     return value
 
 
+def _protocol_registry(attack):
+    registry = attack.get('protocols', {})
+    if not isinstance(registry, dict):
+        raise ValueError('protocols must be an object keyed by protocol identifiers')
+    for protocol_id, specification in registry.items():
+        if not isinstance(protocol_id, str) or not SAFE_ID.fullmatch(protocol_id):
+            raise ValueError('Invalid registered protocol identifier')
+        if (not isinstance(specification, dict)
+                or set(specification) - {'rules', 'presentation'}
+                or not isinstance(specification.get('rules'), str)
+                or not specification['rules'].strip()):
+            raise ValueError('Each registered protocol requires a rules path')
+        if ('presentation' in specification
+                and (not isinstance(specification['presentation'], str)
+                     or not specification['presentation'].strip())):
+            raise ValueError('Protocol presentation must be a nonempty path when provided')
+    return registry
+
+
+def selected_protocol(attack, metadata, *, root=ROOT):
+    """Choose registered data rules by sealed run metadata, never by engine name."""
+    registry = _protocol_registry(attack)
+    if 'protocol_id' not in metadata:
+        return {'protocol_id': None, 'rules': resolve(attack['rules'], root),
+                'presentation': resolve(attack['presentation'], root)
+                if attack.get('presentation') else None}
+    protocol_id = metadata['protocol_id']
+    if not isinstance(protocol_id, str) or not SAFE_ID.fullmatch(protocol_id):
+        raise ValueError('metadata.protocol_id must be a valid nonempty identifier')
+    if protocol_id not in registry:
+        raise ValueError('Unregistered evidence protocol: ' + protocol_id)
+    specification = registry[protocol_id]
+    rules_path = resolve(specification['rules'], root)
+    rules = json.loads(rules_path.read_text(encoding='utf-8'))
+    if (not isinstance(rules, dict) or rules.get('protocol_id') != protocol_id
+            or not isinstance(metadata.get('attack_id'), str)
+            or rules.get('attack_id') != metadata['attack_id']):
+        raise ValueError('Registered rules do not match the evidence protocol and attack')
+    presentation = (resolve(specification['presentation'], root)
+                    if specification.get('presentation') else None)
+    if presentation is not None:
+        display = json.loads(presentation.read_text(encoding='utf-8'))
+        if (not isinstance(display, dict) or display.get('protocol_id') != protocol_id
+                or display.get('attack_id') != metadata['attack_id']):
+            raise ValueError('Registered presentation does not match the evidence protocol and attack')
+    return {'protocol_id': protocol_id, 'rules': rules_path, 'presentation': presentation}
+
+
 def load_config(path):
     config = json.loads(Path(path).read_text(encoding='utf-8'))
     if config.get('schema_version') != '1.0.0' or not isinstance(config.get('attacks'), dict):
         raise ValueError('Invalid experiment configuration')
     for attack_id, attack in config['attacks'].items():
         identifier(attack_id)
+        _protocol_registry(attack)
         if not isinstance(attack.get('engines'), dict) or not attack['engines']:
             raise ValueError('Each attack requires engine configuration')
         for engine in attack['engines']:
@@ -75,6 +124,37 @@ def selected_source(engine, state_path, override=None):
     if state_path.exists():
         return resolve(json.loads(state_path.read_text(encoding='utf-8'))['source_log'])
     return resolve(engine['source_log'])
+
+
+def selected_supplements(engine, source_log, *, root=ROOT):
+    """Select display observations belonging to the actual selected evidence run.
+
+    Historical supplements remain limited to their explicitly configured source.
+    Run-relative supplements work for fresh execution and saved-log replay alike;
+    the publisher validates their referenced event bytes before rendering them.
+    """
+    source_log = Path(source_log).resolve(strict=True)
+    selected = ([resolve(path, root) for path in engine.get('supplements', [])]
+                if engine.get('source_log') and source_log == resolve(engine['source_log'], root) else [])
+    configured = engine.get('run_supplements', [])
+    if not isinstance(configured, list) or any(not isinstance(item, str) or not item for item in configured):
+        raise ValueError('run_supplements must be a list of nonempty relative paths')
+    for value in configured:
+        relative = Path(value)
+        if relative.is_absolute() or '..' in relative.parts:
+            raise ValueError('Run supplements must stay within their raw evidence directory')
+        supplement = (source_log.parent / relative).resolve(strict=True)
+        if not supplement.is_relative_to(source_log.parent) or not supplement.is_file():
+            raise ValueError('Run supplement escaped its raw evidence directory or is not a file')
+        record = json.loads(supplement.read_text(encoding='utf-8'))
+        references = record.get('source_runs') if isinstance(record, dict) else None
+        if (not isinstance(references, list) or not references
+                or any(not isinstance(item, dict) or not isinstance(item.get('log_path'), str)
+                       or (supplement.parent / item['log_path']).resolve() != source_log
+                       for item in references)):
+            raise ValueError('Each run supplement must reference only the selected event log')
+        selected.append(supplement)
+    return selected
 
 
 def verify_selection(record, *, attack_id, engine_id, source_log, events_sha256):
@@ -155,16 +235,14 @@ def main(argv=None, *, actor='developer'):
             if selection is not None:
                 verify_selection(selection, attack_id=args.attack, engine_id=engine_id,
                                  source_log=log_path, events_sha256=package.seal['events_sha256'])
-            # An old model's behavior review must not silently attach to a new run/model.
-            supplements = [resolve(p) for p in engine.get('supplements', [])]
-            if log_path.resolve() != resolve(engine['source_log']):
-                supplements = []
-            result = publish(log_path, resolve(attack['rules']),
+            protocol = selected_protocol(attack, package.metadata, root=ROOT)
+            supplements = selected_supplements(engine, log_path)
+            result = publish(log_path, protocol['rules'],
                 log_output_dir=ROOT / 'LieMappAnalyzer/LogFile' / args.attack / engine_id,
                 report_output_dir=ROOT / 'report' / args.attack / engine_id,
                 analysis_dir=ROOT / '.evidence/analyses' / args.attack / engine_id / publication_id,
                 mapping_path=resolve(engine['mapping']) if engine.get('mapping') else None,
-                presentation_path=resolve(attack['presentation']) if attack.get('presentation') else None,
+                presentation_path=protocol['presentation'],
                 supplement_paths=supplements, attack_label=attack['label'], engine_label=engine['label'],
                 replace=args.replace, backup_dir=(ROOT / '.archive/publications' / publication_id / engine_id
                                                 if args.replace else None))

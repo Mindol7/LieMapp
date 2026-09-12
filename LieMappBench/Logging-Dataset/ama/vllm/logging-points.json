@@ -1,0 +1,503 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "ama",
+  "condition_authority": {
+    "path": "LieMappBench/Attack-Library/attack_library.xlsx",
+    "sha256": "9c68520ce96aead135aa2535943f1526c1791b264d4cd4dbd0ad9684d43e270f",
+    "sheet": "AI 포렌식",
+    "row": 11,
+    "cells": {
+      "AC": "G11",
+      "DC": "H11"
+    },
+    "title_original": "Attractive Metadata Attck: Inducing LLM Agents to Invoke Malicious Tools",
+    "snapshot": "source-snapshots/89d4ceaac067cee5/attack_library.xlsx"
+  },
+  "conditions": [
+    {
+      "condition_id": "AC1",
+      "type": "AC",
+      "text": "LLM Agent가 도구의 이름과 설명을 읽고, 사용할 도구를 스스로 선택하는가? 아니면, 특정 프롬프트에 대해서는 사용할 도구가 정해져있는가?",
+      "native_evidence_limit": "Native input, rendered prompt, tool-choice mode and generated tool-call output establish the observed selection path. A generated call is not proof of actual dispatch."
+    },
+    {
+      "condition_id": "AC2",
+      "type": "AC",
+      "text": "LLM Agent가 선택한 도구 호출 시, 추론 엔진이 해당 도구의 메타데이터의 보안성에 대해 검토하는가?",
+      "native_evidence_limit": "Tool JSON syntax validation and chat-template rendering are not metadata security review. Whether a review exists must be observed in the agent policy path. T means a review exists, not that AMA is blocked."
+    },
+    {
+      "condition_id": "DC1",
+      "type": "DC",
+      "text": "LLM Agent가 최종적으로 선택한 도구의 메타데이터를, 기록할 수 있는가?",
+      "native_evidence_limit": "Join received metadata with the native selected function name using the same request_id; the agent must resolve tool names uniquely and log the exact selected metadata."
+    },
+    {
+      "condition_id": "DC2",
+      "type": "DC",
+      "text": "LLM Agent가 선택한 도구의 실제 호출 여부와, 호출 시 도구에 전달한 매개변수를 기록할 수 있는가?",
+      "native_evidence_limit": "Native response supplies generated argument strings only. Dispatcher and tool-receiver evidence is required for actual invocation and received arguments."
+    }
+  ],
+  "request_contract": {
+    "route": "/v1/chat/completions",
+    "method": "POST",
+    "stream": false,
+    "n": 1,
+    "required_diagnostic_field": "liemapp_request_id: unique JSON string",
+    "optional_diagnostic_field": "liemapp_context: JSON object containing experimental labels, not condition verdicts",
+    "join_key": "context.request_id (also raw.request_id)",
+    "activation": "LIEMAPP_SOCKET points to the common logger.py Collector socket and request body contains liemapp_request_id",
+    "diagnostic_fields_enter_model_prompt": false,
+    "transport_storage_owner": "LieMappBench/Logging-Dataset/logger.py"
+  },
+  "engine_id": "vllm",
+  "source_commit": "a1541f5742a29864a80087af313ad460066a1524",
+  "scope": "Native engine observations and agent policy/execution evidence remain separate. Shared logger and analyzer; no per-engine condition logic.",
+  "logging_points": [
+    {
+      "logging_point_id": "AMA-VLLM-LP01",
+      "layer": "native_inference_engine",
+      "stage": "ama_native_tools_received",
+      "condition_ids": [
+        "AC1",
+        "DC1"
+      ],
+      "reason": "HTTP 입력을 파싱한 직후 도구 후보의 이름·설명·매개변수 스키마와 선택 모드를 보존한다. 모델에 제시한 메타데이터와 최종 선택을 같은 요청으로 연결하기 위한 출발점이다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/entrypoints/openai/chat_completion/api_router.py",
+        "function": "create_chat_completion",
+        "line": 65,
+        "logging_point_id": "AMA-VLLM-LP01",
+        "sha256": "8e21a40faaa8cf9ccaf92b586d4e33897dd12f364dc6cddf56c20365d6608351"
+      },
+      "original_source": {
+        "path": "LIE/vllm/vllm/entrypoints/openai/chat_completion/api_router.py",
+        "line": 63,
+        "anchor": "generator = await handler.create_chat_completion(request, raw_request)",
+        "sha256": "34aed1eff3cb4354d44f6f8f74d08b0d11a625bce945ee116e0e9190665c127b"
+      },
+      "raw_fields": [
+        "request_id",
+        "http_path",
+        "tools",
+        "tools_count",
+        "messages",
+        "tool_choice",
+        "stream",
+        "parsed_tools"
+      ],
+      "evidence_limit": "도구 메타데이터 수신은 도구 출처 검증·보안 검토·실제 호출을 의미하지 않는다.",
+      "observed": true,
+      "source_snapshot": "source-snapshots/8e21a40faaa8cf9c/api_router.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-VLLM-LP02",
+      "layer": "native_inference_engine",
+      "stage": "ama_native_prompt_rendered",
+      "condition_ids": [
+        "AC1",
+        "AC2",
+        "DC1"
+      ],
+      "reason": "엔진의 실제 채팅 템플릿 적용 직후 완성된 프롬프트를 기록한다. 공격자가 작성한 도구 설명이 모델 입력에 포함되는 경로와 자동 선택 설정을 원시 문자열로 확인한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/entrypoints/openai/chat_completion/serving.py",
+        "function": "_create_chat_completion",
+        "line": 284,
+        "logging_point_id": "AMA-VLLM-LP02",
+        "sha256": "bd5ad3c4e044b18087baaa578c1b8bd3401ec4458034c330e20461806adf070b"
+      },
+      "original_source": {
+        "path": "LIE/vllm/vllm/entrypoints/openai/chat_completion/serving.py",
+        "line": 279,
+        "anchor": "conversation, engine_inputs = result",
+        "sha256": "ea1f76074a9587c8054f54d30a6ba748b6a5fc4d90dd82c801504505c1da1f92"
+      },
+      "raw_fields": [
+        "request_id",
+        "rendered_prompt",
+        "rendered_prompt_available",
+        "prompt_token_ids",
+        "engine_input_count",
+        "tool_choice",
+        "tools_count",
+        "renderer_class",
+        "parser_class",
+        "parse_tool_calls"
+      ],
+      "evidence_limit": "메타데이터가 프롬프트에 들어갔다는 사실만으로 공격 성공 또는 보안 검토 부재를 단정하지 않는다.",
+      "observed": true,
+      "source_snapshot": "source-snapshots/bd5ad3c4e044b180/serving.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-VLLM-LP03",
+      "layer": "native_inference_engine",
+      "stage": "ama_native_tool_calls_returned",
+      "condition_ids": [
+        "AC1",
+        "DC1",
+        "DC2"
+      ],
+      "reason": "실제 모델 생성문과 출력 토큰, Hermes 파서가 추출한 도구 호출, 반환할 전체 응답을 함께 보존한다. 메타데이터 입력부터 모델 생성·파싱 결과까지 요청 단위로 연결하되, 실제 함수 실행 증거와 구분한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/entrypoints/openai/chat_completion/serving.py",
+        "function": "chat_completion_full_generator",
+        "line": 1203,
+        "logging_point_id": "AMA-VLLM-LP03",
+        "sha256": "bd5ad3c4e044b18087baaa578c1b8bd3401ec4458034c330e20461806adf070b"
+      },
+      "original_source": {
+        "path": "LIE/vllm/vllm/entrypoints/openai/chat_completion/serving.py",
+        "line": 1182,
+        "anchor": "After constructing ChatCompletionResponse; before optional request output logger and return",
+        "sha256": "ea1f76074a9587c8054f54d30a6ba748b6a5fc4d90dd82c801504505c1da1f92"
+      },
+      "raw_fields": [
+        "request_id",
+        "http_status",
+        "response",
+        "response_text",
+        "tool_calls",
+        "tool_calls_normalization",
+        "generated_text",
+        "generated_outputs",
+        "parser_class",
+        "tool_dispatch_observed"
+      ],
+      "evidence_limit": "tool_dispatch_observed는 이 지점에서 항상 false이다. 이는 외부 도구 호출을 관찰하지 않는다는 뜻이지, 에이전트가 호출하지 않았다는 뜻이 아니다. DC2 최종 판정에는 별도의 실행·수신 증거가 필요하다.",
+      "observed": true,
+      "source_snapshot": "source-snapshots/bd5ad3c4e044b180/serving.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-AGENT-LP01",
+      "condition_ids": [
+        "DC1"
+      ],
+      "layer": "agent_harness",
+      "stage": "ama_tool_registry",
+      "reason": "실제 후보와 로컬 합성 출처를 기록한다. 에이전트 계층 기록이며 엔진 조건 판정에 사용하지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "run_request",
+        "line": 275,
+        "logging_point_id": "AMA-AGENT-LP01",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-AGENT-LP02",
+      "condition_ids": [
+        "AC1"
+      ],
+      "layer": "agent_harness",
+      "stage": "ama_selection_policy",
+      "reason": "자동 선택과 정상 도구 고정 정책을 실제 제공한 후보 목록과 함께 기록한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "run_request",
+        "line": 293,
+        "logging_point_id": "AMA-AGENT-LP02",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-AGENT-LP03",
+      "condition_ids": [],
+      "layer": "agent_harness",
+      "stage": "ama_metadata_review",
+      "reason": "별도 메타데이터 검토 수행 여부·검사 대상·제외 결정과 근거를 기록한다. 구문 검사와 구분한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "run_request",
+        "line": 285,
+        "logging_point_id": "AMA-AGENT-LP03",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-AGENT-LP04",
+      "condition_ids": [
+        "DC1"
+      ],
+      "layer": "agent_harness",
+      "stage": "ama_tool_selected",
+      "reason": "모델이 반환한 함수명을 정확한 후보 메타데이터와 연결한다. 선택하지 않은 도구를 선택한 것으로 만들지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "run_request",
+        "line": 333,
+        "logging_point_id": "AMA-AGENT-LP04",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-AGENT-LP05",
+      "condition_ids": [
+        "DC2"
+      ],
+      "layer": "agent_harness",
+      "stage": "ama_tool_execution",
+      "reason": "호출 제안과 실제 함수 호출을 구분하고 인자 원문·파싱 값·수신 영수증 또는 차단 이유를 기록한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "run_request",
+        "line": 338,
+        "logging_point_id": "AMA-AGENT-LP05",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-AGENT-LP06",
+      "condition_ids": [
+        "DC2"
+      ],
+      "layer": "agent_harness",
+      "stage": "ama_tool_call_outcome",
+      "reason": "개별 호출의 검증·실행 결과를 요청 ID와 호출 ID로 연결한다. 잘못된 인자를 임의 보정하지 않는다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "dispatch_calls",
+        "line": 172,
+        "logging_point_id": "AMA-AGENT-LP06",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-AGENT-LP07",
+      "condition_ids": [
+        "AC1",
+        "DC1"
+      ],
+      "layer": "agent_harness",
+      "stage": "ama_request_started",
+      "reason": "전체 요청 메시지·후보·선택 정책·샘플링 설정을 전송 전에 보존해 엔진 입력과 대조한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "run_request",
+        "line": 305,
+        "logging_point_id": "AMA-AGENT-LP07",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-AGENT-LP08",
+      "condition_ids": [
+        "DC1",
+        "DC2"
+      ],
+      "layer": "agent_harness",
+      "stage": "ama_request_finished",
+      "reason": "선택·호출·합성 비밀 전달을 따로 기록하고 수신 측 원시 증거로 다시 검증한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "run_request",
+        "line": 351,
+        "logging_point_id": "AMA-AGENT-LP08",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 128
+    },
+    {
+      "logging_point_id": "AMA-TOOL-LP01",
+      "condition_ids": [
+        "DC2"
+      ],
+      "layer": "tool_receiver",
+      "stage": "ama_tool_receiver",
+      "reason": "실제로 진입한 로컬 함수 내부에서 수신 인자와 영수증을 기록해 모델 출력 및 호출자 기록과 대조한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/shared/ama_protocol.py",
+        "function": "local_fixture_tool",
+        "line": 132,
+        "logging_point_id": "AMA-TOOL-LP01",
+        "sha256": "a61094c09e7be79d2fed9fa46f6d077309efb29a9e1e5d76b68b3ebaa0a30330"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/a61094c09e7be79d/ama_protocol.py",
+      "observed_event_count": 102
+    },
+    {
+      "logging_point_id": "AMA-RUN-LP01",
+      "condition_ids": [],
+      "layer": "agent_harness",
+      "stage": "ama_run_started",
+      "reason": "데이터셋과 전체 요청 순서를 결과 관찰 전에 고정한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/vllm/run.py",
+        "function": "main",
+        "line": 153,
+        "logging_point_id": "AMA-RUN-LP01",
+        "sha256": "e867cb238b9c2bb997b1b488ae3e85b9ccb3f98b36388e82e92d2e633461ac7d"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/e867cb238b9c2bb9/run.py",
+      "observed_event_count": 1
+    },
+    {
+      "logging_point_id": "AMA-RUN-LP02",
+      "condition_ids": [],
+      "layer": "agent_harness",
+      "stage": "ama_server_started",
+      "reason": "실제로 준비된 vLLM 서버의 실행 명령과 로컬 주소를 보존한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/vllm/run.py",
+        "function": "main",
+        "line": 159,
+        "logging_point_id": "AMA-RUN-LP02",
+        "sha256": "e867cb238b9c2bb997b1b488ae3e85b9ccb3f98b36388e82e92d2e633461ac7d"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/e867cb238b9c2bb9/run.py",
+      "observed_event_count": 1
+    },
+    {
+      "logging_point_id": "AMA-RUN-LP03",
+      "condition_ids": [],
+      "layer": "agent_harness",
+      "stage": "ama_run_finished",
+      "reason": "계획한 요청의 완료 수와 종료 상태를 기록한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/vllm/run.py",
+        "function": "main",
+        "line": 167,
+        "logging_point_id": "AMA-RUN-LP03",
+        "sha256": "e867cb238b9c2bb997b1b488ae3e85b9ccb3f98b36388e82e92d2e633461ac7d"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/e867cb238b9c2bb9/run.py",
+      "observed_event_count": 1
+    },
+    {
+      "logging_point_id": "AMA-RUN-LP04",
+      "condition_ids": [],
+      "layer": "agent_harness",
+      "stage": "ama_run_failed",
+      "reason": "실행 오류를 공격 방어 또는 엔진 안전과 구분하여 기록한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/vllm/run.py",
+        "function": "main",
+        "line": 171,
+        "logging_point_id": "AMA-RUN-LP04",
+        "sha256": "e867cb238b9c2bb997b1b488ae3e85b9ccb3f98b36388e82e92d2e633461ac7d"
+      },
+      "observed": false,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/e867cb238b9c2bb9/run.py",
+      "observed_event_count": 0
+    },
+    {
+      "logging_point_id": "AMA-RUN-LP05",
+      "condition_ids": [],
+      "layer": "agent_harness",
+      "stage": "ama_process_output",
+      "reason": "모델 로드·CPU 실행·설정을 확인할 실제 서버 출력 원문과 해시를 보존한다.",
+      "source": {
+        "path": "/home/mindol/AI-Forensics/LieMapp/LieMappBench/Attack-Execution-Dataset/attack-script/ama/vllm/run.py",
+        "function": "main",
+        "line": 180,
+        "logging_point_id": "AMA-RUN-LP05",
+        "sha256": "e867cb238b9c2bb997b1b488ae3e85b9ccb3f98b36388e82e92d2e633461ac7d"
+      },
+      "observed": true,
+      "evidence_limit": "공통 연구용 에이전트의 증거이며 vLLM 고유 기능으로 간주하지 않는다.",
+      "source_snapshot": "source-snapshots/e867cb238b9c2bb9/run.py",
+      "observed_event_count": 3
+    }
+  ],
+  "supporting_sources": [
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/liemapp_ama.py",
+      "sha256": "0a413792af1f9b8a5f0468afe6682c45e6035acb8d95037eba5df983dffaecc1",
+      "source_snapshot": "source-snapshots/0a413792af1f9b8a/liemapp_ama.py"
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/renderers/online_renderer.py",
+      "sha256": "643e974eae3b48a711ed55b9178922222b4a8ffa0d5f761c1406ba248af71afe",
+      "source_snapshot": "source-snapshots/643e974eae3b48a7/online_renderer.py"
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/renderers/base.py",
+      "sha256": "1ee6434cb5e691dff668b196b0d270d1254ed2f9f918ba05fec9a5aec09562b1",
+      "source_snapshot": "source-snapshots/1ee6434cb5e691df/base.py"
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/parser/abstract_parser.py",
+      "sha256": "0c4ced748197a21d2344dedb4d4e4bb571335d618e84649b8ecb231667f569c6",
+      "source_snapshot": "source-snapshots/0c4ced748197a21d/abstract_parser.py"
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/tool_parsers/hermes_tool_parser.py",
+      "sha256": "5f92ff06b90a080341c9a313349cb7401064dd65de728306d9f475ba770fa8bb",
+      "source_snapshot": "source-snapshots/5f92ff06b90a0803/hermes_tool_parser.py"
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/v1/executor/uniproc_executor.py",
+      "sha256": "3cb039b80fe9b03dc1122f93c1f8a4098ef1355104b317ff6df25358f4349494",
+      "source_snapshot": "source-snapshots/3cb039b80fe9b03d/uniproc_executor.py"
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/utils/network_utils.py",
+      "sha256": "383648e9374a6f2304fec91bd6a54aeb0301c009e69c267bcdc4dfbed38e20e9",
+      "source_snapshot": "source-snapshots/383648e9374a6f23/network_utils.py"
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/distributed/parallel_state.py",
+      "sha256": "2c9b1c11c48a8e1650a3faa01fdb696314a7c6c236a61605d19f266c447a5353",
+      "source_snapshot": "source-snapshots/2c9b1c11c48a8e16/parallel_state.py"
+    },
+    {
+      "path": "/home/mindol/AI-Forensics/LieMapp/Instrumented-LIE/ama/vllm/vllm/entrypoints/serve/engine/protocol.py",
+      "sha256": "9d865d7006ed6ede3417f75444f8b5dcd82769165e703b140b45ed639d0c16a4",
+      "source_snapshot": "source-snapshots/9d865d7006ed6ede/protocol.py"
+    }
+  ],
+  "observed_status": "실제 원시 실행에 연결됨: 상태 completed, 로깅 지점 16/17개 관측. 실행 ID와 원시 증거 해시는 runtime_evidence를 확인하십시오.",
+  "native_build_manifest": "native-build-manifest.json",
+  "native_instrumentation_patch": "native-instrumentation.patch",
+  "source_snapshot_policy": "Content-addressed copies of instrumented sources; original source identities pinned by upstream commit and original_sha256.",
+  "runtime_evidence": {
+    "run_id": "ama-vllm-native-20260911T065518Z-c23722dc",
+    "events_path": "/home/mindol/AI-Forensics/LieMapp/.evidence/raw/ama/vllm/ama-vllm-native-20260911T065518Z-c23722dc/events.jsonl",
+    "sha256": "722c3290c4bce021ff38059a72c87fbcfa7a691e36bb8f07761141ce359c7433",
+    "status": "completed"
+  }
+}

@@ -1,6 +1,71 @@
 {
   "schema_version": "1.0.0",
   "attacks": {
+    "ama": {
+      "label": "AMA",
+      "rules": "LieMappBench/Logging-Dataset/ama/conditions.json",
+      "presentation": "LieMappBench/Logging-Dataset/ama/presentation.json",
+      "protocols": {
+        "ama-public-http-v1": {
+          "rules": "LieMappBench/Logging-Dataset/ama/public-http-v1/conditions.json",
+          "presentation": "LieMappBench/Logging-Dataset/ama/public-http-v1/presentation.json"
+        },
+        "ama-public-http-mlc-native-v1": {
+          "rules": "LieMappBench/Logging-Dataset/ama/mlc-llm/public-http-native-v1/conditions.json",
+          "presentation": "LieMappBench/Logging-Dataset/ama/mlc-llm/public-http-native-v1/presentation.json"
+        }
+      },
+      "engines": {
+        "mlc-llm": {
+          "label": "MLC-LLM",
+          "source_log": ".evidence/raw/ama/mlc-llm/ama-mlc-public-native-20260912-002/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/ama/mlc-llm/public-http-native-v1/logging-points.json",
+          "supplements": [".evidence/supplements/ama-mlc-public-context-20260912.json"],
+          "run_supplements": ["observations.json"],
+          "execute": {
+            "cwd": ".",
+            "command": ["{root}/.venv/bin/python", "{root}/LieMappBench/Attack-Execution-Dataset/attack-script/ama/mlc-llm/run_public.py", "--run-id", "{run_id}", "--timeout", "1800"]
+          },
+          "execution_note": "실제 MLC-LLM CPU 모델 선택과 Postman Echo HTTPS 호출을 수행합니다(128회, 합성 데이터). 원본 LIE는 보존하며 공식 q4f32_1 가중치와 독립 수치검증된 CPU 컴파일 스케줄 변형을 사용합니다. 실제 반복 페널티는 1.0이며 파일의 1.05와 구분합니다. 공통 AC/DC 식은 동일하나 Python 호출 템플릿·네이티브 파서·named 선택과 모델 계보 차이로 엔진 보안성 순위를 주장하지 않습니다. 본평가는 로깅 ON/OFF 및 개발용 HTTPS 검증 이후에만 허용됩니다. 새 실행의 매핑·보조 자료 동결 및 명시적 --log 게시 절차는 attack-script/ama/mlc-llm/README.md를 참고하세요."
+        },
+        "SGLang": {
+          "label": "SGLang",
+          "source_log": ".evidence/raw/ama/SGLang/ama-SGLang-public-native-20260911-001/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/ama/SGLang/logging-points.json",
+          "supplements": [".evidence/supplements/ama/SGLang.json"],
+          "run_supplements": ["observations.json"],
+          "execute": {
+            "cwd": ".",
+            "command": ["{root}/.venv/bin/python", "{root}/LieMappBench/Attack-Execution-Dataset/attack-script/ama/SGLang/run.py", "--run-id", "{run_id}"]
+          },
+          "execution_note": "실제 SGLang CPU 추론과 Postman Echo 공개 API HTTPS 호출을 수행합니다(최대 128회, 합성 데이터만 전송). 공개 API 원본 출처와 로컬 메타데이터 개입을 구분하며, 새 ama-public-http-v1 규칙으로 분석합니다. 악성 서비스 게시·공격자 소유·원 논문 QNT 전체 재현을 의미하지 않습니다. --execute 없이 저장 로그만 분석할 수 있습니다."
+        },
+        "vllm": {
+          "label": "vLLM",
+          "source_log": ".evidence/raw/ama/vllm/ama-vllm-public-native-20260911-001/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/ama/vllm/public-http-v1/logging-points.json",
+          "supplements": [".evidence/supplements/ama/vllm-public-20260911.json"],
+          "run_supplements": ["observations.json"],
+          "execute": {
+            "cwd": ".",
+            "command": ["{root}/.venv/bin/python", "{root}/LieMappBench/Attack-Execution-Dataset/attack-script/ama/vllm/run_public.py", "--run-id", "{run_id}"]
+          },
+          "execution_note": "실제 vLLM CPU 추론과 Postman Echo 공개 API HTTPS 호출을 수행합니다(최대 128회, 합성 데이터만 전송). SGLang과 같은 입력·출처·공통 HTTP 프로토콜·AC/DC 규칙 및 FP32 모델 파일을 사용합니다. 템플릿·파서·샘플러 차이는 남아 있으며, 기존 로컬 도구 증거는 보존합니다. 새 실행의 엄격한 소스 매핑 동결 및 명시적 --log 분석 절차는 attack-script/ama/vllm/README-public-http-v1.md를 참고하세요. 원 논문의 QNT 전체 재현·악성 도구 게시를 의미하지 않습니다."
+        },
+        "llamacpp": {
+          "label": "llama.cpp",
+          "source_log": ".evidence/raw/ama/llamacpp/ama-llamacpp-public-native-20260911-001/events.jsonl",
+          "mapping": "LieMappBench/Logging-Dataset/ama/llamacpp/public-http-v1/logging-points.json",
+          "supplements": [".evidence/supplements/ama/llamacpp-public-20260911.json"],
+          "run_supplements": ["observations.json"],
+          "execute": {
+            "cwd": ".",
+            "command": ["{root}/.venv/bin/python", "{root}/LieMappBench/Attack-Execution-Dataset/attack-script/ama/llamacpp/run_public.py", "--run-id", "{run_id}"]
+          },
+          "execution_note": "실제 llama.cpp CPU 추론과 Postman Echo 공개 API HTTPS 호출을 수행합니다(최대 128회, 합성 데이터만 전송). SGLang과 같은 입력·출처·공통 HTTP 프로토콜·AC/DC 규칙을 사용하며, Q4_K_M과 FP32의 정밀도 차이는 엔진 비교의 한계로 남습니다. 기존 로컬 도구 증거는 보존합니다. 새 실행의 엄격한 소스 매핑 동결 및 명시적 --log 분석 절차는 attack-script/ama/llamacpp/README-public.md를 참고하세요. 원 논문의 QNT 전체 재현·악성 도구 게시를 의미하지 않습니다."
+        }
+      }
+    },
     "siai": {
       "label": "SIAI",
       "rules": "LieMappBench/Logging-Dataset/siai/conditions.json",

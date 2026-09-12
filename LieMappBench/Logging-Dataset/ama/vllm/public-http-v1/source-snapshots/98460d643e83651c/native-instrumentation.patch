@@ -1,0 +1,207 @@
+diff --git a/vllm/entrypoints/openai/chat_completion/api_router.py b/vllm/entrypoints/openai/chat_completion/api_router.py
+index 291907a77a..29754dfd1f 100644
+--- a/vllm/entrypoints/openai/chat_completion/api_router.py
++++ b/vllm/entrypoints/openai/chat_completion/api_router.py
+@@ -7,6 +7,7 @@ from http import HTTPStatus
+ from fastapi import APIRouter, Depends, FastAPI, Request
+ from fastapi.responses import JSONResponse, StreamingResponse
+ 
++from vllm import liemapp_ama
+ from vllm.entrypoints.openai.chat_completion.batch_serving import OpenAIServingChatBatch
+ from vllm.entrypoints.openai.chat_completion.protocol import (
+     BatchChatCompletionRequest,
+@@ -59,6 +60,24 @@ async def create_chat_completion(request: ChatCompletionRequest, raw_request: Re
+     if handler is None:
+         raise NotImplementedError("The model does not support Chat Completions API")
+ 
++    if liemapp_ama.enabled(request):
++        submitted = await raw_request.json()
++        liemapp_ama.emit(
++            request,
++            "ama_native_tools_received",
++            "AMA-VLLM-LP01",
++            {
++                "http_path": raw_request.url.path,
++                "tools": submitted.get("tools", []),
++                "tools_count": len(submitted.get("tools", [])),
++                "messages": submitted.get("messages", []),
++                "tool_choice": submitted.get("tool_choice", "auto"),
++                "stream": submitted.get("stream", False),
++                "parsed_tools": [t.model_dump() for t in request.tools or []],
++            },
++            "Native HTTP route received the submitted tool metadata and policy.",
++        )
++
+     generator = await handler.create_chat_completion(request, raw_request)
+ 
+     if isinstance(generator, ErrorResponse):
+diff --git a/vllm/entrypoints/openai/chat_completion/serving.py b/vllm/entrypoints/openai/chat_completion/serving.py
+index 06e7315c24..9b37426918 100644
+--- a/vllm/entrypoints/openai/chat_completion/serving.py
++++ b/vllm/entrypoints/openai/chat_completion/serving.py
+@@ -9,7 +9,9 @@ from http import HTTPStatus
+ from typing import Any, Final, cast
+ 
+ from fastapi import Request
++from fastapi.responses import JSONResponse
+ 
++from vllm import liemapp_ama
+ from vllm.engine.protocol import EngineClient
+ from vllm.entrypoints.chat_utils import (
+     ChatTemplateContentFormatOption,
+@@ -278,6 +280,25 @@ class OpenAIServingChat(GenerateBaseServing):
+ 
+         conversation, engine_inputs = result
+ 
++        if liemapp_ama.enabled(request):
++            liemapp_ama.emit(
++                request,
++                "ama_native_prompt_rendered",
++                "AMA-VLLM-LP02",
++                {
++                    "rendered_prompt": engine_inputs[0].get("prompt"),
++                    "rendered_prompt_available": "prompt" in engine_inputs[0],
++                    "prompt_token_ids": engine_inputs[0].get("prompt_token_ids"),
++                    "engine_input_count": len(engine_inputs),
++                    "tool_choice": request.tool_choice,
++                    "tools_count": len(request.tools or []),
++                    "renderer_class": type(self.renderer).__name__,
++                    "parser_class": type(parser).__name__ if parser else None,
++                    "parse_tool_calls": self.enable_auto_tools,
++                },
++                "Native renderer produced the exact prompt scheduled for inference.",
++            )
++
+         request_id = (
+             f"chatcmpl-{self._base_request_id(raw_request, request.request_id)}"
+         )
+@@ -1177,6 +1198,40 @@ class OpenAIServingChat(GenerateBaseServing):
+             metrics=per_request_metrics,
+         )
+ 
++        if liemapp_ama.enabled(request):
++            payload = response.model_dump()
++            liemapp_ama.emit(
++                request,
++                "ama_native_tool_calls_returned",
++                "AMA-VLLM-LP03",
++                {
++                    "http_status": 200,
++                    "response": payload,
++                    "response_text": JSONResponse(content=payload).body.decode(
++                        "utf-8"
++                    ),
++                    "tool_calls": liemapp_ama.tool_calls(payload),
++                    "tool_calls_normalization": (
++                        "Absent/null message.tool_calls is flattened as []; "
++                        "full response and response_text remain unchanged."
++                    ),
++                    "generated_text": final_res.outputs[0].text,
++                    "generated_outputs": [
++                        {
++                            "index": output.index,
++                            "text": output.text,
++                            "token_ids": list(output.token_ids),
++                            "finish_reason": output.finish_reason,
++                            "stop_reason": output.stop_reason,
++                        }
++                        for output in final_res.outputs
++                    ],
++                    "parser_class": type(parser).__name__ if parser else None,
++                    "tool_dispatch_observed": False,
++                },
++                "Actual generated text and native parsed response; not tool execution.",
++            )
++
+         # Log complete response if output logging is enabled
+         if self.enable_log_outputs and self.request_logger:
+             for choice in choices:
+diff --git a/vllm/liemapp_ama.py b/vllm/liemapp_ama.py
+new file mode 100644
+index 0000000000..3b6073ea5a
+--- /dev/null
++++ b/vllm/liemapp_ama.py
+@@ -0,0 +1,83 @@
++# SPDX-License-Identifier: Apache-2.0
++# SPDX-FileCopyrightText: Copyright contributors to the vLLM project
++"""Observation-only transport for the private LieMapp AMA experiment.
++
++Request labels never enter generation parameters or chat-template inputs. All
++storage, evidence hashes, and event sequencing belong to the common logger.
++"""
++
++import importlib.util
++import inspect
++import json
++import os
++import sys
++from functools import lru_cache
++from pathlib import Path
++from typing import Any
++
++
++def enabled(request: Any) -> bool:
++    """Observe only explicitly correlated, nonstreaming experiment requests."""
++    return bool(os.environ.get("LIEMAPP_SOCKET")) and bool(
++        getattr(request, "liemapp_request_id", None)
++    )
++
++
++def tool_calls(payload: dict) -> list:
++    """Normalize only absent/null no-call fields; retain the original response."""
++    result = []
++    for choice in payload["choices"]:
++        calls = choice["message"].get("tool_calls")
++        if calls is None:
++            continue
++        if not isinstance(calls, list):
++            raise ValueError("Native response tool_calls must be a list or null")
++        result.extend(calls)
++    return result
++
++
++@lru_cache(maxsize=1)
++def _logger_module():
++    path = Path(os.environ["LIEMAPP_LOGGER_PATH"]).resolve(strict=True)
++    name = "liemapp_ama_common_logger"
++    spec = importlib.util.spec_from_file_location(name, path)
++    if spec is None or spec.loader is None:
++        raise RuntimeError("Cannot load common LieMapp logger")
++    module = importlib.util.module_from_spec(spec)
++    sys.modules[name] = module
++    spec.loader.exec_module(module)
++    return module
++
++
++def emit(request: Any, stage: str, point: str, raw: dict, summary: str) -> None:
++    """Emit exact request-scoped observations; fail if collection is incomplete."""
++    if not enabled(request):
++        return
++    request_id = getattr(request, "liemapp_request_id", None)
++    if not isinstance(request_id, str) or not 1 <= len(request_id) <= 256:
++        raise ValueError("Invalid LieMapp request correlation ID")
++    labels = getattr(request, "liemapp_context", {})
++    if not isinstance(labels, dict):
++        raise ValueError("LieMapp request context must be an object")
++    encoded = json.dumps(labels, ensure_ascii=False, allow_nan=False)
++    if len(encoded.encode("utf-8")) > 16384:
++        raise ValueError("LieMapp request context exceeds 16 KiB")
++    context = json.loads(encoded)
++    context["request_id"] = request_id
++    frame = inspect.currentframe()
++    assert frame is not None and frame.f_back is not None
++    caller = frame.f_back
++    source = {
++        "path": str(Path(caller.f_code.co_filename).resolve()),
++        "function": caller.f_code.co_name,
++        "line": caller.f_lineno,
++        "logging_point_id": point,
++    }
++    del frame, caller
++    _logger_module().Client().emit(
++        stage,
++        {**raw, "request_id": request_id},
++        readable={"summary": summary, "scope": "native inference observation"},
++        context=context,
++        source=source,
++    )

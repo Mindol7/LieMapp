@@ -1,0 +1,244 @@
+{
+  "schema_version": "1.0.0",
+  "attack_id": "ama",
+  "engine_id": "llamacpp",
+  "original_repository": "LIE/llama.cpp",
+  "instrumented_repository": "Instrumented-LIE/ama/llamacpp",
+  "upstream_commit": "9e0e220594af405a62835dc3a27495729fd8506b",
+  "private_experiment_fork": true,
+  "original_worktree_verified_clean": true,
+  "git_commits_created": false,
+  "clone_storage": "Local shared-object clone. Keep the original Git object store or recreate from upstream commit and the recorded patch.",
+  "source_changes": [
+    {
+      "path": "tools/server/server-context.cpp",
+      "original_sha256": "c347b2403b0f7e314960b9170f39e27fe67049420fe9ae272852d98028955ce7",
+      "instrumented_sha256": "d062edf131abfe8a388b10b3bdccc2a467d703a25d8d02a7715d6862b2f2a035",
+      "purpose": "Observe received tool metadata and actual nonstreaming native response. No tool dispatch is added."
+    },
+    {
+      "path": "tools/server/server-common.cpp",
+      "original_sha256": "bbece72259e2aaab94ac0f31ba404b4a3f2868848cce1fe19a255009a60c6eb1",
+      "instrumented_sha256": "b9c1a2c893b2c4a077beb2c60c2229bcc08b635b48e2e96a14057d8ee42b086a",
+      "purpose": "Observe exact native chat-template output and tool-choice configuration."
+    },
+    {
+      "path": "tools/server/CMakeLists.txt",
+      "original_sha256": "c9e7dbdfe130bed6d519551277cd382d0186c18810df68df0150c22757e6e86e",
+      "instrumented_sha256": "3b3285eb780944fd1db94ca7effbed68cbbc268f7bbb764eefd5407202726b24",
+      "purpose": "Include the common framework native transport header."
+    }
+  ],
+  "patches": [
+    {
+      "path": "LieMappBench/Logging-Dataset/ama/llamacpp/native-instrumentation.patch",
+      "sha256": "e7801ba374671b5520c1ef147927618f4c0f3e1338c092e6f5c74218d2ed025d",
+      "apply_root": "Pinned llama.cpp checkout"
+    },
+    {
+      "path": "LieMappBench/Logging-Dataset/ama/llamacpp/common-bridge-context.patch",
+      "sha256": "96ac39d2b5bc44a2f2a92fe056142cea99bcd00b2b8515615c1bc3e13bac9e62",
+      "apply_root": "Older LieMapp framework checkout lacking explicit context support"
+    }
+  ],
+  "common_native_transport": {
+    "path": "LieMappBench/Logging-Dataset/native/bridge.h",
+    "sha256": "9959350c55e3b5524e4a8b5d053e314e8ac97b98025832bb40b9bb8df702cf09",
+    "storage_owner": "LieMappBench/Logging-Dataset/logger.py",
+    "compatibility": "Optional final context_override argument; omitted or null preserves legacy environment context. All emitted contexts must be JSON objects."
+  },
+  "build": {
+    "status": "success",
+    "version_output": "0.4.0-dev (build 10825, commit 9e0e22059)",
+    "compiler": "GNU C++ 13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04.1)",
+    "cmake": "4.3.4",
+    "platform": "Linux x86_64",
+    "backend": "CPU",
+    "configuration": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "GGML_CUDA": "OFF",
+      "GGML_NATIVE": "ON",
+      "LLAMA_BUILD_TESTS": "OFF",
+      "LLAMA_BUILD_EXAMPLES": "OFF",
+      "LLAMA_BUILD_APP": "OFF",
+      "LLAMA_BUILD_SERVER": "ON",
+      "LLAMA_BUILD_UI": "OFF",
+      "LLAMA_USE_PREBUILT_UI": "OFF",
+      "LLAMA_OPENSSL": "OFF"
+    },
+    "max_parallel_jobs": 6,
+    "note": "GGML_NATIVE=ON targets the current CPU. Rebuild when moving to a CPU with a different instruction set. Missing embedded UI assets are intentional and do not affect chat-completions inference."
+  },
+  "built_artifacts": [
+    {
+      "name": "llama-server",
+      "sha256": "94e17bda03752b1d037bbf1e07104d6baaca05430093ca52460170d43cf4dbc9"
+    },
+    {
+      "name": "libllama-server-impl.so",
+      "sha256": "aa5186d56dd2d3f3cd3767482655a95f3f67ba74b5864f7c2f792c0cc75f8101"
+    },
+    {
+      "name": "libllama-common.so",
+      "sha256": "bbabeb95a4ca55e567e454465ab6c477788bd9908256069d1f7af0abf78a5511"
+    },
+    {
+      "name": "libllama.so",
+      "sha256": "9eeff3cc3106699c553526376181389db755bc65ade1d2f948cd5e2f92a7a94c"
+    },
+    {
+      "name": "libggml.so",
+      "sha256": "018d52305d61914a28ca6457719fa1c50329f79faf4be7bc966140bf51049227"
+    },
+    {
+      "name": "libggml-base.so",
+      "sha256": "b139df8539a5f24cad28af0cd11063c38a0a7facacc3e67d304313f7caf111bf"
+    },
+    {
+      "name": "libggml-cpu.so",
+      "sha256": "cb0a819dee206f6159f246b1b0ad64a1ee12cc9f3f57805f23dbf8dd9e6f36be"
+    },
+    {
+      "name": "libmtmd.so",
+      "sha256": "05b30345341a21ce7b7376d49abb9de71aee7ad16f830fc29b95427a735693a6"
+    }
+  ],
+  "built_artifact_directory": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin",
+  "validation": {
+    "native_transport_smoke": {
+      "status": "passed",
+      "source": "Instrumented-LIE/ama/llamacpp/liemapp/native-transport-smoke.cpp",
+      "event_count": 4,
+      "checks": [
+        "Legacy environment context preserved",
+        "Two concurrent explicit request contexts remain isolated",
+        "Raw integer values preserved",
+        "Source hashes and sealed common-logger event chain generated"
+      ],
+      "scope": "Transport test in a temporary run directory; not a model inference or attack result."
+    },
+    "logging_disabled_transport_smoke": "passed: native bridge test exits successfully with LIEMAPP_SOCKET unset; no Collector or writer is created by native code",
+    "patch_applicability": "passed: forward git apply --check against clean original and reverse --check against instrumented checkout; neither check changed files",
+    "mapping_source_integrity": "passed: 3 native source paths, hook line numbers and SHA-256 hashes plus 3 supporting source hashes",
+    "model_inference": "Recorded separately by the attack-execution harness; compilation alone is not runtime evidence."
+  },
+  "legacy_manifest": {
+    "path": "LieMappBench/Logging-Dataset/ama/llamacpp/native-build-manifest.json",
+    "sha256": "4e6c38a011895b91eee15785fe568c37e0bfcd3bf87858ba9ba35429bbe67692"
+  },
+  "protocol_id": "ama-public-http-v1",
+  "expected_modified_paths": [
+    "tools/server/server-context.cpp",
+    "tools/server/server-common.cpp",
+    "tools/server/CMakeLists.txt"
+  ],
+  "validated_files": [
+    {
+      "path": "LieMappBench/Logging-Dataset/ama/llamacpp/native-build-manifest.json",
+      "sha256": "4e6c38a011895b91eee15785fe568c37e0bfcd3bf87858ba9ba35429bbe67692",
+      "bytes": 5419
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/tools/server/server-context.cpp",
+      "sha256": "d062edf131abfe8a388b10b3bdccc2a467d703a25d8d02a7715d6862b2f2a035",
+      "bytes": 228071
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/tools/server/server-common.cpp",
+      "sha256": "b9c1a2c893b2c4a077beb2c60c2229bcc08b635b48e2e96a14057d8ee42b086a",
+      "bytes": 66710
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/tools/server/CMakeLists.txt",
+      "sha256": "3b3285eb780944fd1db94ca7effbed68cbbc268f7bbb764eefd5407202726b24",
+      "bytes": 2006
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin/llama-server",
+      "sha256": "94e17bda03752b1d037bbf1e07104d6baaca05430093ca52460170d43cf4dbc9",
+      "bytes": 17888
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin/libllama-server-impl.so",
+      "sha256": "aa5186d56dd2d3f3cd3767482655a95f3f67ba74b5864f7c2f792c0cc75f8101",
+      "bytes": 4002120
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin/libllama-common.so",
+      "sha256": "bbabeb95a4ca55e567e454465ab6c477788bd9908256069d1f7af0abf78a5511",
+      "bytes": 5807888
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin/libllama.so",
+      "sha256": "9eeff3cc3106699c553526376181389db755bc65ade1d2f948cd5e2f92a7a94c",
+      "bytes": 4764416
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin/libggml.so",
+      "sha256": "018d52305d61914a28ca6457719fa1c50329f79faf4be7bc966140bf51049227",
+      "bytes": 60720
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin/libggml-base.so",
+      "sha256": "b139df8539a5f24cad28af0cd11063c38a0a7facacc3e67d304313f7caf111bf",
+      "bytes": 948712
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin/libggml-cpu.so",
+      "sha256": "cb0a819dee206f6159f246b1b0ad64a1ee12cc9f3f57805f23dbf8dd9e6f36be",
+      "bytes": 1193880
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/build-liemapp/bin/libmtmd.so",
+      "sha256": "05b30345341a21ce7b7376d49abb9de71aee7ad16f830fc29b95427a735693a6",
+      "bytes": 1964968
+    },
+    {
+      "path": "LieMappBench/Logging-Dataset/ama/llamacpp/native-instrumentation.patch",
+      "sha256": "e7801ba374671b5520c1ef147927618f4c0f3e1338c092e6f5c74218d2ed025d",
+      "bytes": 6189
+    },
+    {
+      "path": "LieMappBench/Logging-Dataset/ama/llamacpp/common-bridge-context.patch",
+      "sha256": "96ac39d2b5bc44a2f2a92fe056142cea99bcd00b2b8515615c1bc3e13bac9e62",
+      "bytes": 1274
+    },
+    {
+      "path": "LieMappBench/Logging-Dataset/native/bridge.h",
+      "sha256": "9959350c55e3b5524e4a8b5d053e314e8ac97b98025832bb40b9bb8df702cf09",
+      "bytes": 5617
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/common/common.h",
+      "sha256": "7cfcc6a57122702ea35d04ed20861aef162bd94f55cfbbf9fd23ee3127fe6cb4",
+      "bytes": 51088
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/common/arg.cpp",
+      "sha256": "22b56a6af40a9b17cd1261ed28d38b4bc6d83d07da3e31052d8c652dbd1ca914",
+      "bytes": 221967
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/common/sampling.cpp",
+      "sha256": "f23f8d663932bfd73abac1bd5e99055fc6efb07e21ef27dd7e25af2f2da40bff",
+      "bytes": 34772
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/tools/server/server-schema.cpp",
+      "sha256": "c3d2899d2a078adae6c4971b3da825bad1aab9cda6b2af652e41e6aef1665274",
+      "bytes": 32843
+    },
+    {
+      "path": "Instrumented-LIE/ama/llamacpp/tools/server/server-task.cpp",
+      "sha256": "0fd5c8df2525e61214986e8abe3fc4edbb92f5dd652c9c2bfd1bc2712218a585",
+      "bytes": 67361
+    }
+  ],
+  "public_protocol_adapter": {
+    "rebuild_performed": false,
+    "native_hook_changes": false,
+    "model_reused": true,
+    "sampling": "CLI temperature-only sampler, neutral repeat penalty, public requests explicit disabled top-k/min-p/cache; actual per-request __verbose.generation_settings checked",
+    "diagnostics": "Upstream --log-verbosity 10 returns pre-parser content and effective generation_settings without source change"
+  }
+}

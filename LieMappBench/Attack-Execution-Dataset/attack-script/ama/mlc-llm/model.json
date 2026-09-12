@@ -1,0 +1,525 @@
+{
+  "schema_version": "1.0.0",
+  "repository": "mlc-ai/Qwen2.5-3B-Instruct-q4f32_1-MLC",
+  "revision": "dfa91e859b714acfa489a1464297080656c3460d",
+  "source_base": "Qwen/Qwen2.5-3B-Instruct",
+  "source_base_exact_revision_disclosed_by_provider": false,
+  "same_bytes_as_local_HF_quantization_claimed": false,
+  "cache_path": ".evidence/models/ama/mlc-official-qwen2.5-3b-instruct-q4f32_1-dfa91e8",
+  "quantization": "q4f32_1",
+  "runtime_dtype": "float32",
+  "floating_storage": "Publisher f32-to-bf16 encoding for float32-declared scale/unquantized weights; expanded at native load time.",
+  "model_config_repetition_penalty": 1.05,
+  "provenance": {
+    "path": "LieMappBench/Attack-Execution-Dataset/attack-source/ama/mlc-llm/model-provenance/dfa91e8/manifest.json",
+    "revision": "dfa91e859b714acfa489a1464297080656c3460d",
+    "api_sha256": "33b0b578e0a23a895fc98fa5f4e622d15d7b1e72ebe1006cfe4aa3356c4d10c7"
+  },
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 1519,
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1475,
+      "sha256": "053ec9a0e52e34e02f94190e80068f03a6bf96b57ee820136f4375436eafcad2",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "97ee05777c58f2bfe434c0e0994fa28613e500ae"
+    },
+    {
+      "path": "merges.txt",
+      "bytes": 1671839,
+      "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+    },
+    {
+      "path": "mlc-chat-config.json",
+      "bytes": 2045,
+      "sha256": "5924a33c2a5af212f765c617039a76a584ba5a73d926040507458abaa231991e",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "3cff0c8f637609d1b0970a176ad3a798ecc80f54"
+    },
+    {
+      "path": "ndarray-cache-b16.json",
+      "bytes": 163187,
+      "sha256": "6999defea2b223434e217fc847ba5236fe0fc2627d92cdf27f4de05a845582e3",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "0b095275066c96e7483465bbf739b10d96e0b228"
+    },
+    {
+      "path": "ndarray-cache.json",
+      "bytes": 164965,
+      "sha256": "fee95d8aa50484c813e909c28081d3cd283a11170354984f4c8dd3f05f99584b",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "bf8428724f1d8238d9a55763b2cf4170913e5999"
+    },
+    {
+      "path": "params_shard_0.bin",
+      "bytes": 155582464,
+      "sha256": "13227ac447fc07e7d97e2fe12e478549ff0256fdbc355106841d0d409c5e8506",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "13227ac447fc07e7d97e2fe12e478549ff0256fdbc355106841d0d409c5e8506"
+    },
+    {
+      "path": "params_shard_1.bin",
+      "bytes": 22544384,
+      "sha256": "8da97a1d869888f793703c0c2fef8eefc91de9b3cfe23f18dcecbdd6312e3288",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "8da97a1d869888f793703c0c2fef8eefc91de9b3cfe23f18dcecbdd6312e3288"
+    },
+    {
+      "path": "params_shard_10.bin",
+      "bytes": 22544384,
+      "sha256": "9dff5c21d95337c6d870125f56efdba99037fbd0b0e3874fd569c54f4156ea9c",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9dff5c21d95337c6d870125f56efdba99037fbd0b0e3874fd569c54f4156ea9c"
+    },
+    {
+      "path": "params_shard_11.bin",
+      "bytes": 22544384,
+      "sha256": "184b8c1b47137321d24cebf1fa2b848a3a04377061f101e4272f18ad341f9d48",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "184b8c1b47137321d24cebf1fa2b848a3a04377061f101e4272f18ad341f9d48"
+    },
+    {
+      "path": "params_shard_12.bin",
+      "bytes": 33502208,
+      "sha256": "eeca20d9181ed2f991940a1229f3f6565273276da881d24e415de8675929ffba",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "eeca20d9181ed2f991940a1229f3f6565273276da881d24e415de8675929ffba"
+    },
+    {
+      "path": "params_shard_13.bin",
+      "bytes": 22544384,
+      "sha256": "9b074c04560d12f3ccd486de1deda3c3a71b12d274bf2a2f11ad721ea5394c64",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9b074c04560d12f3ccd486de1deda3c3a71b12d274bf2a2f11ad721ea5394c64"
+    },
+    {
+      "path": "params_shard_14.bin",
+      "bytes": 28960768,
+      "sha256": "f5bd89f449e107758ab8cdbe8eb11887269c741640f62ddc2745300c49970d86",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "f5bd89f449e107758ab8cdbe8eb11887269c741640f62ddc2745300c49970d86"
+    },
+    {
+      "path": "params_shard_15.bin",
+      "bytes": 22544384,
+      "sha256": "50a1eb6194e2d60ca96759dfa6afb190bd2b961e6b46863905f489dcd0b7cdfa",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "50a1eb6194e2d60ca96759dfa6afb190bd2b961e6b46863905f489dcd0b7cdfa"
+    },
+    {
+      "path": "params_shard_16.bin",
+      "bytes": 22544384,
+      "sha256": "c7109b594e93f896f626234c554e75289caf883a81877e62a519902513462cc3",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "c7109b594e93f896f626234c554e75289caf883a81877e62a519902513462cc3"
+    },
+    {
+      "path": "params_shard_17.bin",
+      "bytes": 33502208,
+      "sha256": "5a557d116c326bc480471170a4af4e901b72ba2efa641570e3d58e260fd42e91",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "5a557d116c326bc480471170a4af4e901b72ba2efa641570e3d58e260fd42e91"
+    },
+    {
+      "path": "params_shard_18.bin",
+      "bytes": 22544384,
+      "sha256": "229056f0faa39007470236ef7569eabb875559c8bf12d09d82c2a58a84449b1a",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "229056f0faa39007470236ef7569eabb875559c8bf12d09d82c2a58a84449b1a"
+    },
+    {
+      "path": "params_shard_19.bin",
+      "bytes": 28960768,
+      "sha256": "95cb5a5e8b4f7972c560c8aa557ec820c3753d90883fb66ce9f10bb7bbd6dbb4",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "95cb5a5e8b4f7972c560c8aa557ec820c3753d90883fb66ce9f10bb7bbd6dbb4"
+    },
+    {
+      "path": "params_shard_2.bin",
+      "bytes": 32133120,
+      "sha256": "9de701dfa61010401bc62654d50100b97edf81b0518f724b40332903874ae3ab",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9de701dfa61010401bc62654d50100b97edf81b0518f724b40332903874ae3ab"
+    },
+    {
+      "path": "params_shard_20.bin",
+      "bytes": 22544384,
+      "sha256": "7bfabe14c9099df211516fffce689efe8d2a1ab9f28cfda8d363814f2c2cdbf2",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "7bfabe14c9099df211516fffce689efe8d2a1ab9f28cfda8d363814f2c2cdbf2"
+    },
+    {
+      "path": "params_shard_21.bin",
+      "bytes": 22544384,
+      "sha256": "c052e2a1c69795572158c2c5bd091747aa27ca0ffcf852329973c5f55d909bd5",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "c052e2a1c69795572158c2c5bd091747aa27ca0ffcf852329973c5f55d909bd5"
+    },
+    {
+      "path": "params_shard_22.bin",
+      "bytes": 33502208,
+      "sha256": "ade58b1ac88138f080cc0b62d163436576be77f36e8db6b96589c99dfcabd6b6",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "ade58b1ac88138f080cc0b62d163436576be77f36e8db6b96589c99dfcabd6b6"
+    },
+    {
+      "path": "params_shard_23.bin",
+      "bytes": 22544384,
+      "sha256": "9a5391469b47b9a6bd4823cfbc3622d965d8ee2788f795aa15b5ecaa5e9ed78b",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9a5391469b47b9a6bd4823cfbc3622d965d8ee2788f795aa15b5ecaa5e9ed78b"
+    },
+    {
+      "path": "params_shard_24.bin",
+      "bytes": 22544384,
+      "sha256": "9e00514342854130035af38b74c7c15741679ae6aa54950d884dacdd4e3824e3",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9e00514342854130035af38b74c7c15741679ae6aa54950d884dacdd4e3824e3"
+    },
+    {
+      "path": "params_shard_25.bin",
+      "bytes": 31788032,
+      "sha256": "3d56bff28c4619c12295b14909dbeb4a69508ffe81b74e43b42327218afdc48e",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "3d56bff28c4619c12295b14909dbeb4a69508ffe81b74e43b42327218afdc48e"
+    },
+    {
+      "path": "params_shard_26.bin",
+      "bytes": 22544384,
+      "sha256": "9c12c4b126f10ac6a9d42c554b8b83aef7e494bb54e8465f5b7606c0eb78f8bb",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9c12c4b126f10ac6a9d42c554b8b83aef7e494bb54e8465f5b7606c0eb78f8bb"
+    },
+    {
+      "path": "params_shard_27.bin",
+      "bytes": 26133504,
+      "sha256": "991a40d460d1b91f355b7f8e897194159d157ff10dd9fa89a31cb0bb15db5145",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "991a40d460d1b91f355b7f8e897194159d157ff10dd9fa89a31cb0bb15db5145"
+    },
+    {
+      "path": "params_shard_28.bin",
+      "bytes": 22544384,
+      "sha256": "fd4ef09363d38c31f1dc621063184e6d6067e0b7745a24785a2b81986cf96bb0",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "fd4ef09363d38c31f1dc621063184e6d6067e0b7745a24785a2b81986cf96bb0"
+    },
+    {
+      "path": "params_shard_29.bin",
+      "bytes": 22544384,
+      "sha256": "1a6a60ebba5a196b343ad30096224992e765601e616658ebde5ad444869e19d4",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "1a6a60ebba5a196b343ad30096224992e765601e616658ebde5ad444869e19d4"
+    },
+    {
+      "path": "params_shard_3.bin",
+      "bytes": 22544384,
+      "sha256": "cdc814bcb2622cfb630fbefe3d3ffbd70ee233e57afbb8d415b4eab268682ed7",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "cdc814bcb2622cfb630fbefe3d3ffbd70ee233e57afbb8d415b4eab268682ed7"
+    },
+    {
+      "path": "params_shard_30.bin",
+      "bytes": 33502208,
+      "sha256": "38d242e186eed59228d251a3f2abf66f76e97f5ad47cdb560b18c4280050386d",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "38d242e186eed59228d251a3f2abf66f76e97f5ad47cdb560b18c4280050386d"
+    },
+    {
+      "path": "params_shard_31.bin",
+      "bytes": 22544384,
+      "sha256": "cb2cab22f119940cad56b7c2a208adffc8ed9763f335a61e1d398f58eb4f2eca",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "cb2cab22f119940cad56b7c2a208adffc8ed9763f335a61e1d398f58eb4f2eca"
+    },
+    {
+      "path": "params_shard_32.bin",
+      "bytes": 28960768,
+      "sha256": "63f175890dfa7b97b5b0e50caedbe37bd4f147ce2d3e06173a891c1e534adf96",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "63f175890dfa7b97b5b0e50caedbe37bd4f147ce2d3e06173a891c1e534adf96"
+    },
+    {
+      "path": "params_shard_33.bin",
+      "bytes": 22544384,
+      "sha256": "2ede738bb67405859afc56c1380a6d49baa8c2aaa5594d70cb0f305f6ece1877",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "2ede738bb67405859afc56c1380a6d49baa8c2aaa5594d70cb0f305f6ece1877"
+    },
+    {
+      "path": "params_shard_34.bin",
+      "bytes": 22544384,
+      "sha256": "1dff81f628299df290e02e20a6fc3d4f3c5c4eb6834a016024f8e67157857942",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "1dff81f628299df290e02e20a6fc3d4f3c5c4eb6834a016024f8e67157857942"
+    },
+    {
+      "path": "params_shard_35.bin",
+      "bytes": 33502208,
+      "sha256": "9e1b07c17137ce99b355580be69a66f6cdd56eda255efa92ce5547fdbb8e1b87",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9e1b07c17137ce99b355580be69a66f6cdd56eda255efa92ce5547fdbb8e1b87"
+    },
+    {
+      "path": "params_shard_36.bin",
+      "bytes": 22544384,
+      "sha256": "cf077e7ea8857c705fcce78f373ff27aeb4180a3682ea8a649d9c2af756a2414",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "cf077e7ea8857c705fcce78f373ff27aeb4180a3682ea8a649d9c2af756a2414"
+    },
+    {
+      "path": "params_shard_37.bin",
+      "bytes": 28956672,
+      "sha256": "fb9c9459616617a737def9cd640778dfd54cf79cbb8c589ceaf6ebb7dbfd7b13",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "fb9c9459616617a737def9cd640778dfd54cf79cbb8c589ceaf6ebb7dbfd7b13"
+    },
+    {
+      "path": "params_shard_38.bin",
+      "bytes": 22544384,
+      "sha256": "158e90271a6cb8246acf03d524b27943bf9e1f8dab954f600e7d69b99dcd1858",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "158e90271a6cb8246acf03d524b27943bf9e1f8dab954f600e7d69b99dcd1858"
+    },
+    {
+      "path": "params_shard_39.bin",
+      "bytes": 33506304,
+      "sha256": "a186397f6487382c7e73b38fe6a9a09bac5e8d0bbcca551c0ae053d27f733d5b",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "a186397f6487382c7e73b38fe6a9a09bac5e8d0bbcca551c0ae053d27f733d5b"
+    },
+    {
+      "path": "params_shard_4.bin",
+      "bytes": 28960768,
+      "sha256": "266b307ec92f3f4530d14f6995359889d9eef864163024a6de095e3cba426b7d",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "266b307ec92f3f4530d14f6995359889d9eef864163024a6de095e3cba426b7d"
+    },
+    {
+      "path": "params_shard_40.bin",
+      "bytes": 22544384,
+      "sha256": "262acddca14e0f332258d5d9263aa96fe83eb4c2f0bbe11c2bd1ad9c4ae32f79",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "262acddca14e0f332258d5d9263aa96fe83eb4c2f0bbe11c2bd1ad9c4ae32f79"
+    },
+    {
+      "path": "params_shard_41.bin",
+      "bytes": 22544384,
+      "sha256": "bce57546ca4c2bdd64a662af8ff7e4e6c38d0b1c039049f10242829875543a3e",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "bce57546ca4c2bdd64a662af8ff7e4e6c38d0b1c039049f10242829875543a3e"
+    },
+    {
+      "path": "params_shard_42.bin",
+      "bytes": 33502208,
+      "sha256": "7e3f64f74bfe39079c7d692d043535e769083af811d6dbaa7ec5bcacf59c5659",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "7e3f64f74bfe39079c7d692d043535e769083af811d6dbaa7ec5bcacf59c5659"
+    },
+    {
+      "path": "params_shard_43.bin",
+      "bytes": 22544384,
+      "sha256": "7a6e594b6b5f8ed96e14c5b18da1181ac859e0a6118f5d54bd09b26bf8259f3e",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "7a6e594b6b5f8ed96e14c5b18da1181ac859e0a6118f5d54bd09b26bf8259f3e"
+    },
+    {
+      "path": "params_shard_44.bin",
+      "bytes": 28960768,
+      "sha256": "de5ab933903b64ed4a29b0e5c616565f50cc77e0d536f82fec5bf07385018122",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "de5ab933903b64ed4a29b0e5c616565f50cc77e0d536f82fec5bf07385018122"
+    },
+    {
+      "path": "params_shard_45.bin",
+      "bytes": 22544384,
+      "sha256": "5fd727a143cdb7e1617b4dedbf28dbb320d8dc25c419e93fe6dc077e9018764c",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "5fd727a143cdb7e1617b4dedbf28dbb320d8dc25c419e93fe6dc077e9018764c"
+    },
+    {
+      "path": "params_shard_46.bin",
+      "bytes": 22544384,
+      "sha256": "4b3e18440909a79c76b739242d29ba1b9628ab7a683ec7028038c940ab03226e",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "4b3e18440909a79c76b739242d29ba1b9628ab7a683ec7028038c940ab03226e"
+    },
+    {
+      "path": "params_shard_47.bin",
+      "bytes": 33502208,
+      "sha256": "9f80a2e9f60150058a921455c09c3b03d83742e227135e6cecfb934576c85ade",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9f80a2e9f60150058a921455c09c3b03d83742e227135e6cecfb934576c85ade"
+    },
+    {
+      "path": "params_shard_48.bin",
+      "bytes": 22544384,
+      "sha256": "f010f889d59e9540e89b9d235c84b203ec2444731d4f698222ba65a9cfaace0b",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "f010f889d59e9540e89b9d235c84b203ec2444731d4f698222ba65a9cfaace0b"
+    },
+    {
+      "path": "params_shard_49.bin",
+      "bytes": 28960768,
+      "sha256": "30e1bdf640aa5bbb0d901663e340f3057255a8bec5f9103a4747e26a18676ada",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "30e1bdf640aa5bbb0d901663e340f3057255a8bec5f9103a4747e26a18676ada"
+    },
+    {
+      "path": "params_shard_5.bin",
+      "bytes": 22544384,
+      "sha256": "0ae8c6646045c206f2088f0fd67d5cb17b10ef142997f309cd0219bfd744d674",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "0ae8c6646045c206f2088f0fd67d5cb17b10ef142997f309cd0219bfd744d674"
+    },
+    {
+      "path": "params_shard_50.bin",
+      "bytes": 22544384,
+      "sha256": "ba76a8a1def89986430e8fb4b80df0f1c21c06c333efbaeda3b19a90e625861c",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "ba76a8a1def89986430e8fb4b80df0f1c21c06c333efbaeda3b19a90e625861c"
+    },
+    {
+      "path": "params_shard_51.bin",
+      "bytes": 22544384,
+      "sha256": "cd9fb16d5e579c6c628eec0b9e4d8e79ba4599167fd730e78f22b1f819142921",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "cd9fb16d5e579c6c628eec0b9e4d8e79ba4599167fd730e78f22b1f819142921"
+    },
+    {
+      "path": "params_shard_52.bin",
+      "bytes": 33502208,
+      "sha256": "9918f0e0430f62fcb42f6147fb1339f8157669f7726a063ea6da83e966a9932b",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "9918f0e0430f62fcb42f6147fb1339f8157669f7726a063ea6da83e966a9932b"
+    },
+    {
+      "path": "params_shard_53.bin",
+      "bytes": 22544384,
+      "sha256": "d5219876031503611830895901844d95787c30791e2e6946233d9fc577b7f238",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "d5219876031503611830895901844d95787c30791e2e6946233d9fc577b7f238"
+    },
+    {
+      "path": "params_shard_54.bin",
+      "bytes": 28960768,
+      "sha256": "06f4787b1e9e3dce73c5b4762be7b779418a83ab9ac76739ab8a519a37eecdd4",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "06f4787b1e9e3dce73c5b4762be7b779418a83ab9ac76739ab8a519a37eecdd4"
+    },
+    {
+      "path": "params_shard_55.bin",
+      "bytes": 22544384,
+      "sha256": "75f8f70a7bdd045694b1aac24bbc2c713141c1e0022857203902f40377f91e6f",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "75f8f70a7bdd045694b1aac24bbc2c713141c1e0022857203902f40377f91e6f"
+    },
+    {
+      "path": "params_shard_56.bin",
+      "bytes": 22544384,
+      "sha256": "ce772df34f504155f5a3eac870e6dac593e24aa2f48378322dcefcd7ade58d71",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "ce772df34f504155f5a3eac870e6dac593e24aa2f48378322dcefcd7ade58d71"
+    },
+    {
+      "path": "params_shard_57.bin",
+      "bytes": 33502208,
+      "sha256": "65011368303987cc7978b534139f5ab9da662dc8f0517336e283cd2077c94bc8",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "65011368303987cc7978b534139f5ab9da662dc8f0517336e283cd2077c94bc8"
+    },
+    {
+      "path": "params_shard_58.bin",
+      "bytes": 22544384,
+      "sha256": "79484747812ab858204c10a4cf8080c62286229b455577c91cf5cd0b114256fe",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "79484747812ab858204c10a4cf8080c62286229b455577c91cf5cd0b114256fe"
+    },
+    {
+      "path": "params_shard_59.bin",
+      "bytes": 28960768,
+      "sha256": "4ff8a2544be29816d9dc8d9c48c4a39d91555ebdb16f86a6c1997339cc26ce74",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "4ff8a2544be29816d9dc8d9c48c4a39d91555ebdb16f86a6c1997339cc26ce74"
+    },
+    {
+      "path": "params_shard_6.bin",
+      "bytes": 22544384,
+      "sha256": "e422cbea662fd1c03b37a8262232c92470a4f3b2fcac973b0d4276628a107f79",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "e422cbea662fd1c03b37a8262232c92470a4f3b2fcac973b0d4276628a107f79"
+    },
+    {
+      "path": "params_shard_60.bin",
+      "bytes": 22544384,
+      "sha256": "d368879dffdac9866243cdbc482e749599d50e7f2f796e8b8537060a463362ce",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "d368879dffdac9866243cdbc482e749599d50e7f2f796e8b8537060a463362ce"
+    },
+    {
+      "path": "params_shard_61.bin",
+      "bytes": 20820992,
+      "sha256": "5bc0dde169d3726d45eee16bb2c75bb03f28820ca2262c72a86ef462c5bc580a",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "5bc0dde169d3726d45eee16bb2c75bb03f28820ca2262c72a86ef462c5bc580a"
+    },
+    {
+      "path": "params_shard_7.bin",
+      "bytes": 33502208,
+      "sha256": "0f7b2b2da5c67301e5f49c029a64b0569a34bfd1f8a384c1fb2e78e07d4b2497",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "0f7b2b2da5c67301e5f49c029a64b0569a34bfd1f8a384c1fb2e78e07d4b2497"
+    },
+    {
+      "path": "params_shard_8.bin",
+      "bytes": 22544384,
+      "sha256": "94627ec47f340222fb5798f20ae9a34ddb95a7b43b77b305cc7143d38fedc2c3",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "94627ec47f340222fb5798f20ae9a34ddb95a7b43b77b305cc7143d38fedc2c3"
+    },
+    {
+      "path": "params_shard_9.bin",
+      "bytes": 28960768,
+      "sha256": "12500880a8f73acf65d90d7036629bb58d50bde9d64d21840d9f4c1a645dc90e",
+      "upstream_hash_kind": "lfs_sha256",
+      "upstream_hash": "12500880a8f73acf65d90d7036629bb58d50bde9d64d21840d9f4c1a645dc90e"
+    },
+    {
+      "path": "tensor-cache.json",
+      "bytes": 164965,
+      "sha256": "fee95d8aa50484c813e909c28081d3cd283a11170354984f4c8dd3f05f99584b",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "bf8428724f1d8238d9a55763b2cf4170913e5999"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 7031645,
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "443909a61d429dff23010e5bddd28ff530edda00"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 7308,
+      "sha256": "5214600ee45ca2f887ce2eede8910378a0111ea99d657428bcbce94778e65a92",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "2e174d67d63d86ccc35baecd4f3014549e325387"
+    },
+    {
+      "path": "vocab.json",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "upstream_hash_kind": "git_blob_sha1",
+      "upstream_hash": "4783fe10ac3adce15ac8f358ef5462739852c569"
+    }
+  ],
+  "scope": "Frozen official model weight bytes only. Native compiled library and CPU scheduling variant are independently bound by the final native runtime manifest."
+}
